@@ -20,7 +20,8 @@ namespace System.Sound
             _soundHandler = SoundHandler.InstanceSoundHandler;
             
             SceneManager.sceneLoaded += OnSceneLoaded;
-            _soundHandler.PlayBgm(_bgm[0]);
+            var sceneNum = SceneManager.GetActiveScene().buildIndex;
+            _soundHandler.PlayBgm(_bgm[sceneNum]);
         }
 
         private void OnDestroy()

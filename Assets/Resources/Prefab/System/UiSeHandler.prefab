@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1228781498251236166
+--- !u!1 &6649483094287316730
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8122072605581347337}
-  - component: {fileID: 8284686126894165849}
+  - component: {fileID: 2792604932065735513}
+  - component: {fileID: 3225516115570472085}
   m_Layer: 0
-  m_Name: BGMSwitcher
-  m_TagString: BGMSwitcher
+  m_Name: UiSeHandler
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8122072605581347337
+--- !u!4 &2792604932065735513
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1228781498251236166}
+  m_GameObject: {fileID: 6649483094287316730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8284686126894165849
+--- !u!114 &3225516115570472085
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1228781498251236166}
+  m_GameObject: {fileID: 6649483094287316730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb124efa5478329429bf4e421aa3d4ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 76cf389183795084a8aabf4272b97dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bgm:
-  - {fileID: 8300000, guid: 8560a7fc8611b8643addb4db8dd1e2ac, type: 3}
-  - {fileID: 8300000, guid: 2d77171d0c125f3409b9de928bbc15d0, type: 3}
-  - {fileID: 8300000, guid: c8cb7dfff995e6b40aaaec9d371dd23a, type: 3}
+  _pushBt: {fileID: 8300000, guid: caf435f30bfcfdb439257759c093e5cc, type: 3}
+  _inputText: {fileID: 8300000, guid: 5c1e32956fcee494f8fd10afe9371c45, type: 3}

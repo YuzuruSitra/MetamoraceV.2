@@ -8,8 +8,11 @@ namespace System.Sound
         public static SoundHandler InstanceSoundHandler;
         [SerializeField]
         private AudioSource _bgmAudioSource;
+
+        public float BgmVolume => _bgmAudioSource.volume;
         [SerializeField]
         private AudioSource _seAudioSource;
+        public float SeVolume => _seAudioSource.volume;
 
         private void Awake()
         {

@@ -14,14 +14,9 @@ namespace System.UI
         [SerializeField] private Button _closeSettingBt;
         [SerializeField] private Button _openInfoBt;
         [SerializeField] private Button _closeInfoBt;
-        [SerializeField] private Button _infoRuleBt;
-        [SerializeField] private Button _infoHowToBt;
-        [SerializeField] private Button _infoStoryBt;
         
         [SerializeField] private InputField _passInput;
         [SerializeField] private InputField _nameInput;
-        [SerializeField] private Slider _sliderBgm;
-        [SerializeField] private Slider _sliderSe;
         
         [SerializeField] private TitleUIHandler _titleUIHandler;
         [SerializeField] private ConnectionHandler _connectionHandler;
@@ -38,13 +33,8 @@ namespace System.UI
             _closeSettingBt.onClick.AddListener(_titleUIHandler.CloseSetting);
             _openInfoBt.onClick.AddListener(_titleUIHandler.OpenInfo);
             _closeInfoBt.onClick.AddListener(_titleUIHandler.CloseInfo);
-            _infoRuleBt.onClick.AddListener(_titleUIHandler.InfoRule);
-            _infoHowToBt.onClick.AddListener(_titleUIHandler.InfoHowTo);
-            _infoStoryBt.onClick.AddListener(_titleUIHandler.InfoStory);
             _passInput.onValueChanged.AddListener(_titleUIHandler.DonePassInput);
             _nameInput.onValueChanged.AddListener(_titleUIHandler.DoneNameInput);
-            _sliderBgm.onValueChanged.AddListener(_titleUIHandler.ChangeBgmValue);
-            _sliderSe.onValueChanged.AddListener(_titleUIHandler.ChangeSeValue);
         }
 
         private void CheckName()
