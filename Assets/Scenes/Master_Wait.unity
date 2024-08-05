@@ -217,7 +217,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 43.23, y: -46.7, z: 0}
 --- !u!114 &82297098
 MonoBehaviour:
@@ -1924,6 +1924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 630283431}
   - component: {fileID: 630283430}
+  - component: {fileID: 630283432}
   m_Layer: 0
   m_Name: ClearCamera
   m_TagString: Untagged
@@ -1989,6 +1990,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &630283432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630283429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &642413366
 GameObject:
   m_ObjectHideFlags: 0
@@ -2192,7 +2226,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1863961041}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: WaitUIHandler, Assembly-CSharp
         m_MethodName: ChangeStateSettingPanel
         m_Mode: 1
@@ -2773,7 +2807,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1863961041}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: WaitUIHandler, Assembly-CSharp
         m_MethodName: ChangeStateInfoPanel
         m_Mode: 1
@@ -5667,7 +5701,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1551733959
 GameObject:
@@ -6206,7 +6240,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1863961041}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: WaitUIHandler, Assembly-CSharp
         m_MethodName: ChangeStateInfoPanel
         m_Mode: 1
@@ -6446,59 +6480,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861573698}
   m_CullTransparentMesh: 1
---- !u!1 &1863961040
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1863961042}
-  - component: {fileID: 1863961041}
-  m_Layer: 0
-  m_Name: WaitUIHandler
-  m_TagString: UIHandler
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1863961041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863961040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ea270b133f8ca845a7ad9972d717747, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _memberText:
-  - {fileID: 285711817}
-  - {fileID: 1525891930}
-  - {fileID: 1461561450}
-  - {fileID: 1418242390}
-  _exitPanel: {fileID: 507098058}
-  _settingPanel: {fileID: 1921546651}
-  _infoPanel: {fileID: 1527415565}
-  _toggleNPC: {fileID: 2007160013}
---- !u!4 &1863961042
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863961040}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.955005, y: 4.979698, z: 2.7034187}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1882881312
 GameObject:
   m_ObjectHideFlags: 0
@@ -6813,7 +6794,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1863961041}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: WaitUIHandler, Assembly-CSharp
         m_MethodName: ChangeStateSettingPanel
         m_Mode: 1
@@ -7348,7 +7329,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1863961041}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: WaitUIHandler, Assembly-CSharp
         m_MethodName: ChangeStateExitPanel
         m_Mode: 1
