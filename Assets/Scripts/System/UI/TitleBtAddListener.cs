@@ -1,8 +1,8 @@
-using Dev.Yuz.Scripts.NetworkSystem;
+using System.Network;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Dev.Yuz.Scripts.UISystem
+namespace System.UI
 {
     public class TitleBtAddListener : MonoBehaviour
     {

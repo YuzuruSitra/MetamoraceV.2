@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace System
+namespace System.Screen
 {
     [ExecuteAlways]
     public class AspectKeeper : MonoBehaviour
@@ -17,7 +16,7 @@ namespace System
 
         private void Update()
         {
-            var screenAspect = Screen.width / (float)Screen.height; //画面のアスペクト比
+            var screenAspect = UnityEngine.Screen.width / (float)UnityEngine.Screen.height; //画面のアスペクト比
             var targetAspect = _aspectVec.x / _aspectVec.y; //目的のアスペクト比
  
             var magRate = targetAspect / screenAspect; //目的アスペクト比にするための倍率

@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-namespace Dev.Yuz.Scripts.NetworkSystem
+namespace System.Network
 {
     public class LaunchSystem : MonoBehaviour
     {

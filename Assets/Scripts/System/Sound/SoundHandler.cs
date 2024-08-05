@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Dev.Yuz.Scripts.SoundSystem
+namespace System.Sound
 {
     public class SoundHandler : MonoBehaviour
     {

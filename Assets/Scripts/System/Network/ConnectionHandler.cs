@@ -2,7 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 
-namespace Dev.Yuz.Scripts.NetworkSystem
+namespace System.Network
 {
     public class ConnectionHandler : MonoBehaviourPunCallbacks
     {

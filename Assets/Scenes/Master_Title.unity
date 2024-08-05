@@ -1047,7 +1047,7 @@ GameObject:
   m_Component:
   - component: {fileID: 375936377}
   m_Layer: 0
-  m_Name: System
+  m_Name: TitleSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4642,6 +4642,7 @@ MonoBehaviour:
   _infoHowToBt: {fileID: 317862346}
   _infoStoryBt: {fileID: 351952397}
   _passInput: {fileID: 761877009}
+  _nameInput: {fileID: 1880999699}
   _sliderBgm: {fileID: 180900086}
   _sliderSe: {fileID: 1571104603}
   _titleUIHandler: {fileID: 1621769078}

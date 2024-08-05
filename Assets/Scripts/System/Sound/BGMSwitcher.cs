@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Dev.Yuz.Scripts.SoundSystem
+namespace System.Sound
 {
     public class BGMSwitcher : MonoBehaviour
     {

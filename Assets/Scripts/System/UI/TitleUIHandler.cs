@@ -1,9 +1,9 @@
-using Dev.Yuz.Scripts.NetworkSystem;
-using Dev.Yuz.Scripts.SoundSystem;
+using System.Network;
+using System.Sound;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Dev.Yuz.Scripts.UISystem
+namespace System.UI
 {
     public class TitleUIHandler : MonoBehaviour
     {
