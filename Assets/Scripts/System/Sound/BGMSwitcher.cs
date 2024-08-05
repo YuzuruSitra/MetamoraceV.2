@@ -21,6 +21,7 @@ namespace System.Sound
             
             SceneManager.sceneLoaded += OnSceneLoaded;
             var sceneNum = SceneManager.GetActiveScene().buildIndex;
+            if (sceneNum >= _bgm.Length) return;
             _soundHandler.PlayBgm(_bgm[sceneNum]);
         }
 
