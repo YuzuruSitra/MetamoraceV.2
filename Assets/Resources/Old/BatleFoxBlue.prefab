@@ -2815,6 +2815,9 @@ GameObject:
   - component: {fileID: 5353145884009873201}
   - component: {fileID: 4853459554889714961}
   - component: {fileID: 4383592953301892261}
+  - component: {fileID: 519369664161836459}
+  - component: {fileID: 403355054168704116}
+  - component: {fileID: 404603311979978053}
   m_Layer: 0
   m_Name: Fox01Use
   m_TagString: Player
@@ -2905,6 +2908,48 @@ MonoBehaviour:
   _frontRayRength: 0.51
   _initialjumpPower: 30
   _jumprayrength: 0.15
+--- !u!114 &519369664161836459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863035892777435699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dff073a8f4907fe4aacc96bb1931fecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerReach: 1
+--- !u!114 &403355054168704116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863035892777435699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6df8ab43165e15747b6e5c6b0af827ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _initialDestroyPower: 1
+  _predictCubes: {fileID: 4142931056409329927}
+  _herosPrefab:
+  - {fileID: 6252427330716548040, guid: d87e00c8c3069f849b854fd0cb7f68ee, type: 3}
+  - {fileID: 0}
+--- !u!114 &404603311979978053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863035892777435699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d28dd33c7321904fbdeab852a9da0d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8918577821326152586
 GameObject:
   m_ObjectHideFlags: 0

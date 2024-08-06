@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2752334942250380793}
   - component: {fileID: 2752334942250380794}
-  - component: {fileID: 2752334942250380797}
   - component: {fileID: 2374573697013641907}
   - component: {fileID: 5483787968176147098}
+  - component: {fileID: 759414738402357896}
   m_Layer: 0
   m_Name: Ambras (1)
   m_TagString: Ambras
@@ -50,29 +50,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2752334942250380797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2752334942250380796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a0f744358e5b94097f9f9099ef48d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _anim: {fileID: 4558987994300960853}
-  _myPV: {fileID: 5483787968176147098}
-  _objID: 1
-  _objHealth: 1.5
-  _blocklength: 0.6
-  _isBigBlock: 0
-  _rb: {fileID: 2374573697013641907}
-  _developMode: 1
-  _gage: {fileID: 5921182815356334153}
-  _parentBlock: {fileID: 6252427330716548040}
-  _cloudeffect: {fileID: 5697575003319578938}
 --- !u!54 &2374573697013641907
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -101,21 +78,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  OwnerShipWasTransfered: 0
-  prefixBackup: -1
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  observableSearch: 0
   ObservedComponents:
   - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  currentMasterID: -1
+  sceneViewId: 0
+  InstantiationId: -1
   isRuntimeInstantiated: 0
+--- !u!114 &759414738402357896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2752334942250380796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d71f8954027da4598aad2f96f48c72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objName: Ambras
+  _objHealth: 1
+  _healthGage: {fileID: 5921182815356334153}
 --- !u!1 &4550569058306320736
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +219,6 @@ GameObject:
   - component: {fileID: 5697575003319578937}
   - component: {fileID: 5697575003319578936}
   - component: {fileID: 5697575003319578939}
-  - component: {fileID: 3964641995334270603}
   m_Layer: 0
   m_Name: CloudEffect
   m_TagString: Untagged
@@ -326,19 +313,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3964641995334270603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5697575003319578938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd778bd21e1e7894dabf939a6a37c495, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NotUseBillboard: 0
 --- !u!1 &5842911844451310260
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,20 +461,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  OwnerShipWasTransfered: 0
-  prefixBackup: -1
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  observableSearch: 0
   ObservedComponents:
   - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  currentMasterID: -1
+  sceneViewId: 0
+  InstantiationId: -1
   isRuntimeInstantiated: 0
 --- !u!1 &8541867025272815441
 GameObject:
@@ -513,7 +483,6 @@ GameObject:
   - component: {fileID: 7723611601844468852}
   - component: {fileID: 8877930454536600052}
   - component: {fileID: 5921182815356334153}
-  - component: {fileID: 2411954740470143757}
   m_Layer: 0
   m_Name: HealthGage
   m_TagString: Untagged
@@ -579,16 +548,3 @@ MonoBehaviour:
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2411954740470143757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8541867025272815441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd778bd21e1e7894dabf939a6a37c495, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NotUseBillboard: 0

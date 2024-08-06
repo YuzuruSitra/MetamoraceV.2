@@ -40,7 +40,6 @@ public class PlayerMover : MonoBehaviour
         
         //if (_playerObjectManipulator.AnimBreak && _onGround) return;
         float inputX = 0.0f;
-        Debug.Log(inputX);
         //チーム1とチーム2で操作反転
         // if (_playerDataReceiver.MineTeamID == 0)
         // {
@@ -83,7 +82,6 @@ public class PlayerMover : MonoBehaviour
         // if(_animSwing) return;
         if (Input.GetKeyDown(KeyCode.Space) && _onGround)
         {
-            Debug.Log("Jump");
             //ジャンプSE鳴らす
             //_playerSoundHandler.PlayJumpSE();
             _rb.AddForce(Vector3.up * _JumpPower, ForceMode.Impulse);
@@ -94,7 +92,7 @@ public class PlayerMover : MonoBehaviour
     {
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * _jumprayrength, Color.red, 0.1f);
-        if (Physics.Raycast(ray, out hit, _jumprayrength)) return true; 
+        if (Physics.Raycast(ray, out hit, _jumprayrength)) return true;
         else return false;
     }
 }
