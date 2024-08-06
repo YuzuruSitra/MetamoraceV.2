@@ -38,7 +38,6 @@ public class PlayerObjectManipulator : MonoBehaviour
     {
         BreakBlock();
         CreateBlock();
-        //playerItemHandler.CreateItem();
         if (_hasBlock) 
         {
             _insPos = new Vector3((int)transform.position.x, (int)transform.position.y + 0.25f, -1.0f);
@@ -100,7 +99,9 @@ public class PlayerObjectManipulator : MonoBehaviour
             //壊したブロックを表示する処理
             _uiHandler.SetStackImage(BreakObjName);
             _predictCubes.SetActive(true);
+            playerItemHandler.CreateItem();
         }
+        
     }
 
 }

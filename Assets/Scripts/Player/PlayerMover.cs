@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
+    private PlayerItemHandler playerItemHandler;
      [SerializeField]
     private Rigidbody _rb;
      [SerializeField]
@@ -15,17 +16,20 @@ public class PlayerMover : MonoBehaviour
     [SerializeField]
     private float _initialjumpPower = 30.0f;
     private float _JumpPower;
-    [SerializeField]
-    private float _jumprayrength = 0.15f;
+    
     private bool _isMoving;
     public bool IsMoving => _isMoving;
     private bool _onGround = true;
     public bool OnGround => _onGround;
+
+    private PlayerCheakAround playerCheakAround;
     // Start is called before the first frame update
     void Start()
     {
          _JumpPower = _initialjumpPower;
          _playerSpeed = _initialSpeed;
+         playerItemHandler = GetComponent<PlayerItemHandler>();
+         playerCheakAround = GetComponent<PlayerCheakAround>();
     }
 
     // Update is called once per frame
@@ -33,6 +37,7 @@ public class PlayerMover : MonoBehaviour
     {
         PlayerCtrl();
         Jump();
+        playerItemHandler.UseItemA();
     }
 
    void PlayerCtrl()
@@ -67,18 +72,14 @@ public class PlayerMover : MonoBehaviour
        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 1280.0f * Time.deltaTime);
        // if (CheckFront(new Ray(transform.position + new Vector3(0, 0.5f, 0), transform.forward * _frontRayRength))) return;
         // カメラの方向を考慮して移動ベクトルを作成
-       
-        _rb.MovePosition(transform.position + movement * _playerSpeed * Time.deltaTime);
+        int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
+        Debug.Log(ItemAEffectRate);
+        _rb.MovePosition(transform.position + movement * _playerSpeed * Time.deltaTime * ItemAEffectRate);
     }
 
     void Jump()
     {
-         float raypos = 0.45f;
-        float rayheight = 0.1f;
-         _onGround = CheckAndJump(new Ray(transform.position + new Vector3(raypos, rayheight, raypos), Vector3.down)) ||
-                        CheckAndJump(new Ray(transform.position + new Vector3(-raypos, rayheight, -raypos), Vector3.down)) ||
-                        CheckAndJump(new Ray(transform.position + new Vector3(raypos, rayheight, -raypos), Vector3.down)) ||
-                        CheckAndJump(new Ray(transform.position + new Vector3(-raypos, rayheight, raypos), Vector3.down));
+        _onGround = playerCheakAround.CheakGroundRay();
         // if(_animSwing) return;
         if (Input.GetKeyDown(KeyCode.Space) && _onGround)
         {
@@ -87,12 +88,5 @@ public class PlayerMover : MonoBehaviour
             _rb.AddForce(Vector3.up * _JumpPower, ForceMode.Impulse);
         }
     }
-    // 地上にいるか判定
-    private bool CheckAndJump(Ray ray)
-    {
-        RaycastHit hit;
-        Debug.DrawRay(ray.origin, ray.direction * _jumprayrength, Color.red, 0.1f);
-        if (Physics.Raycast(ray, out hit, _jumprayrength)) return true;
-        else return false;
-    }
+   
 }

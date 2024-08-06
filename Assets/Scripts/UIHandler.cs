@@ -10,6 +10,7 @@ public class UIHandler : MonoBehaviour
     [SerializeField] Image _BlockImage;
     [SerializeField]  Sprite ItemA, ItemB, ItemC;
     [SerializeField] Image _itemImage;
+    private Color transparent = new Color(0f, 0f, 0f, 0f);
     // Start is called before the first frame update
     void Start()
     {
@@ -93,6 +94,7 @@ public class UIHandler : MonoBehaviour
 
     public void ResetItemImage()
     {
-        
+        _itemImage.sprite = null;
+        _itemImage.color = transparent;
     }
 }
