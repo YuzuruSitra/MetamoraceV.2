@@ -1,4 +1,5 @@
 using System.Network;
+using System.Object;
 using System.Sound;
 using Photon.Pun;
 using Photon.Realtime;

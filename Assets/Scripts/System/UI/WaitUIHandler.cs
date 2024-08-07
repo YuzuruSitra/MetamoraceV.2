@@ -10,6 +10,7 @@ namespace System.UI
         [SerializeField] private GameObject _rulePanel;
         [SerializeField] private GameObject _howToPanel;
         [SerializeField] private GameObject _storyPanel;
+        [SerializeField] private GameObject _exitPanel;
         private UiSeHandler _uiSeHandler;
         
         private void Start()
@@ -64,6 +65,15 @@ namespace System.UI
             _rulePanel.SetActive(false);
             _howToPanel.SetActive(false);
             _storyPanel.SetActive(false);
+        }
+
+        public void OpenExitPanel()
+        {
+            _exitPanel.SetActive(true);
+        }
+        public void CloseExitPanel()
+        {
+            _exitPanel.SetActive(false);
         }
         
     }

@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e650ec0b0178654c98371a4c9d39f38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: Master_Battle
+  _titleSceneName: Master_Title
+  _gameSceneName: Master_Battle
 --- !u!114 &-2341585429553382058
 MonoBehaviour:
   m_ObjectHideFlags: 0

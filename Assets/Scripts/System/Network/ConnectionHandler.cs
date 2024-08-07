@@ -11,7 +11,7 @@ namespace System.Network
         public string RoomPas { get; set; }
         public string PlayerName { get; set; }
         [SerializeField] private string _sceneName;
-        public const int MaxPlayer = 4;
+        private const int MaxPlayer = 4;
         private readonly RoomOptions _option = new();
     
         private void Start()
@@ -56,7 +56,6 @@ namespace System.Network
         public override void OnJoinedRoom()
         {
             PhotonNetwork.NickName = PlayerName;
-            //PhotonNetwork.LoadLevel(_sceneName);
             SceneManager.LoadScene(_sceneName);
         }
         
