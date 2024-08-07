@@ -10,23 +10,18 @@ public class BlockBehaviour : MonoBehaviour
     [SerializeField]
     private float _objHealth;
     private float _maxobjHealth;
+    private ItemCBehavior itemCBehavior;
 
     [SerializeField] private Image _healthGage;
+
     void Start()
     {
         _maxobjHealth = _objHealth;
+        //ItemCBehaviorがついていればゲットコンポーネント}
+        itemCBehavior = GetComponent<ItemCBehavior>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    public void DecreceGage()
-   {
-        Debug.Log("a");
-   }
-     public string DestroyBlock(float power)
+    public string DestroyBlock(float power)
     {
         _objHealth -= power * Time.deltaTime;
         //currentTime = setTime;
@@ -34,6 +29,10 @@ public class BlockBehaviour : MonoBehaviour
         _healthGage.fillAmount = _nowhealth;
         if(_objHealth <= 0)
         {   
+            if (itemCBehavior != null)
+            {
+                itemCBehavior.Break4();
+            }
             gameObject.SetActive(false);
             return _objName;
         }

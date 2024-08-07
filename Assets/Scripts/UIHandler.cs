@@ -95,6 +95,6 @@ public class UIHandler : MonoBehaviour
     public void ResetItemImage()
     {
         _itemImage.sprite = null;
-        _itemImage.color = transparent;
+        //_itemImage.color = transparent;
     }
 }

@@ -9,15 +9,26 @@ public class PlayerItemHandler : MonoBehaviour
     private bool hasItemA, hasItemB, hasItemC;
     private float _itemAEffectTime = 6.0f;
     public int ItemAEffectRate { get; private set; } = 1;
+    private Coroutine _itemACoroutine;
+    private PlayerObjectManipulator playerObjectManipulator;
+    public string NextInsBlock { get; private set; } = null;
 
     public void Start()
     {
         _uiHandler = GameObject.FindWithTag("UIHandler").GetComponent<UIHandler>();
         playerBlockStack = GetComponent<PlayerBlockStack>();
+        playerObjectManipulator = GetComponent<PlayerObjectManipulator>();
     }
+
+    public void Update()
+    {
+      // Debug.Log(playerBlockStack.FullStack);
+    }
+    
     public void CreateItem()
     {
         if (!playerBlockStack.FullStack) return;
+        if (hasItemA || hasItemB || hasItemC) return;
         string ItemType = playerBlockStack.CreateItemType();
             //アイテムUI表示
             _uiHandler.SetItemImage(ItemType);
@@ -40,7 +51,7 @@ public class PlayerItemHandler : MonoBehaviour
                     Debug.Log("Error");
                     break;
             }    
-       // Debug.Log($"hasItemA: {hasItemA}, hasItemB: {hasItemB}, hasItemC: {hasItemC}");
+      // Debug.Log($"hasItemA: {hasItemA}, hasItemB: {hasItemB}, hasItemC: {hasItemC}");
 
     }
 
@@ -55,35 +66,50 @@ public class PlayerItemHandler : MonoBehaviour
             _uiHandler.ResetStackImage();
             _uiHandler.ResetItemImage();
             hasItemA = false;
-            StartCoroutine(FinishItemA());
+            if (_itemACoroutine != null)
+            {
+                StopCoroutine(_itemACoroutine);
+            }
+            _itemACoroutine = StartCoroutine(FinishItemA());
     }
     IEnumerator FinishItemA()
     {
         yield return new WaitForSeconds(_itemAEffectTime);        //もとに戻す
-        Debug.Log("効果終了");
         ItemAEffectRate = 1;
+        _itemACoroutine = null;
     }
     //ブロックを持っている状態でクリック
-    void UseItemB()
+    public void UseItemB()
     {
-        if (!Input.GetMouseButton(0) &&hasItemB) return; 
-        // //ブロックすたっくUIリセット
-        playerBlockStack.ResetBlock();
-        //ブロックスタックリセット
-        _uiHandler.ResetStackImage();
-        _uiHandler.ResetItemImage();
-        hasItemB = false;
+        if (Input.GetMouseButton(1) &&hasItemB && playerObjectManipulator.HasBlock)
+        {
+            // //ブロックすたっくUIリセット
+            playerBlockStack.ResetBlock();
+            //ブロックスタックリセット
+            _uiHandler.ResetStackImage();
+            _uiHandler.ResetItemImage();
+            hasItemB = false;
+            NextInsBlock =  "BigBlock";
+        }
     }
     //ブロックを持っている状態でクリック
-    void UseItemC()
+    public void UseItemC()
     {
-        if (!Input.GetMouseButton(0) &&hasItemC) return; 
-        // //ブロックすたっくUIリセット
-        playerBlockStack.ResetBlock();
-        //ブロックスタックリセット
-        _uiHandler.ResetStackImage();
-        _uiHandler.ResetItemImage();
-        hasItemC = false;
+        if (Input.GetMouseButton(1) &&hasItemC && playerObjectManipulator.HasBlock)
+        {
+            // //ブロックすたっくUIリセット
+            playerBlockStack.ResetBlock();
+            //ブロックスタックリセット
+            _uiHandler.ResetStackImage();
+            _uiHandler.ResetItemImage();
+            hasItemC = false;
+            NextInsBlock =  "ItemCBlock";
+        }
+    }
+
+    public void ResetNextInsBlock()
+    {
+        NextInsBlock = null;
     }
     
 }

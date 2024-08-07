@@ -12,7 +12,7 @@ public class PlayerObjectManipulator : MonoBehaviour
     public float InitialDestroyPower => _initialDestroyPower;
     [SerializeField]
     private GameObject _predictCubes;
-    private float _destroyPower = 1;
+    private float _destroyPower = 1.0f;
      private bool _hasBlock = false;
     public bool HasBlock => _hasBlock;
      private Vector3 _insPos;
@@ -22,8 +22,12 @@ public class PlayerObjectManipulator : MonoBehaviour
     private PlayerItemHandler playerItemHandler;
     [SerializeField]
     GameObject[] _herosPrefab = new GameObject[2];
-
-    private Vector3 _createPos;
+    [SerializeField]
+    GameObject[] _BigPrefab = new GameObject[2];
+    [SerializeField]
+    GameObject[] _cPrefab = new GameObject[2];
+    string nextInsBlock =  "Heros";
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -38,15 +42,15 @@ public class PlayerObjectManipulator : MonoBehaviour
     {
         BreakBlock();
         CreateBlock();
-        if (_hasBlock) 
-        {
-            _insPos = new Vector3((int)transform.position.x, (int)transform.position.y + 0.25f, -1.0f);
-             _createPos = _insPos;
+        playerItemHandler.UseItemC();
+        playerItemHandler.UseItemB();
 
-            _predictCubes.transform.position = _insPos;
-        }
+        if (!_hasBlock) return;
+        _insPos = new Vector3((int)transform.position.x, (int)transform.position.y + 0.25f, -1.0f);
+        _predictCubes.transform.position = _insPos;
     }
-     //ブロック生成
+
+    //ブロック生成
     public void CreateBlock()
     {
         //ブロックを持ってれば処理を行う
@@ -57,30 +61,32 @@ public class PlayerObjectManipulator : MonoBehaviour
         _predictCubes.SetActive(false);
         _insBigPos = _insPos;
         _insBigPos.y += 1.0f;
-      
         StartCoroutine(GenerateBlock());
     }
-     private IEnumerator GenerateBlock()
+
+    private IEnumerator GenerateBlock()
     {
         yield return new WaitForSeconds(0.4f);
-        Instantiate(_herosPrefab[0], _createPos, Quaternion.identity); // _createPosを使用してオブジェクトを生成        // //アイテムBを持っていたら巨大ブロック一回だけ生成
-        // if (_itemHandler._HasItemB && _playerItemHandler.UseItemState == 0)
-        // {
-        //     //アイテムB微調整
-        //     _playerItemHandler.UsedItem();
-        //     _itemHandler.ItemEffectB();
-        // }
-        // //ItemCBlock生成
-        // else if (_itemHandler._HasItemC && _playerItemHandler.UseItemState == 1)
-        // {
-        //     _playerItemHandler.UsedItem();
-        // }
-        // else
-        // {
-        //    
-        // }
-
+        if (playerItemHandler.NextInsBlock != null) nextInsBlock = playerItemHandler.NextInsBlock;
+        else nextInsBlock = "Heros";
+        switch (nextInsBlock)
+        {
+            case "Heros":
+                Instantiate(_herosPrefab[0], _insPos, Quaternion.identity); // _createPosを使用してオブジェクトを生成
+                break;
+            case "BigBlock":
+                // //アイテムBを持っていたら巨大ブロック一回だけ生成
+                Instantiate(_BigPrefab[0], _insBigPos, Quaternion.identity);
+                playerItemHandler.ResetNextInsBlock();
+                break;
+            case "ItemCBlock":
+                Instantiate(_cPrefab[0], _insBigPos, Quaternion.identity);
+                playerItemHandler.ResetNextInsBlock();
+                break;
+        }
+        nextInsBlock = "Heros";
     }
+
     //オブジェクト破壊
     public void BreakBlock()
     {
@@ -89,8 +95,10 @@ public class PlayerObjectManipulator : MonoBehaviour
         playerDirection.Normalize();
         _currentBlock = playerCheakAround.CheckBlockRay(playerDirection);
         if(_currentBlock == null)return;
+        int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
+        _destroyPower = ItemAEffectRate * _initialDestroyPower;
         string BreakObjName = _currentBlock.DestroyBlock(_destroyPower);
-        if (BreakObjName == "Ambras" || BreakObjName == "Heros")
+        if (BreakObjName == "Ambras" || BreakObjName == "Heros" || BreakObjName == "ItemCBlock")
         {
             playerBlockStack.StackBlock(BreakObjName);
             _hasBlock = true;
@@ -101,7 +109,5 @@ public class PlayerObjectManipulator : MonoBehaviour
             _predictCubes.SetActive(true);
             playerItemHandler.CreateItem();
         }
-        
     }
-
 }

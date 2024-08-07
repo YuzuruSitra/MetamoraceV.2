@@ -9,6 +9,10 @@ private string[] _stackBlocks = new string[3];
 
    public bool FullStack { get; private set; } = false;
 
+   void Update()
+   {
+       Debug.Log(_stackBlocks[0] + " " + _stackBlocks[1] + " " + _stackBlocks[2]);
+   }
    //破壊したブロックをスタック
     public void StackBlock(string _objName)
     {      
@@ -20,6 +24,7 @@ private string[] _stackBlocks = new string[3];
             if(_stackBlocks[i] == null)
             {
                 _stackBlocks[i] = _objName;
+                Debug.Log("stack");
                 //Debug.Log(_stackBlocks[0] + " " + _stackBlocks[1] + " " + _stackBlocks[2]);
                 if (_stackBlocks[2] != null) FullStack = true;
                 break;
@@ -29,15 +34,10 @@ private string[] _stackBlocks = new string[3];
 
     public void ResetBlock()
     {
-        for(int i = 0; i < _stackBlocks.Length; i++) 
+        for(int i = 0; i < _stackBlocks.Length; i++)
         {
-            if(_stackBlocks[i] != null) 
-            {
-                Debug.Log("配列が埋まってません");
-                break;
-            }
             //配列のi番目が空（０）だったら処理実行
-            _stackBlocks[i] = "";      
+            _stackBlocks[i] = null;      
         }
         FullStack = false;
     }

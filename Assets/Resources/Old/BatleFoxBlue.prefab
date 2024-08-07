@@ -2907,7 +2907,6 @@ MonoBehaviour:
   _initialSpeed: 5
   _frontRayRength: 0.51
   _initialjumpPower: 30
-  _jumprayrength: 0.15
 --- !u!114 &519369664161836459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2921,6 +2920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerReach: 1
+  _jumprayrength: 0.15
 --- !u!114 &403355054168704116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2937,6 +2937,12 @@ MonoBehaviour:
   _predictCubes: {fileID: 4142931056409329927}
   _herosPrefab:
   - {fileID: 6252427330716548040, guid: d87e00c8c3069f849b854fd0cb7f68ee, type: 3}
+  - {fileID: 0}
+  _BigPrefab:
+  - {fileID: 1664117124386851239, guid: f13175661c7ad164db194d01f13af153, type: 3}
+  - {fileID: 0}
+  _cPrefab:
+  - {fileID: 933951156368605023, guid: 4c029e3fa0c60ae4581b5bac10c0c254, type: 3}
   - {fileID: 0}
 --- !u!114 &404603311979978053
 MonoBehaviour:

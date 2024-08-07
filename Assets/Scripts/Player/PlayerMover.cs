@@ -73,7 +73,6 @@ public class PlayerMover : MonoBehaviour
        // if (CheckFront(new Ray(transform.position + new Vector3(0, 0.5f, 0), transform.forward * _frontRayRength))) return;
         // カメラの方向を考慮して移動ベクトルを作成
         int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
-        Debug.Log(ItemAEffectRate);
         _rb.MovePosition(transform.position + movement * _playerSpeed * Time.deltaTime * ItemAEffectRate);
     }
 
