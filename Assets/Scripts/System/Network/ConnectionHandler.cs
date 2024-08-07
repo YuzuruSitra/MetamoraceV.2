@@ -1,6 +1,7 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace System.Network
 {
@@ -10,14 +11,14 @@ namespace System.Network
         public string RoomPas { get; set; }
         public string PlayerName { get; set; }
         [SerializeField] private string _sceneName;
-        [SerializeField] private byte _maxPlayer = 4;
+        public const int MaxPlayer = 4;
         private readonly RoomOptions _option = new();
     
         private void Start()
         {
             ModeState = 1;
             RoomPas = "";
-            _option.MaxPlayers = _maxPlayer;
+            _option.MaxPlayers = MaxPlayer;
         }
         
         public void JoinRoom()
@@ -55,7 +56,8 @@ namespace System.Network
         public override void OnJoinedRoom()
         {
             PhotonNetwork.NickName = PlayerName;
-            PhotonNetwork.LoadLevel(_sceneName);
+            //PhotonNetwork.LoadLevel(_sceneName);
+            SceneManager.LoadScene(_sceneName);
         }
         
     }
