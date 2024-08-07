@@ -1,10 +1,9 @@
 using System.Network;
 using System.Sound;
-using System.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Dev.Yuz.Scripts.UI
+namespace System.UI
 {
     public class ExitPanelHandler : MonoBehaviour
     {

@@ -10,6 +10,7 @@ namespace System.Network
         [SerializeField] private string[] _battleCharacter;
         [SerializeField] private Vector3 _waitInsPos;
         [SerializeField] private Vector3[] _battleInsPos;
+        public GameObject CurrentPlayer { get; private set; }
         
         private void Start()
         {
@@ -44,7 +45,7 @@ namespace System.Network
                         Debug.LogWarning("ID Error");
                         return;
                     }
-                    PhotonNetwork.Instantiate(_waitCharacter[id], _waitInsPos, Quaternion.identity);
+                    CurrentPlayer = PhotonNetwork.Instantiate(_waitCharacter[id], _waitInsPos, Quaternion.identity);
                     break;
                 case "Master_Battle":
                     if (id >= _battleCharacter.Length)
@@ -52,7 +53,7 @@ namespace System.Network
                         Debug.LogWarning("ID Error");
                         return;
                     }
-                    PhotonNetwork.Instantiate(_battleCharacter[id], _battleInsPos[id], Quaternion.identity);
+                    CurrentPlayer = PhotonNetwork.Instantiate(_battleCharacter[id], _battleInsPos[id], Quaternion.identity);
                     break;
             }
         }

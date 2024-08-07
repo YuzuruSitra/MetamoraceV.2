@@ -1,4 +1,4 @@
-using System.Object;
+using Object;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;

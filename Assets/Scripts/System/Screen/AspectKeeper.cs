@@ -5,13 +5,13 @@ namespace System.Screen
     [ExecuteAlways]
     public class AspectKeeper : MonoBehaviour
     {
-        private Camera _targetCamera; //対象とするカメラ
+        private UnityEngine.Camera _targetCamera; //対象とするカメラ
  
         [SerializeField] private Vector2 _aspectVec; //目的解像度
         private Rect _viewportRect = new Rect(0, 0, 1, 1);
         private void Start()
         {
-            _targetCamera = GetComponent<Camera>();
+            _targetCamera = GetComponent<UnityEngine.Camera>();
         }
 
         private void Update()

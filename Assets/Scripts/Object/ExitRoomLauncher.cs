@@ -2,7 +2,7 @@ using System.UI;
 using Photon.Pun;
 using UnityEngine;
 
-namespace System.Object
+namespace Object
 {
     public class ExitRoomLauncher : MonoBehaviour
     {

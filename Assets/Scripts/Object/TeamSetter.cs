@@ -4,7 +4,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 
-namespace System.Object
+namespace Object
 {
     public class TeamSetter : MonoBehaviour
     {
