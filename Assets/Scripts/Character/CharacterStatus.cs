@@ -1,9 +1,10 @@
 using System;
+using Photon.Pun;
 using UnityEngine;
 
 namespace Character
 {
-    public class CharacterStatus : MonoBehaviour
+    public class CharacterStatus : MonoBehaviourPunCallbacks
     {
         public enum Condition
         {
@@ -25,11 +26,13 @@ namespace Character
         
         private void Start()
         {
+            if (!photonView.IsMine) return;
             _currentCondition = Condition.Idole;
         }
 
         private void Update()
         {
+            if (!photonView.IsMine) return;
             JudgmentCondition();
         }
 

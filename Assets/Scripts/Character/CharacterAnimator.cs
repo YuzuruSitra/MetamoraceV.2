@@ -1,8 +1,9 @@
+using Photon.Pun;
 using UnityEngine;
 
 namespace Character
 {
-    public class CharacterAnimator : MonoBehaviour
+    public class CharacterAnimator : MonoBehaviourPunCallbacks
     {
         private Animator _anim;
         [SerializeField] private CharacterStatus _characterStatus;
@@ -18,6 +19,7 @@ namespace Character
 
         private void Start()
         {
+            if (!photonView.IsMine) return;
             _anim = GetComponent<Animator>();
             _characterStatus.ChangeConditionEvent += ChangeAnim;
         }

@@ -1,8 +1,9 @@
+using Photon.Pun;
 using UnityEngine;
 
 namespace Character
 {
-    public class CharacterMover : MonoBehaviour
+    public class CharacterMover : MonoBehaviourPunCallbacks
     {
         [Header("歩行速度")]
         [SerializeField] private float _walkSpeed;
@@ -29,11 +30,13 @@ namespace Character
 
         private void Start()
         {
+            if (!photonView.IsMine) return;
             _controller = GetComponent<CharacterController>();
         }
 
         private void Update()
         {
+            if (!photonView.IsMine) return;
             var horizontal = Input.GetAxis("Horizontal");
             var speed = Input.GetKey(KeyCode.LeftShift) ? _runSpeed : _walkSpeed;
                 
