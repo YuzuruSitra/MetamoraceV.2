@@ -1,23 +1,19 @@
-using System;
+using System.Collections.Generic;
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-using System.Collections.Generic;
-using ExitGames.Client.Photon;
 
-namespace Dev.Yuz.Scripts.System.Network
+namespace System.Network
 {
     public class TeamSetter : MonoBehaviour
     {
         [SerializeField] private int _setTeamNum;
         public const int TeamOutValue = -1;
         public const string TeamKey = "Team";
-
         private readonly Dictionary<Collider, Player> _playerCache = new();
-
-        // キャッシュ用の Hashtable
+        
         private Hashtable _teamInProperties;
-
         private Hashtable _teamOutProperties;
 
         private void Start()
@@ -36,7 +32,6 @@ namespace Dev.Yuz.Scripts.System.Network
         private void OnTriggerEnter(Collider other)
         {
             if (!PhotonNetwork.IsMasterClient) return;
-            
             if (!other.gameObject.CompareTag("Player")) return;
 
             if (!_playerCache.TryGetValue(other, out var player))
@@ -51,9 +46,10 @@ namespace Dev.Yuz.Scripts.System.Network
                 _playerCache[other] = player;
             }
             
-            _teamInProperties[TeamKey] = _setTeamNum;
-            player.SetCustomProperties(_teamInProperties);
-            Debug.Log($"Player {player.NickName} is now on team {_setTeamNum}");
+            // チームのプレイヤー数をカウント
+            var teamCount = CountPlayersInTeam(_setTeamNum);
+            // チームに2人以上いる場合は TeamOutValue を設定
+            player.SetCustomProperties(teamCount >= 2 ? _teamOutProperties : _teamInProperties);
         }
 
         private void OnTriggerExit(Collider other)
@@ -73,6 +69,17 @@ namespace Dev.Yuz.Scripts.System.Network
                 _playerCache[other] = player;
             }
             player.SetCustomProperties(_teamOutProperties);
+            Debug.Log($"Player {player.NickName} is now out of the team.");
+        }
+
+        // 指定したチームにいるプレイヤーの数をカウントするメソッド
+        private int CountPlayersInTeam(int teamNum)
+        {
+            var count = 0;
+            foreach (var player in PhotonNetwork.PlayerList)
+                if (player.CustomProperties.TryGetValue(TeamKey, out var teamValue) && (int)teamValue == teamNum) 
+                    count++;
+            return count;
         }
     }
 }

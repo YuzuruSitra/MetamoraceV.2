@@ -2,7 +2,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Dev.Yuz.Scripts.System.Network
+namespace System.Network
 {
     public class PlayerGenerator : MonoBehaviourPunCallbacks
     {
