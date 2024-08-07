@@ -50,7 +50,7 @@ namespace System.UI
             {
                 var customProperties = player.CustomProperties;
                 if (!customProperties.ContainsKey(TeamSetter.TeamKey)) continue;
-                var teamValue = (int)customProperties["Team"];
+                var teamValue = (int)customProperties[TeamSetter.TeamKey];
                 switch (teamValue)
                 {
                     case TeamSetter.TeamOutValue:

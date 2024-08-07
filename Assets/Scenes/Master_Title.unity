@@ -1401,7 +1401,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneName: Master_Wait
-  _maxPlayer: 4
 --- !u!1001 &1052896711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1410,11 +1409,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6581757328248425592, guid: 25067429fff0d15469497ef6bc96150b,
-        type: 3}
-      propertyPath: _battleInsPos.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 6581757328248425592, guid: 25067429fff0d15469497ef6bc96150b,
         type: 3}
       propertyPath: _battleInsPos.Array.data[0].x
