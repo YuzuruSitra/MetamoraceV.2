@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
     private PlayerItemHandler playerItemHandler;
+    private PlayerObjectManipulator playerObjectManipulator;
+    //private ItemCBehavior itemCBehavior;
      [SerializeField]
     private Rigidbody _rb;
      [SerializeField]
@@ -23,6 +25,9 @@ public class PlayerMover : MonoBehaviour
     public bool OnGround => _onGround;
 
     private PlayerCheakAround playerCheakAround;
+    [SerializeField] private float stanTime = 2.0f;
+    private bool IsStan = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +35,8 @@ public class PlayerMover : MonoBehaviour
          _playerSpeed = _initialSpeed;
          playerItemHandler = GetComponent<PlayerItemHandler>();
          playerCheakAround = GetComponent<PlayerCheakAround>();
+        //itemCBehavior = GetComponent<ItemCBehavior>();
+         playerObjectManipulator = GetComponent<PlayerObjectManipulator>();
     }
 
     // Update is called once per frame
@@ -71,15 +78,25 @@ public class PlayerMover : MonoBehaviour
 
        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 1280.0f * Time.deltaTime);
        // if (CheckFront(new Ray(transform.position + new Vector3(0, 0.5f, 0), transform.forward * _frontRayRength))) return;
-        // カメラの方向を考慮して移動ベクトルを作成
         int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
-        _rb.MovePosition(transform.position + movement * _playerSpeed * Time.deltaTime * ItemAEffectRate);
+        _rb.MovePosition(transform.position + movement * _playerSpeed * Time.deltaTime * ItemAEffectRate );
+    }
+
+    public void StanTest()
+    {
+        if(IsStan)
+        _playerSpeed = 0;
+        StartCoroutine(FinishStan());
+    }
+    IEnumerator FinishStan()
+    {
+        yield return new WaitForSeconds(stanTime); //もとに戻す
+        _playerSpeed = 1;
     }
 
     void Jump()
     {
         _onGround = playerCheakAround.CheakGroundRay();
-        // if(_animSwing) return;
         if (Input.GetKeyDown(KeyCode.Space) && _onGround)
         {
             //ジャンプSE鳴らす

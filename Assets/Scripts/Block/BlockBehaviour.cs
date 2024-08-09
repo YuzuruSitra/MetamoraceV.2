@@ -31,7 +31,8 @@ public class BlockBehaviour : MonoBehaviour
         {   
             if (itemCBehavior != null)
             {
-                itemCBehavior.Break4();
+                
+                itemCBehavior.LotteryItemC();
             }
             gameObject.SetActive(false);
             return _objName;

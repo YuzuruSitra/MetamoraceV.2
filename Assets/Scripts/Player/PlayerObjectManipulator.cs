@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerObjectManipulator : MonoBehaviour
 {
-    private BlockBehaviour _currentBlock;
+    private BlockBehaviour _currentBlockBehavior;
     PlayerCheakAround playerCheakAround;
     PlayerBlockStack playerBlockStack;
      [SerializeField]
@@ -93,21 +93,22 @@ public class PlayerObjectManipulator : MonoBehaviour
         if (_hasBlock || !Input.GetMouseButton(0)) return; 
         Vector3 playerDirection = transform.forward;
         playerDirection.Normalize();
-        _currentBlock = playerCheakAround.CheckBlockRay(playerDirection);
-        if(_currentBlock == null)return;
+        _currentBlockBehavior = playerCheakAround.CheckBlockRay(playerDirection);
+        if(_currentBlockBehavior == null)return;
         int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
         _destroyPower = ItemAEffectRate * _initialDestroyPower;
-        string BreakObjName = _currentBlock.DestroyBlock(_destroyPower);
-        if (BreakObjName == "Ambras" || BreakObjName == "Heros" || BreakObjName == "ItemCBlock")
-        {
+        //_currentBlockBehavior
+        string BreakObjName = _currentBlockBehavior.DestroyBlock(_destroyPower);
+        if (BreakObjName != "Ambras" && BreakObjName != "Heros"&& BreakObjName != "ItemC") return;
+        
             playerBlockStack.StackBlock(BreakObjName);
             _hasBlock = true;
             //次に生成するブロックを表示する処理
-            _uiHandler.BlockImage(BreakObjName);
+            _uiHandler.BlockImage();
             //壊したブロックを表示する処理
             _uiHandler.SetStackImage(BreakObjName);
             _predictCubes.SetActive(true);
             playerItemHandler.CreateItem();
-        }
+        
     }
 }

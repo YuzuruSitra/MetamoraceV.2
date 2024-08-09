@@ -19,18 +19,18 @@ public class UIHandler : MonoBehaviour
 
     // Update is called once per frame
     //保持しているブロック画像表示
-    public void BlockImage(string objName)
+    public void BlockImage()
     {
-        if (objName == "Ambras")
-        {
+        // if (objName == "Ambras")
+        // {
             _BlockImage.sprite = _ambrasSprite;
             _BlockImage.color = Color.white;
-        }
-        else
-        {
-            _BlockImage.sprite = _herosSprite;
-            _BlockImage.color = Color.white;
-        }
+        // }
+        // else
+        // {
+        //     _BlockImage.sprite = _herosSprite;
+        //     _BlockImage.color = Color.white;
+        // }
     }
     //保持しているブロック画像null
     public void ResetBlockImage()

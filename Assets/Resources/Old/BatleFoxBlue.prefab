@@ -2818,6 +2818,7 @@ GameObject:
   - component: {fileID: 519369664161836459}
   - component: {fileID: 403355054168704116}
   - component: {fileID: 404603311979978053}
+  - component: {fileID: 1227113949402037148}
   m_Layer: 0
   m_Name: Fox01Use
   m_TagString: Player
@@ -2907,6 +2908,7 @@ MonoBehaviour:
   _initialSpeed: 5
   _frontRayRength: 0.51
   _initialjumpPower: 30
+  stanTime: 2
 --- !u!114 &519369664161836459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2956,6 +2958,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d28dd33c7321904fbdeab852a9da0d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1227113949402037148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863035892777435699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0cc88404c892d4cbf508de0a3bd199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stain: {fileID: 5665578442213602273, guid: 492be725cb4d59d49bff9238527aa527, type: 3}
 --- !u!1 &8918577821326152586
 GameObject:
   m_ObjectHideFlags: 0

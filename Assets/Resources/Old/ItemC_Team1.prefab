@@ -351,8 +351,8 @@ GameObject:
   - component: {fileID: 3944944894216717303}
   - component: {fileID: 2910339165191738683}
   - component: {fileID: 5146288136537980966}
-  - component: {fileID: 7289983772155924176}
   - component: {fileID: 3673713765362069911}
+  - component: {fileID: 4030376782661932603}
   m_Layer: 0
   m_Name: ItemCBlock1
   m_TagString: ItemCBlock
@@ -429,18 +429,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: -1
   isRuntimeInstantiated: 0
---- !u!114 &7289983772155924176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7875487920154440351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 071419fe7c67caa42bb20c5c7b037e10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3673713765362069911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,9 +441,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d71f8954027da4598aad2f96f48c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objName: ItemCBlock
+  _objName: Ambras
   _objHealth: 1
   _healthGage: {fileID: 5190817532096405292}
+--- !u!114 &4030376782661932603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7875487920154440351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071419fe7c67caa42bb20c5c7b037e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useCombo: 1
+  stanTime: 2
 --- !u!1001 &9058769499305692561
 PrefabInstance:
   m_ObjectHideFlags: 0
