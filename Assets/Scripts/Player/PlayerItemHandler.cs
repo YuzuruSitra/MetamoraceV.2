@@ -88,6 +88,9 @@ public class PlayerItemHandler : MonoBehaviour
             //ブロックスタックリセット
             _uiHandler.ResetStackImage();
             _uiHandler.ResetItemImage();
+            //ブロック巨大化エフェクト
+            
+            
             hasItemB = false;
             NextInsBlock =  "BigBlock";
         }

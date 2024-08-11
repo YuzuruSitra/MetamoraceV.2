@@ -10,11 +10,17 @@ public class UIHandler : MonoBehaviour
     [SerializeField] Image _BlockImage;
     [SerializeField]  Sprite ItemA, ItemB, ItemC;
     [SerializeField] Image _itemImage;
-    private Color transparent = new Color(0f, 0f, 0f, 0f);
-    // Start is called before the first frame update
+
+    private EffectHandler _effectHandler;
+   
     void Start()
     {
-        
+        _effectHandler = GameObject.FindWithTag("EffectHandler").GetComponent<EffectHandler>();
+        foreach (var image in _StackImage)
+        {
+            image.enabled = false;
+        }
+        _itemImage.enabled = false;
     }
 
     // Update is called once per frame
@@ -24,7 +30,6 @@ public class UIHandler : MonoBehaviour
         // if (objName == "Ambras")
         // {
             _BlockImage.sprite = _ambrasSprite;
-            _BlockImage.color = Color.white;
         // }
         // else
         // {
@@ -50,12 +55,12 @@ public class UIHandler : MonoBehaviour
                 if (_objName == "Ambras")
                 {
                     _StackImage[i].sprite = _ambrasSprite;
-                    _StackImage[i].color = Color.white;
+                    _StackImage[i].enabled = true;
                 }
                 else if (_objName == "Heros")
                 {
                     _StackImage[i].sprite = _herosSprite;
-                    _StackImage[i].color = Color.white;
+                    _StackImage[i].enabled = true;
                 }
                 else Debug.Log("Error");
                 break;
@@ -68,12 +73,15 @@ public class UIHandler : MonoBehaviour
         for (int i = 0; i < _StackImage.Length; i++)
         {
             _StackImage[i].sprite = null;
+            _StackImage[i].enabled = false;
            // _StackImage[i].color = toumei;
         }
     }
 
     public void SetItemImage(string ItemType)
     {
+        _itemImage.enabled = true;
+        _effectHandler.LoadCreateItemEffect();
         switch (ItemType)
         {
             case "ItemA":
@@ -94,6 +102,7 @@ public class UIHandler : MonoBehaviour
 
     public void ResetItemImage()
     {
+        _itemImage.enabled = false;
         _itemImage.sprite = null;
         //_itemImage.color = transparent;
     }
