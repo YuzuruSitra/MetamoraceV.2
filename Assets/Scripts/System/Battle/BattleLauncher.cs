@@ -8,7 +8,8 @@ namespace System.Battle
     public class BattleLauncher : MonoBehaviourPunCallbacks
     {
         public event Action BattleLaunch;
-        private bool _isLaunch;
+        public bool _isLaunch;
+        
         private void Start()
         {
             if (!PhotonNetwork.IsMasterClient) return;
