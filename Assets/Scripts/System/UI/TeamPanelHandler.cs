@@ -49,8 +49,8 @@ namespace System.UI
             foreach (var player in players)
             {
                 var customProperties = player.CustomProperties;
-                if (!customProperties.ContainsKey(TeamSetter.TeamKey)) continue;
-                var teamValue = (int)customProperties[TeamSetter.TeamKey];
+                if (!customProperties.ContainsKey(CustomInfoHandler.BattleIdKey)) continue;
+                var teamValue = (int)customProperties[CustomInfoHandler.BattleIdKey];
                 switch (teamValue)
                 {
                     case TeamSetter.TeamOutValue:

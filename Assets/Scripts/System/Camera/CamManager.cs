@@ -29,7 +29,7 @@ namespace System.Camera
         
         private void Start()
         {
-            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(TeamSetter.TeamKey, out var teamValue))
+            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.BattleIdKey, out var teamValue))
                 _teamID = (int)teamValue - 1;
             _playerGenerator = GameObject.FindWithTag("PlayerGenerator").GetComponent<PlayerGenerator>();
             _targetPlayer = _playerGenerator.CurrentPlayer;

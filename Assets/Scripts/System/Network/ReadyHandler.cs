@@ -1,12 +1,12 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace System.Sound
+namespace System.Network
 {
-    public class BGMSwitcher : MonoBehaviour
+    public class ReadyHandler : MonoBehaviour
     {
-        [SerializeField] private AudioClip[] _bgm;
-        private SoundHandler _soundHandler;
+        private CustomInfoHandler _customInfoHandler;
         private void Start()
         {
             var objectsWithSameTag = GameObject.FindGameObjectsWithTag(gameObject.tag);
@@ -17,12 +17,9 @@ namespace System.Sound
                 return;
             }
             DontDestroyOnLoad(gameObject);
-            _soundHandler = SoundHandler.InstanceSoundHandler;
             
+            _customInfoHandler = CustomInfoHandler.Instance;
             SceneManager.sceneLoaded += OnSceneLoaded;
-            var sceneNum = SceneManager.GetActiveScene().buildIndex;
-            if (sceneNum >= _bgm.Length) return;
-            _soundHandler.PlayBgm(_bgm[sceneNum]);
         }
 
         private void OnDestroy()
@@ -35,13 +32,12 @@ namespace System.Sound
             switch (scene.name)
             {
                 case "Master_Title":
-                    _soundHandler.PlayBgm(_bgm[0]);
                     break;
                 case "Master_Wait":
-                    _soundHandler.PlayBgm(_bgm[1]);
+                    _customInfoHandler.ChangeValue(CustomInfoHandler.ReadyKey, 0, PhotonNetwork.LocalPlayer);
                     break;
                 case "Master_Battle":
-                    _soundHandler.PlayBgm(_bgm[2]);
+                    _customInfoHandler.ChangeValue(CustomInfoHandler.ReadyKey, 1, PhotonNetwork.LocalPlayer);
                     break;
             }
         }

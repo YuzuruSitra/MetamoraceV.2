@@ -13,15 +13,13 @@ namespace System.Network
         [SerializeField] private string _gameSceneName;
         private bool _isMatching;
         public event Action<bool> ChangeIsMatching;
-        private Hashtable _teamIdProperties;
-        private const string TeamIdKey = "TeamID";
+        private CustomInfoHandler _customInfoHandler;
+        
         private void Start()
         {
+            _customInfoHandler = CustomInfoHandler.Instance;
+            if (!PhotonNetwork.IsMasterClient) return;
             PhotonNetwork.CurrentRoom.IsOpen = true;
-            _teamIdProperties = new Hashtable
-            {
-                { TeamIdKey, 0 }
-            };
         }
 
         public void GameStart()
@@ -59,7 +57,7 @@ namespace System.Network
 
             foreach (var player in PhotonNetwork.PlayerList)
             {
-                if (player.CustomProperties.TryGetValue(TeamSetter.TeamKey, out var teamValue))
+                if (player.CustomProperties.TryGetValue(CustomInfoHandler.BattleIdKey, out var teamValue))
                 {
                     if ((int)teamValue == TeamSetter.TeamOutValue)
                     {
@@ -83,20 +81,19 @@ namespace System.Network
             foreach (var player in PhotonNetwork.PlayerList)
             {
                 var customProperties = player.CustomProperties;
-                if (!customProperties.ContainsKey(TeamSetter.TeamKey)) continue;
-                var teamValue = (int)customProperties[TeamSetter.TeamKey];
+                if (!customProperties.ContainsKey(CustomInfoHandler.BattleIdKey)) continue;
+                var teamValue = (int)customProperties[CustomInfoHandler.BattleIdKey];
                 switch (teamValue)
                 {
                     case 1:
-                        _teamIdProperties[TeamIdKey] = team1Count;
+                        _customInfoHandler.ChangeValue(CustomInfoHandler.TeamIdKey, team1Count, player);
                         team1Count++;
                         break;
                     case 2:
-                        _teamIdProperties[TeamIdKey] = team2Count;
+                        _customInfoHandler.ChangeValue(CustomInfoHandler.TeamIdKey, team2Count, player);
                         team2Count++;
                         break;
                 }
-                player.SetCustomProperties(_teamIdProperties);
             }
         }
         

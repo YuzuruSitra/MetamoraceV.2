@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using ExitGames.Client.Photon;
+using System.Network;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -10,23 +10,14 @@ namespace Object
     {
         [SerializeField] private int _setTeamNum;
         public const int TeamOutValue = -1;
-        public const string TeamKey = "Team";
         private readonly Dictionary<Collider, Player> _playerCache = new();
-        
-        private Hashtable _teamInProperties;
-        private Hashtable _teamOutProperties;
 
+        private CustomInfoHandler _customInfoHandler;
+        
         private void Start()
         {
-            _teamInProperties = new Hashtable
-            {
-                { TeamKey, _setTeamNum }
-            };
+            _customInfoHandler = CustomInfoHandler.Instance;
             
-            _teamOutProperties = new Hashtable
-            {
-                { TeamKey, TeamOutValue }
-            };
         }
 
         private void OnTriggerEnter(Collider other)
@@ -49,7 +40,8 @@ namespace Object
             // チームのプレイヤー数をカウント
             var teamCount = CountPlayersInTeam(_setTeamNum);
             // チームに2人以上いる場合は TeamOutValue を設定
-            player.SetCustomProperties(teamCount >= 2 ? _teamOutProperties : _teamInProperties);
+            var setValue = teamCount >= 2 ? TeamOutValue : _setTeamNum;
+            _customInfoHandler.ChangeValue(CustomInfoHandler.BattleIdKey, setValue, player);
         }
 
         private void OnTriggerExit(Collider other)
@@ -68,7 +60,7 @@ namespace Object
                 player = photonView.Owner;
                 _playerCache[other] = player;
             }
-            player.SetCustomProperties(_teamOutProperties);
+            _customInfoHandler.ChangeValue(CustomInfoHandler.BattleIdKey, TeamOutValue, player);
             Debug.Log($"Player {player.NickName} is now out of the team.");
         }
 
@@ -77,7 +69,7 @@ namespace Object
         {
             var count = 0;
             foreach (var player in PhotonNetwork.PlayerList)
-                if (player.CustomProperties.TryGetValue(TeamKey, out var teamValue) && (int)teamValue == teamNum) 
+                if (player.CustomProperties.TryGetValue(CustomInfoHandler.BattleIdKey, out var teamValue) && (int)teamValue == teamNum) 
                     count++;
             return count;
         }
