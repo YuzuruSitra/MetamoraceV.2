@@ -32,7 +32,7 @@ namespace System.Network
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
         
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             var id = PhotonNetwork.LocalPlayer.ActorNumber - 1;
             switch (scene.name)
