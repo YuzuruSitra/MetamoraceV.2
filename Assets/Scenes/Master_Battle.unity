@@ -4118,6 +4118,11 @@ PrefabInstance:
       propertyPath: _blockGenerator
       value: 
       objectReference: {fileID: 176189693328225777}
+    - target: {fileID: 5866726218807263601, guid: 49d3f2ad2854486428e2e14ef6cff091,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 49d3f2ad2854486428e2e14ef6cff091, type: 3}
