@@ -68,7 +68,8 @@ namespace System.Camera
                 }
             }
         }
-        void ActivateCam(CinemachineVirtualCameraBase vcam)
+
+        private void ActivateCam(CinemachineVirtualCameraBase vcam)
         {
             if(_topLeftCams[_teamID].Priority != 1) _topLeftCams[_teamID].Priority = 1;
             if(_topRightCams[_teamID].Priority != 1) _topRightCams[_teamID].Priority = 1;

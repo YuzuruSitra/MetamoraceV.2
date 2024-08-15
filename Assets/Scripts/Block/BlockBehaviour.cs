@@ -14,7 +14,7 @@ public class BlockBehaviour : MonoBehaviour
 
     [SerializeField] private Image _healthGage;
 
-    void Start()
+    private void Start()
     {
         _maxobjHealth = _objHealth;
         //ItemCBehaviorがついていればゲットコンポーネント}

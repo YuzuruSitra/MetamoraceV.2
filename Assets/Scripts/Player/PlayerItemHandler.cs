@@ -72,7 +72,8 @@ public class PlayerItemHandler : MonoBehaviour
             }
             _itemACoroutine = StartCoroutine(FinishItemA());
     }
-    IEnumerator FinishItemA()
+
+    private IEnumerator FinishItemA()
     {
         yield return new WaitForSeconds(_itemAEffectTime);        //もとに戻す
         ItemAEffectRate = 1;

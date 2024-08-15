@@ -9,7 +9,7 @@ private string[] _stackBlocks = new string[3];
 
    public bool FullStack { get; private set; } = false;
 
-   void Update()
+   private void Update()
    {
        Debug.Log(_stackBlocks[0] + " " + _stackBlocks[1] + " " + _stackBlocks[2]);
    }

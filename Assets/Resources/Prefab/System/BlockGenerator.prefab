@@ -114,8 +114,9 @@ MonoBehaviour:
   _insPos:
   - {x: 0, y: 11, z: 2.42}
   - {x: 0, y: 11, z: -2.42}
+  _insRot: []
   _parentObj:
   - {fileID: 176189694307449002}
   - {fileID: 176189694105748270}
-  _insInterVal: 4
+  _insInterVal: 5
   _timeHandler: {fileID: 0}

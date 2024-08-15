@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerObjectManipulator : MonoBehaviour
 {
     private BlockBehaviour _currentBlockBehavior;
-    PlayerCheakAround playerCheakAround;
-    PlayerBlockStack playerBlockStack;
+    private PlayerCheakAround playerCheakAround;
+    private PlayerBlockStack playerBlockStack;
      [SerializeField]
     private float _initialDestroyPower = 1.0f;
     public float InitialDestroyPower => _initialDestroyPower;
@@ -20,16 +20,13 @@ public class PlayerObjectManipulator : MonoBehaviour
    // private Vector3 PlayerDirection;
     private UIHandler _uiHandler;
     private PlayerItemHandler playerItemHandler;
-    [SerializeField]
-    GameObject[] _herosPrefab = new GameObject[2];
-    [SerializeField]
-    GameObject[] _BigPrefab = new GameObject[2];
-    [SerializeField]
-    GameObject[] _cPrefab = new GameObject[2];
-    string nextInsBlock =  "Heros";
+    [SerializeField] private GameObject[] _herosPrefab = new GameObject[2];
+    [SerializeField] private GameObject[] _BigPrefab = new GameObject[2];
+    [SerializeField] private GameObject[] _cPrefab = new GameObject[2];
+    private string nextInsBlock =  "Heros";
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _uiHandler = GameObject.FindWithTag("UIHandler").GetComponent<UIHandler>();
         playerCheakAround = GetComponent<PlayerCheakAround>();
@@ -38,7 +35,7 @@ public class PlayerObjectManipulator : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         BreakBlock();
         CreateBlock();

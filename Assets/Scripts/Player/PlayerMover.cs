@@ -29,7 +29,7 @@ public class PlayerMover : MonoBehaviour
     private bool IsStan = false;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
          _JumpPower = _initialjumpPower;
          _playerSpeed = _initialSpeed;
@@ -40,14 +40,14 @@ public class PlayerMover : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         PlayerCtrl();
         Jump();
         playerItemHandler.UseItemA();
     }
 
-   void PlayerCtrl()
+    private void PlayerCtrl()
     {   
         
         //if (_playerObjectManipulator.AnimBreak && _onGround) return;
@@ -88,13 +88,14 @@ public class PlayerMover : MonoBehaviour
         _playerSpeed = 0;
         StartCoroutine(FinishStan());
     }
-    IEnumerator FinishStan()
+
+    private IEnumerator FinishStan()
     {
         yield return new WaitForSeconds(stanTime); //もとに戻す
         _playerSpeed = 1;
     }
 
-    void Jump()
+    private void Jump()
     {
         _onGround = playerCheakAround.CheakGroundRay();
         if (Input.GetKeyDown(KeyCode.Space) && _onGround)

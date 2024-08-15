@@ -48,7 +48,7 @@ public class ItemCBehavior : MonoBehaviour
         StartCoroutine(FinishStan());
     }
 
-    IEnumerator FinishStan()
+    private IEnumerator FinishStan()
     {
         yield return new WaitForSeconds(stanTime); //もとに戻す
         StanMagnification = 1;

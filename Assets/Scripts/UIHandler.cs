@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
-    [SerializeField] Image[] _StackImage = new Image[3];
-    [SerializeField] Sprite _herosSprite, _ambrasSprite, _itemCSprite;
-    [SerializeField] Image _BlockImage;
-    [SerializeField]  Sprite ItemA, ItemB, ItemC;
-    [SerializeField] Image _itemImage;
+    [SerializeField] private Image[] _StackImage = new Image[3];
+    [SerializeField] private Sprite _herosSprite, _ambrasSprite, _itemCSprite;
+    [SerializeField] private Image _BlockImage;
+    [SerializeField] private Sprite ItemA, ItemB, ItemC;
+    [SerializeField] private Image _itemImage;
 
     private EffectHandler _effectHandler;
-   
-    void Start()
+
+    private void Start()
     {
         _effectHandler = GameObject.FindWithTag("EffectHandler").GetComponent<EffectHandler>();
         foreach (var image in _StackImage)

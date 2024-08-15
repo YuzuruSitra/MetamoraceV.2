@@ -8,6 +8,7 @@ namespace System.Battle
         [Header("Index-TeamNum")]
         [SerializeField] private GameObject[] _blockTeam;
         [SerializeField] private Vector3[] _insPos;
+        [SerializeField] private Vector3[] _insRot;
         [SerializeField] private Transform[] _parentObj;
         [SerializeField] private float _insInterVal;
         private const int MinPosX = -7;
@@ -46,7 +47,7 @@ namespace System.Battle
                     } while (Mathf.Approximately(calcPosX, _insPos[i].x) || ObjectExistsInRay(_insPos[i], calcPosX));
 
                     _insPos[i].x = calcPosX;
-                    var obj = PhotonNetwork.Instantiate(_blockTeam[i].name, _insPos[i], Quaternion.identity);
+                    var obj = PhotonNetwork.Instantiate(_blockTeam[i].name, _insPos[i], Quaternion.Euler(_insRot[i]));
                     obj.transform.SetParent(_parentObj[i]);
                 }
             }
