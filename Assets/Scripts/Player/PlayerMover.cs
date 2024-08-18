@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
+    private PlayerStatus playerStatus;
     private PlayerItemHandler playerItemHandler;
     private PlayerObjectManipulator playerObjectManipulator;
     //private ItemCBehavior itemCBehavior;
@@ -26,17 +27,19 @@ public class PlayerMover : MonoBehaviour
 
     private PlayerCheakAround playerCheakAround;
     [SerializeField] private float stanTime = 2.0f;
-    private bool IsStan = false;
+    private PlayerStatus _playerStatus;
 
     // Start is called before the first frame update
     private void Start()
     {
+      
          _JumpPower = _initialjumpPower;
          _playerSpeed = _initialSpeed;
          playerItemHandler = GetComponent<PlayerItemHandler>();
          playerCheakAround = GetComponent<PlayerCheakAround>();
         //itemCBehavior = GetComponent<ItemCBehavior>();
          playerObjectManipulator = GetComponent<PlayerObjectManipulator>();
+         _playerStatus = GetComponent<PlayerStatus>();
     }
 
     // Update is called once per frame
@@ -84,7 +87,8 @@ public class PlayerMover : MonoBehaviour
 
     public void StanTest()
     {
-        if(IsStan)
+        if (_playerStatus.CurrentCondition != PlayerStatus.Condition.Stan) return;
+
         _playerSpeed = 0;
         StartCoroutine(FinishStan());
     }

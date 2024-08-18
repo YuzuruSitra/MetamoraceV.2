@@ -11,6 +11,7 @@ public class BlockBehaviour : MonoBehaviour
     private float _objHealth;
     private float _maxobjHealth;
     private ItemCBehavior itemCBehavior;
+    public bool StanFlag { get; private set; } = false;
 
     [SerializeField] private Image _healthGage;
 
@@ -21,7 +22,7 @@ public class BlockBehaviour : MonoBehaviour
         itemCBehavior = GetComponent<ItemCBehavior>();
     }
 
-    public string DestroyBlock(float power)
+    public (string, bool) DestroyBlock(float power)
     {
         _objHealth -= power * Time.deltaTime;
         //currentTime = setTime;
@@ -31,12 +32,12 @@ public class BlockBehaviour : MonoBehaviour
         {   
             if (itemCBehavior != null)
             {
-                
                 itemCBehavior.LotteryItemC();
+                StanFlag = itemCBehavior.StanFlag;
             }
             gameObject.SetActive(false);
-            return _objName;
+            return (_objName, StanFlag);
         }
-       return "NULL";
+        return ("NULL", StanFlag);
     }
 }

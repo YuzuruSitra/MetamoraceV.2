@@ -8,12 +8,12 @@ public class ItemCBehavior : MonoBehaviour
     [SerializeField] private bool _useCombo;
     private BlockBehaviour _hitBlock;
     [SerializeField] private float stanTime = 2.0f;
-    public bool Stan { get; } = false;
+    public bool StanFlag { get; private set; } = false;
     public int StanMagnification { get; private set; } = 1;
 
     public enum ItemCType
     {
-       //Stan,
+       Stan,
         Break4,
        wall
     }
@@ -30,9 +30,9 @@ public class ItemCBehavior : MonoBehaviour
         itemCType = (ItemCType)System.Enum.ToObject(typeof(ItemCType), number);
         switch (itemCType)
         {
-            // case ItemCType.Stan:
-            //     PlayerStan();
-            //     break;
+            case ItemCType.Stan:
+                StanFlag = true;
+                break;
             case ItemCType.Break4:
                 Break4();
                 break;
@@ -41,7 +41,7 @@ public class ItemCBehavior : MonoBehaviour
             //     break;
         }
     }
-
+    
     public void PlayerStan()
     {
         StanMagnification = 0;

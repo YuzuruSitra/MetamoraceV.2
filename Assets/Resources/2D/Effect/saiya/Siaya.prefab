@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8230843998025336592}
   - component: {fileID: 8230843998025336595}
   - component: {fileID: 8230843998025336594}
-  - component: {fileID: 8880624275439247167}
+  - component: {fileID: 8159674953174668326}
   m_Layer: 0
   m_Name: Siaya
   m_TagString: Untagged
@@ -106,7 +106,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8880624275439247167
+--- !u!114 &8159674953174668326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,6 +115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8230843998025336597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd778bd21e1e7894dabf939a6a37c495, type: 3}
+  m_Script: {fileID: 11500000, guid: c37fcbe14ce050e48b8d6d0e495d343e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NotUseBillboard: 0

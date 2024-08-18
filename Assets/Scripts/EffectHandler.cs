@@ -10,5 +10,9 @@ public class EffectHandler : MonoBehaviour
     {
         CreateItemEffect.SetActive(true);
     }
+    public void LoadBreakBlockEffect()
+    {
+        CreateItemEffect.SetActive(true);
+    }
 }
 

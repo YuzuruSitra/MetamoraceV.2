@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerItemHandler : MonoBehaviour
 {
+    [SerializeField]
+    private PlayerEffectHandler _playerEffectHandler;
     private PlayerBlockStack playerBlockStack;
     private UIHandler _uiHandler;
     private bool hasItemA, hasItemB, hasItemC;
@@ -11,6 +13,7 @@ public class PlayerItemHandler : MonoBehaviour
     public int ItemAEffectRate { get; private set; } = 1;
     private Coroutine _itemACoroutine;
     private PlayerObjectManipulator playerObjectManipulator;
+    [SerializeField] private GameObject SaiyaEffect;
     public string NextInsBlock { get; private set; } = null;
 
     public void Start()
@@ -18,6 +21,7 @@ public class PlayerItemHandler : MonoBehaviour
         _uiHandler = GameObject.FindWithTag("UIHandler").GetComponent<UIHandler>();
         playerBlockStack = GetComponent<PlayerBlockStack>();
         playerObjectManipulator = GetComponent<PlayerObjectManipulator>();
+        _playerEffectHandler = GetComponent<PlayerEffectHandler>();
     }
 
     public void Update()
@@ -65,6 +69,7 @@ public class PlayerItemHandler : MonoBehaviour
             //ブロックスタックリセット
             _uiHandler.ResetStackImage();
             _uiHandler.ResetItemImage();
+            _playerEffectHandler.ChangeSaiya(true);
             hasItemA = false;
             if (_itemACoroutine != null)
             {
@@ -77,6 +82,7 @@ public class PlayerItemHandler : MonoBehaviour
     {
         yield return new WaitForSeconds(_itemAEffectTime);        //もとに戻す
         ItemAEffectRate = 1;
+        _playerEffectHandler.ChangeSaiya(false);
         _itemACoroutine = null;
     }
     //ブロックを持っている状態でクリック

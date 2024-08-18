@@ -54,6 +54,7 @@ namespace Character
             {
                 ChangeCondition(Condition.Run);
             }
+            
         }
 
         private void ChangeCondition(Condition newCondition)

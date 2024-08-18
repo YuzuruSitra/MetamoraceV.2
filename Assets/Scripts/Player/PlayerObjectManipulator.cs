@@ -20,10 +20,14 @@ public class PlayerObjectManipulator : MonoBehaviour
    // private Vector3 PlayerDirection;
     private UIHandler _uiHandler;
     private PlayerItemHandler playerItemHandler;
-    [SerializeField] private GameObject[] _herosPrefab = new GameObject[2];
-    [SerializeField] private GameObject[] _BigPrefab = new GameObject[2];
-    [SerializeField] private GameObject[] _cPrefab = new GameObject[2];
-    private string nextInsBlock =  "Heros";
+    [SerializeField]
+    GameObject[] _herosPrefab = new GameObject[2];
+    [SerializeField]
+    GameObject[] _BigPrefab = new GameObject[2];
+    [SerializeField]
+    GameObject[] _cPrefab = new GameObject[2];
+    string nextInsBlock =  "Heros";
+    public bool IsStan { get; private set; } = false;
     
     // Start is called before the first frame update
     private void Start()
@@ -95,7 +99,11 @@ public class PlayerObjectManipulator : MonoBehaviour
         int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
         _destroyPower = ItemAEffectRate * _initialDestroyPower;
         //_currentBlockBehavior
-        string BreakObjName = _currentBlockBehavior.DestroyBlock(_destroyPower);
+        //string BreakObjName = _currentBlockBehavior.DestroyBlock(_destroyPower);
+       (string BreakObjName,bool StanFlag) = _currentBlockBehavior.DestroyBlock(_destroyPower);
+       IsStan = StanFlag;
+       
+       StanFlag = false;
         if (BreakObjName != "Ambras" && BreakObjName != "Heros"&& BreakObjName != "ItemC") return;
         
             playerBlockStack.StackBlock(BreakObjName);
@@ -108,4 +116,6 @@ public class PlayerObjectManipulator : MonoBehaviour
             playerItemHandler.CreateItem();
         
     }
+    
+   
 }
