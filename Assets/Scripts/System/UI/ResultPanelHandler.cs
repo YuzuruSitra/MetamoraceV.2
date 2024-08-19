@@ -17,10 +17,13 @@ namespace System.UI
         [SerializeField] private UnityEngine.UI.Text[] _winNames;
         [SerializeField] private UnityEngine.UI.Text[] _looseNames;
         [SerializeField] private UnityEngine.UI.Text[] _drawNames;
+        [SerializeField] private UnityEngine.UI.Button _exitBt;
 
         private void Start()
         {
             _gameResultHandler.CalcGameResult += OpenResultPanel;
+            var exitHandler = new BattleExitHandler();
+            _exitBt.onClick.AddListener(exitHandler.ReturnRoom);
         }
 
         private void OnDestroy()
