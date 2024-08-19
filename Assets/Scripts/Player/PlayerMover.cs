@@ -11,12 +11,9 @@ public class PlayerMover : MonoBehaviour
      [SerializeField]
     private Rigidbody _rb;
      [SerializeField]
-    private float _walkSpeed
- = 5.0f;
-    public float WalkSpeed => _walkSpeed;
-    private float _currentMoveSpeed;
-    public float CurrentMoveSpeed => _currentMoveSpeed;
-
+    private float _initialSpeed = 5.0f;
+    public float InitialSpeed => _initialSpeed;
+    private float _playerSpeed;
     [SerializeField]
     private float _frontRayRength = 0.51f;
     [SerializeField]
@@ -35,8 +32,9 @@ public class PlayerMover : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+      
          _JumpPower = _initialjumpPower;
-         _currentMoveSpeed = _walkSpeed;
+         _playerSpeed = _initialSpeed;
          playerItemHandler = GetComponent<PlayerItemHandler>();
          playerCheakAround = GetComponent<PlayerCheakAround>();
         //itemCBehavior = GetComponent<ItemCBehavior>();
@@ -53,8 +51,9 @@ public class PlayerMover : MonoBehaviour
     }
 
     private void PlayerCtrl()
-    {
-        _currentMoveSpeed = _walkSpeed;
+    {   
+        
+        //if (_playerObjectManipulator.AnimBreak && _onGround) return;
         float inputX = 0.0f;
         //チーム1とチーム2で操作反転
         // if (_playerDataReceiver.MineTeamID == 0)
@@ -72,7 +71,7 @@ public class PlayerMover : MonoBehaviour
 
         if (inputX == 0)
         {
-            _currentMoveSpeed = 0;
+            _isMoving = false;
             return;
         }
         
@@ -83,24 +82,21 @@ public class PlayerMover : MonoBehaviour
        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 1280.0f * Time.deltaTime);
        // if (CheckFront(new Ray(transform.position + new Vector3(0, 0.5f, 0), transform.forward * _frontRayRength))) return;
         int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
-        _rb.MovePosition(transform.position + movement * _currentMoveSpeed
- * Time.deltaTime * ItemAEffectRate );
+        _rb.MovePosition(transform.position + movement * _playerSpeed * Time.deltaTime * ItemAEffectRate );
     }
 
     public void StanTest()
     {
         if (_playerStatus.CurrentCondition != PlayerStatus.Condition.Stan) return;
 
-        _currentMoveSpeed
- = 0;
+        _playerSpeed = 0;
         StartCoroutine(FinishStan());
     }
 
     private IEnumerator FinishStan()
     {
         yield return new WaitForSeconds(stanTime); //もとに戻す
-        _currentMoveSpeed
- = 1;
+        _playerSpeed = 1;
     }
 
     private void Jump()

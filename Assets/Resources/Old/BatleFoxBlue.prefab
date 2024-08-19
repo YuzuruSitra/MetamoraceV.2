@@ -2821,7 +2821,6 @@ GameObject:
   - component: {fileID: 1361406520003306817}
   - component: {fileID: 1016124615745743050}
   - component: {fileID: 6956120303748206651}
-  - component: {fileID: 3923018424750703636}
   m_Layer: 0
   m_Name: Fox01Use
   m_TagString: Player
@@ -2908,7 +2907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 5353145884009873201}
-  _walkSpeed: 5
+  _initialSpeed: 10
   _frontRayRength: 0.51
   _initialjumpPower: 30
   stanTime: 2
@@ -2926,9 +2925,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerReach: 1
   _jumprayrength: 0.15
-  _verticalRayOffset: 2
-  _horizontalRayOffset: 0.5
-  _deathDecisionRayRange: 0.15
 --- !u!114 &403355054168704116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3005,20 +3001,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerMover: {fileID: 4383592953301892261}
   _playerObjectManipulator: {fileID: 403355054168704116}
-  _playerCheakAround: {fileID: 519369664161836459}
---- !u!114 &3923018424750703636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8863035892777435699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b255c8cbbee294438822c424e874e8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerStatus: {fileID: 6956120303748206651}
 --- !u!1 &8918577821326152586
 GameObject:
   m_ObjectHideFlags: 0

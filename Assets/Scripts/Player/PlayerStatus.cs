@@ -1,5 +1,5 @@
 using System;
-//using Photon.Pun;
+using Photon.Pun;
 using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
@@ -23,7 +23,6 @@ public class PlayerStatus : MonoBehaviour
 
     [SerializeField] private PlayerMover _playerMover;
     [SerializeField] private PlayerObjectManipulator _playerObjectManipulator;
-    [SerializeField] private PlayerCheakAround _playerCheakAround;
 
     private void Start()
     {
@@ -47,23 +46,15 @@ public class PlayerStatus : MonoBehaviour
         {
             ChangeCondition(Condition.Stan);
         }
-        else if (_playerMover.CurrentMoveSpeed == 0)
-        {
-            ChangeCondition(Condition.Idole);
-        }
-        else if (_playerMover.CurrentMoveSpeed <= _playerMover.WalkSpeed)
-        {
-            ChangeCondition(Condition.Walk);
-        }
-        else if (_playerCheakAround.VerticalDeath)
-        {
-            ChangeCondition(Condition.VDeath);
-        }
-        else if (_playerCheakAround.HorizontalDeath)
-        {
-            ChangeCondition(Condition.HDeath);
-        }
         
+        // else if (_playerMover.CurrentMoveSpeed == 0)
+        // {
+        //     ChangeCondition(Condition.Idole);
+        // }
+        // else if (_playerMover.CurrentMoveSpeed <= _playerMover.WalkSpeed)
+        // {
+        //     ChangeCondition(Condition.Walk);
+        // }
         // else if (_playerMover.CurrentMoveSpeed <= _playerMover.RunSpeed)
         // {
         //     ChangeCondition(Condition.Run);
