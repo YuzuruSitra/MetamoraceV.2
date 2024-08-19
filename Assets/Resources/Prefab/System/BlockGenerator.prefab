@@ -72,6 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 176189694515517910}
   - component: {fileID: 176189694515517911}
+  - component: {fileID: -3480446208975634768}
   m_Layer: 0
   m_Name: BlockGenerator
   m_TagString: Untagged
@@ -114,9 +115,42 @@ MonoBehaviour:
   _insPos:
   - {x: 0, y: 11, z: 2.42}
   - {x: 0, y: 11, z: -2.42}
+  _generatePos:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   _insRot: []
   _parentObj:
   - {fileID: 176189694307449002}
   - {fileID: 176189694105748270}
   _insInterVal: 5
   _timeHandler: {fileID: 0}
+  _predictPrefab: {fileID: 5599351543746501839, guid: f9a46a1423bd56047b0a4a2b9f74e5b1,
+    type: 3}
+  _toggleCount: 4
+  _toggleTime: 0.2
+--- !u!114 &-3480446208975634768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176189694515517909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

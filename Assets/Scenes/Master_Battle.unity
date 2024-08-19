@@ -3658,6 +3658,11 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 373414712}
     m_Modifications:
+    - target: {fileID: -3480446208975634768, guid: 680cbd6e9704dbc48a17e69befe99175,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 176189694515517909, guid: 680cbd6e9704dbc48a17e69befe99175,
         type: 3}
       propertyPath: m_Name
@@ -4381,7 +4386,7 @@ PrefabInstance:
     - target: {fileID: 8546360468500769838, guid: e7bb958145a0d6643872c43d7014cf8b,
         type: 3}
       propertyPath: _battleTime
-      value: 10
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8546360468500769838, guid: e7bb958145a0d6643872c43d7014cf8b,
         type: 3}
