@@ -33,7 +33,7 @@ namespace Block
             _currentHealth = _maxHealth;
             _currentActiveTime = _activeTime;
         }
-
+        
         private void Update()
         {
             if (!IsGrounded()) transform.position += Vector3.down * (_fallSpeed * Time.deltaTime);
@@ -56,11 +56,11 @@ namespace Block
             if (DestroyTime <= _currentDestroyTime) PhotonNetwork.Destroy(gameObject);
         }
 
-        public string DestroyBlock(float power, GameObject player)
+        public string DestroyBlock(float power, GameObject caller)
         {
             photonView.RPC(nameof(ChangeHealth), RpcTarget.All, power);
             if (!(_currentHealth <= 0)) return ErrorTag;
-            SendEffect(player);
+            if (caller.CompareTag("Player")) SendEffect(caller);
             photonView.RPC(nameof(LaunchBreak), RpcTarget.All);
             return gameObject.tag;
         }

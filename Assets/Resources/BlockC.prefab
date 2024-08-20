@@ -246,6 +246,10 @@ MonoBehaviour:
   _activeTime: 0.5
   _cloudAnimator: {fileID: 506610780009736342}
   _fallSpeed: 2.25
+  _rayDistance: 1
+  _destroyPower: 100
+  _transitionTime: 0.5
+  _waitTime: 2.5
 --- !u!114 &5025419353367423876
 MonoBehaviour:
   m_ObjectHideFlags: 0
