@@ -65,7 +65,7 @@ namespace Block
         }
 
         [PunRPC]
-        private void ChangeHealth(float power)
+        public void ChangeHealth(float power)
         {
             _currentActiveTime = 0;
             _currentHealth -= power * Time.deltaTime;
@@ -78,7 +78,7 @@ namespace Block
         }
 
         [PunRPC]
-        private void LaunchBreak()
+        public void LaunchBreak()
         {
             _mesh.enabled = false;
             _col.enabled = false;
