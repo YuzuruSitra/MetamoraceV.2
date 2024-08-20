@@ -11,7 +11,7 @@ private string[] _stackBlocks = new string[3];
 
    private void Update()
    {
-       Debug.Log(_stackBlocks[0] + " " + _stackBlocks[1] + " " + _stackBlocks[2]);
+       //Debug.Log(_stackBlocks[0] + " " + _stackBlocks[1] + " " + _stackBlocks[2]);
    }
    //破壊したブロックをスタック
     public void StackBlock(string _objName)
@@ -24,7 +24,7 @@ private string[] _stackBlocks = new string[3];
             if(_stackBlocks[i] == null)
             {
                 _stackBlocks[i] = _objName;
-                Debug.Log("stack");
+                //Debug.Log("stack");
                 //Debug.Log(_stackBlocks[0] + " " + _stackBlocks[1] + " " + _stackBlocks[2]);
                 if (_stackBlocks[2] != null) FullStack = true;
                 break;

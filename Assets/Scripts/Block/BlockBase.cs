@@ -7,7 +7,6 @@ namespace Block
 {
     public abstract class BlockBase : MonoBehaviourPunCallbacks
     {
-        [SerializeField]
         private MeshRenderer _mesh;
         private BoxCollider _col;
         private const string ErrorTag = "Null";

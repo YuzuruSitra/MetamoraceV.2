@@ -30,7 +30,7 @@ public class PlayerAnimator : MonoBehaviour
         
         private void ChangeAnim(PlayerStatus.Condition condition)
         {
-            Debug.Log(condition);
+            //Debug.Log(condition);
             switch (condition)
             {
                 case PlayerStatus.Condition.Idole:
@@ -95,6 +95,28 @@ public class PlayerAnimator : MonoBehaviour
                     _anim.SetBool(IsBreak, false);
                     _anim.SetBool(IsIdole, false);
                     _anim.SetBool(IsWalk, false);
+                    break;
+                case PlayerStatus.Condition.Break:
+                    _anim.SetBool(IsVDeath, false);
+                    _anim.SetBool(IsHDeath, false);
+                    _anim.SetBool(IsStan, false);
+                    _anim.SetBool(IsSwing, false);
+                    _anim.SetBool(IsJump, false);
+                    _anim.SetBool(IsBreak, true);
+                    _anim.SetBool(IsIdole, false);
+                    _anim.SetBool(IsWalk, false);
+                    //Debug.Log("Breaking");
+                    break;
+                case PlayerStatus.Condition.Swing:
+                    _anim.SetBool(IsVDeath, false);
+                    _anim.SetBool(IsHDeath, false);
+                    _anim.SetBool(IsStan, false);
+                    _anim.SetBool(IsSwing, true);
+                    _anim.SetBool(IsJump, false);
+                    _anim.SetBool(IsBreak, false);
+                    _anim.SetBool(IsIdole, false);
+                    _anim.SetBool(IsWalk, false);
+                    //Debug.Log("Swing");
                     break;
             }
         }

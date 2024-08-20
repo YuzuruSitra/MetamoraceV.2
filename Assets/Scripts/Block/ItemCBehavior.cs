@@ -61,7 +61,7 @@ public class ItemCBehavior : MonoBehaviour
 
     public void Break4()
     {
-        Debug.Log("1");
+        //Debug.Log("1");
 
         Vector3[] directions =
         {
@@ -78,7 +78,7 @@ public class ItemCBehavior : MonoBehaviour
 
     private void BreakDirection(Vector3 direction)
     {
-        Debug.Log("2");
+        //Debug.Log("2");
         Ray ray = new Ray(transform.position, direction);
         RaycastHit hit;
         float rayLength = 1.0f;

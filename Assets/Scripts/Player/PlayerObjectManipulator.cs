@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using Block;
 
 public class PlayerObjectManipulator : MonoBehaviour
 {
-    private BlockBehaviour _currentBlockBehavior;
+    private BlockBase _currentBlockBehavior;
     private PlayerCheakAround playerCheakAround;
     private PlayerBlockStack playerBlockStack;
      [SerializeField]
@@ -28,7 +30,14 @@ public class PlayerObjectManipulator : MonoBehaviour
     GameObject[] _cPrefab = new GameObject[2];
     string nextInsBlock =  "Heros";
     public bool IsStan { get; private set; } = false;
-    
+    private bool breaking = false;
+    public bool Breaking => breaking;
+    private bool swing = false;
+    public bool Swing => swing;
+    private Animator _anim;
+    private float _swingAnimTime;
+    private float _breakAnimTime;
+    private float _breakTime;
     // Start is called before the first frame update
     private void Start()
     {
@@ -36,16 +45,30 @@ public class PlayerObjectManipulator : MonoBehaviour
         playerCheakAround = GetComponent<PlayerCheakAround>();
         playerBlockStack = GetComponent<PlayerBlockStack>();
         playerItemHandler = GetComponent<PlayerItemHandler>();
+        _anim = GetComponent<Animator>();
+         _swingAnimTime = GetAnimationClipLength(_anim.runtimeAnimatorController.animationClips,
+            "swing");
+         _breakAnimTime = GetAnimationClipLength(_anim.runtimeAnimatorController.animationClips,
+             "break");
+        //Debug.Log(_swingAnimTime);
+    }
+    private static float GetAnimationClipLength(IEnumerable<AnimationClip> animationClips, string clipName)
+    {
+        return (from animationClip in animationClips
+            where animationClip.name == clipName
+            select animationClip.length).FirstOrDefault();
     }
 
     // Update is called once per frame
     private void Update()
     {
+        // Debug.Log("Breaking" + breaking);
+        // Debug.Log("Swing" + swing);
         BreakBlock();
         CreateBlock();
         playerItemHandler.UseItemC();
         playerItemHandler.UseItemB();
-
+        Debug.Log(swing);
         if (!_hasBlock) return;
         _insPos = new Vector3((int)transform.position.x, (int)transform.position.y + 0.25f, -1.0f);
         _predictCubes.transform.position = _insPos;
@@ -55,14 +78,17 @@ public class PlayerObjectManipulator : MonoBehaviour
     public void CreateBlock()
     {
         //ブロックを持ってれば処理を行う
-        if (!_hasBlock) return;
-        if (!Input.GetMouseButtonDown(0)) return;
-        _hasBlock = false;
-        _uiHandler.ResetBlockImage();
-        _predictCubes.SetActive(false);
-        _insBigPos = _insPos;
-        _insBigPos.y += 1.0f;
-        StartCoroutine(GenerateBlock());
+        if (_hasBlock&&Input.GetMouseButtonDown(0)) 
+        {
+            swing = true;
+            _hasBlock = false;
+            _uiHandler.ResetBlockImage();
+            _predictCubes.SetActive(false);
+            _insBigPos = _insPos;
+            _insBigPos.y += 1.0f;
+            StartCoroutine(GenerateBlock());
+            StartCoroutine(GenerateAnimDelay());
+        }
     }
 
     private IEnumerator GenerateBlock()
@@ -88,24 +114,28 @@ public class PlayerObjectManipulator : MonoBehaviour
         nextInsBlock = "Heros";
     }
 
+    private IEnumerator GenerateAnimDelay()
+    {
+        yield return new WaitForSeconds(_swingAnimTime);
+        swing = false;
+        //Debug.Log("Swing");
+    }
+
     //オブジェクト破壊
     public void BreakBlock()
     {
-        if (_hasBlock || !Input.GetMouseButton(0)) return; 
-        Vector3 playerDirection = transform.forward;
-        playerDirection.Normalize();
-        _currentBlockBehavior = playerCheakAround.CheckBlockRay(playerDirection);
-        if(_currentBlockBehavior == null)return;
-        int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
-        _destroyPower = ItemAEffectRate * _initialDestroyPower;
-        //_currentBlockBehavior
-        //string BreakObjName = _currentBlockBehavior.DestroyBlock(_destroyPower);
-       (string BreakObjName,bool StanFlag) = _currentBlockBehavior.DestroyBlock(_destroyPower);
-       IsStan = StanFlag;
-       
-       StanFlag = false;
-        if (BreakObjName != "Ambras" && BreakObjName != "Heros"&& BreakObjName != "ItemC") return;
-        
+        if (!_hasBlock && Input.GetMouseButton(0))
+        {
+            Vector3 playerDirection = transform.forward;
+            playerDirection.Normalize();
+            _currentBlockBehavior = playerCheakAround.CheckBlockRay(playerDirection);
+            if (_currentBlockBehavior == null) return;
+            breaking = true;
+            int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
+            _destroyPower = ItemAEffectRate * _initialDestroyPower;
+            string BreakObjName = _currentBlockBehavior.DestroyBlock(_destroyPower,this.gameObject);
+            if (BreakObjName != "Ambras" && BreakObjName != "Heros" && BreakObjName != "ItemC") return;
+
             playerBlockStack.StackBlock(BreakObjName);
             _hasBlock = true;
             //次に生成するブロックを表示する処理
@@ -114,8 +144,16 @@ public class PlayerObjectManipulator : MonoBehaviour
             _uiHandler.SetStackImage(BreakObjName);
             _predictCubes.SetActive(true);
             playerItemHandler.CreateItem();
-        
+            // StartCoroutine(BreakAnimDelay());
+        }
+        else breaking = false;
     }
+        // private IEnumerator BreakAnimDelay()
+        // {
+        //     yield return new WaitForSeconds(_breakAnimTime);
+        //     breaking = false;
+        //     Debug.Log("Swing");
+        // }
     
    
 }

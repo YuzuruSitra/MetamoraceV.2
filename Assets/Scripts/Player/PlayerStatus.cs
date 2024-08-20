@@ -39,29 +39,38 @@ public class PlayerStatus : MonoBehaviour
 
     private void JudgmentCondition()
     {
-        if (!_playerMover.OnGround)
+        // if (!_playerMover.OnGround)
+        // {
+        //     ChangeCondition(Condition.Jump);
+        // }
+        // else if (_playerObjectManipulator.IsStan)
+        // {
+        //     ChangeCondition(Condition.Stan);
+        // }
+        // else if (_playerMover.CurrentMoveSpeed == 0)
+        // {
+        //     ChangeCondition(Condition.Idole);
+        // }
+        // else if (_playerCheakAround.VerticalDeath)
+        // {
+        //     ChangeCondition(Condition.VDeath);
+        // }
+        // else if (_playerCheakAround.HorizontalDeath)
+        // {
+        //     ChangeCondition(Condition.HDeath);
+        // }
+        
+         if (_playerObjectManipulator.Swing)
         {
-            ChangeCondition(Condition.Jump);
+            ChangeCondition(Condition.Swing);
         }
-        else if (_playerObjectManipulator.IsStan)
+        else if (_playerObjectManipulator.Breaking)
         {
-            ChangeCondition(Condition.Stan);
-        }
-        else if (_playerMover.CurrentMoveSpeed == 0)
-        {
-            ChangeCondition(Condition.Idole);
+            ChangeCondition(Condition.Break);
         }
         else if (_playerMover.CurrentMoveSpeed <= _playerMover.WalkSpeed)
         {
             ChangeCondition(Condition.Walk);
-        }
-        else if (_playerCheakAround.VerticalDeath)
-        {
-            ChangeCondition(Condition.VDeath);
-        }
-        else if (_playerCheakAround.HorizontalDeath)
-        {
-            ChangeCondition(Condition.HDeath);
         }
         
         // else if (_playerMover.CurrentMoveSpeed <= _playerMover.RunSpeed)
