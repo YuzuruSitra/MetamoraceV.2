@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerItemHandler : MonoBehaviour
+using Photon.Pun;
+public class PlayerItemHandler : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private PlayerEffectHandler _playerEffectHandler;

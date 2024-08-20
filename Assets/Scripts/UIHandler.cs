@@ -80,6 +80,7 @@ public class UIHandler : MonoBehaviour
 
     public void SetItemImage(string ItemType)
     {
+        Debug.Log("Called");
         _itemImage.enabled = true;
         _effectHandler.LoadCreateItemEffect();
         switch (ItemType)

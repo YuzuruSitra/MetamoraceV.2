@@ -3,32 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Block;
+//using Block;
+using Photon.Pun;
 
-public class PlayerObjectManipulator : MonoBehaviour
+public class PlayerObjectManipulator : MonoBehaviourPunCallbacks
 {
     private BlockBase _currentBlockBehavior;
-    private PlayerCheakAround playerCheakAround;
-    private PlayerBlockStack playerBlockStack;
-     [SerializeField]
-    private float _initialDestroyPower = 1.0f;
+    [SerializeField] private PlayerCheakAround playerCheakAround;
+    [SerializeField] private PlayerBlockStack playerBlockStack;
+    [SerializeField] private float _initialDestroyPower = 1.0f;
     public float InitialDestroyPower => _initialDestroyPower;
-    [SerializeField]
-    private GameObject _predictCubes;
+    [SerializeField] private GameObject _predictCubes;
     private float _destroyPower = 1.0f;
-     private bool _hasBlock = false;
+    private bool _hasBlock = false;
     public bool HasBlock => _hasBlock;
-     private Vector3 _insPos;
+    private Vector3 _insPos;
+
     private Vector3 _insBigPos;
-   // private Vector3 PlayerDirection;
+
+    // private Vector3 PlayerDirection;
     private UIHandler _uiHandler;
-    private PlayerItemHandler playerItemHandler;
-    [SerializeField]
-    GameObject[] _herosPrefab = new GameObject[2];
-    [SerializeField]
-    GameObject[] _BigPrefab = new GameObject[2];
-    [SerializeField]
-    GameObject[] _cPrefab = new GameObject[2];
-    string nextInsBlock =  "Heros";
+    [SerializeField] private PlayerItemHandler playerItemHandler;
+    [SerializeField] GameObject[] _herosPrefab = new GameObject[2];
+    [SerializeField] GameObject[] _BigPrefab = new GameObject[2];
+    [SerializeField] GameObject[] _cPrefab = new GameObject[2];
+    string nextInsBlock = "Heros";
     public bool IsStan { get; private set; } = false;
     private bool breaking = false;
     public bool Breaking => breaking;
@@ -37,21 +36,24 @@ public class PlayerObjectManipulator : MonoBehaviour
     private Animator _anim;
     private float _swingAnimTime;
     private float _breakAnimTime;
+
     private float _breakTime;
+
     // Start is called before the first frame update
     private void Start()
     {
         _uiHandler = GameObject.FindWithTag("UIHandler").GetComponent<UIHandler>();
-        playerCheakAround = GetComponent<PlayerCheakAround>();
-        playerBlockStack = GetComponent<PlayerBlockStack>();
-        playerItemHandler = GetComponent<PlayerItemHandler>();
+        //playerCheakAround = GetComponent<PlayerCheakAround>();
+        //playerBlockStack = GetComponent<PlayerBlockStack>();
+        //playerItemHandler = GetComponent<PlayerItemHandler>();
         _anim = GetComponent<Animator>();
-         _swingAnimTime = GetAnimationClipLength(_anim.runtimeAnimatorController.animationClips,
+        _swingAnimTime = GetAnimationClipLength(_anim.runtimeAnimatorController.animationClips,
             "swing");
-         _breakAnimTime = GetAnimationClipLength(_anim.runtimeAnimatorController.animationClips,
-             "break");
+        _breakAnimTime = GetAnimationClipLength(_anim.runtimeAnimatorController.animationClips,
+            "break");
         //Debug.Log(_swingAnimTime);
     }
+
     private static float GetAnimationClipLength(IEnumerable<AnimationClip> animationClips, string clipName)
     {
         return (from animationClip in animationClips
@@ -68,7 +70,7 @@ public class PlayerObjectManipulator : MonoBehaviour
         CreateBlock();
         playerItemHandler.UseItemC();
         playerItemHandler.UseItemB();
-        Debug.Log(swing);
+        //Debug.Log(swing);
         if (!_hasBlock) return;
         _insPos = new Vector3((int)transform.position.x, (int)transform.position.y + 0.25f, -1.0f);
         _predictCubes.transform.position = _insPos;
@@ -78,7 +80,7 @@ public class PlayerObjectManipulator : MonoBehaviour
     public void CreateBlock()
     {
         //ブロックを持ってれば処理を行う
-        if (_hasBlock&&Input.GetMouseButtonDown(0)) 
+        if (_hasBlock && Input.GetMouseButtonDown(0))
         {
             swing = true;
             _hasBlock = false;
@@ -111,6 +113,7 @@ public class PlayerObjectManipulator : MonoBehaviour
                 playerItemHandler.ResetNextInsBlock();
                 break;
         }
+
         nextInsBlock = "Heros";
     }
 
@@ -133,27 +136,32 @@ public class PlayerObjectManipulator : MonoBehaviour
             breaking = true;
             int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
             _destroyPower = ItemAEffectRate * _initialDestroyPower;
-            string BreakObjName = _currentBlockBehavior.DestroyBlock(_destroyPower,this.gameObject);
+            string BreakObjName = _currentBlockBehavior.DestroyBlock(_destroyPower, this.gameObject);
             if (BreakObjName != "Ambras" && BreakObjName != "Heros" && BreakObjName != "ItemC") return;
-
             playerBlockStack.StackBlock(BreakObjName);
             _hasBlock = true;
-            //次に生成するブロックを表示する処理
-            _uiHandler.BlockImage();
-            //壊したブロックを表示する処理
-            _uiHandler.SetStackImage(BreakObjName);
-            _predictCubes.SetActive(true);
-            playerItemHandler.CreateItem();
-            // StartCoroutine(BreakAnimDelay());
+            if (_uiHandler == null)
+            {
+                Debug.Log("NULL");
+            }
+            else
+            {
+                Debug.Log(BreakObjName);
+                //次に生成するブロックを表示する処理
+                _uiHandler.BlockImage();
+                //壊したブロックを表示する処理
+                _uiHandler.SetStackImage(BreakObjName);
+                _predictCubes.SetActive(true);
+                playerItemHandler.CreateItem();
+                // StartCoroutine(BreakAnimDelay());
+            }
         }
         else breaking = false;
     }
-        // private IEnumerator BreakAnimDelay()
-        // {
-        //     yield return new WaitForSeconds(_breakAnimTime);
-        //     breaking = false;
-        //     Debug.Log("Swing");
-        // }
-    
-   
+    // private IEnumerator BreakAnimDelay()
+    // {
+    //     yield return new WaitForSeconds(_breakAnimTime);
+    //     breaking = false;
+    //     Debug.Log("Swing");
+    // }
 }

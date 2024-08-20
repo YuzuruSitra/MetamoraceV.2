@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerAnimator : MonoBehaviour
+using Photon.Pun;
+public class PlayerAnimator : MonoBehaviourPunCallbacks
 {
      private Animator _anim;
         [SerializeField] private PlayerStatus _playerStatus;

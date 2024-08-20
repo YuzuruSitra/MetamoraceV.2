@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerBlockStack : MonoBehaviour
+using Photon.Pun;
+public class PlayerBlockStack : MonoBehaviourPunCallbacks
 {
 private string[] _stackBlocks = new string[3];
     public string[] _StackBlocks => _stackBlocks;

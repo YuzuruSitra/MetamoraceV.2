@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerMover : MonoBehaviour
+using Photon.Pun;
+public class PlayerMover : MonoBehaviourPunCallbacks
 {
     private PlayerStatus playerStatus;
     private PlayerItemHandler playerItemHandler;

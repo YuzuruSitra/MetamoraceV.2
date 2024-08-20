@@ -1469,6 +1469,26 @@ PrefabInstance:
       propertyPath: _battleInsPos.Array.data[3].z
       value: -2.42
       objectReference: {fileID: 0}
+    - target: {fileID: 6581757328248425592, guid: 25067429fff0d15469497ef6bc96150b,
+        type: 3}
+      propertyPath: _battleCharacter.Array.data[0]
+      value: BattleFox_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581757328248425592, guid: 25067429fff0d15469497ef6bc96150b,
+        type: 3}
+      propertyPath: _battleCharacter.Array.data[1]
+      value: BattleFox_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581757328248425592, guid: 25067429fff0d15469497ef6bc96150b,
+        type: 3}
+      propertyPath: _battleCharacter.Array.data[2]
+      value: BattleFox_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581757328248425592, guid: 25067429fff0d15469497ef6bc96150b,
+        type: 3}
+      propertyPath: _battleCharacter.Array.data[3]
+      value: BattleFox_01
+      objectReference: {fileID: 0}
     - target: {fileID: 6581757328248425593, guid: 25067429fff0d15469497ef6bc96150b,
         type: 3}
       propertyPath: m_RootOrder
@@ -1869,9 +1889,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.00007620454
     y: 0
-    width: 1
+    width: 0.9998476
     height: 1
   near clip plane: 0.3
   far clip plane: 1000

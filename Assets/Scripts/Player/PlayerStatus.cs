@@ -1,8 +1,8 @@
 using System;
-//using Photon.Pun;
+using Photon.Pun;
 using UnityEngine;
 
-public class PlayerStatus : MonoBehaviour
+public class PlayerStatus : MonoBehaviourPunCallbacks
 {
     public enum Condition
     {
