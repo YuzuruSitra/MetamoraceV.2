@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
@@ -24,6 +25,14 @@ namespace Character
         public event Action<Condition> ChangeConditionEvent;
         
         [SerializeField] private CharacterMover _characterMover;
+        private readonly HashSet<Condition> _nonMovingConditions = new()
+        {
+            Condition.Pause,
+            Condition.Break,
+            Condition.Stan,
+            Condition.VDeath,
+            Condition.HDeath
+        };
         
         private void Start()
         {
@@ -71,6 +80,13 @@ namespace Character
             if (_currentCondition == newCondition) return;
             ChangeConditionEvent?.Invoke(newCondition);
             _currentCondition = newCondition;
+            ChangeMoveBool(newCondition);
+        }
+
+        private void ChangeMoveBool(Condition newCondition)
+        {
+            var isMove = !_nonMovingConditions.Contains(newCondition);
+            _characterMover.SetMoveBool(isMove);
         }
         
     }
