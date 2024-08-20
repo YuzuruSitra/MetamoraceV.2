@@ -28,8 +28,8 @@ namespace System.Camera
         
         private void Start()
         {
-            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.BattleIdKey, out var teamValue))
-                _teamID = (int)teamValue - 1;
+            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamValue))
+                _teamID = (int)teamValue;
             _playerGenerator = GameObject.FindWithTag("PlayerGenerator").GetComponent<PlayerGenerator>();
             _targetPlayer = _playerGenerator.CurrentPlayer;
         }

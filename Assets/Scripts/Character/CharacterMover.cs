@@ -1,3 +1,4 @@
+using System.Network;
 using Photon.Pun;
 using UnityEngine;
 
@@ -21,6 +22,8 @@ namespace Character
         [Header("重力")]
         [SerializeField] private float _gravity;
 
+        private bool _isReversal;
+        
         private CharacterController _controller;
         public float CurrentMoveSpeed { get; private set; }
         public bool IsGrounded => _controller.isGrounded;
@@ -33,6 +36,8 @@ namespace Character
         {
             if (!photonView.IsMine) return;
             _controller = GetComponent<CharacterController>();
+            if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
+            _isReversal = ((int)teamId != 0);
         }
 
         private void Update()
@@ -41,6 +46,7 @@ namespace Character
             
             // Caching the horizontal input and speed calculation
             var horizontal = Input.GetAxis("Horizontal");
+            if (_isReversal) horizontal = -horizontal;
             var speed = Input.GetKey(KeyCode.LeftShift) ? _runSpeed : _walkSpeed;
 
             if (!_isMoving) horizontal = 0;
