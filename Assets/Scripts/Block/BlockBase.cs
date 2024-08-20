@@ -24,7 +24,7 @@ namespace Block
         [SerializeField] private float _fallSpeed;
         private const float RayLength = 0.02f;
 
-        private void Start()
+        protected  virtual void Start()
         {
             _mesh = GetComponent<MeshRenderer>();
             _col = GetComponent<BoxCollider>();
@@ -33,9 +33,10 @@ namespace Block
             _currentActiveTime = _activeTime;
         }
         
-        private void Update()
+        protected virtual void Update()
         {
-            if (!IsGrounded()) transform.position += Vector3.down * (_fallSpeed * Time.deltaTime);
+            if (PhotonNetwork.IsMasterClient) 
+                if (!IsGrounded()) transform.position += Vector3.down * (_fallSpeed * Time.deltaTime);
 
             if (_currentActiveTime <= _activeTime)
             {

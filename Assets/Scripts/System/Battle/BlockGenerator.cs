@@ -10,7 +10,9 @@ namespace System.Battle
         private const int AllGenerate = MaxGenerate * 2;
         [Header("Index-TeamNum")]
         [SerializeField] private GameObject[] _blockTeam;
-        [SerializeField] private Vector3[] _insPos;
+        private const float BlockInsY = 11.0f;
+        public const float Team1PosZ = -2.42f;
+        public const float Team2PosZ = 2.42f;
         [SerializeField] private Vector3[] _generatePos = new Vector3[AllGenerate];
         [SerializeField] private Vector3[] _insRot;
         [SerializeField] private Transform[] _parentObj;
@@ -41,7 +43,7 @@ namespace System.Battle
             }
             if (!PhotonNetwork.IsMasterClient) return;
             for (var i = 0; i < _generatePos.Length; i++)
-                _generatePos[i].y = _insPos[0].y;
+                _generatePos[i].y = BlockInsY;
         }
 
         private void Update()
@@ -67,7 +69,7 @@ namespace System.Battle
                     calcPosX = UnityEngine.Random.Range(MinPosX, MaxPosX);
                 } while (Mathf.Approximately(calcPosX, _generatePos[i].x) || ObjectExistsInRay(_generatePos[i], calcPosX));
                 _generatePos[i].x = calcPosX;
-                _generatePos[i].z = i < teamInsCount ? _insPos[0].z : _insPos[1].z;
+                _generatePos[i].z = i < teamInsCount ? Team1PosZ : Team2PosZ;
                 _predictPos[i].x = _generatePos[i].x;
                 _predictPos[i].z = _generatePos[i].z;
             }

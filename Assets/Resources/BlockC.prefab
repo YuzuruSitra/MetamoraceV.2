@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 8621169857655290190}
   m_Layer: 0
   m_Name: BlockC
-  m_TagString: Ambras
+  m_TagString: ItemCBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -240,7 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f905f702b366d7f4eaf120c85eecbec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mesh: {fileID: 8621169857655290188}
   _maxHealth: 3
   _healthGage: {fileID: 1889904291471763943}
   _activeTime: 0.5
