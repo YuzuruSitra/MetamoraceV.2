@@ -56,7 +56,7 @@ MonoBehaviour:
   - WaitFox_01
   _waitInsPos: {x: 24, y: -15, z: 84}
   _battleInsPos:
-  - {x: -2, y: 2, z: 2.42}
-  - {x: 2, y: 2, z: 2.42}
   - {x: -2, y: 2, z: -2.42}
   - {x: 2, y: 2, z: -2.42}
+  - {x: -2, y: 2, z: 2.42}
+  - {x: 2, y: 2, z: 2.42}
