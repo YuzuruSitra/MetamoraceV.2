@@ -12,11 +12,12 @@ namespace Character
             Walk,
             Run,
             Jump,
-            Stan,
-            Swing,
+            Generate,
             Break,
             VDeath,
-            HDeath
+            HDeath,
+            Stan,
+            Pause
         }
 
         private Condition _currentCondition;
@@ -35,9 +36,12 @@ namespace Character
             if (!photonView.IsMine) return;
             JudgmentCondition();
         }
-
+        
+        // Within factors.
         private void JudgmentCondition()
         {
+            if (_currentCondition is Condition.Stan or Condition.Pause) return;
+            
             if (!_characterMover.IsGrounded)
             {
                 ChangeCondition(Condition.Jump);
@@ -54,7 +58,12 @@ namespace Character
             {
                 ChangeCondition(Condition.Run);
             }
-            
+        }
+        
+        // External factors.
+        public void ReceiveChangeState(Condition condition)
+        {
+            ChangeCondition(condition);
         }
 
         private void ChangeCondition(Condition newCondition)

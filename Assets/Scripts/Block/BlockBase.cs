@@ -1,3 +1,4 @@
+using Character;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,10 +57,11 @@ namespace Block
             if (DestroyTime <= _currentDestroyTime) PhotonNetwork.Destroy(gameObject);
         }
 
-        public string DestroyBlock(float power)
+        public string DestroyBlock(float power, GameObject player)
         {
             photonView.RPC(nameof(ChangeHealth), RpcTarget.All, power);
             if (!(_currentHealth <= 0)) return ErrorTag;
+            SendEffect(player);
             photonView.RPC(nameof(LaunchBreak), RpcTarget.All);
             return gameObject.tag;
         }
@@ -78,11 +80,16 @@ namespace Block
         }
 
         [PunRPC]
-        protected virtual void LaunchBreak()
+        private void LaunchBreak()
         {
             _mesh.enabled = false;
             _col.enabled = false;
             _cloudAnimator.SetBool(IsBreak, true);
+        }
+
+        protected virtual void SendEffect(GameObject player)
+        {
+            
         }
 
         private bool IsGrounded()

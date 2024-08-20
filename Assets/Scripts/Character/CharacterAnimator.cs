@@ -71,6 +71,46 @@ namespace Character
                     _anim.SetBool(IsIdole, false);
                     _anim.SetBool(IsWalk, false);
                     break;
+                case CharacterStatus.Condition.Generate:
+                    _anim.SetBool(IsVDeath, false);
+                    _anim.SetBool(IsHDeath, false);
+                    _anim.SetBool(IsStan, false);
+                    _anim.SetBool(IsSwing, true);
+                    _anim.SetBool(IsJump, false);
+                    _anim.SetBool(IsBreak, false);
+                    _anim.SetBool(IsIdole, false);
+                    _anim.SetBool(IsWalk, false);
+                    break;
+                case CharacterStatus.Condition.Break:
+                    _anim.SetBool(IsVDeath, false);
+                    _anim.SetBool(IsHDeath, false);
+                    _anim.SetBool(IsStan, false);
+                    _anim.SetBool(IsSwing, false);
+                    _anim.SetBool(IsJump, false);
+                    _anim.SetBool(IsBreak, true);
+                    _anim.SetBool(IsIdole, false);
+                    _anim.SetBool(IsWalk, false);
+                    break;
+                case CharacterStatus.Condition.VDeath:
+                    _anim.SetBool(IsVDeath, true);
+                    _anim.SetBool(IsHDeath, false);
+                    _anim.SetBool(IsStan, false);
+                    _anim.SetBool(IsSwing, false);
+                    _anim.SetBool(IsJump, false);
+                    _anim.SetBool(IsBreak, false);
+                    _anim.SetBool(IsIdole, false);
+                    _anim.SetBool(IsWalk, false);
+                    break;
+                case CharacterStatus.Condition.HDeath:
+                    _anim.SetBool(IsVDeath, false);
+                    _anim.SetBool(IsHDeath, true);
+                    _anim.SetBool(IsStan, false);
+                    _anim.SetBool(IsSwing, false);
+                    _anim.SetBool(IsJump, false);
+                    _anim.SetBool(IsBreak, false);
+                    _anim.SetBool(IsIdole, false);
+                    _anim.SetBool(IsWalk, false);
+                    break;
             }
         }
        
