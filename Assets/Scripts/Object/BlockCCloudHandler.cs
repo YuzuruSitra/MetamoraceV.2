@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +15,6 @@ namespace Object
         public void LaunchCloud(Transform targetObject, float transitionTime, float waitTime)
         {
             var mainCamera = Camera.main;
-            if (mainCamera == null) return;
             var screenPosition = mainCamera.WorldToScreenPoint(targetObject.position);
             transform.position = screenPosition;
             if (_coroutine != null) StopCoroutine(_coroutine);
