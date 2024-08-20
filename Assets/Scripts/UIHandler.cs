@@ -27,6 +27,8 @@ public class UIHandler : MonoBehaviour
     //保持しているブロック画像表示
     public void BlockImage()
     {
+        Debug.Log("Called");
+
         // if (objName == "Ambras")
         // {
             _BlockImage.sprite = _ambrasSprite;
@@ -48,6 +50,7 @@ public class UIHandler : MonoBehaviour
     //アンブラスとヘイロスのスプライトを格納
     public void SetStackImage(string _objName)
     {
+        Debug.Log("Called");
         for (int i = 0; i < _StackImage.Length; i++)
         {
             if (_StackImage[i].sprite == null)
@@ -56,6 +59,7 @@ public class UIHandler : MonoBehaviour
                 {
                     _StackImage[i].sprite = _ambrasSprite;
                     _StackImage[i].enabled = true;
+                    
                 }
                 else if (_objName == "Heros")
                 {
