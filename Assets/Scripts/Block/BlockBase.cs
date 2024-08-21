@@ -1,3 +1,4 @@
+using System.Battle;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,21 +24,35 @@ namespace Block
         
         [SerializeField] private float _fallSpeed;
         private const float RayLength = 0.02f;
-
-        protected  virtual void Start()
+        
+        [SerializeField] private bool _isMoving;
+        [SerializeField] private int _insPlayerTeam;
+        private float _targetPosZ;
+        [SerializeField] private float _moveSpeed;
+        private Vector3 _currentPos;
+        private const float Threshold = 0.01f;
+        private void Start()
         {
             _mesh = GetComponent<MeshRenderer>();
             _col = GetComponent<BoxCollider>();
             _blockAnimator = GetComponent<Animator>();
             _currentHealth = _maxHealth;
             _currentActiveTime = _activeTime;
+            if (!_isMoving) return;
+            _targetPosZ = (_insPlayerTeam == 0) ? BlockGenerator.Team2PosZ : BlockGenerator.Team1PosZ;
+            _currentPos = transform.position;
         }
         
-        protected virtual void Update()
+        private void Update()
         {
-            if (PhotonNetwork.IsMasterClient) 
-                if (!IsGrounded()) transform.position += Vector3.down * (_fallSpeed * Time.deltaTime);
-
+            if (PhotonNetwork.IsMasterClient)
+            {
+                if (!_isMoving)
+                    GravityFall();
+                else
+                    TowardsPos();
+            }
+            
             if (_currentActiveTime <= _activeTime)
             {
                 _currentActiveTime += Time.deltaTime;
@@ -89,6 +104,24 @@ namespace Block
         protected virtual void SendEffect(GameObject player)
         {
             
+        }
+
+        private void GravityFall()
+        {
+            if (!IsGrounded()) transform.position += Vector3.down * (_fallSpeed * Time.deltaTime);
+        }
+        
+        private void TowardsPos()
+        {
+            if (!PhotonNetwork.IsMasterClient) return;
+            var step = _moveSpeed * Time.deltaTime;
+            _currentPos.z = Mathf.MoveTowards(_currentPos.z, _targetPosZ, step);
+            transform.position = _currentPos;
+
+            if (!(Mathf.Abs(_currentPos.z - _targetPosZ) < Threshold)) return;
+            _currentPos.z = _targetPosZ;
+            transform.position = _currentPos;
+            _isMoving = true;
         }
 
         private bool IsGrounded()
