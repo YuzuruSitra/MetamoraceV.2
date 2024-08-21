@@ -23,7 +23,7 @@ namespace Block
         private float _currentDestroyTime;
         
         [SerializeField] private float _fallSpeed;
-        private const float RayLength = 0.02f;
+        private const float RayLength = 0.04f;
         
         [SerializeField] private bool _isMoving;
         [SerializeField] private int _insPlayerTeam;
@@ -126,7 +126,11 @@ namespace Block
 
         private bool IsGrounded()
         {
-            return Physics.Raycast(transform.position, Vector3.down, _mesh.bounds.extents.y + RayLength);
+            var extents = _mesh.bounds.extents;
+            var centerGrounded = Physics.Raycast(transform.position, Vector3.down, extents.y + RayLength);
+            var leftGrounded = Physics.Raycast(transform.position - transform.right * extents.x, Vector3.down, extents.y + RayLength);
+            var rightGrounded = Physics.Raycast(transform.position + transform.right * extents.x, Vector3.down, extents.y + RayLength);
+            return centerGrounded || leftGrounded || rightGrounded;
         }
     }
 }

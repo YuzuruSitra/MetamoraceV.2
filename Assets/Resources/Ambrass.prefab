@@ -245,6 +245,9 @@ MonoBehaviour:
   _activeTime: 0.5
   _cloudAnimator: {fileID: 5697575003319578936}
   _fallSpeed: 2.25
+  _isMoving: 0
+  _insPlayerTeam: 0
+  _moveSpeed: 0
 --- !u!114 &985142421573186090
 MonoBehaviour:
   m_ObjectHideFlags: 0
