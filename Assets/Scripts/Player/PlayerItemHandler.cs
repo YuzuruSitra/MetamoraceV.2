@@ -109,6 +109,8 @@ public class PlayerItemHandler : MonoBehaviourPunCallbacks
         {
             // //ブロックすたっくUIリセット
             playerBlockStack.ResetBlock();
+            //NextブロックUI差し替え
+            _uiHandler.SetBlockImage("ItemC");
             //ブロックスタックリセット
             _uiHandler.ResetStackImage();
             _uiHandler.ResetItemImage();

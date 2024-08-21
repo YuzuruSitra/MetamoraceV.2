@@ -18,24 +18,24 @@ public class UIHandler : MonoBehaviour
         _effectHandler = GameObject.FindWithTag("EffectHandler").GetComponent<EffectHandler>();
         foreach (var image in _StackImage)
         {
+            image.sprite = null;
             image.enabled = false;
         }
+        _itemImage.sprite = null;
         _itemImage.enabled = false;
+        _BlockImage.sprite = null;
+        _BlockImage.enabled = false;
     }
 
     // Update is called once per frame
     //保持しているブロック画像表示
-    public void BlockImage()
+    public void SetBlockImage(string _spriteName)
     {
-        Debug.Log("Called");
+        //表示される画像　アンブラス　bigアンブラス アイテムCブロックy
 
-        // if (objName == "Ambras")
-        // {
-            _BlockImage.sprite = _ambrasSprite;
-        // }
-        // else
-        // {
-        //     _BlockImage.sprite = _herosSprite;
+         if (_spriteName == "Ambras") _BlockImage.sprite = _ambrasSprite;
+         else if(_spriteName == "ItemC")   _BlockImage.sprite = _itemCSprite;
+          
         //     _BlockImage.color = Color.white;
         // }
     }

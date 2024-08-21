@@ -390,13 +390,13 @@ MonoBehaviour:
   _predictCubes: {fileID: 8827741291898530419}
   playerItemHandler: {fileID: -4113925797534529641}
   _herosPrefab:
-  - {fileID: 0}
+  - {fileID: 6252427330716548040, guid: dd44774894b10ec40a0a2074985c3109, type: 3}
   - {fileID: 0}
   _BigPrefab:
-  - {fileID: 0}
+  - {fileID: 2221145504540172902, guid: 35e9c72fa342f2641b45a5d41ace5474, type: 3}
   - {fileID: 0}
   _cPrefab:
-  - {fileID: 0}
+  - {fileID: 2221145504540172902, guid: 35e9c72fa342f2641b45a5d41ace5474, type: 3}
   - {fileID: 0}
 --- !u!114 &8767944959376233026
 MonoBehaviour:
