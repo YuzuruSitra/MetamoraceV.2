@@ -143,7 +143,7 @@ Transform:
   m_Children:
   - {fileID: 4574751560403268960}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -0, y: 180, z: -0}
 --- !u!33 &8621169857655290189
 MeshFilter:
@@ -240,7 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f905f702b366d7f4eaf120c85eecbec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mesh: {fileID: 8621169857655290188}
   _maxHealth: 3
   _healthGage: {fileID: 1889904291471763943}
   _activeTime: 0.5
@@ -424,6 +423,7 @@ GameObject:
   - component: {fileID: 2538282250367755738}
   - component: {fileID: 3684704398326997082}
   - component: {fileID: 1889904291471763943}
+  - component: {fileID: 630542985513404146}
   m_Layer: 0
   m_Name: HealthGage
   m_TagString: Untagged
@@ -489,3 +489,16 @@ MonoBehaviour:
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &630542985513404146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4511695723265074943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c37fcbe14ce050e48b8d6d0e495d343e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NotUseBillboard: 0

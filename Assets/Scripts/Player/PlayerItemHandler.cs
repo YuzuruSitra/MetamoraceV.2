@@ -97,6 +97,8 @@ public class PlayerItemHandler : MonoBehaviourPunCallbacks
             _uiHandler.ResetItemImage();
             //ブロック巨大化エフェクト
             
+            //NextブロックUI差し替え
+            _uiHandler.SetBlockImage("BigAmbras");
             
             hasItemB = false;
             NextInsBlock =  "BigBlock";

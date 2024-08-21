@@ -10,12 +10,16 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private Image _BlockImage;
     [SerializeField] private Sprite ItemA, ItemB, ItemC;
     [SerializeField] private Image _itemImage;
+    [SerializeField] private Image _blockFrame;
+    private float BigAmbrasScale = 1.5f;
+    private Vector3 initBlockFrameScale;
+    private Vector3 initBlockScale;
+    [SerializeField] private GameObject CreateBigBlockEffect;
+    [SerializeField] private GameObject CreateCBlockEffect;
 
-    private EffectHandler _effectHandler;
-
+    [SerializeField] private GameObject CreateItemEffect;
     private void Start()
     {
-        _effectHandler = GameObject.FindWithTag("EffectHandler").GetComponent<EffectHandler>();
         foreach (var image in _StackImage)
         {
             image.sprite = null;
@@ -25,6 +29,11 @@ public class UIHandler : MonoBehaviour
         _itemImage.enabled = false;
         _BlockImage.sprite = null;
         _BlockImage.enabled = false;
+        initBlockFrameScale = _blockFrame.transform.localScale;
+        initBlockScale = _BlockImage.transform.localScale;
+        CreateBigBlockEffect.SetActive(false);
+        CreateCBlockEffect.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -32,25 +41,39 @@ public class UIHandler : MonoBehaviour
     public void SetBlockImage(string _spriteName)
     {
         //表示される画像　アンブラス　bigアンブラス アイテムCブロックy
-
+        _BlockImage.enabled = true;
          if (_spriteName == "Ambras") _BlockImage.sprite = _ambrasSprite;
-         else if(_spriteName == "ItemC")   _BlockImage.sprite = _itemCSprite;
-          
+         else if (_spriteName == "ItemC")
+         {
+             _BlockImage.sprite = _itemCSprite;
+             CreateCBlockEffect.SetActive(true);
+         }
+         
+         else if (_spriteName == "BigAmbras")
+         {
+             //くものエフェクト
+             
+             //大きくする
+             CreateBigBlockEffect.SetActive(true);
+             _BlockImage.sprite = _ambrasSprite;
+             _blockFrame.transform.localScale = initBlockFrameScale * BigAmbrasScale;
+             _BlockImage.transform.localScale =initBlockScale * BigAmbrasScale;
+         }
+         else Debug.LogError("NUllBLockName");
         //     _BlockImage.color = Color.white;
         // }
     }
     //保持しているブロック画像null
     public void ResetBlockImage()
     {
+        _BlockImage.enabled = false;
+        _blockFrame.transform.localScale = initBlockFrameScale;
+        _BlockImage.transform.localScale =initBlockScale;
         _BlockImage.sprite = null;
-        //_BlockImage.color = toumei;   
-        //_BlockImage.transform.localScale = initialScale;
-        //_BlockFrameImage.transform.localScale = frameinitialScale;
     }
     //アンブラスとヘイロスのスプライトを格納
     public void SetStackImage(string _objName)
     {
-        Debug.Log("Called");
         for (int i = 0; i < _StackImage.Length; i++)
         {
             if (_StackImage[i].sprite == null)
@@ -84,9 +107,8 @@ public class UIHandler : MonoBehaviour
 
     public void SetItemImage(string ItemType)
     {
-        Debug.Log("Called");
         _itemImage.enabled = true;
-        _effectHandler.LoadCreateItemEffect();
+        CreateItemEffect.SetActive(true);
         switch (ItemType)
         {
             case "ItemA":
@@ -109,6 +131,5 @@ public class UIHandler : MonoBehaviour
     {
         _itemImage.enabled = false;
         _itemImage.sprite = null;
-        //_itemImage.color = transparent;
     }
 }

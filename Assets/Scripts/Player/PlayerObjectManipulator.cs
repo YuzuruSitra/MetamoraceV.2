@@ -133,7 +133,6 @@ public class PlayerObjectManipulator : MonoBehaviourPunCallbacks
             playerDirection.Normalize();
             _currentBlockBehavior = playerCheakAround.CheckBlockRay(playerDirection);
             if (_currentBlockBehavior == null) return;
-            Debug.Log("TOutch");
             breaking = true;
             int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
             _destroyPower = ItemAEffectRate * _initialDestroyPower;
@@ -141,15 +140,13 @@ public class PlayerObjectManipulator : MonoBehaviourPunCallbacks
             if (BreakObjName != "Ambras" && BreakObjName != "Heros" && BreakObjName != "ItemC") return;
             playerBlockStack.StackBlock(BreakObjName);
             _hasBlock = true;
-                Debug.Log(BreakObjName);
-                //次に生成するブロックを表示する処理
-                _uiHandler.SetBlockImage("Ambras");
-                //壊したブロックを表示する処理
-                _uiHandler.SetStackImage(BreakObjName);
-                _predictCubes.SetActive(true);
-                playerItemHandler.CreateItem();
-                // StartCoroutine(BreakAnimDelay());
-            
+            //次に生成するブロックを表示する処理
+            _uiHandler.SetBlockImage("Ambras");
+            //壊したブロックを表示する処理
+            _uiHandler.SetStackImage(BreakObjName);
+            _predictCubes.SetActive(true);
+            playerItemHandler.CreateItem();
+            // StartCoroutine(BreakAnimDelay());
         }
         else breaking = false;
     }
