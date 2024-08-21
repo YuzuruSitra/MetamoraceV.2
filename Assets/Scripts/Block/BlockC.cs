@@ -62,7 +62,7 @@ namespace Block
             {
                 if (!Physics.Raycast(transform.position, direction, out var hit, _rayDistance)) continue;
                 var block = hit.collider.GetComponent<BlockBase>();
-                if (block == null) continue;
+                if (!block) continue;
                 block.DestroyBlock(_destroyPower, gameObject);
             }
         }
