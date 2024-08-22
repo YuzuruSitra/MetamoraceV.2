@@ -57,4 +57,8 @@ public class PlayerEffectHandler : MonoBehaviourPunCallbacks
     {
         _saiyaEffect.SetActive(state);
     }
+    public void ChangeDie(bool state)
+    {
+        _dieEffect.SetActive(state);
+    }
 }

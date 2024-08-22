@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Network;
 using Block;
 using UnityEngine;
 using Photon.Pun;
@@ -24,7 +25,13 @@ public class PlayerCheakAround : MonoBehaviourPunCallbacks
     public bool HorizontalDeath => _horizontalDeath;
     private bool _isPlayerDeath = false;
     public bool IsPlayerDeath => _isPlayerDeath;
-
+    [SerializeField] private PlayerEffectHandler _playerEffectHandler;
+    private int _teamId;
+    void Start()
+    {
+        if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
+        _teamId = (int)teamId;
+    }
     void Update()
     {
         JudgeVerticalDeath();
@@ -63,31 +70,34 @@ public class PlayerCheakAround : MonoBehaviourPunCallbacks
         Ray ray = new Ray(rayOrigin, Vector3.up);
         Debug.DrawRay(ray.origin, ray.direction * _deathDecisionRayRange, Color.green);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, _deathDecisionRayRange) && _onGround) 
-        {
+        if (!Physics.Raycast(ray, out RaycastHit hit, _deathDecisionRayRange)) return;
+        if (!_onGround) return;
+        if (_isPlayerDeath) return;
+        
             _verticalDeath = true;
             _isPlayerDeath = true;
+            _playerEffectHandler.ChangeDie(true);
             Debug.Log("DeathVertical");
             //StartCoroutine(ChangePhysics());
-        }
     }
     //奥行きの死亡判定
     private void JudgeHorizontalDeath()
     {
-        //Vector3 rayDirection = (_playerDataReceiver.MineTeamID == 0) ? Vector3.left : Vector3.right;
-        Vector3 rayDirection = Vector3.left;
+        Vector3 rayDirection = (_teamId == 0) ? Vector3.left : Vector3.right;
+        //Vector3 rayDirection = Vector3.left;
         Vector3 rayOrigin = transform.position + new Vector3(0f, 0.5f, 0f);
         Ray ray = new Ray(rayOrigin, rayDirection);
     
         Debug.DrawRay(rayOrigin, rayDirection * _deathDecisionRayRange, Color.blue, 1.0f);
-    
-        if (Physics.Raycast(ray, out RaycastHit hit, _deathDecisionRayRange))
-        {
+
+        if (!Physics.Raycast(ray, out RaycastHit hit, _deathDecisionRayRange)) return;
+        if (_isPlayerDeath) return;        
             _horizontalDeath = true;
             _isPlayerDeath = true;
             Debug.Log("DeathHorizontal");
+            _playerEffectHandler.ChangeDie(true);
             //StartCoroutine(ChangePhysics());
-        }
+        
     }
 
     // private IEnumerator ChangePhysics()

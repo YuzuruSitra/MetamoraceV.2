@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Network;
 using UnityEngine;
 using Photon.Pun;
 public class PlayerMover : MonoBehaviourPunCallbacks
@@ -39,7 +40,7 @@ public class PlayerMover : MonoBehaviourPunCallbacks
         //itemCBehavior = GetComponent<ItemCBehavior>();
          playerObjectManipulator = GetComponent<PlayerObjectManipulator>();
          _playerStatus = GetComponent<PlayerStatus>();
-         //if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
+         if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
 
     }
 

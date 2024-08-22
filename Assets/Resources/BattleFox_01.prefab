@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 4079149055446210050}
   - component: {fileID: 4415524763905620544}
   - component: {fileID: 8767944959376233026}
+  - component: {fileID: 5188375242369531952}
   m_Layer: 0
   m_Name: BattleFox_01
   m_TagString: Player
@@ -325,6 +326,7 @@ MonoBehaviour:
   _verticalRayOffset: 2
   _horizontalRayOffset: 0.5
   _deathDecisionRayRange: 0.15
+  _playerEffectHandler: {fileID: -585989662397046169}
 --- !u!114 &-585989662397046169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,6 +415,24 @@ MonoBehaviour:
   _playerObjectManipulator: {fileID: 4415524763905620544}
   _playerCheakAround: {fileID: 6042942886170842283}
   _playerEffectHandler: {fileID: -585989662397046169}
+--- !u!143 &5188375242369531952
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6192094455029975907}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1
+  m_Radius: 0.2
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &6192094455082704709
 GameObject:
   m_ObjectHideFlags: 0
@@ -2881,6 +2901,8 @@ GameObject:
   - component: {fileID: 6333200031512036488}
   - component: {fileID: 3132195955015453792}
   - component: {fileID: 3950164294257934313}
+  - component: {fileID: 8030426457705627586}
+  - component: {fileID: 2159650603756841187}
   m_Layer: 0
   m_Name: DieEffect
   m_TagString: Untagged
@@ -2975,6 +2997,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8030426457705627586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7435075649655454717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a4bb2f73c00cd4a9710ba734fce701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2159650603756841187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7435075649655454717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c37fcbe14ce050e48b8d6d0e495d343e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NotUseBillboard: 0
 --- !u!1 &8482710940011011291
 GameObject:
   m_ObjectHideFlags: 0
