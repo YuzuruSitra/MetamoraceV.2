@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Network;
 using UnityEngine;
 using Photon.Pun;
@@ -7,17 +5,25 @@ public class PlayerMover : MonoBehaviourPunCallbacks
 {
     private PlayerStatus playerStatus;
     private PlayerItemHandler playerItemHandler;
-    private PlayerObjectManipulator playerObjectManipulator;
-    //private ItemCBehavior itemCBehavior;
      [SerializeField]
     private Rigidbody _rb;
-     [SerializeField]
-    private float _walkSpeed
- = 5.0f;
+    [Header("歩行速度")]
+    [SerializeField] private float _walkSpeed;
     public float WalkSpeed => _walkSpeed;
+    [Header("走行速度")]
+    [SerializeField] private float _runSpeed;
+    
+    [Header("ジャンプ速度")]
+    [SerializeField] private float _jumpSpeed;
     private float _currentMoveSpeed;
-    public float CurrentMoveSpeed => _currentMoveSpeed;
-
+    
+    [Header("重力")]
+    [SerializeField] private float _gravity;
+    public float CurrentMoveSpeed { get; private set; }
+    
+    private CharacterController _controller;
+    public bool IsGrounded => _controller.isGrounded;
+    
     [SerializeField]
     private float _frontRayRength = 0.51f;
     [SerializeField]
@@ -29,26 +35,60 @@ public class PlayerMover : MonoBehaviourPunCallbacks
     private PlayerCheakAround playerCheakAround;
     private PlayerStatus _playerStatus;
     private bool _isMoving = true;
-
+    private float _verticalSpeed;
+    private bool _isReversal;
+    private Vector3 _moveDirection = Vector3.zero;
+    private Vector3 _direction = Vector3.zero;
     // Start is called before the first frame update
     private void Start()
     {
+        if (!photonView.IsMine) return;
          _JumpPower = _initialjumpPower;
          _currentMoveSpeed = _walkSpeed;
          playerItemHandler = GetComponent<PlayerItemHandler>();
          playerCheakAround = GetComponent<PlayerCheakAround>();
-        //itemCBehavior = GetComponent<ItemCBehavior>();
-         playerObjectManipulator = GetComponent<PlayerObjectManipulator>();
-         _playerStatus = GetComponent<PlayerStatus>();
+         _controller = GetComponent<CharacterController>();
          if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
-
+         _isReversal = ((int)teamId != 0);
     }
 
     // Update is called once per frame
     private void Update()
     {
-        PlayerCtrl();
-        Jump();
+        //PlayerCtrl();
+        //Jump();
+        if (!photonView.IsMine) return;
+        int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
+        // Caching the horizontal input and speed calculation
+        var horizontal = Input.GetAxis("Horizontal");
+        if (_isReversal) horizontal = -horizontal;
+        var speed = Input.GetKey(KeyCode.LeftShift) ? _runSpeed : _walkSpeed * ItemAEffectRate;
+        if (!_isMoving) horizontal = 0;
+            
+        _moveDirection.x = horizontal * speed;
+        _moveDirection.z = 0;
+        CurrentMoveSpeed = speed * Mathf.Abs(horizontal);
+            
+        if (horizontal != 0)
+        {
+            _direction.x = horizontal;
+            _direction.z = 0;
+            transform.rotation = Quaternion.LookRotation(_direction);
+        }
+
+        if (_controller.isGrounded)
+        {
+            _verticalSpeed = -_gravity * Time.deltaTime;
+            if (Input.GetButtonDown("Jump")) _verticalSpeed = _jumpSpeed;
+        }
+        else
+        {
+            // Apply gravity when the character is in the air
+            _verticalSpeed -= _gravity * Time.deltaTime;
+        }
+        // Combine horizontal movement with vertical speed
+        _moveDirection.y = _verticalSpeed;
+        _controller.Move(_moveDirection * Time.deltaTime);
         playerItemHandler.UseItemA();
     }
 
@@ -89,13 +129,23 @@ public class PlayerMover : MonoBehaviourPunCallbacks
 
     private void Jump()
     {
-        _onGround = playerCheakAround.CheakGroundRay();
-        if (Input.GetKeyDown(KeyCode.Space) && _onGround)
+        if (_controller.isGrounded)
         {
-            //ジャンプSE鳴らす
-            //_playerSoundHandler.PlayJumpSE();
-            _rb.AddForce(Vector3.up * _JumpPower, ForceMode.Impulse);
+            _verticalSpeed = -_gravity * Time.deltaTime;
+            if (Input.GetButtonDown("Jump")) _verticalSpeed = _jumpSpeed;
         }
+        else
+        {
+            // Apply gravity when the character is in the air
+            _verticalSpeed -= _gravity * Time.deltaTime;
+        }
+        // _onGround = playerCheakAround.CheakGroundRay();
+        // if (Input.GetKeyDown(KeyCode.Space) && _onGround)
+        // {
+        //     //ジャンプSE鳴らす
+        //     //_playerSoundHandler.PlayJumpSE();
+        //     _rb.AddForce(Vector3.up * _JumpPower, ForceMode.Impulse);
+        // }
     }
     public void SetMoveBool(bool isMoving)
     {

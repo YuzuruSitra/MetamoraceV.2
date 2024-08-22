@@ -370,7 +370,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 6192094455029975912}
-  _walkSpeed: 5
+  _walkSpeed: 8
+  _runSpeed: 12
+  _jumpSpeed: 20
+  _gravity: 50
   _frontRayRength: 0.51
   _initialjumpPower: 5
 --- !u!114 &4415524763905620544

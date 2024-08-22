@@ -83,12 +83,12 @@ public class PlayerCheakAround : MonoBehaviourPunCallbacks
     //奥行きの死亡判定
     private void JudgeHorizontalDeath()
     {
-        Vector3 rayDirection = (_teamId == 0) ? Vector3.left : Vector3.right;
+        Vector3 rayDirection = (_teamId == 0) ? Vector3.forward : Vector3.back;
         //Vector3 rayDirection = Vector3.left;
         Vector3 rayOrigin = transform.position + new Vector3(0f, 0.5f, 0f);
         Ray ray = new Ray(rayOrigin, rayDirection);
     
-        Debug.DrawRay(rayOrigin, rayDirection * _deathDecisionRayRange, Color.blue, 1.0f);
+        Debug.DrawRay(rayOrigin, rayDirection * _deathDecisionRayRange, Color.red, 1.0f);
 
         if (!Physics.Raycast(ray, out RaycastHit hit, _deathDecisionRayRange)) return;
         if (_isPlayerDeath) return;        
