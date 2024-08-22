@@ -31,6 +31,8 @@ namespace Block
         [SerializeField] private float _moveSpeed;
         private Vector3 _currentPos;
         private const float Threshold = 0.01f;
+
+        private bool _isExit;
         private void Start()
         {
             _mesh = GetComponent<MeshRenderer>();
@@ -51,6 +53,7 @@ namespace Block
                     GravityFall();
                 else
                     TowardsPos();
+                DoExit();
             }
             
             if (_currentActiveTime <= _activeTime)
@@ -101,10 +104,7 @@ namespace Block
             _cloudAnimator.SetBool(IsBreak, true);
         }
 
-        protected virtual void SendEffect(GameObject player)
-        {
-            
-        }
+        protected virtual void SendEffect(GameObject player) { }
 
         private void GravityFall()
         {
@@ -122,6 +122,20 @@ namespace Block
             _currentPos.z = _targetPosZ;
             transform.position = _currentPos;
             _isMoving = true;
+        }
+
+        private void DoExit()
+        {
+            if (!_isExit)
+            {
+                var extents = _mesh.bounds.extents;
+                var hit = Physics.Raycast(transform.position, -Vector3.forward, out var hitInfo, extents.y + RayLength);
+                if (hit && hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Block")) _isExit = true;
+            }
+            else
+            {
+                transform.position += transform.forward * (_moveSpeed * Time.deltaTime);
+            }
         }
 
         private bool IsGrounded()

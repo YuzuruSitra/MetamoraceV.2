@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4877533089794867079}
   - component: {fileID: 7685533847900862010}
   - component: {fileID: 5549890428150238061}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HealthGage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 3089273977409894766}
   - component: {fileID: 5506119256084080224}
   - component: {fileID: 6575775889996180227}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BlockUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 3832327878639400025}
   - component: {fileID: 519679699810461330}
   - component: {fileID: 519679699810461331}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BigHerosTeam1
   m_TagString: Heros
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 8616826936954140490}
   - component: {fileID: 8616826936954140491}
   - component: {fileID: 8616826936954140488}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CloudEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

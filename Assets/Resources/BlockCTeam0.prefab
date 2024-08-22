@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 506610780009736343}
   - component: {fileID: 506610780009736342}
   - component: {fileID: 506610780009736341}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CloudEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 5025419353367423876}
   - component: {fileID: 8621169857655290191}
   - component: {fileID: 8621169857655290190}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BlockCTeam0
   m_TagString: ItemCBlock
   m_Icon: {fileID: 0}
@@ -245,9 +245,9 @@ MonoBehaviour:
   _activeTime: 0.5
   _cloudAnimator: {fileID: 506610780009736342}
   _fallSpeed: 2.25
+  _isMoving: 1
   _insPlayerTeam: 0
   _moveSpeed: 3
-  _isMoving: 1
   _rayDistance: 1
   _destroyPower: 100
   _transitionTime: 0.5
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 6507006503976298163}
   - component: {fileID: 4394215719917746621}
   - component: {fileID: 3157886408106636510}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BlockUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 3684704398326997082}
   - component: {fileID: 1889904291471763943}
   - component: {fileID: 630542985513404146}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HealthGage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
