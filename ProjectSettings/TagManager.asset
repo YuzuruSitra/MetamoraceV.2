@@ -9,6 +9,16 @@ TagManager:
   - Heros
   - BlockManager
   - ItemCBlock
+  - BGMSwitcher
+  - ReadyHandler
+  - PlayerGenerator
+  - OutArea
+  - Team2Area
+  - Team1Area
+  - EffectHandler
+  - Wall
+  - GameResultHandler
+  - CloudBlockC
   layers:
   - Default
   - TransparentFX
@@ -16,7 +26,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Block
   - 
   - 
   - 
