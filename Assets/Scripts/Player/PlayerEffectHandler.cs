@@ -52,11 +52,7 @@ public class PlayerEffectHandler : MonoBehaviourPunCallbacks
         _animStan = state;
     }
 
-    void ChangeStanAnimState(bool state)
-    {
-        _stanEffect.SetActive(state);
-        _stanEffectAnim.SetBool("Stan", state);
-    }
+   
     public void ChangeSaiya(bool state)
     {
         _saiyaEffect.SetActive(state);

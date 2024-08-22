@@ -22,6 +22,7 @@ namespace Block
         protected override void SendEffect(GameObject player)
         {
             var selectedEffect = GetRandomEffect();
+            selectedEffect = Effect.Cloud;
             switch (selectedEffect)
             {
                 case Effect.Stan:
@@ -45,8 +46,8 @@ namespace Block
 
         private void DoStan(GameObject player)
         {
-            var status = player.GetComponent<CharacterStatus>();
-            status.ReceiveChangeState(CharacterStatus.Condition.Stan);
+            var status1 = player.GetComponent<PlayerStatus>();
+            status1.StartStan();
         }
         
         private void DoBomb()

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Block;
-//using Block;
 using Photon.Pun;
 
 public class PlayerObjectManipulator : MonoBehaviourPunCallbacks
@@ -42,16 +41,13 @@ public class PlayerObjectManipulator : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     private void Start()
     {
+        //if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
         _uiHandler = GameObject.FindWithTag("UIHandler").GetComponent<UIHandler>();
-        //playerCheakAround = GetComponent<PlayerCheakAround>();
-        //playerBlockStack = GetComponent<PlayerBlockStack>();
-        //playerItemHandler = GetComponent<PlayerItemHandler>();
         _anim = GetComponent<Animator>();
         _swingAnimTime = GetAnimationClipLength(_anim.runtimeAnimatorController.animationClips,
             "swing");
         _breakAnimTime = GetAnimationClipLength(_anim.runtimeAnimatorController.animationClips,
             "break");
-        //Debug.Log(_swingAnimTime);
     }
 
     private static float GetAnimationClipLength(IEnumerable<AnimationClip> animationClips, string clipName)
@@ -137,7 +133,7 @@ public class PlayerObjectManipulator : MonoBehaviourPunCallbacks
             int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
             _destroyPower = ItemAEffectRate * _initialDestroyPower;
             string BreakObjName = _currentBlockBehavior.DestroyBlock(_destroyPower, this.gameObject);
-            if (BreakObjName != "Ambras" && BreakObjName != "Heros" && BreakObjName != "ItemC") return;
+            if (BreakObjName != "Ambras" && BreakObjName != "Heros" && BreakObjName != "ItemCBlock") return;
             playerBlockStack.StackBlock(BreakObjName);
             _hasBlock = true;
             //次に生成するブロックを表示する処理

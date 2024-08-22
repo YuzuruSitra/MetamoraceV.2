@@ -33,7 +33,7 @@ public class PlayerAnimator : MonoBehaviourPunCallbacks
             //Debug.Log(condition);
             switch (condition)
             {
-                case PlayerStatus.Condition.Idole:
+                case PlayerStatus.Condition.Idle:
                     _anim.SetBool(IsVDeath, false);
                     _anim.SetBool(IsHDeath, false);
                     _anim.SetBool(IsStan, false);
@@ -107,7 +107,7 @@ public class PlayerAnimator : MonoBehaviourPunCallbacks
                     _anim.SetBool(IsWalk, false);
                     //Debug.Log("Breaking");
                     break;
-                case PlayerStatus.Condition.Swing:
+                case PlayerStatus.Condition.Generate:
                     _anim.SetBool(IsVDeath, false);
                     _anim.SetBool(IsHDeath, false);
                     _anim.SetBool(IsStan, false);
@@ -117,6 +117,16 @@ public class PlayerAnimator : MonoBehaviourPunCallbacks
                     _anim.SetBool(IsIdole, false);
                     _anim.SetBool(IsWalk, false);
                     //Debug.Log("Swing");
+                    break;
+                case PlayerStatus.Condition.Stan:
+                    _anim.SetBool(IsVDeath, false);
+                    _anim.SetBool(IsHDeath, false);
+                    _anim.SetBool(IsStan, true);
+                    _anim.SetBool(IsSwing, false);
+                    _anim.SetBool(IsJump, false);
+                    _anim.SetBool(IsBreak, false);
+                    _anim.SetBool(IsIdole, false);
+                    _anim.SetBool(IsWalk, false);
                     break;
             }
         }

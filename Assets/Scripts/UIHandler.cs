@@ -78,7 +78,7 @@ public class UIHandler : MonoBehaviour
         {
             if (_StackImage[i].sprite == null)
             {
-                if (_objName == "Ambras")
+                if (_objName == "Ambras" || _objName == "ItemCBlock")
                 {
                     _StackImage[i].sprite = _ambrasSprite;
                     _StackImage[i].enabled = true;

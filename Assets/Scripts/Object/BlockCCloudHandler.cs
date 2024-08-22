@@ -6,8 +6,8 @@ namespace Object
 {
     public class BlockCCloudHandler : MonoBehaviour
     {
-        private Image _image;
-        public Transform _targetObject;
+        [SerializeField]
+        private Image _cloudBlockC;
         private static readonly Vector3 InitialScale = new(0.01f, 0.01f, 0.01f);
         private static readonly Vector3 MaxScale = new(25.0f, 25.0f, 25.0f);
         private Coroutine _coroutine;
@@ -23,7 +23,7 @@ namespace Object
 
         private IEnumerator CloudAnim(float transitionTime, float waitTime)
         {
-            _image.enabled = true;
+            _cloudBlockC.enabled = true;
             
             var elapsedTime = 0f;
             while (elapsedTime < transitionTime)
@@ -51,7 +51,7 @@ namespace Object
                 yield return null;
             }
             transform.localScale = InitialScale;
-            _image.enabled = false;
+            _cloudBlockC.enabled = false;
             _coroutine = null;
         }
         

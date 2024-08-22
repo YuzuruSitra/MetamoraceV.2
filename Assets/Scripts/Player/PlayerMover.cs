@@ -22,15 +22,12 @@ public class PlayerMover : MonoBehaviourPunCallbacks
     [SerializeField]
     private float _initialjumpPower = 30.0f;
     private float _JumpPower;
-    
-    private bool _isMoving;
-    public bool IsMoving => _isMoving;
     private bool _onGround = true;
     public bool OnGround => _onGround;
 
     private PlayerCheakAround playerCheakAround;
-    [SerializeField] private float stanTime = 2.0f;
     private PlayerStatus _playerStatus;
+    private bool _isMoving = true;
 
     // Start is called before the first frame update
     private void Start()
@@ -42,6 +39,8 @@ public class PlayerMover : MonoBehaviourPunCallbacks
         //itemCBehavior = GetComponent<ItemCBehavior>();
          playerObjectManipulator = GetComponent<PlayerObjectManipulator>();
          _playerStatus = GetComponent<PlayerStatus>();
+         //if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
+
     }
 
     // Update is called once per frame
@@ -68,7 +67,7 @@ public class PlayerMover : MonoBehaviourPunCallbacks
         //     if (Input.GetKey("a")) inputX = 1.0f;
         // }
         if (Input.GetKey("a") && Input.GetKey("d")) inputX = 0.0f;
-        _isMoving = true;
+        if (!_isMoving) inputX = 0;
 
         if (inputX == 0)
         {
@@ -84,23 +83,7 @@ public class PlayerMover : MonoBehaviourPunCallbacks
        // if (CheckFront(new Ray(transform.position + new Vector3(0, 0.5f, 0), transform.forward * _frontRayRength))) return;
         int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
         _rb.MovePosition(transform.position + movement * _currentMoveSpeed
- * Time.deltaTime * ItemAEffectRate );
-    }
-
-    public void StanTest()
-    {
-        if (_playerStatus.CurrentCondition != PlayerStatus.Condition.Stan) return;
-
-        _currentMoveSpeed
- = 0;
-        StartCoroutine(FinishStan());
-    }
-
-    private IEnumerator FinishStan()
-    {
-        yield return new WaitForSeconds(stanTime); //もとに戻す
-        _currentMoveSpeed
- = 1;
+                                           * Time.deltaTime * ItemAEffectRate );
     }
 
     private void Jump()
@@ -113,5 +96,8 @@ public class PlayerMover : MonoBehaviourPunCallbacks
             _rb.AddForce(Vector3.up * _JumpPower, ForceMode.Impulse);
         }
     }
-   
+    public void SetMoveBool(bool isMoving)
+    {
+        _isMoving = isMoving;
+    }
 }

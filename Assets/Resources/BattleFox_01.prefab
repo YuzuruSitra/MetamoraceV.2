@@ -371,7 +371,6 @@ MonoBehaviour:
   _walkSpeed: 5
   _frontRayRength: 0.51
   _initialjumpPower: 5
-  stanTime: 2
 --- !u!114 &4415524763905620544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,14 +389,14 @@ MonoBehaviour:
   _predictCubes: {fileID: 8827741291898530419}
   playerItemHandler: {fileID: -4113925797534529641}
   _herosPrefab:
-  - {fileID: 6252427330716548040, guid: dd44774894b10ec40a0a2074985c3109, type: 3}
-  - {fileID: 0}
+  - {fileID: 6252427330716548040, guid: b777963ef718be1488242f203a158f0f, type: 3}
+  - {fileID: 6252427330716548040, guid: 30f85fa786d52334896dd17147365eb7, type: 3}
   _BigPrefab:
-  - {fileID: 2221145504540172902, guid: 35e9c72fa342f2641b45a5d41ace5474, type: 3}
-  - {fileID: 0}
+  - {fileID: 7944861777834327483, guid: 8b8cd8f57b701544fbe5415db42f897e, type: 3}
+  - {fileID: 7944861777834327483, guid: 15119ea81e7559c4894e25cf21560286, type: 3}
   _cPrefab:
   - {fileID: 2221145504540172902, guid: 35e9c72fa342f2641b45a5d41ace5474, type: 3}
-  - {fileID: 0}
+  - {fileID: 2221145504540172902, guid: cca862801533c7d42a6844dd123394cf, type: 3}
 --- !u!114 &8767944959376233026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,6 +412,7 @@ MonoBehaviour:
   _playerMover: {fileID: 4079149055446210050}
   _playerObjectManipulator: {fileID: 4415524763905620544}
   _playerCheakAround: {fileID: 6042942886170842283}
+  _playerEffectHandler: {fileID: -585989662397046169}
 --- !u!1 &6192094455082704709
 GameObject:
   m_ObjectHideFlags: 0
@@ -2986,6 +2986,7 @@ GameObject:
   - component: {fileID: 347746089834808889}
   - component: {fileID: 6633770234874132095}
   - component: {fileID: 4395092779493317488}
+  - component: {fileID: 8111011523798384172}
   m_Layer: 0
   m_Name: StanEffect
   m_TagString: Untagged
@@ -3080,6 +3081,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8111011523798384172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8482710940011011291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c37fcbe14ce050e48b8d6d0e495d343e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NotUseBillboard: 0
 --- !u!1 &8827741291898530419
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,7 +3187,7 @@ BoxCollider:
   m_GameObject: {fileID: 8827741291898530419}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -3279,7 +3293,7 @@ PrefabInstance:
     - target: {fileID: 8230843998025336597, guid: 40b481f26c98126449b7c2ed6341bc37,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8880624275439247167, guid: 40b481f26c98126449b7c2ed6341bc37, type: 3}
