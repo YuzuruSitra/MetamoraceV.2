@@ -22,7 +22,6 @@ namespace Block
         protected override void SendEffect(GameObject player)
         {
             var selectedEffect = GetRandomEffect();
-            selectedEffect = Effect.Cloud;
             switch (selectedEffect)
             {
                 case Effect.Stan:

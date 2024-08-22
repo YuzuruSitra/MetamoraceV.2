@@ -375,7 +375,6 @@ MonoBehaviour:
   _jumpSpeed: 20
   _gravity: 50
   _frontRayRength: 0.51
-  _initialjumpPower: 5
 --- !u!114 &4415524763905620544
 MonoBehaviour:
   m_ObjectHideFlags: 0

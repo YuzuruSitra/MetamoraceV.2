@@ -81,7 +81,7 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
         // }
         
         
-        else if (!_playerMover.OnGround)
+        else if (!_playerMover.IsGrounded)
         {
             ChangeCondition(Condition.Jump);
         }
