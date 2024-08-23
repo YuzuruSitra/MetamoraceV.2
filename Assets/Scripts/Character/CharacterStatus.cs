@@ -20,15 +20,25 @@ namespace Character
             Stan,
             Pause
         }
-
         private Condition _currentCondition;
         public event Action<Condition> ChangeConditionEvent;
         
+        public enum SpecialEffects
+        {
+            None,
+            SelfEnhancement
+        }
+        private SpecialEffects _currentSpecialEffects = SpecialEffects.None;
+        public event Action<SpecialEffects> ChangeSpecialEffectsEvent;
+        
         [SerializeField] private CharacterMover _characterMover;
+        [SerializeField] private CharacterObjBreaker _characterObjBreaker;
+        [SerializeField] private CharacterObjGenerator _characterObjGenerator;
         private readonly HashSet<Condition> _nonMovingConditions = new()
         {
             Condition.Pause,
             Condition.Break,
+            Condition.Generate,
             Condition.Stan,
             Condition.VDeath,
             Condition.HDeath
@@ -50,8 +60,16 @@ namespace Character
         private void JudgmentCondition()
         {
             if (_currentCondition is Condition.Stan or Condition.Pause) return;
-            
-            if (!_characterMover.IsGrounded)
+
+            if (_characterObjGenerator.IsGenerate)
+            {
+                ChangeCondition(Condition.Generate);
+            }
+            if (_characterObjBreaker.IsBreaking)
+            {
+                ChangeCondition(Condition.Break);
+            }
+            else if (!_characterMover.IsGrounded)
             {
                 ChangeCondition(Condition.Jump);
             }
@@ -73,6 +91,13 @@ namespace Character
         public void ReceiveChangeState(Condition condition)
         {
             ChangeCondition(condition);
+        }
+        
+        public void ReceiveSpecialEffects(SpecialEffects effects)
+        {
+            if (_currentSpecialEffects == effects) return;
+            _currentSpecialEffects = effects;
+            ChangeSpecialEffectsEvent?.Invoke(effects);
         }
 
         private void ChangeCondition(Condition newCondition)

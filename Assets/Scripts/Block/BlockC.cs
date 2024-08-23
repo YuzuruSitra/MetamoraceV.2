@@ -45,8 +45,8 @@ namespace Block
 
         private void DoStan(GameObject player)
         {
-            var status1 = player.GetComponent<PlayerStatus>();
-            status1.StartStan();
+            var status = player.GetComponent<CharacterStatus>();
+            status.ReceiveChangeState(CharacterStatus.Condition.Stan);
         }
         
         private void DoBomb()
@@ -61,6 +61,7 @@ namespace Block
             foreach (var direction in directions)
             {
                 if (!Physics.Raycast(transform.position, direction, out var hit, _rayDistance)) continue;
+                if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Block")) return; 
                 var block = hit.collider.GetComponent<BlockBase>();
                 if (!block) continue;
                 block.DestroyBlock(_destroyPower, gameObject);

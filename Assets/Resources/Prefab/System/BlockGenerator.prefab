@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: -3480446208975634768}
   m_Layer: 0
   m_Name: BlockGenerator
-  m_TagString: Untagged
+  m_TagString: BlockGenerator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,9 +112,6 @@ MonoBehaviour:
   _blockTeam:
   - {fileID: 0}
   - {fileID: 0}
-  _insPos:
-  - {x: 0, y: 11, z: -2.42}
-  - {x: 0, y: 11, z: 2.42}
   _generatePos:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}

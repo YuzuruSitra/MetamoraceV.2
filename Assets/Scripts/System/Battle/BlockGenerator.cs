@@ -33,6 +33,7 @@ namespace System.Battle
         [SerializeField] private int _toggleCount;
         [SerializeField] private float _toggleTime;
         private WaitForSeconds _toggleWait;
+        
         private void Start()
         {
             _toggleWait = new WaitForSeconds(_toggleTime);
@@ -130,5 +131,17 @@ namespace System.Battle
             var share = (cubeParent.childCount * 100) / FieldSize;
             return share;
         }
+
+        public void OtherGenerateObj(int teamNum, string target, Vector3 pos)
+        {
+            photonView.RPC(nameof(ReceiveGenerate), RpcTarget.MasterClient, teamNum, target, pos);
+        }
+
+        public void ReceiveGenerate(int teamNum, string target, Vector3 pos)
+        {
+            var obj = PhotonNetwork.Instantiate(target, pos, Quaternion.Euler(_insRot[teamNum]));
+            obj.transform.SetParent(_parentObj[teamNum]);
+        }
+        
     }
 }
