@@ -22,7 +22,7 @@ public class BlockBehaviour : MonoBehaviour
         itemCBehavior = GetComponent<ItemCBehavior>();
     }
 
-    public (string, bool) DestroyBlock(float power)
+    public string DestroyBlock(float power)
     {
         _objHealth -= power * Time.deltaTime;
         //currentTime = setTime;
@@ -36,8 +36,8 @@ public class BlockBehaviour : MonoBehaviour
                 StanFlag = itemCBehavior.StanFlag;
             }
             gameObject.SetActive(false);
-            return (_objName, StanFlag);
+            return _objName;
         }
-        return ("NULL", StanFlag);
+        return "NULL";
     }
 }

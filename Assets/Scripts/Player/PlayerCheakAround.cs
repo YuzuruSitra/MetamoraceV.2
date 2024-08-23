@@ -45,24 +45,7 @@ public class PlayerCheakAround : MonoBehaviourPunCallbacks
         _currentBlock = hit.collider.GetComponent<BlockBase>();
         return _currentBlock;
     }
-
-    public bool CheakGroundRay()
-    {
-        float raypos = 0.45f;
-        float rayheight = 0.1f;
-        _onGround = CheckAndJump(new Ray(transform.position + new Vector3(raypos, rayheight, raypos), Vector3.down)) ||
-                    CheckAndJump(new Ray(transform.position + new Vector3(-raypos, rayheight, -raypos), Vector3.down)) ||
-                    CheckAndJump(new Ray(transform.position + new Vector3(raypos, rayheight, -raypos), Vector3.down)) ||
-                    CheckAndJump(new Ray(transform.position + new Vector3(-raypos, rayheight, raypos), Vector3.down));
-        return _onGround;
-    }
-    // 地上にいるか判定
-    private bool CheckAndJump(Ray ray)
-    {
-        RaycastHit hit;
-        Debug.DrawRay(ray.origin, ray.direction * _jumprayrength, Color.red, 0.1f);
-        return Physics.Raycast(ray, out hit, _jumprayrength);
-    }
+    
     //縦方向の死亡判定
     private void JudgeVerticalDeath()
     {

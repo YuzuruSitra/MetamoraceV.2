@@ -4,8 +4,6 @@ using UnityEngine;
 using Photon.Pun;
 public class PlayerEffectHandler : MonoBehaviourPunCallbacks
 {
-    // [SerializeField]
-    // private PlayerDataReceiver _playerDataReceiver;
     [SerializeField] 
     private GameObject _stanEffect;
     [SerializeField]
