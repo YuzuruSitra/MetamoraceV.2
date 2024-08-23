@@ -76,7 +76,8 @@ namespace Character
             yield return _forSeconds;
             if (_blockInfoDict.TryGetValue(_characterObjStacker.HasBlock, out var values))
             {
-                var insPos = RoundPos(transform.position + values.offset);
+                var insPos = RoundPos(transform.position);
+                insPos += values.offset;
                 _blockGenerator.OtherGenerateObj(1 - _teamID, values.prefab.name, insPos);
             }
             IsGenerate = false;
@@ -89,7 +90,8 @@ namespace Character
             if (_blockInfoDict.TryGetValue(_characterObjStacker.HasBlock, out var values))
             {
                 _predictCubes.SetActive(true);
-                var insPos = RoundPos(transform.position + values.offset);
+                var insPos = RoundPos(transform.position);
+                insPos += values.offset;
                 _predictCubes.transform.position = insPos;
                 _predictCubes.transform.localScale = values.size;
             }
@@ -106,9 +108,8 @@ namespace Character
 
         private Vector3 RoundPos(Vector3 pos)
         {
-            pos.x = Mathf.Round(pos.x);
-            pos.y = Mathf.Round(pos.y);
-            pos.z = Mathf.Round(pos.z);
+            pos.x = (int)pos.x;
+            pos.y = (int)pos.y;
             return pos;
         }
     }

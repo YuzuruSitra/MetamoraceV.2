@@ -24,7 +24,7 @@ namespace Block
         
         [SerializeField] private float _fallSpeed;
         private const float RayLength = 0.04f;
-        
+        private const float ExitRayLength = 0.5f;
         [SerializeField] private bool _isMoving;
         [SerializeField] private int _insPlayerTeam;
         private float _targetPosZ;
@@ -129,15 +129,15 @@ namespace Block
             if (!_isExit)
             {
                 var extents = _mesh.bounds.extents;
-                var hit = Physics.Raycast(transform.position, -Vector3.forward, out var hitInfo, extents.y + RayLength);
-                if (hit && hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Block")) _isExit = true;
+                if(!Physics.Raycast(transform.position, -transform.forward, out var hitInfo, extents.z + ExitRayLength)) return;
+                if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Block")) _isExit = true;
             }
             else
             {
-                transform.position += transform.forward * (_moveSpeed * Time.deltaTime);
+                transform.position += transform.forward.normalized * (_moveSpeed * Time.deltaTime);
             }
         }
-
+        
         private bool IsGrounded()
         {
             var extents = _mesh.bounds.extents;
