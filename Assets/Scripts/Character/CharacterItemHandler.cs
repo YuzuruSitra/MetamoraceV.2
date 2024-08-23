@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.UI;
 using Photon.Pun;
 using UnityEngine;
 
@@ -10,13 +12,14 @@ namespace Character
         [SerializeField] private CharacterObjBreaker _characterObjBreaker;
         [SerializeField] private CharacterMover _characterMover;
         [SerializeField] private CharacterStatus _characterStatus;
+        private StackUIHandler _stackUIHandler;
         [SerializeField] private float _enhanceTime;
         private WaitForSeconds _enhanceForSeconds;
         private Coroutine _enhanceCoroutine;
         [SerializeField] private float _enhanceSpeedFactor;
         [SerializeField] private float _enhancePowerFactor;
         
-        private enum Item
+        public enum Item
         {
             None,
             SpecialEnhancement,
@@ -24,18 +27,22 @@ namespace Character
             SpecialBlock
         }
         private Item _haveItem = Item.None;
+        private event Action<Item> ChangeItemEvent; 
         
         private void Start()
         {
             if (!photonView.IsMine) return;
-            _characterObjStacker.ChangeStack += GetItem;
             _enhanceForSeconds = new WaitForSeconds(_enhanceTime);
+            _characterObjStacker.ChangeStackEvent += GetItem;
+            _stackUIHandler = GameObject.FindWithTag("StackUIHandler").GetComponent<StackUIHandler>();
+            ChangeItemEvent += _stackUIHandler.ChangeItemImage;
         }
 
         private void OnDestroy()
         {
             if (!photonView.IsMine) return;
-            _characterObjStacker.ChangeStack -= GetItem;
+            _characterObjStacker.ChangeStackEvent -= GetItem;
+            ChangeItemEvent -= _stackUIHandler.ChangeItemImage;
         }
 
         private void Update()
@@ -64,11 +71,11 @@ namespace Character
                 }
             }
             if (herosCount == stacks.Length)
-                _haveItem = Item.SpecialEnhancement;
-            else if (ambrasCount == stacks.Length)
-                _haveItem = Item.GiganticRay;
+                ChangeItem(Item.SpecialEnhancement);
+            else if (ambrasCount == stacks.Length) 
+                ChangeItem(Item.GiganticRay);
             else
-                _haveItem = Item.SpecialBlock;
+                ChangeItem(Item.SpecialBlock);
         }
 
         private void UseItem()
@@ -88,6 +95,7 @@ namespace Character
                     _characterObjStacker.ChangeHasBlock("ItemCBlock");
                     break;
             }
+            ChangeItem(Item.None);
         }
 
         private IEnumerator EnhancementSelf()
@@ -100,6 +108,13 @@ namespace Character
             _characterObjBreaker.ChangePowerFactor(1.0f);
             _characterMover.ChangeSpeedFactor(1.0f);
             _enhanceCoroutine = null;
+        }
+
+        private void ChangeItem(Item newItem)
+        {
+            if (_haveItem == newItem) return;
+            ChangeItemEvent?.Invoke(newItem);
+            _haveItem = newItem;
         }
         
     }
