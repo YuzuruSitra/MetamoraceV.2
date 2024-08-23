@@ -24,7 +24,7 @@ namespace Block
         
         [SerializeField] private float _fallSpeed;
         private const float RayLength = 0.04f;
-        private const float ExitRayLength = 0.5f;
+        private const float ExitRayLength = 0.1f;
         [SerializeField] private bool _isMoving;
         [SerializeField] private int _insPlayerTeam;
         private float _targetPosZ;
@@ -43,6 +43,7 @@ namespace Block
             if (!_isMoving) return;
             _targetPosZ = (_insPlayerTeam == 0) ? BlockGenerator.Team2PosZ : BlockGenerator.Team1PosZ;
             _currentPos = transform.position;
+            
         }
         
         private void Update()
@@ -50,10 +51,14 @@ namespace Block
             if (PhotonNetwork.IsMasterClient)
             {
                 if (!_isMoving)
+                {
                     GravityFall();
+                    DoExit();
+                }
                 else
+                {
                     TowardsPos();
-                DoExit();
+                }
             }
             
             if (_currentActiveTime <= _activeTime)
@@ -128,9 +133,12 @@ namespace Block
         {
             if (!_isExit)
             {
+                if (!IsGrounded()) return;
                 var extents = _mesh.bounds.extents;
                 if(!Physics.Raycast(transform.position, -transform.forward, out var hitInfo, extents.z + ExitRayLength)) return;
-                if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Block")) _isExit = true;
+                var obj = hitInfo.collider.gameObject;
+                if (obj.layer != LayerMask.NameToLayer("Block")) return;
+                _isExit = true;
             }
             else
             {
@@ -141,9 +149,10 @@ namespace Block
         private bool IsGrounded()
         {
             var extents = _mesh.bounds.extents;
-            var centerGrounded = Physics.Raycast(transform.position, Vector3.down, extents.y + RayLength);
-            var leftGrounded = Physics.Raycast(transform.position - transform.right * extents.x, Vector3.down, extents.y + RayLength);
-            var rightGrounded = Physics.Raycast(transform.position + transform.right * extents.x, Vector3.down, extents.y + RayLength);
+            var layerMask = ~LayerMask.GetMask("IgnoreLayer");
+            var centerGrounded = Physics.Raycast(transform.position, Vector3.down, extents.y + RayLength, layerMask);
+            var leftGrounded = Physics.Raycast(transform.position - transform.right * extents.x, Vector3.down, extents.y + RayLength, layerMask);
+            var rightGrounded = Physics.Raycast(transform.position + transform.right * extents.x, Vector3.down, extents.y + RayLength, layerMask);
             return centerGrounded || leftGrounded || rightGrounded;
         }
     }

@@ -20,8 +20,8 @@ namespace Character
         [SerializeField] private AnimationClip _generateAnim;
         [SerializeField] private float _motionDelay;
         public bool IsGenerate { get; private set; }
-        private Vector3 _insBlockOffset = new(0f, 0.25f, -1f);
-        private Vector3 _insBigBlockOffset = new(0f, 1.25f, -1.5f);
+        private Vector3 _insBlockOffset = new(0f, 0.5f, -1f);
+        private Vector3 _insBigBlockOffset = new(0f, 1.5f, -1.5f);
         private WaitForSeconds _forSeconds;
         private Coroutine _insCoroutine;
         private BlockGenerator _blockGenerator;
@@ -36,7 +36,7 @@ namespace Character
         private void InitializeVariables()
         {
             var animationLength = _generateAnim.length;
-            _forSeconds = new WaitForSeconds(animationLength + _motionDelay);
+            _forSeconds = new WaitForSeconds((animationLength + _motionDelay) * 0.5f);
             _predictCubes = Instantiate(_predictCubes);
             _blockGenerator = GameObject.FindWithTag("BlockGenerator").GetComponent<BlockGenerator>();
             if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
@@ -79,9 +79,10 @@ namespace Character
                 var insPos = RoundPos(transform.position);
                 insPos += values.offset;
                 _blockGenerator.OtherGenerateObj(1 - _teamID, values.prefab.name, insPos);
+                _characterObjStacker.InsBlock();
             }
+            yield return _forSeconds;
             IsGenerate = false;
-            _characterObjStacker.InsBlock();
             _insCoroutine = null;
         }
 
@@ -108,8 +109,8 @@ namespace Character
 
         private Vector3 RoundPos(Vector3 pos)
         {
-            pos.x = (int)pos.x;
-            pos.y = (int)pos.y;
+            pos.x = Mathf.Round(pos.x);
+            pos.y = Mathf.Round(pos.y);
             return pos;
         }
     }

@@ -19,6 +19,7 @@ TagManager:
   - Wall
   - GameResultHandler
   - CloudBlockC
+  - BigHeros
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Water
   - UI
   - Block
-  - 
+  - IgnoreLayer
   - 
   - 
   - 

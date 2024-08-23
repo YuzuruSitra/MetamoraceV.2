@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8868700978465778098}
   - component: {fileID: 6178733514791363596}
   - component: {fileID: 5918725808174099212}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Desk_BlockDestroyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5581199268569396362}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: front_set_FBX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 4161985871720676369}
   - component: {fileID: 7260324919968752506}
   - component: {fileID: 4845848219755964960}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: desk_Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
