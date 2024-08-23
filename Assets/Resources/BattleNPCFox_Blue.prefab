@@ -114,9 +114,9 @@ GameObject:
   - component: {fileID: 3327627888559251142}
   - component: {fileID: 4095018660143650099}
   - component: {fileID: 5188375242369531952}
-  - component: {fileID: 5120166110486728850}
   - component: {fileID: 709568341215935250}
   - component: {fileID: 1770698746642199941}
+  - component: {fileID: 212380628048022779}
   m_Layer: 0
   m_Name: BattleNPCFox_Blue
   m_TagString: Player
@@ -297,25 +297,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &5120166110486728850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6192094455029975907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78a45f76e72a7b640bcc7280e066aa5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _npcReach: 1
-  _jumprayrength: 0.15
-  _verticalRayOffset: 2
-  _horizontalRayOffset: 0.5
-  _deathDecisionRayRange: 0.15
-  _playerEffectHandler: {fileID: 0}
-  MaxBlockDetection: 8
 --- !u!114 &709568341215935250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +315,7 @@ MonoBehaviour:
   _jumpSpeed: 0
   _gravity: 0
   _frontRayRength: 0.51
+  _npcCheackAround: {fileID: 0}
 --- !u!114 &1770698746642199941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +328,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da0c423e5d23b614f965b7e031d7bc37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _npcCheackAround: {fileID: 0}
+  _npcMover: {fileID: 709568341215935250}
+  _npcObjectmanipulater: {fileID: 212380628048022779}
+--- !u!114 &212380628048022779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6192094455029975907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebe56cf94527d64dbb38a2a83d0cf8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugMode: 0
+  _npcCheackAround: {fileID: 0}
+  _npcBlockStack: {fileID: 0}
+  _initialDestroyPower: 1
+  _predictCubes: {fileID: 0}
+  _npcItemHandler: {fileID: 0}
+  _herosPrefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  _BigPrefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  _cPrefab:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &6192094455082704709
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,8 @@ namespace NPC
         [SerializeField] private NPCCheackAround _npcCheackAround;
         [SerializeField] private NPCMover _npcMover;
         [SerializeField] private NPCObjectmanipulater _npcObjectmanipulater;
+        private readonly float ReEnterStateInterval = 2.0f;
+        private Dictionary<NPCState, float> stateReEnterTimes = new Dictionary<NPCState, float>();
         
         public enum NPCState
         {
@@ -32,18 +34,22 @@ namespace NPC
 
         private void Start()
         {
-            //if (!photonView.IsMine) return;
+            _currentNpcState = NPCState.Idle;
+
+            // 各ステートの再入可能時間を初期化
+            foreach (NPCState state in Enum.GetValues(typeof(NPCState)))
+            {
+                stateReEnterTimes[state] = -ReEnterStateInterval;
+            }
         }
 
         private void Update()
         {
-            //if (!photonView.IsMine) return;
-            JudgmentCondition();//
-           
+            JudgmentCondition();
         }
+
         private void JudgmentCondition()
         {
-           // if (_currentCondition is Condition.Stan or Condition.Pause) return;
             if (_npcCheackAround.VerticalDeath)
             {
                 ChangeCondition(NPCState.VDeath);
@@ -67,21 +73,31 @@ namespace NPC
                 ChangeCondition(NPCState.Generate);
                 _npcObjectmanipulater.CreateBlock();
             }
-        
-        
-           
-            
-        
-            // else if (_playerMover.CurrentMoveSpeed <= _playerMover.RunSpeed)
-            // {
-            //     ChangeCondition(Condition.Run);
-            // }
+            else if (_npcCheackAround.CheckArroundBlock() != null)
+            {
+                ChangeCondition(NPCState.Walk);
+                _npcMover.ForwardBlock();
+            }
+            else
+            {
+                ChangeCondition(NPCState.Idle);
+            }
         }
-        //ブロックを回避
-        //ブロックを壊す
+
         private void ChangeCondition(NPCState newState)
         {
-            if (_currentNpcState == newState) return;
+            float currentTime = Time.time;
+            
+            // 新しいステートに入る前に再入可能か確認
+            if (_currentNpcState == newState || currentTime - stateReEnterTimes[newState] < ReEnterStateInterval)
+            {
+                return;
+            }
+
+            // 現在のステートの再入可能時間を設定
+            stateReEnterTimes[_currentNpcState] = currentTime;
+
+            // ステートの変更処理
             ChangeStateEvent?.Invoke(newState);
             _currentNpcState = newState;
             ChangeMoveBool(newState);
@@ -89,9 +105,12 @@ namespace NPC
 
         private void ChangeMoveBool(NPCState newState)
         {
-            // var isMove = !_nonMovingConditions.Contains(newState);
-            // _characterMover.SetMoveBool(isMove);
+            // 移動状態の変更に関するロジックを実装
+        }
+
+        public void ReceiveChangeState(NPCState _state)
+        {
+            ChangeCondition(_state);
         }
     }
 }
-

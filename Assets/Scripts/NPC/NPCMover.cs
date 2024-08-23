@@ -7,8 +7,7 @@ namespace NPC
 {
     public class NPCMover : MonoBehaviour
     { 
-        private PlayerStatus playerStatus;
-    private PlayerItemHandler playerItemHandler;
+    private NPCItemHandler _npcItemHandler;
      [SerializeField]
     private Rigidbody _rb;
     [Header("歩行速度")]
@@ -33,14 +32,15 @@ namespace NPC
     private PlayerStatus _playerStatus;
     private bool _isMoving = true;
     private float _verticalSpeed;
-    private bool _isReversal;
     private Vector3 _moveDirection = Vector3.zero;
     private Vector3 _direction = Vector3.zero;
+
+    [SerializeField] private NPCCheackAround _npcCheackAround;
     // Start is called before the first frame update
     private void Start()
     {
        //if (!photonView.IsMine) return;
-         playerItemHandler = GetComponent<PlayerItemHandler>();
+         _npcItemHandler = GetComponent<NPCItemHandler>();
          _controller = GetComponent<CharacterController>();
          //if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
          //_isReversal = ((int)teamId != 0);
@@ -50,7 +50,7 @@ namespace NPC
     private void Update()
     {
        // if (!photonView.IsMine) return;
-        // int ItemAEffectRate = playerItemHandler.ItemAEffectRate;
+        // int ItemAEffectRate = _npcItemHandler.ItemAEffectRate;
         // // Caching the horizontal input and speed calculation
         // var horizontal = Input.GetAxis("Horizontal");
         // var speed = _walkSpeed * ItemAEffectRate;
@@ -80,7 +80,7 @@ namespace NPC
         // // Combine horizontal movement with vertical speed
         // _moveDirection.y = _verticalSpeed;
         // _controller.Move(_moveDirection * Time.deltaTime);
-        // playerItemHandler.UseItemA();
+        // _npcItemHandler.UseItemA();
     }
 
     public void Jump()
@@ -100,8 +100,9 @@ namespace NPC
 
     public void AvoidVerticalBlock()
     {
+        int ItemAEffectRate = _npcItemHandler.ItemAEffectRate;
         var horizontal = 1;
-        var speed = _walkSpeed;
+        var speed = _walkSpeed * ItemAEffectRate;;
         if (!_isMoving) horizontal = 0;
             
         _moveDirection.x = horizontal * speed;
@@ -116,6 +117,49 @@ namespace NPC
         }
         _controller.Move(_moveDirection * Time.deltaTime);
     }
+
+    public void ForwardBlock()
+    {
+        int ItemAEffectRate = _npcItemHandler.ItemAEffectRate;
+        string _blockDirection = _npcCheackAround.CheckArroundBlock();
+        if (_blockDirection == "Right")
+        {
+            var horizontal = 1;
+            var speed = _walkSpeed * ItemAEffectRate;
+            if (!_isMoving) horizontal = 0;
+            
+            _moveDirection.x = horizontal * speed;
+            _moveDirection.z = 0;
+            CurrentMoveSpeed = speed * Mathf.Abs(horizontal);
+            
+            if (horizontal != 0)
+            {
+                _direction.x = horizontal;
+                _direction.z = 0;
+                transform.rotation = Quaternion.LookRotation(_direction);
+            }
+            _controller.Move(_moveDirection * Time.deltaTime);
+        }
+        else
+        {
+            var horizontal = -1;
+            var speed = _walkSpeed* ItemAEffectRate;
+            if (!_isMoving) horizontal = 0;
+            
+            _moveDirection.x = horizontal * speed;
+            _moveDirection.z = 0;
+            CurrentMoveSpeed = speed * Mathf.Abs(horizontal);
+            
+            if (horizontal != 0)
+            {
+                _direction.x = horizontal;
+                _direction.z = 0;
+                transform.rotation = Quaternion.LookRotation(_direction);
+            }
+            _controller.Move(_moveDirection * Time.deltaTime);
+        }
+    }
+    
     
     
     public void SetMoveBool(bool isMoving)

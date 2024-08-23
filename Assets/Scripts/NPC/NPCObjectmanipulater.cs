@@ -63,10 +63,6 @@ namespace NPC
         // Update is called once per frame
         private void Update()
         {
-            // Debug.Log("Breaking" + breaking);
-            // Debug.Log("Swing" + swing);
-            // _npcItemHandler.UseItemC();
-            // _npcItemHandler.UseItemB();
             if (!_hasBlock) return;
             _insPos = new Vector3((int)transform.position.x, (int)transform.position.y + 0.25f, -1.0f);
             _predictCubes.transform.position = _insPos;

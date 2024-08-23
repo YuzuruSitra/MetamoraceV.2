@@ -29,8 +29,8 @@ namespace System.UI
             _itemImage.enabled = false;
             _getItemEffect.SetActive(false);
             _changeBlockEffect.SetActive(false);
-            _initialBlockFrameScale = transform.localScale;
-            _initialBlockFramePos = transform.position;
+            _initialBlockFrameScale = _insBlockFrame.transform.localScale;
+            _initialBlockFramePos = _insBlockFrame.transform.position;
         }
 
         public void ChangeInsBlockImage(string block)
@@ -66,13 +66,13 @@ namespace System.UI
             if (_currentIsFrame == isBig) return;
             if (isBig)
             {
-                transform.localScale = _bigScale;
-                transform.position = _bigPos;
+                _insBlockFrame.transform.localScale = _bigScale;
+                _insBlockFrame.transform.position = _bigPos;
             }
             else
             {
-                transform.localScale = _initialBlockFrameScale;
-                transform.position = _initialBlockFramePos;
+                _insBlockFrame.transform.localScale = _initialBlockFrameScale;
+                _insBlockFrame.transform.position = _initialBlockFramePos;
             }
             _currentIsFrame = isBig;
         }

@@ -22,7 +22,7 @@ namespace NPC
                 {
                     _stackBlocks[i] = _objName;
                     //Debug.Log("stack");
-                    //Debug.Log(_stackBlocks[0] + " " + _stackBlocks[1] + " " + _stackBlocks[2]);
+                    Debug.Log(_stackBlocks[0] + " " + _stackBlocks[1] + " " + _stackBlocks[2]);
                     if (_stackBlocks[2] != null) FullStack = true;
                     break;
                 }

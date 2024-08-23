@@ -3038,8 +3038,8 @@ GameObject:
   - component: {fileID: 2701986482574614238}
   - component: {fileID: 4703573765224883546}
   - component: {fileID: 7287233359943623925}
-  - component: {fileID: 6088592297000603663}
   - component: {fileID: 1875857882707057206}
+  - component: {fileID: 1748742271437355142}
   m_Layer: 0
   m_Name: DieEffect
   m_TagString: Untagged
@@ -3134,18 +3134,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6088592297000603663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6286712398835773736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51a4bb2f73c00cd4a9710ba734fce701, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1875857882707057206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3159,6 +3147,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NotUseBillboard: 0
+--- !u!114 &1748742271437355142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6286712398835773736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a4bb2f73c00cd4a9710ba734fce701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4415745724308901395
 PrefabInstance:
   m_ObjectHideFlags: 0
