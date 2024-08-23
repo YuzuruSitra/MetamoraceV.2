@@ -16,6 +16,8 @@ namespace Character
         private void Start()
         {
             if (!photonView.IsMine) return;
+            HasBlock = NullKey;
+            for (var i = 0; i < _blockStack.Length; i++) _blockStack[i] = NullKey;
             ResetStack();
             _stackUIHandler = GameObject.FindWithTag("StackUIHandler").GetComponent<StackUIHandler>();
             GetBlockEvent += _stackUIHandler.ChangeInsBlockImage;
@@ -34,7 +36,11 @@ namespace Character
         {
             var objKind = target.tag;
             for (var i = 0; i < _blockStack.Length; i++)
-                if (_blockStack[i] == NullKey) _blockStack[i] = objKind;
+            {
+                if (_blockStack[i] != NullKey) continue;
+                _blockStack[i] = objKind;
+                break;
+            }
             ChangeStackEvent?.Invoke(_blockStack);
             ChangeHasBlock("Heros");
         }

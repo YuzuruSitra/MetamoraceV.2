@@ -330,10 +330,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50416345703cec74d9fe41288f4cbf7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkSpeed: 8
-  _runSpeed: 12
-  _jumpSpeed: 20
-  _gravity: 50
+  _walkSpeed: 4
+  _runSpeed: 6
+  _jumpSpeed: 12
+  _gravity: 35
 --- !u!114 &6192094455029975915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45545d5b9cd0e7741a2d6184e05d8fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyPower: 0
+  _destroyPower: 1
   _playerReach: 0.8
   _characterObjStacker: {fileID: 278414432227119862}
 --- !u!114 &7456515268578178929

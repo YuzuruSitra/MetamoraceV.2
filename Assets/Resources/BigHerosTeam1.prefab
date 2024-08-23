@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0cd9f2c48d4e7468528b688bfdb4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 6
+  _maxHealth: 5
   _healthGage: {fileID: 7685533847900862010}
   _activeTime: 0.5
   _cloudAnimator: {fileID: 8616826936954140491}

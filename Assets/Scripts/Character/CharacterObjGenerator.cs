@@ -41,7 +41,7 @@ namespace Character
             _blockGenerator = GameObject.FindWithTag("BlockGenerator").GetComponent<BlockGenerator>();
             if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
             _teamID = (int)teamId;
-            if (_teamID != 1) return;
+            if (_teamID != 0) return;
             _insBlockOffset.z *= -1;
             _insBigBlockOffset.z *= -1;
         }
@@ -68,7 +68,6 @@ namespace Character
             if (!_isGenerate) return;
             if (_characterObjStacker.HasBlock == CharacterObjStacker.NullKey || _insCoroutine != null) return;
             _insCoroutine = StartCoroutine(GenerateBlock());
-            _characterObjStacker.InsBlock();
         }
 
         private IEnumerator GenerateBlock()
@@ -77,10 +76,11 @@ namespace Character
             yield return _forSeconds;
             if (_blockInfoDict.TryGetValue(_characterObjStacker.HasBlock, out var values))
             {
-                var insPos = transform.position + values.offset;
-                _blockGenerator.OtherGenerateObj(_teamID,values.prefab.name, insPos);
+                var insPos = RoundPos(transform.position + values.offset);
+                _blockGenerator.OtherGenerateObj(1 - _teamID, values.prefab.name, insPos);
             }
             IsGenerate = false;
+            _characterObjStacker.InsBlock();
             _insCoroutine = null;
         }
 
@@ -89,7 +89,8 @@ namespace Character
             if (_blockInfoDict.TryGetValue(_characterObjStacker.HasBlock, out var values))
             {
                 _predictCubes.SetActive(true);
-                _predictCubes.transform.position = transform.position + values.offset;
+                var insPos = RoundPos(transform.position + values.offset);
+                _predictCubes.transform.position = insPos;
                 _predictCubes.transform.localScale = values.size;
             }
             else
@@ -101,6 +102,14 @@ namespace Character
         public void SetGenerateBool(bool isGenerate)
         {
             _isGenerate = isGenerate;
+        }
+
+        private Vector3 RoundPos(Vector3 pos)
+        {
+            pos.x = Mathf.Round(pos.x);
+            pos.y = Mathf.Round(pos.y);
+            pos.z = Mathf.Round(pos.z);
+            return pos;
         }
     }
 }

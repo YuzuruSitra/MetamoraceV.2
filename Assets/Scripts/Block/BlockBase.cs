@@ -121,7 +121,7 @@ namespace Block
             if (!(Mathf.Abs(_currentPos.z - _targetPosZ) < Threshold)) return;
             _currentPos.z = _targetPosZ;
             transform.position = _currentPos;
-            _isMoving = true;
+            _isMoving = false;
         }
 
         private void DoExit()

@@ -37,7 +37,6 @@ namespace Character
         private readonly HashSet<Condition> _nonMovingConditions = new()
         {
             Condition.Pause,
-            Condition.Break,
             Condition.Generate,
             Condition.Stan,
             Condition.VDeath,
@@ -47,7 +46,8 @@ namespace Character
         private void Start()
         {
             if (!photonView.IsMine) return;
-            _currentCondition = Condition.Pause;
+            // _currentCondition = Condition.Pause;
+            _currentCondition = Condition.Idole;
         }
 
         private void Update()

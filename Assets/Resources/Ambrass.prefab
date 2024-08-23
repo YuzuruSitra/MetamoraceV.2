@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904573b846d58264885629c88f25f6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 3
+  _maxHealth: 2
   _healthGage: {fileID: 5921182815356334153}
   _activeTime: 0.5
   _cloudAnimator: {fileID: 5697575003319578936}

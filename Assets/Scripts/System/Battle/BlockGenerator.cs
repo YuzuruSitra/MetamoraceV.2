@@ -136,7 +136,8 @@ namespace System.Battle
         {
             photonView.RPC(nameof(ReceiveGenerate), RpcTarget.MasterClient, teamNum, target, pos);
         }
-
+        
+        [PunRPC]
         public void ReceiveGenerate(int teamNum, string target, Vector3 pos)
         {
             var obj = PhotonNetwork.Instantiate(target, pos, Quaternion.Euler(_insRot[teamNum]));

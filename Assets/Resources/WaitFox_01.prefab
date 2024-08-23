@@ -113,6 +113,8 @@ GameObject:
   - component: {fileID: 6192094455029975910}
   - component: {fileID: 6192094455029975915}
   - component: {fileID: 6192094455029975914}
+  - component: {fileID: 1267629793179180197}
+  - component: {fileID: 5970117286552278260}
   - component: {fileID: 6192094455029975909}
   - component: {fileID: -277913044095691217}
   - component: {fileID: 3327627888559251142}
@@ -139,7 +141,7 @@ Transform:
   - {fileID: 6192094456598107873}
   - {fileID: 6192094455565753561}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!95 &6192094455029975913
 Animator:
@@ -202,8 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50416345703cec74d9fe41288f4cbf7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkSpeed: 8
-  _runSpeed: 12
+  _walkSpeed: 10
+  _runSpeed: 15
   _jumpSpeed: 20
   _gravity: 50
 --- !u!114 &6192094455029975915
@@ -232,6 +234,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterMover: {fileID: 6192094455029975910}
+  _characterObjBreaker: {fileID: 1267629793179180197}
+  _characterObjGenerator: {fileID: 5970117286552278260}
+--- !u!114 &1267629793179180197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6192094455029975907}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45545d5b9cd0e7741a2d6184e05d8fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyPower: 0
+  _playerReach: 0
+  _characterObjStacker: {fileID: 0}
+--- !u!114 &5970117286552278260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6192094455029975907}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c3f600c758f5c4f87794bb487b6c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterObjStacker: {fileID: 0}
+  _herosPrefab: []
+  _bigHerosPrefab: []
+  _blockCPrefab: []
+  _predictCubes: {fileID: 0}
+  _generateAnim: {fileID: 0}
+  _motionDelay: 0
 --- !u!143 &6192094455029975909
 CharacterController:
   m_ObjectHideFlags: 0

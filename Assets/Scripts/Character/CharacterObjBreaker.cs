@@ -20,21 +20,18 @@ namespace Character
         {
             if (!photonView.IsMine) return; 
             if (Input.GetMouseButton(0)) BreakBlock();
+            else IsBreaking = false;
         }
         
         private void BreakBlock()
         {
-            if (_isBreak && _characterObjStacker.HasBlock == CharacterObjStacker.NullKey)
-            {
-                IsBreaking = true;
-                if (!CheckHitBlock()) return;
-                var power = _destroyPower * _powerFactor;
-                var breakObjName = _currentBlockBase.DestroyBlock(power, gameObject);
-                if (breakObjName == BlockBase.ErrorTag) return;
-                _characterObjStacker.BreakBlock(_currentObj);
-                return;
-            }
-            IsBreaking = false;
+            if (!_isBreak || _characterObjStacker.HasBlock != CharacterObjStacker.NullKey) return;
+            IsBreaking = true;
+            if (!CheckHitBlock()) return;
+            var power = _destroyPower * _powerFactor;
+            var breakObjName = _currentBlockBase.DestroyBlock(power, gameObject);
+            if (breakObjName == BlockBase.ErrorTag) return;
+            _characterObjStacker.BreakBlock(_currentObj);
         }
         
         private bool CheckHitBlock()

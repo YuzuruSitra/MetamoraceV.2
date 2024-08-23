@@ -24,9 +24,9 @@ namespace System.UI
         
         private void Start()
         {
-            foreach (var t in _stackImage) t.sprite = null;
-            _insBlockImage.sprite = null;
-            _itemImage.sprite = null;
+            foreach (var t in _stackImage) t.enabled = false;
+            _insBlockImage.enabled = false;
+            _itemImage.enabled = false;
             _getItemEffect.SetActive(false);
             _changeBlockEffect.SetActive(false);
             _initialBlockFrameScale = transform.localScale;
@@ -38,21 +38,24 @@ namespace System.UI
             switch (block)
             {
                 case "Heros":
+                    _insBlockImage.enabled = true;
                     _insBlockImage.sprite = _herosSprite;
                     ChangeFrameSize(false);
                     break;
                 case "BigHeros":
                     _changeBlockEffect.SetActive(true);
+                    _insBlockImage.enabled = true;
                     _insBlockImage.sprite = _herosSprite;
                     ChangeFrameSize(true);
                     break;
                 case "ItemCBlock":
                     _changeBlockEffect.SetActive(true);
+                    _insBlockImage.enabled = true;
                     _insBlockImage.sprite = _itemCSprite;
                     ChangeFrameSize(false);
                     break;
                 case CharacterObjStacker.NullKey:
-                    _insBlockImage.sprite = null;
+                    _insBlockImage.enabled = false;
                     ChangeFrameSize(false);
                     return;
             }
@@ -82,13 +85,16 @@ namespace System.UI
                 switch (t)
                 {
                     case "Ambras":
+                        _stackImage[i].enabled = true;
                         _stackImage[i].sprite = _ambrasSprite;
                         break;
                     case "Heros":
                     case "BigHeros":
+                        _stackImage[i].enabled = true;
                         _stackImage[i].sprite = _herosSprite;
                         break;
                     case CharacterObjStacker.NullKey:
+                        _stackImage[i].enabled = false;
                         _stackImage[i].sprite = null;
                         return;
                 }
@@ -98,7 +104,12 @@ namespace System.UI
         public void ChangeItemImage(CharacterItemHandler.Item item)
         {
             var itemNum = (int)item;
-            if (itemNum != 0) _getItemEffect.SetActive(true);
+            var hasItem = itemNum != 0;
+
+            _getItemEffect.SetActive(hasItem);
+            _itemImage.enabled = hasItem;
+
+            if (hasItem) _itemImage.sprite = _itemSprites[itemNum];
         }
     }
 }
