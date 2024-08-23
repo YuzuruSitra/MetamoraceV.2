@@ -25,10 +25,13 @@ namespace Character
         public event Action<Condition> ChangeConditionEvent;
         
         [SerializeField] private CharacterMover _characterMover;
+        [SerializeField] private CharacterObjBreaker _characterObjBreaker;
+        [SerializeField] private CharacterObjGenerator _characterObjGenerator;
         private readonly HashSet<Condition> _nonMovingConditions = new()
         {
             Condition.Pause,
             Condition.Break,
+            Condition.Generate,
             Condition.Stan,
             Condition.VDeath,
             Condition.HDeath
@@ -50,8 +53,16 @@ namespace Character
         private void JudgmentCondition()
         {
             if (_currentCondition is Condition.Stan or Condition.Pause) return;
-            
-            if (!_characterMover.IsGrounded)
+
+            if (_characterObjGenerator.IsGenerate)
+            {
+                ChangeCondition(Condition.Generate);
+            }
+            if (_characterObjBreaker.IsBreaking)
+            {
+                ChangeCondition(Condition.Break);
+            }
+            else if (!_characterMover.IsGrounded)
             {
                 ChangeCondition(Condition.Jump);
             }
