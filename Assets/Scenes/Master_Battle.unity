@@ -3350,6 +3350,16 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1279456258}
     m_Modifications:
+    - target: {fileID: 3517713152905164617, guid: 06e5bf67817b10c4398529f8dd38d191,
+        type: 3}
+      propertyPath: _bigPos.x
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 3517713152905164617, guid: 06e5bf67817b10c4398529f8dd38d191,
+        type: 3}
+      propertyPath: _bigPos.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3517713152905164622, guid: 06e5bf67817b10c4398529f8dd38d191,
         type: 3}
       propertyPath: m_Pivot.x

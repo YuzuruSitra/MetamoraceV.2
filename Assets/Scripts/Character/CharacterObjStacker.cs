@@ -57,7 +57,7 @@ namespace Character
             GetBlockEvent?.Invoke(newBlock);
         }
 
-        private void ResetStack()
+        public void ResetStack()
         {
             for (var i = 0; i < _blockStack.Length; i++)
                 _blockStack[i] = NullKey;

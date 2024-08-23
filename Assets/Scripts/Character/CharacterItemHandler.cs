@@ -96,6 +96,7 @@ namespace Character
                     break;
             }
             ChangeItem(Item.None);
+            _characterObjStacker.ResetStack();
         }
 
         private IEnumerator EnhancementSelf()
