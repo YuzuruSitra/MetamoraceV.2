@@ -14,6 +14,7 @@ namespace Character
         [Header("走行速度")]
         [SerializeField] private float _runSpeed;
 
+        private float _speedFactor = 1.0f;
         public float RunSpeed => _runSpeed;
 
         [Header("ジャンプ速度")]
@@ -51,7 +52,7 @@ namespace Character
 
             if (!_isMoving) horizontal = 0;
             
-            _moveDirection.x = horizontal * speed;
+            _moveDirection.x = horizontal * speed * _speedFactor;
             _moveDirection.z = 0;
             CurrentMoveSpeed = speed * Mathf.Abs(horizontal);
             
@@ -81,5 +82,11 @@ namespace Character
         {
             _isMoving = isMoving;
         }
+
+        public void ChangeSpeedFactor(float value)
+        {
+            _speedFactor = value;
+        }
+        
     }
 }

@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 3808852125223167166}
   - component: {fileID: 2681944477019818140}
   - component: {fileID: 7456515268578178929}
+  - component: {fileID: 7429199923039469224}
   - component: {fileID: 278414432227119862}
   - component: {fileID: 6192094455029975909}
   - component: {fileID: -277913044095691217}
@@ -267,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45545d5b9cd0e7741a2d6184e05d8fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialDestroyPower: 1
+  _destroyPower: 0
   _playerReach: 0.8
   _characterObjStacker: {fileID: 278414432227119862}
 --- !u!114 &7456515268578178929
@@ -296,6 +297,25 @@ MonoBehaviour:
     type: 3}
   _generateAnim: {fileID: 7400000, guid: 4e5454ced529e814aa1d238a5e87e0f3, type: 2}
   _motionDelay: 0.1
+--- !u!114 &7429199923039469224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6192094455029975907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc51d2d1d9ad5f94c9fc9697d10629b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterObjStacker: {fileID: 278414432227119862}
+  _characterObjBreaker: {fileID: 2681944477019818140}
+  _characterMover: {fileID: 6192094455029975910}
+  _characterStatus: {fileID: 6192094455029975914}
+  _enhanceTime: 6
+  _enhanceSpeedFactor: 1.75
+  _enhancePowerFactor: 1.75
 --- !u!114 &278414432227119862
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,9 +20,16 @@ namespace Character
             Stan,
             Pause
         }
-
         private Condition _currentCondition;
         public event Action<Condition> ChangeConditionEvent;
+        
+        public enum SpecialEffects
+        {
+            None,
+            SelfEnhancement
+        }
+        private SpecialEffects _currentSpecialEffects = SpecialEffects.None;
+        public event Action<SpecialEffects> ChangeSpecialEffectsEvent;
         
         [SerializeField] private CharacterMover _characterMover;
         [SerializeField] private CharacterObjBreaker _characterObjBreaker;
@@ -84,6 +91,13 @@ namespace Character
         public void ReceiveChangeState(Condition condition)
         {
             ChangeCondition(condition);
+        }
+        
+        public void ReceiveSpecialEffects(SpecialEffects effects)
+        {
+            if (_currentSpecialEffects == effects) return;
+            _currentSpecialEffects = effects;
+            ChangeSpecialEffectsEvent?.Invoke(effects);
         }
 
         private void ChangeCondition(Condition newCondition)

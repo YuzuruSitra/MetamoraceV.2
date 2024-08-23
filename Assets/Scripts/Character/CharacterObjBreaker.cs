@@ -9,17 +9,11 @@ namespace Character
         private GameObject _currentObj;
         private BlockBase _currentBlockBase;
         private readonly Vector3 _upPadding = new(0f,0.5f,0f);
-        [SerializeField] private float _initialDestroyPower;
-        public float InitialDestroyPower => _initialDestroyPower;
-        private float _destroyPower;
+        [SerializeField] private float _destroyPower;
+        private float _powerFactor = 1.0f;
         [SerializeField] private float _playerReach;
         public bool IsBreaking { get; private set; }
         [SerializeField] private CharacterObjStacker _characterObjStacker;
-
-        private void Start()
-        {
-            _destroyPower = _initialDestroyPower;
-        }
 
         private void Update()
         {
@@ -33,7 +27,8 @@ namespace Character
             {
                 IsBreaking = true;
                 if (!CheckHitBlock()) return;
-                var breakObjName = _currentBlockBase.DestroyBlock(_destroyPower, gameObject);
+                var power = _destroyPower * _powerFactor;
+                var breakObjName = _currentBlockBase.DestroyBlock(power, gameObject);
                 if (breakObjName == BlockBase.ErrorTag) return;
                 _characterObjStacker.BreakBlock(_currentObj);
                 return;
@@ -52,9 +47,9 @@ namespace Character
             return true;
         }
 
-        public void ChangePower(float power)
+        public void ChangePowerFactor(float value)
         {
-            _destroyPower = power;
+            _powerFactor = value;
         }
     
     }
