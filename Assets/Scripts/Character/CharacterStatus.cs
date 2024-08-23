@@ -112,6 +112,8 @@ namespace Character
         {
             var isMove = !_nonMovingConditions.Contains(newCondition);
             _characterMover.SetMoveBool(isMove);
+            _characterObjGenerator.SetGenerateBool(isMove);
+            _characterObjBreaker.SetBreakBool(isMove);
         }
         
     }

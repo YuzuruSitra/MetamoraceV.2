@@ -10,6 +10,7 @@ namespace Character
     public class CharacterObjGenerator : MonoBehaviourPunCallbacks
     {
         private int _teamID;
+        private bool _isGenerate = true;
         [SerializeField] private CharacterObjStacker _characterObjStacker;
         [SerializeField] private GameObject[] _herosPrefab;
         [SerializeField] private GameObject[] _bigHerosPrefab;
@@ -64,6 +65,7 @@ namespace Character
 
         private void CreateBlock()
         {
+            if (!_isGenerate) return;
             if (_characterObjStacker.HasBlock == CharacterObjStacker.NullKey || _insCoroutine != null) return;
             _insCoroutine = StartCoroutine(GenerateBlock());
             _characterObjStacker.InsBlock();
@@ -94,6 +96,11 @@ namespace Character
             {
                 _predictCubes.SetActive(false);
             }
+        }
+        
+        public void SetGenerateBool(bool isGenerate)
+        {
+            _isGenerate = isGenerate;
         }
     }
 }

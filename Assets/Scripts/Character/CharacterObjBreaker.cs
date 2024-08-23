@@ -6,6 +6,7 @@ namespace Character
 {
     public class CharacterObjBreaker : MonoBehaviourPunCallbacks
     {
+        private bool _isBreak;
         private GameObject _currentObj;
         private BlockBase _currentBlockBase;
         private readonly Vector3 _upPadding = new(0f,0.5f,0f);
@@ -23,7 +24,7 @@ namespace Character
         
         private void BreakBlock()
         {
-            if (_characterObjStacker.HasBlock == CharacterObjStacker.NullKey)
+            if (_isBreak && _characterObjStacker.HasBlock == CharacterObjStacker.NullKey)
             {
                 IsBreaking = true;
                 if (!CheckHitBlock()) return;
@@ -50,6 +51,11 @@ namespace Character
         public void ChangePowerFactor(float value)
         {
             _powerFactor = value;
+        }
+        
+        public void SetBreakBool(bool isBreak)
+        {
+            _isBreak = isBreak;
         }
     
     }
