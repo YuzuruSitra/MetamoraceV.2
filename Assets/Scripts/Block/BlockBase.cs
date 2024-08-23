@@ -9,7 +9,7 @@ namespace Block
     {
         private MeshRenderer _mesh;
         private BoxCollider _col;
-        private const string ErrorTag = "Null";
+        public const string ErrorTag = "Null";
         [SerializeField] private float _maxHealth;
         private float _currentHealth;
         [SerializeField] private Image _healthGage;
