@@ -6,8 +6,8 @@ namespace System.Network
 {
     public class PlayerGenerator : MonoBehaviourPunCallbacks
     {
-        [SerializeField] private string[] _waitCharacter;
-        [SerializeField] private string[] _battleCharacter;
+        [SerializeField] private GameObject[] _waitCharacter;
+        [SerializeField] private GameObject[] _battleCharacter;
         [SerializeField] private Vector3 _waitInsPos;
         [SerializeField] private Vector3[] _battleInsPos;
         public GameObject CurrentPlayer { get; private set; }
@@ -45,7 +45,7 @@ namespace System.Network
                         Debug.LogWarning("ID Error");
                         return;
                     }
-                    CurrentPlayer = PhotonNetwork.Instantiate(_waitCharacter[id], _waitInsPos, Quaternion.identity);
+                    CurrentPlayer = PhotonNetwork.Instantiate(_waitCharacter[id].name, _waitInsPos, Quaternion.identity);
                     break;
                 case "Master_Battle":
                     if (id >= _battleCharacter.Length)
@@ -53,7 +53,7 @@ namespace System.Network
                         Debug.LogWarning("ID Error");
                         return;
                     }
-                    CurrentPlayer = PhotonNetwork.Instantiate(_battleCharacter[id], _battleInsPos[id], Quaternion.identity);
+                    CurrentPlayer = PhotonNetwork.Instantiate(_battleCharacter[id].name, _battleInsPos[id], Quaternion.identity);
                     break;
             }
         }

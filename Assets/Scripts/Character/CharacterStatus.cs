@@ -47,7 +47,7 @@ namespace Character
         private void Start()
         {
             if (!photonView.IsMine) return;
-            _currentCondition = Condition.Idole;
+            _currentCondition = Condition.Pause;
         }
 
         private void Update()
@@ -65,7 +65,7 @@ namespace Character
             {
                 ChangeCondition(Condition.Generate);
             }
-            if (_characterObjBreaker.IsBreaking)
+            else if (_characterObjBreaker.IsBreaking)
             {
                 ChangeCondition(Condition.Break);
             }

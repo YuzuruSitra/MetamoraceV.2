@@ -45,15 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waitCharacter:
-  - WaitFox_01
-  - WaitFox_01
-  - WaitFox_01
-  - WaitFox_01
+  - {fileID: 6192094455029975907, guid: e9ef3029bb242f24eac97d08fadddb66, type: 3}
+  - {fileID: 6192094455029975907, guid: e9ef3029bb242f24eac97d08fadddb66, type: 3}
+  - {fileID: 6192094455029975907, guid: e9ef3029bb242f24eac97d08fadddb66, type: 3}
+  - {fileID: 6192094455029975907, guid: e9ef3029bb242f24eac97d08fadddb66, type: 3}
   _battleCharacter:
-  - WaitFox_01
-  - WaitFox_01
-  - WaitFox_01
-  - WaitFox_01
+  - {fileID: 6192094455029975907, guid: 39d449409c53f9b4983e32439d7a1d57, type: 3}
+  - {fileID: 6192094455029975907, guid: 39d449409c53f9b4983e32439d7a1d57, type: 3}
+  - {fileID: 6192094455029975907, guid: 39d449409c53f9b4983e32439d7a1d57, type: 3}
+  - {fileID: 6192094455029975907, guid: 39d449409c53f9b4983e32439d7a1d57, type: 3}
   _waitInsPos: {x: 24, y: -15, z: 84}
   _battleInsPos:
   - {x: -2, y: 2, z: -2.42}
