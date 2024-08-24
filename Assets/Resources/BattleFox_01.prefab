@@ -334,6 +334,7 @@ MonoBehaviour:
   _runSpeed: 6
   _jumpSpeed: 12
   _gravity: 35
+  _isWaitScene: 0
 --- !u!114 &6192094455029975915
 MonoBehaviour:
   m_ObjectHideFlags: 0

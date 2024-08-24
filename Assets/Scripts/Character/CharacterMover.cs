@@ -22,7 +22,7 @@ namespace Character
 
         [Header("重力")]
         [SerializeField] private float _gravity;
-
+        [SerializeField] private bool _isWaitScene;
         private bool _isReversal;
         
         private CharacterController _controller;
@@ -37,6 +37,7 @@ namespace Character
         {
             if (!photonView.IsMine) return;
             _controller = GetComponent<CharacterController>();
+            if (_isWaitScene) return;
             if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
             _isReversal = ((int)teamId != 0);
         }
