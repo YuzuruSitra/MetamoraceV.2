@@ -1,4 +1,5 @@
 using System;
+using System.Battle;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
@@ -34,6 +35,8 @@ namespace Character
         [SerializeField] private CharacterMover _characterMover;
         [SerializeField] private CharacterObjBreaker _characterObjBreaker;
         [SerializeField] private CharacterObjGenerator _characterObjGenerator;
+        private TimeHandler _timeHandler;
+        [SerializeField] private bool _isWaitScene;
         private readonly HashSet<Condition> _nonMovingConditions = new()
         {
             Condition.Pause,
@@ -46,8 +49,22 @@ namespace Character
         private void Start()
         {
             if (!photonView.IsMine) return;
-            // _currentCondition = Condition.Pause;
-            _currentCondition = Condition.Idole;
+            if (_isWaitScene) return;
+            ChangeCondition(Condition.Pause);
+            _timeHandler = GameObject.FindWithTag("TimeHandler").GetComponent<TimeHandler>();
+            _timeHandler.CountDownedEvent += LaunchGame;
+        }
+
+        private void OnDestroy()
+        {
+            if (_isWaitScene) return;
+            _timeHandler.CountDownedEvent -= LaunchGame;
+        }
+
+
+        private void LaunchGame()
+        {
+            ChangeCondition(Condition.Idole);
         }
 
         private void Update()

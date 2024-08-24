@@ -237,6 +237,7 @@ MonoBehaviour:
   _characterMover: {fileID: 6192094455029975910}
   _characterObjBreaker: {fileID: 1267629793179180197}
   _characterObjGenerator: {fileID: 5970117286552278260}
+  _isWaitScene: 1
 --- !u!114 &1267629793179180197
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeHandler: {fileID: 0}
   _blockGenerator: {fileID: 0}
+  _delayTime: 2
 --- !u!114 &5866726218807263601
 MonoBehaviour:
   m_ObjectHideFlags: 0

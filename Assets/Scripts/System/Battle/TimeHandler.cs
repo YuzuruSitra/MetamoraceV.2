@@ -14,7 +14,13 @@ namespace System.Battle
         
         [SerializeField] private BattleLauncher _battleLauncher;
         private bool _isStart;
+        private bool _isStop;
+        public event Action CountDownedEvent;
         public event Action FinishEvent;
+
+        private bool _isCountDowned;
+        private bool _isFinished;
+        
         private void Start()
         {
             _isStart = false;
@@ -28,6 +34,7 @@ namespace System.Battle
 
         private void Update()
         {
+            if (_isStop) return;
             if (!_isStart) return;
             if (_countTime > 0)
             {
@@ -35,12 +42,17 @@ namespace System.Battle
                 return;
             }
 
-            if (_battleTime <= 0) return;
+            if (!_isCountDowned)
+            {
+                CountDownedEvent?.Invoke();
+                _isCountDowned = true;
+            }
             _battleTime -= Time.deltaTime;
-            
-            if (!(_battleTime <= 0)) return;
-            _battleTime = 0;
-            if (PhotonNetwork.IsMasterClient) photonView.RPC(nameof(SharedFinishGame), RpcTarget.All);
+            if (_battleTime > 0) return;
+            if (!PhotonNetwork.IsMasterClient) return;
+            if (_isFinished) return;
+            photonView.RPC(nameof(SharedFinishGame), RpcTarget.All);
+            _isFinished = true;
         }
         
         private void Launch()
@@ -49,9 +61,20 @@ namespace System.Battle
         }
         
         [PunRPC]
-        private void SharedLaunchGame()
+        public void SharedLaunchGame()
         {
             _isStart = true;
+        }
+
+        public void ReceiveStopTime()
+        {
+            photonView.RPC(nameof(SharedStopTime), RpcTarget.All);
+        }
+        
+        [PunRPC]
+        public void SharedStopTime()
+        {
+            _isStop = true;
         }
         
         [PunRPC]
