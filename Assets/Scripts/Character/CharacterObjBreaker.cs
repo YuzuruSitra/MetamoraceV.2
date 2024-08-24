@@ -9,7 +9,7 @@ namespace Character
         private bool _isBreak;
         private GameObject _currentObj;
         private BlockBase _currentBlockBase;
-        private readonly Vector3 _upPadding = new(0f,0.5f,0f);
+        private readonly Vector3 _upPadding = new(0f,0.4f,0f);
         [SerializeField] private float _destroyPower;
         private float _powerFactor = 1.0f;
         [SerializeField] private float _playerReach;

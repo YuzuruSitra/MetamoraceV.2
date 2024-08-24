@@ -332,8 +332,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _walkSpeed: 4
   _runSpeed: 6
+  _decelerationSpeed: 1.5
   _jumpSpeed: 12
   _gravity: 35
+  _characterObjBreaker: {fileID: 2681944477019818140}
   _isWaitScene: 0
 --- !u!114 &6192094455029975915
 MonoBehaviour:

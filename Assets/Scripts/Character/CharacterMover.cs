@@ -4,79 +4,113 @@ using UnityEngine;
 
 namespace Character
 {
+    [RequireComponent(typeof(CharacterController))]
     public class CharacterMover : MonoBehaviourPunCallbacks
     {
         [Header("歩行速度")]
         [SerializeField] private float _walkSpeed;
-
-        public float WalkSpeed => _walkSpeed;
-        
         [Header("走行速度")]
         [SerializeField] private float _runSpeed;
-
-        private float _speedFactor = 1.0f;
-        public float RunSpeed => _runSpeed;
-
+        [Header("減速速度")]
+        [SerializeField] private float _decelerationSpeed;
         [Header("ジャンプ速度")]
         [SerializeField] private float _jumpSpeed;
-
         [Header("重力")]
         [SerializeField] private float _gravity;
+        [SerializeField] private CharacterObjBreaker _characterObjBreaker;
+
         [SerializeField] private bool _isWaitScene;
-        private bool _isReversal;
-        
+
         private CharacterController _controller;
-        public float CurrentMoveSpeed { get; private set; }
-        public bool IsGrounded => _controller.isGrounded;
         private Vector3 _moveDirection = Vector3.zero;
-        private Vector3 _direction = Vector3.zero;
         private float _verticalSpeed;
         private bool _isMoving = true;
-        
+        private float _currentInputFactor;
+        private float _speedFactor = 1.0f;
+        private bool _isReversal;
+
+        public float CurrentMoveSpeed { get; private set; }
+        public bool IsGrounded => _controller.isGrounded;
+
+        public float WalkSpeed => _walkSpeed;
+        public float RunSpeed => _runSpeed;
+
         private void Start()
         {
             if (!photonView.IsMine) return;
+
             _controller = GetComponent<CharacterController>();
+            InitializeReversalState();
+        }
+
+        private void InitializeReversalState()
+        {
             if (_isWaitScene) return;
-            if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
-            _isReversal = ((int)teamId != 0);
+            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId))
+                _isReversal = ((int)teamId != 0);
         }
 
         private void Update()
         {
             if (!photonView.IsMine) return;
-            
-            // Caching the horizontal input and speed calculation
-            var horizontal = Input.GetAxis("Horizontal");
-            if (_isReversal) horizontal = -horizontal;
-            var speed = Input.GetKey(KeyCode.LeftShift) ? _runSpeed : _walkSpeed;
+            HandleMovement();
+        }
 
-            if (!_isMoving) horizontal = 0;
-            
-            _moveDirection.x = horizontal * speed * _speedFactor;
-            _moveDirection.z = 0;
-            CurrentMoveSpeed = speed * Mathf.Abs(horizontal);
-            
-            if (horizontal != 0)
-            {
-                _direction.x = horizontal;
-                _direction.z = 0;
-                transform.rotation = Quaternion.LookRotation(_direction);
-            }
+        private void HandleMovement()
+        {
+            SpeedReduction();
+            AdjustDirectionForReversal();
 
+            var speed = GetCurrentSpeed();
+            _moveDirection.x = _currentInputFactor * speed * _speedFactor;
+            CurrentMoveSpeed = speed * Mathf.Abs(_currentInputFactor);
+            if (_currentInputFactor != 0) RotateCharacter();
+            ApplyGravityAndJump();
+            _controller.Move(_moveDirection * Time.deltaTime);
+        }
+
+        private float GetCurrentSpeed()
+        {
+            return Input.GetKey(KeyCode.LeftShift) ? _runSpeed : _walkSpeed;
+        }
+
+        private void AdjustDirectionForReversal()
+        {
+            if (_isReversal) _currentInputFactor = -_currentInputFactor;
+        }
+
+        private void RotateCharacter()
+        {
+            var rot = Vector3.zero;
+            rot.x = _currentInputFactor;
+            var direction = rot;
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
+
+        private void ApplyGravityAndJump()
+        {
             if (_controller.isGrounded)
             {
                 _verticalSpeed = -_gravity * Time.deltaTime;
-                if (_isMoving && Input.GetButtonDown("Jump")) _verticalSpeed = _jumpSpeed;
+                if (_isMoving && !_characterObjBreaker.IsBreaking && Input.GetButtonDown("Jump"))
+                    _verticalSpeed = _jumpSpeed;
             }
             else
             {
-                // Apply gravity when the character is in the air
                 _verticalSpeed -= _gravity * Time.deltaTime;
             }
-            // Combine horizontal movement with vertical speed
+
             _moveDirection.y = _verticalSpeed;
-            _controller.Move(_moveDirection * Time.deltaTime);
+        }
+
+        private void SpeedReduction()
+        {
+            var input = Input.GetAxis("Horizontal");
+            if (input == 0 || _characterObjBreaker.IsBreaking)
+                _currentInputFactor = Mathf.MoveTowards(_currentInputFactor, 0, _decelerationSpeed * Time.deltaTime);
+            else
+                _currentInputFactor = input;
+            if (!_isMoving) _currentInputFactor = 0;
         }
 
         public void SetMoveBool(bool isMoving)
@@ -88,6 +122,5 @@ namespace Character
         {
             _speedFactor = value;
         }
-        
     }
 }
