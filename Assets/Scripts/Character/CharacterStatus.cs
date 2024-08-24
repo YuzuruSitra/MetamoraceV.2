@@ -59,8 +59,7 @@ namespace Character
         // Within factors.
         private void JudgmentCondition()
         {
-            if (_currentCondition is Condition.Stan or Condition.Pause) return;
-
+            if (_currentCondition is Condition.Stan or Condition.Pause or Condition.VDeath or Condition.HDeath) return;
             if (_characterObjGenerator.IsGenerate)
             {
                 ChangeCondition(Condition.Generate);

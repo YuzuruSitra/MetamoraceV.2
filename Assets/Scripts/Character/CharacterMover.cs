@@ -66,7 +66,7 @@ namespace Character
             if (_controller.isGrounded)
             {
                 _verticalSpeed = -_gravity * Time.deltaTime;
-                if (Input.GetButtonDown("Jump")) _verticalSpeed = _jumpSpeed;
+                if (_isMoving && Input.GetButtonDown("Jump")) _verticalSpeed = _jumpSpeed;
             }
             else
             {
