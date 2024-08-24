@@ -13,8 +13,7 @@ namespace System.Battle
         public float CountTime => _countTime;
         
         [SerializeField] private BattleLauncher _battleLauncher;
-        private bool _isStart;
-        private bool _isStop;
+        public bool IsCountDown { get; private set; }
         public event Action CountDownedEvent;
         public event Action FinishEvent;
 
@@ -23,7 +22,6 @@ namespace System.Battle
         
         private void Start()
         {
-            _isStart = false;
             _battleLauncher.BattleLaunch += Launch;
         }
 
@@ -34,8 +32,7 @@ namespace System.Battle
 
         private void Update()
         {
-            if (_isStop) return;
-            if (!_isStart) return;
+            if (!IsCountDown) return;
             if (_countTime > 0)
             {
                 _countTime -= Time.deltaTime;
@@ -63,7 +60,7 @@ namespace System.Battle
         [PunRPC]
         public void SharedLaunchGame()
         {
-            _isStart = true;
+            IsCountDown = true;
         }
 
         public void ReceiveStopTime()
@@ -74,7 +71,7 @@ namespace System.Battle
         [PunRPC]
         public void SharedStopTime()
         {
-            _isStop = true;
+            IsCountDown = false;
         }
         
         [PunRPC]

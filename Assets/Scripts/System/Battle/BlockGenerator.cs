@@ -50,8 +50,7 @@ namespace System.Battle
         private void Update()
         {
             if (!PhotonNetwork.IsMasterClient) return;
-            if (_timeHandler.CountTime > 0) return;
-            if (_timeHandler.BattleTime <= 0) return;
+            if (!_timeHandler.IsCountDown) return;
             _currentTime += Time.deltaTime;
             if (_currentTime <= _insInterVal) return;
             SetPositionInfo();
