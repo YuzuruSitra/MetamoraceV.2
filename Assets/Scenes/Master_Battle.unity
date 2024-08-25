@@ -830,9 +830,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.00015467405
     width: 1
-    height: 1
+    height: 0.99969065
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 45
@@ -3353,12 +3353,22 @@ PrefabInstance:
     - target: {fileID: 3517713152905164617, guid: 06e5bf67817b10c4398529f8dd38d191,
         type: 3}
       propertyPath: _bigPos.x
-      value: 800
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 3517713152905164617, guid: 06e5bf67817b10c4398529f8dd38d191,
         type: 3}
       propertyPath: _bigPos.y
-      value: 100
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 3517713152905164617, guid: 06e5bf67817b10c4398529f8dd38d191,
+        type: 3}
+      propertyPath: _bigScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3517713152905164617, guid: 06e5bf67817b10c4398529f8dd38d191,
+        type: 3}
+      propertyPath: _bigScale.y
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3517713152905164622, guid: 06e5bf67817b10c4398529f8dd38d191,
         type: 3}
@@ -3469,6 +3479,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StackUIHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 3517713153684633326, guid: 06e5bf67817b10c4398529f8dd38d191,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

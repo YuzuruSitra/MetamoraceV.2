@@ -96,6 +96,8 @@ namespace System.UI
                     case CharacterObjStacker.NullKey:
                         _stackImage[i].enabled = false;
                         _stackImage[i].sprite = null;
+                        break;
+                        default:
                         return;
                 }
             }
