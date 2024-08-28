@@ -30,7 +30,7 @@ namespace System.UI
             _getItemEffect.SetActive(false);
             _changeBlockEffect.SetActive(false);
             _initialBlockFrameScale = _insBlockFrame.transform.localScale;
-            _initialBlockFramePos = _insBlockFrame.transform.position;
+            _initialBlockFramePos = _insBlockFrame.rectTransform.anchoredPosition;
         }
 
         public void ChangeInsBlockImage(string block)
@@ -67,12 +67,12 @@ namespace System.UI
             if (isBig)
             {
                 _insBlockFrame.transform.localScale = _bigScale;
-                _insBlockFrame.transform.position = _bigPos;
+                _insBlockFrame.rectTransform.anchoredPosition = _bigPos;
             }
             else
             {
                 _insBlockFrame.transform.localScale = _initialBlockFrameScale;
-                _insBlockFrame.transform.position = _initialBlockFramePos;
+                _insBlockFrame.rectTransform.anchoredPosition = _initialBlockFramePos;
             }
             _currentIsFrame = isBig;
         }
