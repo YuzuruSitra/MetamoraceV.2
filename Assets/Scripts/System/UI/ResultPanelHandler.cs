@@ -80,7 +80,6 @@ namespace System.UI
             {
                 var customProperties = player.CustomProperties;
                 if (!customProperties.ContainsKey(CustomInfoHandler.TeamIdKey)) continue;
-                Debug.Log("a");
                 var teamValue = (int)customProperties[CustomInfoHandler.TeamIdKey];
                 if (teamValue != teamNum) continue;
                 if (index >= nameFields.Length) continue;
@@ -96,7 +95,6 @@ namespace System.UI
             {
                 var customProperties = player.CustomProperties;
                 if (!customProperties.ContainsKey(CustomInfoHandler.TeamIdKey)) continue;
-                Debug.Log("b");
                 var teamValue = (int)customProperties[CustomInfoHandler.TeamIdKey];
                 if (teamValue != 1 && teamValue != 2) continue;
                 nameFields[indices[teamValue - 1]].text = player.NickName;
