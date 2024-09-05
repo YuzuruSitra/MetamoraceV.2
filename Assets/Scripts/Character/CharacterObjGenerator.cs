@@ -11,6 +11,7 @@ namespace Character
     {
         private int _teamID;
         private bool _isGenerate = true;
+        [SerializeField] private CharacterStatus _characterStatus;
         [SerializeField] private CharacterObjStacker _characterObjStacker;
         [SerializeField] private GameObject[] _herosPrefab;
         [SerializeField] private GameObject[] _bigHerosPrefab;
@@ -39,9 +40,9 @@ namespace Character
             _forSeconds = new WaitForSeconds((animationLength + _motionDelay) * 0.5f);
             _predictCubes = Instantiate(_predictCubes);
             _blockGenerator = GameObject.FindWithTag("BlockGenerator").GetComponent<BlockGenerator>();
-            if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
-            _teamID = (int)teamId;
-            if (_teamID != 0) return;
+
+            var num = _characterStatus.LocalPlayerTeam - 1;
+            if (num != 1) return;
             _insBlockOffset.z *= -1;
             _insBigBlockOffset.z *= -1;
         }

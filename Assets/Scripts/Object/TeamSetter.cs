@@ -37,11 +37,11 @@ namespace Object
                 _playerCache[other] = player;
             }
             
-            // チームのプレイヤー数をカウント
+            // 繝�?��?��繝�縺?��繝励Ξ繧?��繝､繝ｼ謨?��繧偵き繧?��繝ｳ繝�
             var teamCount = CountPlayersInTeam(_setTeamNum);
-            // チームに2人以上いる場合は TeamOutValue を設定
+            // 繝�?��?��繝�縺?��2�??��莉･荳翫?��繧句?��?��蜷医?��?�� TeamOutValue 繧定ｨ?��螳?��
             var setValue = teamCount >= 2 ? TeamOutValue : _setTeamNum;
-            _customInfoHandler.ChangeValue(CustomInfoHandler.BattleIdKey, setValue, player);
+            _customInfoHandler.ChangeValue(CustomInfoHandler.TeamIdKey, setValue, player);
         }
 
         private void OnTriggerExit(Collider other)
@@ -60,16 +60,16 @@ namespace Object
                 player = photonView.Owner;
                 _playerCache[other] = player;
             }
-            _customInfoHandler.ChangeValue(CustomInfoHandler.BattleIdKey, TeamOutValue, player);
+            _customInfoHandler.ChangeValue(CustomInfoHandler.TeamIdKey, TeamOutValue, player);
             Debug.Log($"Player {player.NickName} is now out of the team.");
         }
 
-        // 指定したチームにいるプレイヤーの数をカウントするメソッド
+        // 謖�螳壹?�?縺溘メ繝ｼ繝�縺?��縺?��繧九�励Ξ繧?��繝､繝ｼ縺?��謨?��繧偵き繧?��繝ｳ繝医�?繧九Γ繧?��繝�繝�
         private int CountPlayersInTeam(int teamNum)
         {
             var count = 0;
             foreach (var player in PhotonNetwork.PlayerList)
-                if (player.CustomProperties.TryGetValue(CustomInfoHandler.BattleIdKey, out var teamValue) && (int)teamValue == teamNum) 
+                if (player.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamValue) && (int)teamValue == teamNum) 
                     count++;
             return count;
         }

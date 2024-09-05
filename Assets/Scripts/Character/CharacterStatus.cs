@@ -50,16 +50,17 @@ namespace Character
             Condition.HDeath
         };
         
-        private void Start()
+        private void Awake()
         {
             if (!photonView.IsMine) return;
             if (_isWaitScene) return;
             ChangeCondition(Condition.Pause);
             _timeHandler = GameObject.FindWithTag("TimeHandler").GetComponent<TimeHandler>();
             _timeHandler.CountDownedEvent += LaunchGame;
-            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.BattleIdKey, out var battleId))
-                _localPlayerTeam = (int)battleId;
-            
+            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId))
+            _localPlayerTeam = (int)teamId;
+            var isReversal = (_localPlayerTeam == 1);
+            _characterMover.SetReversalBool(isReversal);
         }
 
         private void OnDestroy()

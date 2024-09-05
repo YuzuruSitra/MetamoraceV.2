@@ -9,16 +9,16 @@ namespace System.Network
         private static CustomInfoHandler _instance;
         public static CustomInfoHandler Instance => _instance ??= new CustomInfoHandler();
         private readonly Hashtable _properties;
+        public const string MemberIdKey = "MemberID";
         public const string TeamIdKey = "TeamID";
-        public const string BattleIdKey = "BattleID";
         public const string ReadyKey = "Ready";
         
         private CustomInfoHandler()
         {
             _properties = new Hashtable
             {
+                { MemberIdKey, 0 },
                 { TeamIdKey, 0 },
-                { BattleIdKey, 0 },
                 { ReadyKey, 0 } // 1-Ready
             };
             PhotonNetwork.LocalPlayer.SetCustomProperties(_properties);

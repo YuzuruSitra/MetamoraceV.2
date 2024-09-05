@@ -32,10 +32,11 @@ namespace Character
             _characterStatus.ChangeConditionEvent += ReceiveEffect;
             _characterStatus.ChangeSpecialEffectsEvent += ReceiveEnhancement;
             _effects = new[] { _stanEffect, _dieEffect };
-            if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
-            _stanEffect.transform.position = _stanOffSets[(int)teamId];
-            _selfEnhancementEffect.transform.position = _selfEnhancementOffSets[(int)teamId];
-            _dieEffect.transform.position = _dieOffSets[(int)teamId];
+
+            var num = _characterStatus.LocalPlayerTeam - 1;
+            _stanEffect.transform.position = _stanOffSets[num];
+            _selfEnhancementEffect.transform.position = _selfEnhancementOffSets[num];
+            _dieEffect.transform.position = _dieOffSets[num];
         }
 
         private void OnDestroy()

@@ -40,7 +40,7 @@ namespace NPC
     [SerializeField] private NPCMover _npcMover;
     void Start()
     {
-        if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
+        if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.MemberIdKey, out var teamId)) return;
         _teamId = (int)teamId;
     }
     void Update()
@@ -49,7 +49,7 @@ namespace NPC
         JudgeHorizontalDeath();
        
     }
-    //一番近いブロックnの方向を取得
+    //一番近いブロ�?クnの方向を取�?
     public string CheckArroundBlock()
     {
         Ray Rightray = new Ray(transform.position + _upPadding, Vector3.right);
@@ -78,8 +78,8 @@ namespace NPC
     public bool CheckVerticalDeathBlock()
     {
          _overBlock = false;
-        //頭上検出Ray
-        //頭上にブロックがあればよける、両方がブロックで挟まれている場合はジャンプ
+        //頭上検�?�Ray
+        //頭上にブロ�?クがあれ�?�よける、両方がブロ�?クで挟まれて�?る�?�合�?�ジャン�?
         Vector3 rayOrigin = transform.position + Vector3.up * _verticalRayOffset;
         Ray rayover = new Ray(rayOrigin, Vector3.up);
         Debug.DrawRay(rayover.origin, rayover.direction * _vericalAvoidRayLengh, Color.green);
@@ -135,7 +135,7 @@ namespace NPC
         return _currentBlock1;
     }
     
-    //縦方向の死亡判定
+    //縦方向�?�死亡判�?
     private void JudgeVerticalDeath()
     {
         Vector3 rayOrigin = transform.position + Vector3.up * _verticalRayOffset;
@@ -152,7 +152,7 @@ namespace NPC
             Debug.Log("DeathVertical");
             //StartCoroutine(ChangePhysics());
     }
-    //奥行きの死亡判定
+    //奥行きの死亡判�?
     private void JudgeHorizontalDeath()
     {
         Vector3 rayDirection = (_teamId == 0) ? Vector3.forward : Vector3.back;

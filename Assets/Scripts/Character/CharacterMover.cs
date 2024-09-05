@@ -18,6 +18,7 @@ namespace Character
         [Header("重力")]
         [SerializeField] private float _gravity;
         [SerializeField] private CharacterObjBreaker _characterObjBreaker;
+        [SerializeField] private bool _isWaitScene;
 
         private CharacterController _controller;
         private Vector3 _moveDirection = Vector3.zero;
@@ -25,6 +26,7 @@ namespace Character
         private bool _isMoving = true;
         private float _currentInputFactor;
         private float _speedFactor = 1.0f;
+        private bool _isReversal;
 
         public float CurrentMoveSpeed { get; private set; }
         public bool IsGrounded => _controller.isGrounded;
@@ -47,13 +49,18 @@ namespace Character
         private void HandleMovement()
         {
             SpeedReduction();
-
+            AdjustDirectionForReversal();
             var speed = GetCurrentSpeed();
             _moveDirection.x = _currentInputFactor * speed * _speedFactor;
             CurrentMoveSpeed = speed * Mathf.Abs(_currentInputFactor);
             if (_currentInputFactor != 0) RotateCharacter();
             ApplyGravityAndJump();
             _controller.Move(_moveDirection * Time.deltaTime);
+        }
+
+        private void AdjustDirectionForReversal()
+        {
+            if (_isReversal) _currentInputFactor = -_currentInputFactor;
         }
 
         private float GetCurrentSpeed()
@@ -98,6 +105,12 @@ namespace Character
         public void SetMoveBool(bool isMoving)
         {
             _isMoving = isMoving;
+        }
+
+        public void SetReversalBool(bool isReversal)
+        {
+            if (_isWaitScene) return;
+            _isReversal = isReversal;
         }
 
         public void ChangeSpeedFactor(float value)

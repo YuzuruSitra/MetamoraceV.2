@@ -28,8 +28,9 @@ namespace System.Camera
         
         private void Start()
         {
+            
             if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamValue))
-                _teamID = (int)teamValue;
+                _teamID = 2 - (int)teamValue;
             _playerGenerator = GameObject.FindWithTag("PlayerGenerator").GetComponent<PlayerGenerator>();
             _targetPlayer = _playerGenerator.CurrentPlayer;
         }

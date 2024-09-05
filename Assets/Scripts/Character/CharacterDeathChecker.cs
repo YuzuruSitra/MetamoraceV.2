@@ -15,8 +15,7 @@ namespace Character
         private void Start()
         {
             if (!photonView.IsMine) return;
-            if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
-            _horizontalRayDirection = ((int)teamId == 0) ? Vector3.forward : Vector3.back;
+            _horizontalRayDirection = (_characterStatus.LocalPlayerTeam == 1) ? Vector3.forward : Vector3.back;
         }
 
         private void Update()

@@ -410,6 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c3f600c758f5c4f87794bb487b6c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterStatus: {fileID: 6192094455029975914}
   _characterObjStacker: {fileID: 278414432227119862}
   _herosPrefab:
   - {fileID: 6252427330716548040, guid: b777963ef718be1488242f203a158f0f, type: 3}

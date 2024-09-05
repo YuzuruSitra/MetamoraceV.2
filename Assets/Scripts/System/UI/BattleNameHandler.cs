@@ -12,8 +12,8 @@ namespace System.UI
         {
             foreach (var player in PhotonNetwork.PlayerList)
             {
-                if (!player.CustomProperties.TryGetValue(CustomInfoHandler.BattleIdKey, out var battleIdKey)) continue;
-                var id = (int)battleIdKey;
+                if (!player.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamIdKey)) continue;
+                var id = (int)teamIdKey;
                 if (_headerNames.Length - 1 < id) continue;
                 _headerNames[id].text = player.NickName;
             }

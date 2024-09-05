@@ -32,14 +32,16 @@ public class PlayerMover : MonoBehaviourPunCallbacks
     private bool _isReversal;
     private Vector3 _moveDirection = Vector3.zero;
     private Vector3 _direction = Vector3.zero;
+
+    
     // Start is called before the first frame update
     private void Start()
     {
         if (!photonView.IsMine) return;
-         playerItemHandler = GetComponent<PlayerItemHandler>();
-         _controller = GetComponent<CharacterController>();
-         if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
-         _isReversal = ((int)teamId != 0);
+        playerItemHandler = GetComponent<PlayerItemHandler>();
+        _controller = GetComponent<CharacterController>();
+        if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
+        _isReversal = ((int)teamId != 0);
     }
 
     // Update is called once per frame

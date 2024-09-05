@@ -53,7 +53,9 @@ namespace System.Network
                         Debug.LogWarning("ID Error");
                         return;
                     }
-                    CurrentPlayer = PhotonNetwork.Instantiate(_battleCharacter[id].name, _battleInsPos[id], Quaternion.identity);
+                    if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.MemberIdKey, out var teamId)) return;
+                    var posID = (int)teamId;
+                    CurrentPlayer = PhotonNetwork.Instantiate(_battleCharacter[id].name, _battleInsPos[posID], Quaternion.identity);
                     break;
             }
         }

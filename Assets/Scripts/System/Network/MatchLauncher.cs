@@ -26,14 +26,14 @@ namespace System.Network
         {
             if (!PhotonNetwork.IsMasterClient) return;
             photonView.RPC(nameof(StopAutoSync), RpcTarget.All);
-            // 開始に条件を追記していく予定
+            // 開始に条件を追記して�?く予�?
             if (!_isMatching) return;
             SetInGameID();
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.LoadLevel(_gameSceneName);
         }
         
-        // 退出処理
+        // 退出処�?
         public void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
@@ -57,7 +57,7 @@ namespace System.Network
 
             foreach (var player in PhotonNetwork.PlayerList)
             {
-                if (player.CustomProperties.TryGetValue(CustomInfoHandler.BattleIdKey, out var teamValue))
+                if (player.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamValue))
                 {
                     if ((int)teamValue == TeamSetter.TeamOutValue)
                     {
@@ -81,16 +81,16 @@ namespace System.Network
             foreach (var player in PhotonNetwork.PlayerList)
             {
                 var customProperties = player.CustomProperties;
-                if (!customProperties.ContainsKey(CustomInfoHandler.BattleIdKey)) continue;
-                var teamValue = (int)customProperties[CustomInfoHandler.BattleIdKey];
+                if (!customProperties.ContainsKey(CustomInfoHandler.TeamIdKey)) continue;
+                var teamValue = (int)customProperties[CustomInfoHandler.TeamIdKey];
                 switch (teamValue)
                 {
                     case 1:
-                        _customInfoHandler.ChangeValue(CustomInfoHandler.TeamIdKey, team1Count, player);
+                        _customInfoHandler.ChangeValue(CustomInfoHandler.MemberIdKey, team1Count, player);
                         team1Count++;
                         break;
                     case 2:
-                        _customInfoHandler.ChangeValue(CustomInfoHandler.TeamIdKey, team2Count, player);
+                        _customInfoHandler.ChangeValue(CustomInfoHandler.MemberIdKey, team2Count, player);
                         team2Count++;
                         break;
                 }

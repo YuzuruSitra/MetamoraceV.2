@@ -18,7 +18,7 @@ namespace System.UI
         
         private void Start()
         {
-            _roomText.text = PhotonNetwork.MasterClient.NickName + "のルーム";
+            _roomText.text = PhotonNetwork.MasterClient.NickName + "のルー�?";
             if (!PhotonNetwork.IsMasterClient) _startBt.interactable = false;
             _uiSeHandler = UiSeHandler.InstanceUiSeHandler;
             _startBt.onClick.AddListener(_uiSeHandler.PushSound);
@@ -49,8 +49,8 @@ namespace System.UI
             foreach (var player in players)
             {
                 var customProperties = player.CustomProperties;
-                if (!customProperties.ContainsKey(CustomInfoHandler.BattleIdKey)) continue;
-                var teamValue = (int)customProperties[CustomInfoHandler.BattleIdKey];
+                if (!customProperties.ContainsKey(CustomInfoHandler.TeamIdKey)) continue;
+                var teamValue = (int)customProperties[CustomInfoHandler.TeamIdKey];
                 switch (teamValue)
                 {
                     case TeamSetter.TeamOutValue:
