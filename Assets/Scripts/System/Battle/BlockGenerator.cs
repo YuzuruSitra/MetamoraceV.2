@@ -22,8 +22,8 @@ namespace System.Battle
         private const int FieldSize = 120;
         private const float RayDistance = 1.0f;
         private float _currentTime;
-        public int BlocksShareTeam1 => CalcBlocksShare(_parentObj[0]);
-        public int BlocksShareTeam2 => CalcBlocksShare(_parentObj[1]);
+        public int BlocksShareTeam1 => CalcBlocksShare(_parentObj[1]);
+        public int BlocksShareTeam2 => CalcBlocksShare(_parentObj[0]);
         [SerializeField] private TimeHandler _timeHandler;
         
         [SerializeField] private GameObject _predictPrefab;
