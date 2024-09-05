@@ -19,15 +19,12 @@ namespace Character
         [SerializeField] private float _gravity;
         [SerializeField] private CharacterObjBreaker _characterObjBreaker;
 
-        [SerializeField] private bool _isWaitScene;
-
         private CharacterController _controller;
         private Vector3 _moveDirection = Vector3.zero;
         private float _verticalSpeed;
         private bool _isMoving = true;
         private float _currentInputFactor;
         private float _speedFactor = 1.0f;
-        private bool _isReversal;
 
         public float CurrentMoveSpeed { get; private set; }
         public bool IsGrounded => _controller.isGrounded;
@@ -38,16 +35,7 @@ namespace Character
         private void Start()
         {
             if (!photonView.IsMine) return;
-
             _controller = GetComponent<CharacterController>();
-            InitializeReversalState();
-        }
-
-        private void InitializeReversalState()
-        {
-            if (_isWaitScene) return;
-            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId))
-                _isReversal = ((int)teamId != 0);
         }
 
         private void Update()
@@ -59,7 +47,6 @@ namespace Character
         private void HandleMovement()
         {
             SpeedReduction();
-            AdjustDirectionForReversal();
 
             var speed = GetCurrentSpeed();
             _moveDirection.x = _currentInputFactor * speed * _speedFactor;
@@ -72,11 +59,6 @@ namespace Character
         private float GetCurrentSpeed()
         {
             return Input.GetKey(KeyCode.LeftShift) ? _runSpeed : _walkSpeed;
-        }
-
-        private void AdjustDirectionForReversal()
-        {
-            if (_isReversal) _currentInputFactor = -_currentInputFactor;
         }
 
         private void RotateCharacter()

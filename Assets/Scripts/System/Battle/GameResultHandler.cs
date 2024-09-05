@@ -19,7 +19,7 @@ namespace System.Battle
         private void Start()
         {
             if (!PhotonNetwork.IsMasterClient) return;
-            _timeHandler.FinishEvent += CalcResult;
+            _timeHandler.FinishEvent += CalcTimeResult;
             _waitFor = new WaitForSeconds(_delayTime);
             
             var playerGenerator = GameObject.FindWithTag("PlayerGenerator").GetComponent<PlayerGenerator>();
@@ -31,7 +31,7 @@ namespace System.Battle
         private void OnDestroy()
         {
             if (!PhotonNetwork.IsMasterClient) return;
-            _timeHandler.FinishEvent -= CalcResult;
+            _timeHandler.FinishEvent -= CalcTimeResult;
             _characterStatus.ChangeConditionEvent -= ReceiveCondition;
         }
 
@@ -46,10 +46,17 @@ namespace System.Battle
         private IEnumerator ResultDelay()
         {
             yield return _waitFor;
-            CalcResult();
+            CalcDeathResult();
         }
 
-        private void CalcResult()
+        private void CalcDeathResult()
+        {
+            _timeHandler.ReceiveStopTime();
+            var winTeamNum = 3 - _characterStatus.LocalPlayerTeam;
+            photonView.RPC(nameof(ShareCalc), RpcTarget.All, winTeamNum);
+        }
+
+        private void CalcTimeResult()
         {
             _timeHandler.ReceiveStopTime();
             var shareTeam1 = _blockGenerator.BlocksShareTeam1;

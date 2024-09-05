@@ -2,6 +2,7 @@ using System;
 using System.Battle;
 using System.Collections.Generic;
 using Photon.Pun;
+using System.Network;
 using UnityEngine;
 
 namespace Character
@@ -37,6 +38,9 @@ namespace Character
         [SerializeField] private CharacterObjGenerator _characterObjGenerator;
         private TimeHandler _timeHandler;
         [SerializeField] private bool _isWaitScene;
+        // Team 1 or 2.
+        private int _localPlayerTeam;
+        public int LocalPlayerTeam => _localPlayerTeam;
         private readonly HashSet<Condition> _nonMovingConditions = new()
         {
             Condition.Pause,
@@ -53,6 +57,9 @@ namespace Character
             ChangeCondition(Condition.Pause);
             _timeHandler = GameObject.FindWithTag("TimeHandler").GetComponent<TimeHandler>();
             _timeHandler.CountDownedEvent += LaunchGame;
+            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.BattleIdKey, out var battleId))
+                _localPlayerTeam = (int)battleId;
+            
         }
 
         private void OnDestroy()
