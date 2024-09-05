@@ -104,9 +104,9 @@ namespace Block
         [PunRPC]
         public void LaunchBreak()
         {
+            _cloudAnimator.SetBool(IsBreak, true);
             _mesh.enabled = false;
             _col.enabled = false;
-            _cloudAnimator.SetBool(IsBreak, true);
         }
 
         protected virtual void SendEffect(GameObject player) { }
