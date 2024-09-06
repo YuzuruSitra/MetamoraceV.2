@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
@@ -59,22 +60,31 @@ namespace System.Battle
 
         private void SetPositionInfo()
         {
-            var teamInsCount = UnityEngine.Random.Range(1,  MaxGenerate + 1);
+            var teamInsCount = UnityEngine.Random.Range(1, MaxGenerate + 1);
             var allInsCount = teamInsCount * 2;
+            
+            // 既に使用されたX座標を保存するセット
+            HashSet<int> usedXPositions = new HashSet<int>();
+            
             for (var i = 0; i < allInsCount; i++)
             {
                 int calcPosX;
                 do
                 {
                     calcPosX = UnityEngine.Random.Range(MinPosX, MaxPosX);
-                } while (Mathf.Approximately(calcPosX, _generatePos[i].x) || ObjectExistsInRay(_generatePos[i], calcPosX));
+                } while (usedXPositions.Contains(calcPosX) || ObjectExistsInRay(_generatePos[i], calcPosX));
+
                 _generatePos[i].x = calcPosX;
                 _generatePos[i].z = i < teamInsCount ? Team1PosZ : Team2PosZ;
                 _predictPos[i].x = _generatePos[i].x;
                 _predictPos[i].z = _generatePos[i].z;
+                
+                // 使用したX座標をセットに追加
+                usedXPositions.Add(calcPosX);
             }
             photonView.RPC(nameof(CallGenerate), RpcTarget.All, _predictPos, _generatePos, allInsCount);
         }
+
         
         [PunRPC]
         private void CallGenerate(Vector3[] predictPos, Vector3[] generatePos, int insCount)
