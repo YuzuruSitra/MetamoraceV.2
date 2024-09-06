@@ -77,6 +77,8 @@ namespace System.Battle
         [PunRPC]
         private void SharedFinishGame()
         {
+            _battleTime = 0;
+            IsCountDown = false;
             FinishEvent?.Invoke();
         }
     }

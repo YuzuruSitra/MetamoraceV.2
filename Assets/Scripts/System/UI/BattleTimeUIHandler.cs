@@ -37,8 +37,8 @@ namespace System.UI
 
         private void UpdateTimeText()
         {
-            var minute = (int)Math.Floor(_timeHandler.BattleTime / 60);
-            var second = (int)Math.Ceiling(_timeHandler.BattleTime) % 60;
+            var minute = (int)Math.Floor(_timeHandler.BattleTime / 60.0f);
+            var second = (int)Math.Floor(_timeHandler.BattleTime) % 60;
             _timeText.text = minute + ":" + second.ToString("D2");
         }
     }
