@@ -18,7 +18,7 @@ namespace System.UI
         
         private void Start()
         {
-            _roomText.text = PhotonNetwork.MasterClient.NickName + "のルー�?";
+            _roomText.text = PhotonNetwork.MasterClient.NickName + "のルーム";
             if (!PhotonNetwork.IsMasterClient) _startBt.interactable = false;
             _uiSeHandler = UiSeHandler.InstanceUiSeHandler;
             _startBt.onClick.AddListener(_uiSeHandler.PushSound);
