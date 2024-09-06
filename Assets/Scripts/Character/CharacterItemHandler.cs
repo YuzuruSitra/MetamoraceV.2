@@ -59,11 +59,11 @@ namespace Character
             {
                 switch (t)
                 {
-                    case "Ambras":
+                    case CharacterObjStacker.BlockAmbras:
                         ambrasCount++;
                         break;
-                    case "Heros":
-                    case "BigHeros":
+                    case CharacterObjStacker.BlockHeros:
+                    case CharacterObjStacker.BlockBigHeros:
                         herosCount++;
                         break;
                     case CharacterObjStacker.NullKey:
@@ -89,10 +89,10 @@ namespace Character
                     _enhanceCoroutine = StartCoroutine(EnhancementSelf());
                     break;
                 case Item.GiganticRay:
-                    _characterObjStacker.ChangeHasBlock("BigHeros");
+                    _characterObjStacker.ChangeHasBlock(CharacterObjStacker.BlockBigHeros);
                     break;
                 case Item.SpecialBlock:
-                    _characterObjStacker.ChangeHasBlock("ItemCBlock");
+                    _characterObjStacker.ChangeHasBlock(CharacterObjStacker.BlockItemC);
                     break;
             }
             ChangeItem(Item.None);

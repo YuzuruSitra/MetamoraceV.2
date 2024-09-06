@@ -13,6 +13,11 @@ namespace Character
         private readonly string[] _blockStack = new string[3];
         public event Action<string[]> ChangeStackEvent;
         public const string NullKey = "Null";
+        public const string BlockHeros = "Heros";
+        public const string BlockBigHeros = "BigHeros";
+        public const string BlockAmbras = "Ambras";
+        public const string BlockItemC = "ItemCBlock";
+
         private void Start()
         {
             if (!photonView.IsMine) return;
@@ -42,7 +47,7 @@ namespace Character
                 break;
             }
             ChangeStackEvent?.Invoke(_blockStack);
-            ChangeHasBlock("Heros");
+            ChangeHasBlock(BlockHeros);
         }
 
         public void InsBlock()

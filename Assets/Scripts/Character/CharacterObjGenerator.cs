@@ -26,6 +26,7 @@ namespace Character
         private WaitForSeconds _forSeconds;
         private Coroutine _insCoroutine;
         private BlockGenerator _blockGenerator;
+        private BigBlockInsClamper _bigBlockInsClamper;
         
         private void Start()
         {
@@ -36,6 +37,7 @@ namespace Character
 
         private void InitializeVariables()
         {
+            _bigBlockInsClamper = new BigBlockInsClamper();
             var animationLength = _generateAnim.length;
             _forSeconds = new WaitForSeconds((animationLength + _motionDelay) * 0.5f);
             _predictCubes = Instantiate(_predictCubes);
@@ -77,7 +79,7 @@ namespace Character
             yield return _forSeconds;
             if (_blockInfoDict.TryGetValue(_characterObjStacker.HasBlock, out var values))
             {
-                var insPos = RoundPos(transform.position);
+                var insPos = RoundPos(_characterObjStacker.HasBlock, transform.position);
                 insPos += values.offset;
                 _blockGenerator.OtherGenerateObj(1 - _teamID, values.prefab.name, insPos);
                 _characterObjStacker.InsBlock();
@@ -92,7 +94,7 @@ namespace Character
             if (_blockInfoDict.TryGetValue(_characterObjStacker.HasBlock, out var values))
             {
                 _predictCubes.SetActive(true);
-                var insPos = RoundPos(transform.position);
+                var insPos = RoundPos(_characterObjStacker.HasBlock, transform.position);
                 insPos += values.offset;
                 _predictCubes.transform.position = insPos;
                 _predictCubes.transform.localScale = values.size;
@@ -108,10 +110,18 @@ namespace Character
             _isGenerate = isGenerate;
         }
 
-        private Vector3 RoundPos(Vector3 pos)
+        private Vector3 RoundPos(string blockType, Vector3 pos)
         {
-            pos.x = Mathf.Round(pos.x);
-            pos.y = Mathf.Round(pos.y);
+            if (blockType == CharacterObjStacker.BlockBigHeros)
+            {
+                pos.x = _bigBlockInsClamper.ClampValueX(pos.x);
+                pos.y = _bigBlockInsClamper.ClampValueY(pos.y);
+            }
+            else
+            {
+                pos.x = Mathf.Round(pos.x);
+                pos.y = Mathf.Round(pos.y);
+            }
             return pos;
         }
     }
