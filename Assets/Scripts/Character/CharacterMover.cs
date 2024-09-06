@@ -49,18 +49,12 @@ namespace Character
         private void HandleMovement()
         {
             SpeedReduction();
-            AdjustDirectionForReversal();
             var speed = GetCurrentSpeed();
             _moveDirection.x = _currentInputFactor * speed * _speedFactor;
             CurrentMoveSpeed = speed * Mathf.Abs(_currentInputFactor);
             if (_currentInputFactor != 0) RotateCharacter();
             ApplyGravityAndJump();
             _controller.Move(_moveDirection * Time.deltaTime);
-        }
-
-        private void AdjustDirectionForReversal()
-        {
-            if (_isReversal) _currentInputFactor = -_currentInputFactor;
         }
 
         private float GetCurrentSpeed()
@@ -95,6 +89,7 @@ namespace Character
         private void SpeedReduction()
         {
             var input = Input.GetAxis("Horizontal");
+            input = _isReversal ? -input : input;
             if (input == 0 || _characterObjBreaker.IsBreaking)
                 _currentInputFactor = Mathf.MoveTowards(_currentInputFactor, 0, _decelerationSpeed * Time.deltaTime);
             else

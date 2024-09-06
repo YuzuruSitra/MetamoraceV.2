@@ -4059,7 +4059,7 @@ PrefabInstance:
     - target: {fileID: 8546360468500769838, guid: e7bb958145a0d6643872c43d7014cf8b,
         type: 3}
       propertyPath: _battleTime
-      value: 63
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8546360468500769838, guid: e7bb958145a0d6643872c43d7014cf8b,
         type: 3}
