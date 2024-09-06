@@ -41,9 +41,8 @@ namespace Block
             _currentHealth = _maxHealth;
             _currentActiveTime = _activeTime;
             if (!_isMoving) return;
-            _targetPosZ = (_insPlayerTeam == 0) ? BlockGenerator.Team2PosZ : BlockGenerator.Team1PosZ;
+            _targetPosZ = (_insPlayerTeam == 1) ? BlockGenerator.Team2PosZ : BlockGenerator.Team1PosZ;
             _currentPos = transform.position;
-            
         }
         
         private void Update()

@@ -78,9 +78,8 @@ namespace System.UI
             var index = 0;
             foreach (var player in PhotonNetwork.PlayerList)
             {
-                var customProperties = player.CustomProperties;
-                if (!customProperties.ContainsKey(CustomInfoHandler.TeamIdKey)) continue;
-                var teamValue = (int)customProperties[CustomInfoHandler.TeamIdKey];
+                if (!player.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) continue;
+                var teamValue = (int)teamId;
                 if (teamValue != teamNum) continue;
                 if (index >= nameFields.Length) continue;
                 nameFields[index].text = player.NickName;
@@ -93,9 +92,8 @@ namespace System.UI
             int[] indices = { 0, 2 };
             foreach (var player in PhotonNetwork.PlayerList)
             {
-                var customProperties = player.CustomProperties;
-                if (!customProperties.ContainsKey(CustomInfoHandler.TeamIdKey)) continue;
-                var teamValue = (int)customProperties[CustomInfoHandler.TeamIdKey];
+                if (!player.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) continue;
+                var teamValue = (int)teamId;
                 if (teamValue != 1 && teamValue != 2) continue;
                 nameFields[indices[teamValue - 1]].text = player.NickName;
                 indices[teamValue - 1]++;

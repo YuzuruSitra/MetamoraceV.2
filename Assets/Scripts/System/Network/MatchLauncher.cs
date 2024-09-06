@@ -1,9 +1,8 @@
-using ExitGames.Client.Photon;
-using Object;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 namespace System.Network
 {
@@ -14,41 +13,81 @@ namespace System.Network
         private bool _isMatching;
         public event Action<bool> ChangeIsMatching;
         private CustomInfoHandler _customInfoHandler;
-        
+        private bool _isWaitMemberId = true;
+        private Coroutine _gameStartCoroutine;
         private void Start()
         {
             _customInfoHandler = CustomInfoHandler.Instance;
             if (!PhotonNetwork.IsMasterClient) return;
             PhotonNetwork.CurrentRoom.IsOpen = true;
+            foreach (var player in PhotonNetwork.PlayerList)
+                _customInfoHandler.ChangeValue(CustomInfoHandler.TeamIdKey, CustomInfoHandler.InitialValue, player);
         }
 
         public void GameStart()
         {
             if (!PhotonNetwork.IsMasterClient) return;
-            photonView.RPC(nameof(StopAutoSync), RpcTarget.All);
-            // 開始に条件を追記して�?く予�?
-            if (!_isMatching) return;
+            if (!_isMatching)
+            {
+                if (_gameStartCoroutine != null)
+                {
+                    StopCoroutine(_gameStartCoroutine);
+                    _gameStartCoroutine = null;
+                }
+                return;
+            }
+            // カスタムプロパティを設定して、全員のプロパティ更新を確認するまで待機する
+            _gameStartCoroutine = StartCoroutine(WaitForAllPlayersReady());
+        }
+
+        private IEnumerator WaitForAllPlayersReady()
+        {
             SetInGameID();
+
+            // すべてのプレイヤーが準備完了になるまで待機
+            while (_isWaitMemberId) yield return null;
+
+            // プレイヤー全員が準備完了になったらシーン遷移
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.LoadLevel(_gameSceneName);
+            _gameStartCoroutine = null;
         }
         
-        // 退出処�?
+        // 退出処理
         public void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene(_titleSceneName);
         }
         
-        [PunRPC]
-        private void StopAutoSync()
+        public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
         {
-            PhotonNetwork.AutomaticallySyncScene = false;
+            if (changedProps.ContainsKey(CustomInfoHandler.TeamIdKey))
+                IsEnable();
+            if (changedProps.ContainsKey(CustomInfoHandler.MemberIdKey))
+                CheckMemberIdChanged();
         }
-        
-        public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+
+        private void CheckMemberIdChanged()
         {
-            IsEnable();
+            var isWait = false;
+            foreach (var player in PhotonNetwork.PlayerList)
+            {
+                if (player.CustomProperties.TryGetValue(CustomInfoHandler.MemberIdKey, out var memberIdValue))
+                {
+                    if ((int)memberIdValue == CustomInfoHandler.InitialValue)
+                    {
+                        isWait = true;
+                        break;
+                    }
+                }
+                else
+                {
+                    isWait = true;
+                    break;
+                }
+            }
+            _isWaitMemberId = isWait;
         }
 
         private void IsEnable()
@@ -59,14 +98,16 @@ namespace System.Network
             {
                 if (player.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamValue))
                 {
-                    if ((int)teamValue == TeamSetter.TeamOutValue)
+                    if ((int)teamValue == CustomInfoHandler.InitialValue)
                     {
                         isMatching = false;
+                        break;
                     }
                 }
                 else
                 {
                     isMatching = false;
+                    break;
                 }
             }
             

@@ -59,7 +59,7 @@ namespace Character
             _timeHandler.CountDownedEvent += LaunchGame;
             if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId))
             _localPlayerTeam = (int)teamId;
-            var isReversal = (_localPlayerTeam == 1);
+            var isReversal = (_localPlayerTeam != 1);
             _characterMover.SetReversalBool(isReversal);
         }
 

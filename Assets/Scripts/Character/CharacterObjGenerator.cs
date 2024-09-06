@@ -41,8 +41,8 @@ namespace Character
             _predictCubes = Instantiate(_predictCubes);
             _blockGenerator = GameObject.FindWithTag("BlockGenerator").GetComponent<BlockGenerator>();
 
-            var num = _characterStatus.LocalPlayerTeam - 1;
-            if (num != 1) return;
+            _teamID = _characterStatus.LocalPlayerTeam - 1;
+            if (_teamID == 1) return;
             _insBlockOffset.z *= -1;
             _insBigBlockOffset.z *= -1;
         }

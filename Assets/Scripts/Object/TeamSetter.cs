@@ -9,7 +9,6 @@ namespace Object
     public class TeamSetter : MonoBehaviour
     {
         [SerializeField] private int _setTeamNum;
-        public const int TeamOutValue = -1;
         private readonly Dictionary<Collider, Player> _playerCache = new();
 
         private CustomInfoHandler _customInfoHandler;
@@ -36,12 +35,11 @@ namespace Object
                 player = photonView.Owner;
                 _playerCache[other] = player;
             }
-            
-            // ç¹â?šï¿½?½¼ç¹ï¿½ç¸º?½®ç¹åŠ±Îç¹§?½¤ç¹ï½¤ç¹ï½¼è¬¨?½°ç¹§åµãç¹§?½¦ç¹ï½³ç¹ï¿½
+
             var teamCount = CountPlayersInTeam(_setTeamNum);
-            // ç¹â?šï¿½?½¼ç¹ï¿½ç¸º?½«2è??½ºè‰ï½¥è³ç¿«?¼ç¹§å¥?¿½?½´èœ·åŒ»?¿½?½¯ TeamOutValue ç¹§å®šï½¨?½­è³?¿½
-            var setValue = teamCount >= 2 ? TeamOutValue : _setTeamNum;
+            var setValue = teamCount >= 2 ? CustomInfoHandler.InitialValue : _setTeamNum;
             _customInfoHandler.ChangeValue(CustomInfoHandler.TeamIdKey, setValue, player);
+            Debug.Log($"Player {player.NickName} is now set of the team{setValue}.");
         }
 
         private void OnTriggerExit(Collider other)
@@ -60,11 +58,10 @@ namespace Object
                 player = photonView.Owner;
                 _playerCache[other] = player;
             }
-            _customInfoHandler.ChangeValue(CustomInfoHandler.TeamIdKey, TeamOutValue, player);
+            _customInfoHandler.ChangeValue(CustomInfoHandler.TeamIdKey, CustomInfoHandler.InitialValue, player);
             Debug.Log($"Player {player.NickName} is now out of the team.");
         }
 
-        // è¬–ï¿½è³å£¹?¼?ç¸ºæº˜ãƒ¡ç¹ï½¼ç¹ï¿½ç¸º?½«ç¸º?¿½ç¹§ä¹ï¿½åŠ±Îç¹§?½¤ç¹ï½¤ç¹ï½¼ç¸º?½®è¬¨?½°ç¹§åµãç¹§?½¦ç¹ï½³ç¹åŒ»â˜?ç¹§ä¹Î“ç¹§?½½ç¹ï¿½ç¹ï¿½
         private int CountPlayersInTeam(int teamNum)
         {
             var count = 0;

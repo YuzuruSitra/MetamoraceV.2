@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 8621169857655290191}
   - component: {fileID: 8621169857655290190}
   m_Layer: 6
-  m_Name: BlockCTeam0
+  m_Name: BlockCTeam2
   m_TagString: ItemCBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   _cloudAnimator: {fileID: 506610780009736342}
   _fallSpeed: 2.25
   _isMoving: 1
-  _insPlayerTeam: 0
+  _insPlayerTeam: 2
   _moveSpeed: 3
   _rayDistance: 1
   _destroyPower: 100
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 2538282250367755738}
   - component: {fileID: 3684704398326997082}
   - component: {fileID: 1889904291471763943}
-  - component: {fileID: 630542985513404146}
+  - component: {fileID: 2279098906914341502}
   m_Layer: 6
   m_Name: HealthGage
   m_TagString: Untagged
@@ -492,7 +492,7 @@ MonoBehaviour:
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &630542985513404146
+--- !u!114 &2279098906914341502
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

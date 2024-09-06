@@ -12,14 +12,15 @@ namespace System.Network
         public const string MemberIdKey = "MemberID";
         public const string TeamIdKey = "TeamID";
         public const string ReadyKey = "Ready";
+        public const int InitialValue = -1;
         
         private CustomInfoHandler()
         {
             _properties = new Hashtable
             {
-                { MemberIdKey, 0 },
-                { TeamIdKey, 0 },
-                { ReadyKey, 0 } // 1-Ready
+                { MemberIdKey, InitialValue },
+                { TeamIdKey, InitialValue },
+                { ReadyKey, InitialValue } // 1-Ready
             };
             PhotonNetwork.LocalPlayer.SetCustomProperties(_properties);
         }

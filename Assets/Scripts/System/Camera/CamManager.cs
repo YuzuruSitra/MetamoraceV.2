@@ -2,6 +2,7 @@ using System.Network;
 using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
+using Character;
 
 namespace System.Camera
 {
@@ -28,11 +29,9 @@ namespace System.Camera
         
         private void Start()
         {
-            
-            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamValue))
-                _teamID = 2 - (int)teamValue;
             _playerGenerator = GameObject.FindWithTag("PlayerGenerator").GetComponent<PlayerGenerator>();
             _targetPlayer = _playerGenerator.CurrentPlayer;
+            _teamID = _targetPlayer.GetComponent<CharacterStatus>().LocalPlayerTeam - 1;
         }
 
         private void Update()

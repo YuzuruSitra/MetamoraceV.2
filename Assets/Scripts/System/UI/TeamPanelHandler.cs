@@ -1,6 +1,5 @@
 using System.Network;
 using System.Sound;
-using Object;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -48,28 +47,27 @@ namespace System.UI
             var players = PhotonNetwork.PlayerList;
             foreach (var player in players)
             {
-                var customProperties = player.CustomProperties;
-                if (!customProperties.ContainsKey(CustomInfoHandler.TeamIdKey)) continue;
-                var teamValue = (int)customProperties[CustomInfoHandler.TeamIdKey];
+                if (!player.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) continue;
+                var teamValue = (int)teamId;
                 switch (teamValue)
                 {
-                    case TeamSetter.TeamOutValue:
+                    case CustomInfoHandler.InitialValue:
                         break;
                     case 1:
                         for (var i = 0; i < _nameText.Length / 2; i++)
-                            if (_nameText[i].text == "")
-                            {
-                                _nameText[i].text = player.NickName;
-                                break;
-                            }
+                        if (_nameText[i].text == "")
+                        {
+                            _nameText[i].text = player.NickName;
+                            break;
+                        }
                         break;
                     case 2:
                         for (var i = _nameText.Length / 2; i < _nameText.Length; i++)
-                            if (_nameText[i].text == "")
-                            {
-                                _nameText[i].text = player.NickName;
-                                break;
-                            }
+                        if (_nameText[i].text == "")
+                        {
+                            _nameText[i].text = player.NickName;
+                            break;
+                        }
                         break;
                 }
             }

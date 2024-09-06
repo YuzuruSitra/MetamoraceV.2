@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 4589873742305698017}
   - component: {fileID: 4589873742305698016}
   m_Layer: 6
-  m_Name: HerosTeam0
+  m_Name: HerosTeam2
   m_TagString: Heros
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   _cloudAnimator: {fileID: 5697575003319578936}
   _fallSpeed: 2.25
   _isMoving: 1
-  _insPlayerTeam: 0
+  _insPlayerTeam: 2
   _moveSpeed: 3
 --- !u!114 &985142421573186090
 MonoBehaviour:
@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 7723611601844468852}
   - component: {fileID: 8877930454536600052}
   - component: {fileID: 5921182815356334153}
-  - component: {fileID: 8467312408888954142}
+  - component: {fileID: 6599898755517100612}
   m_Layer: 6
   m_Name: HealthGage
   m_TagString: Untagged
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8467312408888954142
+--- !u!114 &6599898755517100612
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
