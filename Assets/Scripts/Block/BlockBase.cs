@@ -33,6 +33,9 @@ namespace Block
         private const float Threshold = 0.01f;
 
         private bool _isExit;
+        private Vector3[] _rayOrigins = new Vector3[4];
+        private Vector3 _extents;
+        private const float RayPadding = 0.2f;
         private void Start()
         {
             _mesh = GetComponent<MeshRenderer>();
@@ -40,6 +43,8 @@ namespace Block
             _blockAnimator = GetComponent<Animator>();
             _currentHealth = _maxHealth;
             _currentActiveTime = _activeTime;
+
+            _extents = _mesh.bounds.extents;
             if (!_isMoving) return;
             _targetPosZ = (_insPlayerTeam == 1) ? BlockGenerator.Team2PosZ : BlockGenerator.Team1PosZ;
             _currentPos = transform.position;
@@ -133,10 +138,35 @@ namespace Block
             if (!_isExit)
             {
                 if (!IsGrounded()) return;
-                var extents = _mesh.bounds.extents;
-                if(!Physics.Raycast(transform.position, -transform.forward, out var hitInfo, extents.z + ExitRayLength)) return;
-                var obj = hitInfo.collider.gameObject;
-                if (obj.layer != LayerMask.NameToLayer("Block")) return;
+
+                bool exitDetected = false;
+                var rayLength = _extents.x + ExitRayLength;
+                var rayColor = Color.red; // Rayの色
+
+                // メッシュの4つの角の座標を計算
+                _rayOrigins[0] = transform.position + transform.right * (_extents.x - RayPadding) + transform.up * (_extents.y - RayPadding);
+                _rayOrigins[1] = transform.position - transform.right * (_extents.x - RayPadding) + transform.up * (_extents.y - RayPadding);
+                _rayOrigins[2] = transform.position + transform.right * (_extents.x - RayPadding) - transform.up * (_extents.y - RayPadding);
+                _rayOrigins[3] = transform.position - transform.right * (_extents.x - RayPadding) - transform.up * (_extents.y - RayPadding);
+
+                // 各角からRayを飛ばして可視化
+                foreach (var origin in _rayOrigins)
+                {
+                    Debug.DrawRay(origin, -transform.forward * rayLength, rayColor);
+                    
+                    if (Physics.Raycast(origin, -transform.forward, out var hitInfo, rayLength))
+                    {
+                        var obj = hitInfo.collider.gameObject;
+                        if (obj.layer == LayerMask.NameToLayer("Block"))
+                        {
+                            exitDetected = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!exitDetected) return;
+
                 _isExit = true;
             }
             else
@@ -144,6 +174,7 @@ namespace Block
                 transform.position += transform.forward.normalized * (_moveSpeed * Time.deltaTime);
             }
         }
+
         
         private bool IsGrounded()
         {
