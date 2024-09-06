@@ -10,6 +10,7 @@ namespace System.Network
         [SerializeField] private GameObject[] _battleCharacter;
         [SerializeField] private Vector3 _waitInsPos;
         [SerializeField] private Vector3[] _battleInsPos;
+        [SerializeField] private Vector3[] _battleInsRot;
         public GameObject CurrentPlayer { get; private set; }
         
         private void Start()
@@ -53,9 +54,11 @@ namespace System.Network
                         Debug.LogWarning("ID Error");
                         return;
                     }
-                    if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.MemberIdKey, out var teamId)) return;
-                    var posID = (int)teamId;
-                    CurrentPlayer = PhotonNetwork.Instantiate(_battleCharacter[id].name, _battleInsPos[posID], Quaternion.identity);
+                    if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.MemberIdKey, out var memberId)) return;
+                    var memberNum = (int)memberId;
+                    if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
+                    var teamNum = (int)teamId - 1;
+                    CurrentPlayer = PhotonNetwork.Instantiate(_battleCharacter[id].name, _battleInsPos[memberNum], Quaternion.Euler(_battleInsRot[teamNum]));
                     break;
             }
         }
