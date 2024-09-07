@@ -56,7 +56,12 @@ namespace System.Network
         // 退出処理
         public void LeaveRoom()
         {
-            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.LeaveRoom(); // ルームから退出を開始
+        }
+
+        public override void OnLeftRoom()
+        {
+            // ルームから退出完了後にシーンをロード
             SceneManager.LoadScene(_titleSceneName);
         }
         

@@ -56,7 +56,7 @@ namespace System.Network
         public override void OnJoinedRoom()
         {
             PhotonNetwork.NickName = PlayerName;
-            SceneManager.LoadScene(_sceneName);
+            PhotonNetwork.LoadLevel(_sceneName);
         }
         
     }

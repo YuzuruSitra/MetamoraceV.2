@@ -889,7 +889,7 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
-    Collab: 0
+    Collab: 1
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
