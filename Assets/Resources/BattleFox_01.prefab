@@ -230,7 +230,6 @@ GameObject:
   - component: {fileID: 6192094455029975912}
   - component: {fileID: 6192094455029975911}
   - component: {fileID: 6192094455029975910}
-  - component: {fileID: 9204295685674231509}
   - component: {fileID: 6192094455029975915}
   - component: {fileID: 6192094455029975914}
   - component: {fileID: 3808852125223167166}
@@ -241,7 +240,8 @@ GameObject:
   - component: {fileID: 1169859380555798308}
   - component: {fileID: 6192094455029975909}
   - component: {fileID: -277913044095691217}
-  - component: {fileID: 4095018660143650099}
+  - component: {fileID: 9204295685674231509}
+  - component: {fileID: 776502803261327228}
   m_Layer: 0
   m_Name: BattleFox_01
   m_TagString: Player
@@ -337,18 +337,6 @@ MonoBehaviour:
   _gravity: 35
   _characterObjBreaker: {fileID: 2681944477019818140}
   _isWaitScene: 0
---- !u!114 &9204295685674231509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6192094455029975907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d8e04c27a25543b4866f4b4d3390346, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6192094455029975915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,12 +414,12 @@ MonoBehaviour:
   _characterObjStacker: {fileID: 278414432227119862}
   _herosPrefab:
   - {fileID: 6252427330716548040, guid: b777963ef718be1488242f203a158f0f, type: 3}
-  - {fileID: 6252427330716548040, guid: 36914340ea1b4934b9cf806db51adba6, type: 3}
+  - {fileID: 6252427330716548040, guid: ced6d72d5239346dca4d9ae8cf156bb5, type: 3}
   _bigHerosPrefab:
-  - {fileID: 7944861777834327483, guid: 8b8cd8f57b701544fbe5415db42f897e, type: 3}
+  - {fileID: 7944861777834327483, guid: c8f5907e972c24a62b3cf4250ce0a0be, type: 3}
   - {fileID: 7944861777834327483, guid: 15119ea81e7559c4894e25cf21560286, type: 3}
   _blockCPrefab:
-  - {fileID: 2221145504540172902, guid: 35e9c72fa342f2641b45a5d41ace5474, type: 3}
+  - {fileID: 2221145504540172902, guid: 647563940752a4fe9a52ab56e03d201c, type: 3}
   - {fileID: 2221145504540172902, guid: cca862801533c7d42a6844dd123394cf, type: 3}
   _predictCubes: {fileID: 5289778021230006843, guid: 6493bafa44d7b574c98e695122283ec9,
     type: 3}
@@ -522,11 +510,11 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 9204295685674231509}
-  - {fileID: 4095018660143650099}
+  - {fileID: 776502803261327228}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &4095018660143650099
+--- !u!114 &9204295685674231509
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -535,42 +523,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 6192094455029975907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d8e04c27a25543b4866f4b4d3390346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isJump
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isSwing
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isVDeath
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isHDeath
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isStan
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isWalk
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isIdole
-  - Type: 1
-    SynchronizeType: 1
-    Name: MoveSpeed
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isBreak
-  m_SynchronizeLayers:
-  - SynchronizeType: 1
-    LayerIndex: 0
+--- !u!114 &776502803261327228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6192094455029975907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50eaedb95e35a4a7abc2a9f8d26423ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 6192094455029975913}
 --- !u!1 &6192094455082704709
 GameObject:
   m_ObjectHideFlags: 0

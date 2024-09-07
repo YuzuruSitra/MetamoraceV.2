@@ -111,14 +111,14 @@ GameObject:
   - component: {fileID: 6192094455029975912}
   - component: {fileID: 6192094455029975911}
   - component: {fileID: 6192094455029975910}
-  - component: {fileID: 1631687853890075947}
   - component: {fileID: 6192094455029975915}
   - component: {fileID: 6192094455029975914}
   - component: {fileID: 1267629793179180197}
   - component: {fileID: 5970117286552278260}
   - component: {fileID: 6192094455029975909}
   - component: {fileID: -277913044095691217}
-  - component: {fileID: 4095018660143650099}
+  - component: {fileID: 1631687853890075947}
+  - component: {fileID: 7555822409568286571}
   m_Layer: 0
   m_Name: WaitFox_01
   m_TagString: Player
@@ -211,18 +211,6 @@ MonoBehaviour:
   _gravity: 50
   _characterObjBreaker: {fileID: 1267629793179180197}
   _isWaitScene: 1
---- !u!114 &1631687853890075947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6192094455029975907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d8e04c27a25543b4866f4b4d3390346, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6192094455029975915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,11 +313,11 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1631687853890075947}
-  - {fileID: 4095018660143650099}
+  - {fileID: 7555822409568286571}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &4095018660143650099
+--- !u!114 &1631687853890075947
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -338,42 +326,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 6192094455029975907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d8e04c27a25543b4866f4b4d3390346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isJump
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isSwing
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isVDeath
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isHDeath
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isStan
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isWalk
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isIdole
-  - Type: 1
-    SynchronizeType: 1
-    Name: MoveSpeed
-  - Type: 4
-    SynchronizeType: 1
-    Name: _isBreak
-  m_SynchronizeLayers:
-  - SynchronizeType: 1
-    LayerIndex: 0
+--- !u!114 &7555822409568286571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6192094455029975907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50eaedb95e35a4a7abc2a9f8d26423ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 6192094455029975913}
 --- !u!1 &6192094455082704709
 GameObject:
   m_ObjectHideFlags: 0
