@@ -36,49 +36,18 @@ namespace Block
         private Vector3[] _rayOrigins = new Vector3[4];
         private Vector3 _extents;
         private const float RayPadding = 0.2f;
-        private float _initBlockScaleXY;
-        private float _initBlockScaleZ;
-        private Vector3 _initBlockScale;
-        private float _initColldierScaleXY;
-        private float _initColldierScaleZ;
-        private Vector3 _initColliderScale;
         private void Start()
         {
-            
-            _mesh = GetComponent<MeshRenderer>();
+            Transform child = transform.GetChild(0);
+            _mesh = child.GetComponent<MeshRenderer>();
             _col = GetComponent<BoxCollider>();
-            _blockAnimator = GetComponent<Animator>();
+            _blockAnimator = child.GetComponent<Animator>();
             _currentHealth = _maxHealth;
             _currentActiveTime = _activeTime;
             _extents = _mesh.bounds.extents;
-            _initColldierScaleXY = _col.size.x;
-            _initColldierScaleZ = _col.size.z;
-            _initColliderScale = new Vector3(_initColldierScaleXY, _initColldierScaleXY, _initColldierScaleZ);
-            Debug.Log(_initColliderScale);
-                _initBlockScaleZ = transform.localScale.z;
-            _initBlockScaleXY = transform.localScale.x;
-            // 初期のスケールベクトル（x, y, z）を設定
-            _initBlockScale = new Vector3(_initBlockScaleXY, _initBlockScaleXY, _initBlockScaleZ);
-            
             if (!_isMoving) return;
             _targetPosZ = (_insPlayerTeam == 1) ? BlockGenerator.Team2PosZ : BlockGenerator.Team1PosZ;
             _currentPos = transform.position;
-        }
-        
-        //アニメーションの伸縮に合わせてリサイズ
-        void ReSizeCollider()
-        {
-            Vector3 currentScale = transform.localScale;
-            // 各次元のスケールレートを計算
-            float scaleRateX = _initBlockScale.x / currentScale.x;
-            float scaleRateY = _initBlockScale.y / currentScale.y;
-            float scaleRateZ = _initBlockScale.z / currentScale.z;
-            _col.size = _initColliderScale;
-            Vector3 currentColliderScale = _col.size;
-            currentColliderScale.x *= scaleRateX;
-            currentColliderScale.y *= scaleRateY;
-            currentColliderScale.z *= scaleRateZ;
-            _col.size = currentColliderScale;
         }
         
         
@@ -96,8 +65,6 @@ namespace Block
                     TowardsPos();
                 }
             }
-
-            ReSizeCollider();
             if (_currentActiveTime <= _activeTime)
             {
                 _currentActiveTime += Time.deltaTime;
