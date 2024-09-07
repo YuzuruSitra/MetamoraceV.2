@@ -89,9 +89,11 @@ namespace Character
                     _enhanceCoroutine = StartCoroutine(EnhancementSelf());
                     break;
                 case Item.GiganticRay:
+                    if (_characterObjStacker.HasBlock == CharacterObjStacker.NullKey) return;
                     _characterObjStacker.ChangeHasBlock(CharacterObjStacker.BlockBigHeros);
                     break;
                 case Item.SpecialBlock:
+                    if (_characterObjStacker.HasBlock == CharacterObjStacker.NullKey) return;
                     _characterObjStacker.ChangeHasBlock(CharacterObjStacker.BlockItemC);
                     break;
             }

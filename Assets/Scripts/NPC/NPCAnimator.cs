@@ -22,7 +22,7 @@ namespace NPC
         {
             //if (!photonView.IsMine) return;
             _anim = GetComponent<Animator>();
-            _npcStateManagement.ChangeStateEvent += ChangeAnim;
+            //_npcStateManagement.ChangeStateEvent += ChangeAnim;
         }
 
         void Update()
