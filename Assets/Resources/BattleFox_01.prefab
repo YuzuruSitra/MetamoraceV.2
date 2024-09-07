@@ -414,7 +414,7 @@ MonoBehaviour:
   _characterObjStacker: {fileID: 278414432227119862}
   _herosPrefab:
   - {fileID: 6252427330716548040, guid: b777963ef718be1488242f203a158f0f, type: 3}
-  - {fileID: 6252427330716548040, guid: 30f85fa786d52334896dd17147365eb7, type: 3}
+  - {fileID: 6252427330716548040, guid: 36914340ea1b4934b9cf806db51adba6, type: 3}
   _bigHerosPrefab:
   - {fileID: 7944861777834327483, guid: 8b8cd8f57b701544fbe5415db42f897e, type: 3}
   - {fileID: 7944861777834327483, guid: 15119ea81e7559c4894e25cf21560286, type: 3}
