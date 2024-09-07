@@ -51,9 +51,10 @@ namespace Block
             _currentHealth = _maxHealth;
             _currentActiveTime = _activeTime;
             _extents = _mesh.bounds.extents;
-            _initColliderScale = new Vector3(1, 1, 3);
             _initColldierScaleXY = _col.size.x;
             _initColldierScaleZ = _col.size.z;
+            _initColliderScale = new Vector3(_initColldierScaleXY, _initColldierScaleXY, _initColldierScaleZ);
+            Debug.Log(_initColliderScale);
                 _initBlockScaleZ = transform.localScale.z;
             _initBlockScaleXY = transform.localScale.x;
             // 初期のスケールベクトル（x, y, z）を設定
@@ -68,19 +69,15 @@ namespace Block
         void ReSizeCollider()
         {
             Vector3 currentScale = transform.localScale;
-            _col.size = _initColliderScale;
-            // コライダーのサイズを調整して元のサイズを保つ
-            Vector3 currentColliderScale = _col.size;
             // 各次元のスケールレートを計算
             float scaleRateX = _initBlockScale.x / currentScale.x;
             float scaleRateY = _initBlockScale.y / currentScale.y;
             float scaleRateZ = _initBlockScale.z / currentScale.z;
-
-            
+            _col.size = _initColliderScale;
+            Vector3 currentColliderScale = _col.size;
             currentColliderScale.x *= scaleRateX;
             currentColliderScale.y *= scaleRateY;
             currentColliderScale.z *= scaleRateZ;
-
             _col.size = currentColliderScale;
         }
         
