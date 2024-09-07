@@ -36,19 +36,54 @@ namespace Block
         private Vector3[] _rayOrigins = new Vector3[4];
         private Vector3 _extents;
         private const float RayPadding = 0.2f;
+        private float _initBlockScaleXY;
+        private float _initBlockScaleZ;
+        private Vector3 _initBlockScale;
+        private float _initColldierScaleXY;
+        private float _initColldierScaleZ;
+        private Vector3 _initColliderScale;
         private void Start()
         {
+            
             _mesh = GetComponent<MeshRenderer>();
             _col = GetComponent<BoxCollider>();
             _blockAnimator = GetComponent<Animator>();
             _currentHealth = _maxHealth;
             _currentActiveTime = _activeTime;
-
             _extents = _mesh.bounds.extents;
+            _initColliderScale = new Vector3(1, 1, 3);
+            _initColldierScaleXY = _col.size.x;
+            _initColldierScaleZ = _col.size.z;
+                _initBlockScaleZ = transform.localScale.z;
+            _initBlockScaleXY = transform.localScale.x;
+            // 初期のスケールベクトル（x, y, z）を設定
+            _initBlockScale = new Vector3(_initBlockScaleXY, _initBlockScaleXY, _initBlockScaleZ);
+            
             if (!_isMoving) return;
             _targetPosZ = (_insPlayerTeam == 1) ? BlockGenerator.Team2PosZ : BlockGenerator.Team1PosZ;
             _currentPos = transform.position;
         }
+        
+        //アニメーションの伸縮に合わせてリサイズ
+        void ReSizeCollider()
+        {
+            Vector3 currentScale = transform.localScale;
+            _col.size = _initColliderScale;
+            // コライダーのサイズを調整して元のサイズを保つ
+            Vector3 currentColliderScale = _col.size;
+            // 各次元のスケールレートを計算
+            float scaleRateX = _initBlockScale.x / currentScale.x;
+            float scaleRateY = _initBlockScale.y / currentScale.y;
+            float scaleRateZ = _initBlockScale.z / currentScale.z;
+
+            
+            currentColliderScale.x *= scaleRateX;
+            currentColliderScale.y *= scaleRateY;
+            currentColliderScale.z *= scaleRateZ;
+
+            _col.size = currentColliderScale;
+        }
+        
         
         private void Update()
         {
@@ -64,7 +99,8 @@ namespace Block
                     TowardsPos();
                 }
             }
-            
+
+            ReSizeCollider();
             if (_currentActiveTime <= _activeTime)
             {
                 _currentActiveTime += Time.deltaTime;
@@ -141,15 +177,15 @@ namespace Block
 
                 bool exitDetected = false;
                 var rayLength = _extents.x + ExitRayLength;
-                var rayColor = Color.red; // Ray�̐F
+                var rayColor = Color.red; // Ray�̐F
 
-                // ���b�V����4�̊p�̍��W���v�Z
+                // ���b�V����4�̊p�̍��W���v�Z
                 _rayOrigins[0] = transform.position + transform.right * (_extents.x - RayPadding) + transform.up * (_extents.y - RayPadding);
                 _rayOrigins[1] = transform.position - transform.right * (_extents.x - RayPadding) + transform.up * (_extents.y - RayPadding);
                 _rayOrigins[2] = transform.position + transform.right * (_extents.x - RayPadding) - transform.up * (_extents.y - RayPadding);
                 _rayOrigins[3] = transform.position - transform.right * (_extents.x - RayPadding) - transform.up * (_extents.y - RayPadding);
 
-                // �e�p����Ray���΂��ĉ���
+                // �e�p����Ray���΂��ĉ���
                 foreach (var origin in _rayOrigins)
                 {
                     Debug.DrawRay(origin, -transform.forward * rayLength, rayColor);
