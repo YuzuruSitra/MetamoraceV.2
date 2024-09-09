@@ -1,7 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace System.Network
 {
@@ -11,7 +10,7 @@ namespace System.Network
         public string RoomPas { get; set; }
         public string PlayerName { get; set; }
         [SerializeField] private string _sceneName;
-        private const int MaxPlayer = 4;
+        public const int MaxPlayer = 4;
         private readonly RoomOptions _option = new();
     
         private void Start()

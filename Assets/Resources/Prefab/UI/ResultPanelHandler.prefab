@@ -59,9 +59,11 @@ MonoBehaviour:
   _teamSeems:
   - {fileID: 2731457191752319639}
   - {fileID: 2731457191984243672}
-  _winNames:
+  _names:
   - {fileID: 2534335083459117854}
   - {fileID: 2534335083970941058}
+  - {fileID: 2731457191585132662}
+  - {fileID: 2731457192588174880}
   _looseNames:
   - {fileID: 2731457191585132662}
   - {fileID: 2731457192588174880}
