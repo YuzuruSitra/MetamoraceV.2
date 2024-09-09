@@ -14,6 +14,7 @@ namespace System.UI
         [SerializeField] private GameObject _drawPanel;
         [SerializeField] private UnityEngine.UI.Text[] _sharePercent;
         [SerializeField] private UnityEngine.UI.Text[] _drawSharePercent;
+        [SerializeField] private UnityEngine.UI.Text[] _teamSeems;
         [SerializeField] private UnityEngine.UI.Text[] _winNames;
         [SerializeField] private UnityEngine.UI.Text[] _looseNames;
         [SerializeField] private UnityEngine.UI.Text[] _drawNames;
@@ -34,7 +35,7 @@ namespace System.UI
         private void OpenResultPanel(int winTeamNum)
         {
             _resultPanel.SetActive(true);
-
+            var looseTeamNum = 3 - winTeamNum;
             if (winTeamNum == 0)
             {
                 _drawPanel.SetActive(true);
@@ -45,12 +46,19 @@ namespace System.UI
             else
             {
                 _winLoosePanel.SetActive(true);
+                UpdateTeamSeems(winTeamNum, looseTeamNum);
                 UpdateSharePercent(winTeamNum);
                 // Show Winning Teams.
                 UpdatePlayerNames(winTeamNum, _winNames);
                 // Show losing teams
-                UpdatePlayerNames(3 - winTeamNum, _looseNames);
+                UpdatePlayerNames(looseTeamNum, _looseNames);
             }
+        }
+
+        private void UpdateTeamSeems(int winTeamNum, int looseTeamNum)
+        {
+            _teamSeems[0].text = "Team" + winTeamNum;
+            _teamSeems[1].text = "Team" + looseTeamNum;
         }
 
         private void UpdateSharePercent(int winTeamNum)
