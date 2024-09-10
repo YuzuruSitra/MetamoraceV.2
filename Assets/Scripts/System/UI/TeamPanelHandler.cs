@@ -37,7 +37,8 @@ namespace System.UI
 
         public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
         {
-            ChangeTeamName();
+            if (changedProps.ContainsKey(CustomInfoHandler.TeamIdKey))
+                ChangeTeamName();
         }
 
         private void ChangeTeamName()

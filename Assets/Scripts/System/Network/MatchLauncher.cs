@@ -49,8 +49,14 @@ namespace System.Network
 
             // プレイヤー全員が準備完了になったらシーン遷移
             PhotonNetwork.CurrentRoom.IsOpen = false;
-            PhotonNetwork.LoadLevel(_gameSceneName);
+            photonView.RPC("LoadGameScene", RpcTarget.All);
             _gameStartCoroutine = null;
+        }
+
+        [PunRPC]
+        public void LoadGameScene()
+        {
+            PhotonNetwork.LoadLevel(_gameSceneName);
         }
         
         // 退出処理
