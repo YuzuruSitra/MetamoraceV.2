@@ -12,14 +12,14 @@ namespace Character
         [SerializeField] private GameObject _dieEffect;
         private GameObject[] _effects;
         private const float EffectPosZ = 0.4f;
-         private RectTransform _deathEffectPos;
+        private RectTransform _deathEffectPos, __selfEnhancementEffectPos, _stanEffectPos;
 
-        private readonly Vector2 _stanOffSets = 
-            new (0f, 0.8f);
-        private readonly Vector2 _selfEnhancementOffSets = 
+        private readonly Vector2 _stanOffSets =
+            new(0f, 0.8f);
+        private readonly Vector2 _selfEnhancementOffSets =
             new(0, 1.2f)
         ;
-        private readonly Vector2 _dieOffSets = 
+        private readonly Vector2 _dieOffSets =
             new(0, 1.2f);
         [SerializeField] private Transform target;
 
@@ -28,30 +28,31 @@ namespace Character
         {
             if (!photonView.IsMine) return;
             _deathEffectPos = _dieEffect.GetComponent<RectTransform>();
+            __selfEnhancementEffectPos = _selfEnhancementEffect.GetComponent<RectTransform>();
+
+            _stanEffectPos = _stanEffect.GetComponent<RectTransform>();
+
 
             _dieEffect.SetActive(false);
             _characterStatus.ChangeConditionEvent += ReceiveEffect;
             _characterStatus.ChangeSpecialEffectsEvent += ReceiveEnhancement;
-            _effects = new[] { _stanEffect, _dieEffect };
+            _effects = new[] { _stanEffect, _dieEffect, _selfEnhancementEffect };
 
             var num = _characterStatus.LocalPlayerTeam - 1;
-            _stanEffect.transform.position = _stanOffSets;
-            _selfEnhancementEffect.transform.position = _selfEnhancementOffSets;
-            _dieEffect.transform.position = _dieOffSets;
+            DisableEffects();
+            // _stanEffect.transform.position = _stanOffSets;
+            // _selfEnhancementEffect.transform.position = _selfEnhancementOffSets;
+            //_dieEffect.transform.position = _dieOffSets;
         }
 
         void Update()
         {
-            // メインカメラが存在するかチェック
-            if (Camera.main == null)
-            {
-                Debug.LogError("Main camera not found!");
-                return;
-            }
 
             // ターゲットのワールド座標をスクリーン座標に変換し、オフセットを適用
             Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, target.position);
-            _deathEffectPos.position = screenPos + (Vector3)_dieOffSets;  // Vector3にキャストして加算
+            _deathEffectPos.position = screenPos + (Vector3)_dieOffSets;  
+            __selfEnhancementEffectPos.position = screenPos + (Vector3)_selfEnhancementOffSets;  
+            _stanEffectPos.position = screenPos + (Vector3)_stanOffSets;  
         }
         private void OnDestroy()
         {
@@ -102,7 +103,9 @@ namespace Character
         public void DisableEffects()
         {
             foreach (var t in _effects)
+            {
                 t.SetActive(false);
+            }
         }
     }
 }
