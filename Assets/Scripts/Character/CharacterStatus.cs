@@ -65,6 +65,7 @@ namespace Character
 
         private void OnDestroy()
         {
+            if (!photonView.IsMine) return;
             if (_isWaitScene) return;
             _timeHandler.CountDownedEvent -= LaunchGame;
         }
