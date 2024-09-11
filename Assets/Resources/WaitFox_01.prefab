@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8475272049765973193}
   - component: {fileID: 8765790676184304451}
   - component: {fileID: 4703907483109023931}
-  - component: {fileID: 1428183559889764248}
   m_Layer: 5
   m_Name: CharacterName
   m_TagString: Untagged
@@ -83,20 +82,6 @@ MonoBehaviour:
   m_Text: 'masaki
 
 '
---- !u!114 &1428183559889764248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 121774581142055801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61a6fcd23a92b4f0fb4ec0eb8564c047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 6192094455029975908}
-  playerNameOffsetY: 60
 --- !u!1 &1337142252351774042
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,6 +524,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nickName: {fileID: 4703907483109023931}
+  target: {fileID: 6192094455029975908}
+  playerNameOffsetY: 60
 --- !u!1 &6192094455082704709
 GameObject:
   m_ObjectHideFlags: 0

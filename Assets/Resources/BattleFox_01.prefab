@@ -114,7 +114,6 @@ GameObject:
   - component: {fileID: 2536616791691017475}
   - component: {fileID: 3887926024723808969}
   - component: {fileID: 7879760907670114502}
-  - component: {fileID: 7551405785354588887}
   m_Layer: 5
   m_Name: CharacterName
   m_TagString: Untagged
@@ -186,20 +185,6 @@ MonoBehaviour:
   m_Text: 'masaki
 
 '
---- !u!114 &7551405785354588887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3272162009819446580}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61a6fcd23a92b4f0fb4ec0eb8564c047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 6192094455029975908}
-  playerNameOffsetY: 80
 --- !u!1 &4576817536285853678
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,8 +315,11 @@ GameObject:
   - component: {fileID: 5944797580937599880}
   - component: {fileID: 4983250002876108476}
   - component: {fileID: 8897359444543221498}
+  - component: {fileID: 782094644348972045}
+  - component: {fileID: 7196051766545128703}
+  - component: {fileID: 3639691119225054}
   m_Layer: 5
-  m_Name: Effect
+  m_Name: DeathEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -346,7 +334,7 @@ RectTransform:
   m_GameObject: {fileID: 5464254392220447065}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 8.525642, y: 8.525642, z: 8.525642}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5134324189971062529}
@@ -385,7 +373,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 9954334c45a54c14b859674b022eaba1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -395,6 +383,52 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &782094644348972045
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5464254392220447065}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 65760569d641cd8419abeb73357f3eb5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7196051766545128703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5464254392220447065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a4bb2f73c00cd4a9710ba734fce701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3639691119225054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5464254392220447065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a6fcd23a92b4f0fb4ec0eb8564c047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 6192094455029975908}
+  playerNameOffsetY: 0
 --- !u!1 &6192094454964169634
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,12 +546,12 @@ GameObject:
   - component: {fileID: 7456515268578178929}
   - component: {fileID: 7429199923039469224}
   - component: {fileID: 278414432227119862}
-  - component: {fileID: 1169859380555798308}
   - component: {fileID: 6192094455029975909}
   - component: {fileID: -277913044095691217}
   - component: {fileID: 9204295685674231509}
   - component: {fileID: 776502803261327228}
   - component: {fileID: 7728309156620584514}
+  - component: {fileID: 3782165560839719858}
   m_Layer: 0
   m_Name: BattleFox_01
   m_TagString: Player
@@ -717,22 +751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18075538149db4f4a84e13e975d9c9a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1169859380555798308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6192094455029975907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0a210c0f00e1a42826cd4e3fe6c4dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _characterStatus: {fileID: 6192094455029975914}
-  _selfEnhancementEffect: {fileID: 5728073323994482950}
-  _stanEffect: {fileID: 4576817536285853678}
-  _dieEffect: {fileID: 6286712398835773736}
 --- !u!143 &6192094455029975909
 CharacterController:
   m_ObjectHideFlags: 0
@@ -813,6 +831,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nickName: {fileID: 7879760907670114502}
+  target: {fileID: 6192094455029975908}
+  playerNameOffsetY: 80
+--- !u!114 &3782165560839719858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6192094455029975907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7132590b5784f4e278bac3c023effcfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterStatus: {fileID: 6192094455029975914}
+  _selfEnhancementEffect: {fileID: 5464254392220447065}
+  _stanEffect: {fileID: 5464254392220447065}
+  _dieEffect: {fileID: 5464254392220447065}
+  target: {fileID: 6192094455029975908}
 --- !u!1 &6192094455082704709
 GameObject:
   m_ObjectHideFlags: 0
@@ -3513,12 +3550,6 @@ PrefabInstance:
 --- !u!4 &5728073323994482947 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8230843998025336592, guid: 40b481f26c98126449b7c2ed6341bc37,
-    type: 3}
-  m_PrefabInstance: {fileID: 4415745724308901395}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5728073323994482950 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8230843998025336597, guid: 40b481f26c98126449b7c2ed6341bc37,
     type: 3}
   m_PrefabInstance: {fileID: 4415745724308901395}
   m_PrefabAsset: {fileID: 0}
