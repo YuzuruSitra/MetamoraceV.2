@@ -18,21 +18,21 @@ namespace System.Battle
         
         private void Start()
         {
-            if (!PhotonNetwork.IsMasterClient) return;
-            _timeHandler.FinishEvent += CalcTimeResult;
-            _waitFor = new WaitForSeconds(_delayTime);
-            
             var playerGenerator = GameObject.FindWithTag("PlayerGenerator").GetComponent<PlayerGenerator>();
             var player = playerGenerator.CurrentPlayer;
             _characterStatus = player.GetComponent<CharacterStatus>();
             _characterStatus.ChangeConditionEvent += ReceiveCondition;
+
+            if (!PhotonNetwork.IsMasterClient) return;
+            _timeHandler.FinishEvent += CalcTimeResult;
+            _waitFor = new WaitForSeconds(_delayTime);
         }
 
         private void OnDestroy()
         {
+            _characterStatus.ChangeConditionEvent -= ReceiveCondition;
             if (!PhotonNetwork.IsMasterClient) return;
             _timeHandler.FinishEvent -= CalcTimeResult;
-            _characterStatus.ChangeConditionEvent -= ReceiveCondition;
         }
 
         private void ReceiveCondition(CharacterStatus.Condition condition)
