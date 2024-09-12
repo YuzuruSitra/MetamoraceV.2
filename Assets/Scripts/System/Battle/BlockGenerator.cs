@@ -16,15 +16,19 @@ namespace System.Battle
         public const float Team2PosZ = 2.42f;
         [SerializeField] private Vector3[] _generatePos = new Vector3[AllGenerate];
         [SerializeField] private Vector3[] _insRot;
-        [SerializeField] private Transform[] _parentObj;
         [SerializeField] private float _insInterVal;
         private const int MinPosX = -7;
         private const int MaxPosX = 8;
         private const int FieldSize = 120;
         private const float RayDistance = 1.0f;
         private float _currentTime;
-        public int BlocksShareTeam1 => CalcBlocksShare(_parentObj[0]);
-        public int BlocksShareTeam2 => CalcBlocksShare(_parentObj[1]);
+        private const int DefaultSize = 1;
+        private const int BigSize = 4;
+        // 0 - team1. 1 - team2.
+        private int[] _blocksCount = new int[2];
+        private int[] _blocksRatio = new int[2];
+        public int BlocksShareTeam1 => _blocksRatio[0];
+        public int BlocksShareTeam2 => _blocksRatio[1];
         [SerializeField] private TimeHandler _timeHandler;
         
         [SerializeField] private GameObject _predictPrefab;
@@ -122,7 +126,7 @@ namespace System.Battle
             {
                 var teamNum = i < insCount / 2 ? 0 : 1;
                 var obj = PhotonNetwork.Instantiate(_blockTeam[teamNum].name, generatePos[i], Quaternion.Euler(_insRot[teamNum]));
-                obj.transform.SetParent(_parentObj[teamNum]);
+                ChangeBlocksShare(obj.tag, teamNum, true);
             }
         }
         
@@ -134,12 +138,6 @@ namespace System.Battle
             if (!Physics.Raycast(startPos, Vector3.down, out var hit, RayDistance)) return false;
             return hit.collider.CompareTag("Ambras") || hit.collider.CompareTag("Heros");
         }
-        
-        private int CalcBlocksShare(Transform cubeParent)
-        {
-            var share = (cubeParent.childCount * 100) / FieldSize;
-            return share;
-        }
 
         public void OtherGenerateObj(int teamNum, string target, Vector3 pos)
         {
@@ -150,8 +148,30 @@ namespace System.Battle
         public void ReceiveGenerate(int teamNum, string target, Vector3 pos)
         {
             var obj = PhotonNetwork.Instantiate(target, pos, Quaternion.Euler(_insRot[teamNum]));
-            obj.transform.SetParent(_parentObj[teamNum]);
+            ChangeBlocksShare(obj.tag, teamNum, true);
         }
+
+        public void ChangeBlocksShare(string objKind, int targetTeam, bool isIncrease)
+        {
+            var size = objKind == "BigHeros" ? BigSize : DefaultSize;
+            if (isIncrease) _blocksCount[targetTeam] += size;
+            else _blocksCount[targetTeam] -= size;
+            int ratio = CalcShareRatio(_blocksCount[targetTeam]);
+            photonView.RPC(nameof(ChangeBlockRatio), RpcTarget.All, targetTeam, ratio);
+        }
+
+        [PunRPC]
+        public void ChangeBlockRatio(int targetTeam, int ratio)
+        {
+            _blocksRatio[targetTeam] = ratio;
+        }
+
+        private int CalcShareRatio(int count)
+        {
+            var share = (count * 100) / FieldSize;
+            return share;
+        }
+
         
     }
 }

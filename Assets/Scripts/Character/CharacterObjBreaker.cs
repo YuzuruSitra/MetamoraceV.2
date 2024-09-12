@@ -1,6 +1,7 @@
 using Block;
 using Photon.Pun;
 using UnityEngine;
+using System.Battle;
 
 namespace Character
 {
@@ -15,6 +16,16 @@ namespace Character
         [SerializeField] private float _playerReach;
         public bool IsBreaking { get; private set; }
         [SerializeField] private CharacterObjStacker _characterObjStacker;
+        private BlockGenerator _blockGenerator;
+        [SerializeField] private CharacterStatus _characterStatus;
+        private int _teamID;
+
+        private void Start()
+        {
+            if (!photonView.IsMine) return;
+            _blockGenerator = GameObject.FindWithTag("BlockGenerator").GetComponent<BlockGenerator>();
+            _teamID = _characterStatus.LocalPlayerTeam - 1;
+        }
 
         private void Update()
         {
@@ -31,6 +42,7 @@ namespace Character
             var power = _destroyPower * _powerFactor;
             var breakObjName = _currentBlockBase.DestroyBlock(power, gameObject);
             if (breakObjName == BlockBase.ErrorTag) return;
+            _blockGenerator.ChangeBlocksShare(breakObjName, _teamID, false);
             _characterObjStacker.BreakBlock(_currentObj);
         }
         
