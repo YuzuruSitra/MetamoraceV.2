@@ -36,6 +36,7 @@ namespace Block
         private Vector3[] _rayOrigins = new Vector3[4];
         private Vector3 _extents;
         private const float RayPadding = 0.2f;
+        
         private void Start()
         {
             Transform child = transform.GetChild(0);
@@ -49,7 +50,6 @@ namespace Block
             _targetPosZ = (_insPlayerTeam == 1) ? BlockGenerator.Team2PosZ : BlockGenerator.Team1PosZ;
             _currentPos = transform.position;
         }
-        
         
         private void Update()
         {
@@ -141,15 +141,13 @@ namespace Block
 
                 bool exitDetected = false;
                 var rayLength = _extents.x + ExitRayLength;
-                var rayColor = Color.red; // Ray�̐F
+                var rayColor = Color.red;
 
-                // ���b�V����4�̊p�̍��W���v�Z
                 _rayOrigins[0] = transform.position + transform.right * (_extents.x - RayPadding) + transform.up * (_extents.y - RayPadding);
                 _rayOrigins[1] = transform.position - transform.right * (_extents.x - RayPadding) + transform.up * (_extents.y - RayPadding);
                 _rayOrigins[2] = transform.position + transform.right * (_extents.x - RayPadding) - transform.up * (_extents.y - RayPadding);
                 _rayOrigins[3] = transform.position - transform.right * (_extents.x - RayPadding) - transform.up * (_extents.y - RayPadding);
 
-                // �e�p����Ray���΂��ĉ���
                 foreach (var origin in _rayOrigins)
                 {
                     Debug.DrawRay(origin, -transform.forward * rayLength, rayColor);
