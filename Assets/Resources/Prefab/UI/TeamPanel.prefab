@@ -418,7 +418,7 @@ MonoBehaviour:
   - {fileID: 1530939390203802844}
   - {fileID: 1530939391132947578}
   - {fileID: 1530939390126270832}
-  _startBt: {fileID: 1530939391466338992}
+  _startBtObj: {fileID: 1530939391466338998}
   _matchLauncher: {fileID: 0}
 --- !u!1 &1530939390553256802
 GameObject:

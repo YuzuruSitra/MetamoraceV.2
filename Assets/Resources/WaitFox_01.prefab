@@ -424,6 +424,7 @@ MonoBehaviour:
   _destroyPower: 0
   _playerReach: 0
   _characterObjStacker: {fileID: 0}
+  _characterStatus: {fileID: 0}
 --- !u!114 &5970117286552278260
 MonoBehaviour:
   m_ObjectHideFlags: 0

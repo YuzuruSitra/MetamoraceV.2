@@ -35,10 +35,7 @@ public class WaitPlayerNameUi : MonoBehaviourPunCallbacks
     private void UpdatePlayerText(Player player)
     {
         int num = player.ActorNumber - 1;
-        if (num < _playerTexts.Length)
-        {
-            _playerTexts[num].text = player.NickName;
-        }
+        if (num < _playerTexts.Length) _playerTexts[num].text = player.NickName;
     }
 
     private void ClearPlayerText(Player player)

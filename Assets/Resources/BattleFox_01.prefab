@@ -805,6 +805,7 @@ MonoBehaviour:
   _destroyPower: 1
   _playerReach: 0.8
   _characterObjStacker: {fileID: 278414432227119862}
+  _characterStatus: {fileID: 6192094455029975914}
 --- !u!114 &7456515268578178929
 MonoBehaviour:
   m_ObjectHideFlags: 0

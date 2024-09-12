@@ -11,14 +11,16 @@ namespace System.UI
     {
         [SerializeField] private UnityEngine.UI.Text _roomText;
         [SerializeField] private UnityEngine.UI.Text[] _nameText;
-        [SerializeField] private Button _startBt;
+        [SerializeField] private GameObject _startBtObj;
+        private Button _startBt;
         private UiSeHandler _uiSeHandler;
         [SerializeField] private MatchLauncher _matchLauncher;
         
         private void Start()
         {
             _roomText.text = PhotonNetwork.MasterClient.NickName + "のルーム";
-            if (!PhotonNetwork.IsMasterClient) _startBt.interactable = false;
+            if (!PhotonNetwork.IsMasterClient) _startBtObj.SetActive(false);
+            _startBt = _startBtObj.GetComponent<Button>();
             _uiSeHandler = UiSeHandler.InstanceUiSeHandler;
             _startBt.onClick.AddListener(_uiSeHandler.PushSound);
             _startBt.onClick.AddListener(_matchLauncher.GameStart);

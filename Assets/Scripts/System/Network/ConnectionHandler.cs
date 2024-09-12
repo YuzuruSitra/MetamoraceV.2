@@ -22,6 +22,7 @@ namespace System.Network
         
         public void JoinRoom()
         {
+            if (PhotonNetwork.NickName != PlayerName) PhotonNetwork.NickName = PlayerName;
             switch (ModeState)
             {
                 case 0:
@@ -54,7 +55,6 @@ namespace System.Network
         // ルームへの参加が成功した時に呼ばれるコールバック
         public override void OnJoinedRoom()
         {
-            PhotonNetwork.NickName = PlayerName;
             PhotonNetwork.LoadLevel(_sceneName);
         }
         
