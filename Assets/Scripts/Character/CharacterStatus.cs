@@ -57,8 +57,8 @@ namespace Character
             ChangeCondition(Condition.Pause);
             _timeHandler = GameObject.FindWithTag("TimeHandler").GetComponent<TimeHandler>();
             _timeHandler.CountDownedEvent += LaunchGame;
-            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId))
-            _localPlayerTeam = (int)teamId;
+            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.MemberIdKey, out var memberId))
+            _localPlayerTeam = (int)memberId < 2 ? 1 : 2;
             var isReversal = (_localPlayerTeam != 1);
             _characterMover.SetReversalBool(isReversal);
         }

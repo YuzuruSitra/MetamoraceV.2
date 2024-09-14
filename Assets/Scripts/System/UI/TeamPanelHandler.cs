@@ -39,12 +39,12 @@ namespace System.UI
 
         public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
         {
-            if (changedProps.ContainsKey(CustomInfoHandler.TeamIdKey))
-                ChangeTeamName();
+            if (changedProps.ContainsKey(CustomInfoHandler.TeamIdKey)) ChangeTeamName();
         }
 
         private void ChangeTeamName()
         {
+            if (_matchLauncher.GoToBattle) return;
             foreach (var t in _nameText) t.text = "";
 
             var players = PhotonNetwork.PlayerList;

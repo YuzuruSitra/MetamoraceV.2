@@ -14,12 +14,15 @@ namespace System.Network
         public event Action<bool> ChangeIsMatching;
         private CustomInfoHandler _customInfoHandler;
         private bool _isWaitMemberId = true;
+        public bool GoToBattle { get; private set; }
         private Coroutine _gameStartCoroutine;
+
         private void Start()
         {
             _customInfoHandler = CustomInfoHandler.Instance;
             if (!PhotonNetwork.IsMasterClient) return;
             PhotonNetwork.CurrentRoom.IsOpen = true;
+            photonView.RPC("ChangeGoToBattle", RpcTarget.All, false);
             foreach (var player in PhotonNetwork.PlayerList)
                 _customInfoHandler.ChangeValue(CustomInfoHandler.TeamIdKey, CustomInfoHandler.InitialValue, player);
         }
@@ -37,16 +40,15 @@ namespace System.Network
                 return;
             }
             // カスタムプロパティを設定して、全員のプロパティ更新を確認するまで待機する
+            photonView.RPC("ChangeGoToBattle", RpcTarget.All, true);
             _gameStartCoroutine = StartCoroutine(WaitForAllPlayersReady());
         }
 
         private IEnumerator WaitForAllPlayersReady()
         {
             SetInGameID();
-
             // すべてのプレイヤーが準備完了になるまで待機
             while (_isWaitMemberId) yield return null;
-
             // プレイヤー全員が準備完了になったらシーン遷移
             PhotonNetwork.CurrentRoom.IsOpen = false;
             photonView.RPC("LoadGameScene", RpcTarget.All);
@@ -62,7 +64,7 @@ namespace System.Network
         // 退出処理
         public void LeaveRoom()
         {
-            PhotonNetwork.LeaveRoom(); // ルームから退出を開始
+            PhotonNetwork.LeaveRoom();
         }
 
         public override void OnLeftRoom()
@@ -147,6 +149,12 @@ namespace System.Network
                         break;
                 }
             }
+        }
+
+        [PunRPC]
+        public void ChangeGoToBattle(bool state)
+        {
+            GoToBattle = state;
         }
         
     }
