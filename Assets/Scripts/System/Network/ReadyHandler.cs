@@ -34,7 +34,7 @@ namespace System.Network
                 case "Master_Title":
                     break;
                 case "Master_Wait":
-                    _customInfoHandler.ChangeValue(CustomInfoHandler.ReadyKey, 0, PhotonNetwork.LocalPlayer);
+                    _customInfoHandler.ChangeValue(CustomInfoHandler.ReadyKey, CustomInfoHandler.InitialValue, PhotonNetwork.LocalPlayer);
                     break;
                 case "Master_Battle":
                     _customInfoHandler.ChangeValue(CustomInfoHandler.ReadyKey, 1, PhotonNetwork.LocalPlayer);

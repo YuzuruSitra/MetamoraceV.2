@@ -30,7 +30,7 @@ namespace System.Battle
             foreach (var player in PhotonNetwork.PlayerList)
             {
                 if (!player.CustomProperties.TryGetValue(CustomInfoHandler.ReadyKey, out var readyValue)) continue;
-                if ((int)readyValue == 0) count++;
+                if ((int)readyValue == CustomInfoHandler.InitialValue) count++;
             }
             return (count == 0);
         }
