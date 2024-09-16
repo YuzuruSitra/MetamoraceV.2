@@ -10,6 +10,7 @@ namespace Character
         [SerializeField] private GameObject _selfEnhancementEffect;
         [SerializeField] private GameObject _stanEffect;
         [SerializeField] private GameObject _dieEffect;
+        [SerializeField] private GameObject _walkEffect;
         private GameObject[] _effects;
         private const float EffectPosZ = 0.4f;
         private readonly Vector3[] _stanOffSets = {
@@ -24,6 +25,9 @@ namespace Character
             new(0, 1.2f, -EffectPosZ),
             new(0, 1.2f, EffectPosZ)
         };
+        private readonly Vector3 _walkInitPos = 
+            new (0f, 0.1f, -0.2f)
+        ;
 
         private void Start()
         {
@@ -31,12 +35,12 @@ namespace Character
             _dieEffect.SetActive(false);
             _characterStatus.ChangeConditionEvent += ReceiveEffect;
             _characterStatus.ChangeSpecialEffectsEvent += ReceiveEnhancement;
-            _effects = new[] { _stanEffect, _dieEffect };
+            _effects = new[] { _stanEffect, _dieEffect,_walkEffect};
 
             var num = _characterStatus.LocalPlayerTeam - 1;
-            _stanEffect.transform.position = _stanOffSets[num];
-            _selfEnhancementEffect.transform.position = _selfEnhancementOffSets[num];
-            _dieEffect.transform.position = _dieOffSets[num];
+            // _stanEffect.transform.position = _stanOffSets[num];
+            // _selfEnhancementEffect.transform.position = _selfEnhancementOffSets[num];
+            // _dieEffect.transform.position = _dieOffSets[num];
         }
 
         private void OnDestroy()
@@ -70,17 +74,20 @@ namespace Character
                 case CharacterStatus.Condition.HDeath:
                     photonView.RPC(nameof(ApplyEffect), RpcTarget.All, 1);
                     break;
+                case CharacterStatus.Condition.Run:
+                    photonView.RPC(nameof(ApplyEffect), RpcTarget.All, 2);
+                    break;
                 default:
                     photonView.RPC(nameof(DisableEffects), RpcTarget.All);
                     break;
             }
         }
-        
+       
         [PunRPC]
         public void ApplyEffect(int target)
         {
-            var other = 1 - target;
-            _effects[other].SetActive(false);
+            // var other = 1 - target;
+            // _effects[other].SetActive(false);
             _effects[target].SetActive(true);
         }
         
