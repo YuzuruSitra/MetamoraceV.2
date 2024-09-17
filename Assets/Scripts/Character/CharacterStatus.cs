@@ -31,16 +31,18 @@ namespace Character
             SelfEnhancement
         }
         private SpecialEffects _currentSpecialEffects = SpecialEffects.None;
-        public event Action<SpecialEffects> ChangeSpecialEffectsEvent;
-        
+          public event Action<SpecialEffects> ChangeSpecialEffectsEvent;
+    
         [SerializeField] private CharacterMover _characterMover;
         [SerializeField] private CharacterObjBreaker _characterObjBreaker;
         [SerializeField] private CharacterObjGenerator _characterObjGenerator;
+        
         private TimeHandler _timeHandler;
         [SerializeField] private bool _isWaitScene;
         // Team 1 or 2.
         private int _localPlayerTeam;
         public int LocalPlayerTeam => _localPlayerTeam;
+        [SerializeField] CharacterEffectHandler _characterEffectHandler;
         private readonly HashSet<Condition> _nonMovingConditions = new()
         {
             Condition.Pause,
@@ -48,6 +50,11 @@ namespace Character
             Condition.Stan,
             Condition.VDeath,
             Condition.HDeath
+        };
+        private readonly HashSet<Condition> _parmanentConditions = new()
+        {
+            Condition.Run,
+            Condition.Jump
         };
         
         private void Awake()
@@ -109,6 +116,7 @@ namespace Character
             else if (_characterMover.CurrentMoveSpeed <= _characterMover.RunSpeed)
             {
                 ChangeCondition(Condition.Run);
+                StartCoroutine(_characterEffectHandler.RecieveWalkEffect());
             }
         }
         

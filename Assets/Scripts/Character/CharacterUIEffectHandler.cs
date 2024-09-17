@@ -12,7 +12,7 @@ namespace Character
         private GameObject[] _effects;
         private const float EffectPosZ = 0.4f;
         private RectTransform _deathEffectPos, _selfEnhancementEffectPos, _stanEffectPos;
-
+        
         private readonly Vector2 _stanOffsets = new(0f, 0.8f);
         private readonly Vector2 _selfEnhancementOffsets = new(0f, 1.2f);
         private readonly Vector2 _dieOffsets = new(0f, 1.2f);

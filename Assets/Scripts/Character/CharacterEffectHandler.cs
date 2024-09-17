@@ -1,6 +1,7 @@
 using System.Network;
 using Photon.Pun;
 using UnityEngine;
+using System.Collections; 
 
 namespace Character
 {
@@ -11,6 +12,8 @@ namespace Character
         [SerializeField] private GameObject _stanEffect;
         [SerializeField] private GameObject _dieEffect;
         [SerializeField] private GameObject _walkEffect;
+        [SerializeField] private GameObject _jumpEffect;
+
         private GameObject[] _effects;
         private const float EffectPosZ = 0.4f;
         private readonly Vector3[] _stanOffSets = {
@@ -28,15 +31,17 @@ namespace Character
         private readonly Vector3 _walkInitPos = 
             new (0f, 0.1f, -0.2f)
         ;
-
+    
+        bool PlayWalkEffect ,PlayJumpEffect= false;
         private void Start()
         {
             if (!photonView.IsMine) return;
             _dieEffect.SetActive(false);
             _characterStatus.ChangeConditionEvent += ReceiveEffect;
             _characterStatus.ChangeSpecialEffectsEvent += ReceiveEnhancement;
-            _effects = new[] { _stanEffect, _dieEffect,_walkEffect};
-
+             _effects = new[] { _stanEffect, _dieEffect};
+             _walkEffect.transform.parent = null;
+             _jumpEffect.transform.parent = null;
             var num = _characterStatus.LocalPlayerTeam - 1;
             // _stanEffect.transform.position = _stanOffSets[num];
             // _selfEnhancementEffect.transform.position = _selfEnhancementOffSets[num];
@@ -74,15 +79,30 @@ namespace Character
                 case CharacterStatus.Condition.HDeath:
                     photonView.RPC(nameof(ApplyEffect), RpcTarget.All, 1);
                     break;
-                case CharacterStatus.Condition.Run:
-                    photonView.RPC(nameof(ApplyEffect), RpcTarget.All, 2);
-                    break;
                 default:
                     photonView.RPC(nameof(DisableEffects), RpcTarget.All);
                     break;
             }
         }
+
+        public IEnumerator RecieveWalkEffect()
+        {
+            if(PlayWalkEffect) yield break;
+             _walkEffect.transform.position = this.gameObject.transform.position;
+            _walkEffect.SetActive(true);
+            PlayWalkEffect = true;
+           yield return new WaitForSeconds (0.6f);
+             PlayWalkEffect = false;
+        }
        
+          public IEnumerator ApplyJumpEffect()
+        {
+             _jumpEffect.transform.position = this.gameObject.transform.position;
+            _jumpEffect.SetActive(true);
+           yield return new WaitForSeconds (0.4f);
+           _jumpEffect.SetActive(false);
+
+        }
         [PunRPC]
         public void ApplyEffect(int target)
         {

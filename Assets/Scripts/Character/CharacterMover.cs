@@ -33,11 +33,13 @@ namespace Character
 
         public float WalkSpeed => _walkSpeed;
         public float RunSpeed => _runSpeed;
+        CharacterEffectHandler _characterEffectHandler;
 
         private void Start()
         {
             if (!photonView.IsMine) return;
             _controller = GetComponent<CharacterController>();
+            _characterEffectHandler = GetComponent<CharacterEffectHandler>();
         }
 
         private void Update()
@@ -76,7 +78,11 @@ namespace Character
             {
                 _verticalSpeed = -_gravity * Time.deltaTime;
                 if (_isMoving && !_characterObjBreaker.IsBreaking && Input.GetButtonDown("Jump"))
-                    _verticalSpeed = _jumpSpeed;
+                {
+                     _verticalSpeed = _jumpSpeed;
+                      StartCoroutine(_characterEffectHandler.ApplyJumpEffect());
+                    //エフェクト再生
+                }
             }
             else
             {
