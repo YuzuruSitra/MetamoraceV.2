@@ -18,7 +18,6 @@ namespace Character
 
         void Start()
         {
-            if (!photonView.IsMine) return;
             _nickNamePos = _nickName.GetComponent<RectTransform>();
             _mainCam = Camera.main;
 
