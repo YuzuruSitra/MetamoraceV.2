@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158390312705297298}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1235,7 +1235,6 @@ MonoBehaviour:
   _characterObjGenerator: {fileID: 7456515268578178929}
   _characterPhotonStatus: {fileID: 3968165114116681612}
   _isWaitScene: 0
-  _characterEffectHandler: {fileID: 3910066193652626827}
 --- !u!114 &3968165114116681612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1421,12 +1420,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterStatus: {fileID: 6192094455029975914}
-  _characterPhotonStatus: {fileID: 3968165114116681612}
   _selfEnhancementEffect: {fileID: 2301195601308475551}
   _stanEffect: {fileID: 1650002595328653766}
   _dieEffect: {fileID: 2822620724261292728}
-  _walkEffect: {fileID: 1513668318086624940}
+  _runEffect: {fileID: 1513668318086624940}
   _jumpEffect: {fileID: 158390312705297298}
+  _characterMover: {fileID: 6192094455029975910}
 --- !u!114 &5784793257100763976
 MonoBehaviour:
   m_ObjectHideFlags: 0

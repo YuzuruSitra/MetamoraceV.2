@@ -1,116 +1,156 @@
 using Photon.Pun;
 using UnityEngine;
-using System.Collections; 
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Character
 {
     public class CharacterEffectHandler : MonoBehaviourPunCallbacks
     {
+        public enum Effects
+        {
+            Stan,
+            Die,
+            Run,
+            Jump
+        }
+
         [SerializeField] private CharacterStatus _characterStatus;
-        [SerializeField] private CharacterPhotonStatus _characterPhotonStatus;
         [SerializeField] private GameObject _selfEnhancementEffect;
         [SerializeField] private GameObject _stanEffect;
         [SerializeField] private GameObject _dieEffect;
-        [SerializeField] private GameObject _walkEffect;
+        [SerializeField] private GameObject _runEffect;
         [SerializeField] private GameObject _jumpEffect;
 
-        private GameObject[] _effects;
-        private const float EffectPosZ = 0.4f;
-        private readonly Vector3[] _stanOffSets = {
-            new (0f, 0.8f, -EffectPosZ),
-            new (0f, 0.8f, EffectPosZ)
-        };
-        private readonly Vector3[] _selfEnhancementOffSets = {
-            new(0, 1.2f, -EffectPosZ),
-            new(0, 1.2f, EffectPosZ)
-        };
-        private readonly Vector3[] _dieOffSets = {
-            new(0, 1.2f, -EffectPosZ),
-            new(0, 1.2f, EffectPosZ)
-        };
-        private readonly Vector3 _walkOffSet = 
-            new (0f, 0.4f, 0f)
-        ;
-    
-        bool PlayWalkEffect ,PlayJumpEffect= false;
+        private Dictionary<Effects, GameObject> _effects;
+        private Vector3 _runOffset = new Vector3(0f, 0.4f, 0f);
+        private WaitForSeconds _runWaitSeconds = new WaitForSeconds(0.6f);
+        private Coroutine _runCoroutine;
+        [SerializeField] private CharacterMover _characterMover;
+        private const float JumpPadding = 0.02f;
+
         private void Start()
         {
+            InitializeEffects();
             if (!photonView.IsMine) return;
-            _dieEffect.SetActive(false);
-            _characterStatus.ChangeConditionEvent += ReceiveEffect;
-            _characterStatus.ChangeSpecialEffectsEvent += ReceiveEnhancement;
-             _effects = new[] { _stanEffect, _dieEffect,_selfEnhancementEffect};
-             _walkEffect.transform.parent = null;
-             _jumpEffect.transform.parent = null;
-            var num = _characterPhotonStatus.LocalPlayerTeamID - 1;
+
+            _characterStatus.ChangeConditionEvent += OnConditionChanged;
+            _characterStatus.ChangeSpecialEffectsEvent += OnSpecialEffectChanged;
         }
 
         private void OnDestroy()
         {
             if (!photonView.IsMine) return;
-            _characterStatus.ChangeConditionEvent -= ReceiveEffect;
-            _characterStatus.ChangeSpecialEffectsEvent -= ReceiveEnhancement;
+
+            _characterStatus.ChangeConditionEvent -= OnConditionChanged;
+            _characterStatus.ChangeSpecialEffectsEvent -= OnSpecialEffectChanged;
         }
-        
-        private void ReceiveEnhancement(CharacterStatus.SpecialEffects special)
+
+        private void InitializeEffects()
         {
-            _selfEnhancementEffect.SetActive(special == CharacterStatus.SpecialEffects.SelfEnhancement);
-            photonView.RPC(nameof(ApplyEnhancement), RpcTarget.All,
-                special == CharacterStatus.SpecialEffects.SelfEnhancement);
+            _effects = new Dictionary<Effects, GameObject>
+            {
+                { Effects.Stan, _stanEffect },
+                { Effects.Die, _dieEffect },
+                { Effects.Run, _runEffect },
+                { Effects.Jump, _jumpEffect }
+            };
+
+            _runEffect.transform.parent = null;
+            _jumpEffect.transform.parent = null;
         }
-        
+
+        private void OnSpecialEffectChanged(CharacterStatus.SpecialEffects special)
+        {
+            bool isActive = special == CharacterStatus.SpecialEffects.SelfEnhancement;
+            SetEnhancementEffect(isActive);
+            photonView.RPC(nameof(SetEnhancementEffect), RpcTarget.Others, isActive);
+        }
+
         [PunRPC]
-        public void ApplyEnhancement(bool isActive)
+        public void SetEnhancementEffect(bool isActive)
         {
             _selfEnhancementEffect.SetActive(isActive);
         }
 
-        private void ReceiveEffect(CharacterStatus.Condition condition)
+        private void OnConditionChanged(CharacterStatus.Condition condition)
         {
             switch (condition)
             {
                 case CharacterStatus.Condition.Stan:
-                    photonView.RPC(nameof(ApplyEffect), RpcTarget.All, 0);
-                    break;
                 case CharacterStatus.Condition.VDeath:
                 case CharacterStatus.Condition.HDeath:
-                    photonView.RPC(nameof(ApplyEffect), RpcTarget.All, 1);
+                    ApplyEffect(condition == CharacterStatus.Condition.Stan ? Effects.Stan : Effects.Die);
+                    break;
+                case CharacterStatus.Condition.Run:
+                    if (_runCoroutine == null)
+                        _runCoroutine = StartCoroutine(RunEffectCoroutine());
+                    break;
+                case CharacterStatus.Condition.Jump:
+                    ApplyJumpEffect();
                     break;
                 default:
-                    photonView.RPC(nameof(DisableEffects), RpcTarget.All);
+                    StopEffectCoroutine();
+                    DisableAllEffects();
                     break;
             }
         }
 
-        public IEnumerator RecieveWalkEffect()
+        private IEnumerator RunEffectCoroutine()
         {
-            if(PlayWalkEffect) yield break;
-             _walkEffect.transform.position = this.gameObject.transform.position + _walkOffSet;
-            _walkEffect.SetActive(true);
-            PlayWalkEffect = true;
-           yield return new WaitForSeconds (0.6f);
-             PlayWalkEffect = false;
+            while (true)
+            {
+                if (_characterMover.IsGrounded)
+                {
+                    Vector3 position = transform.position + _runOffset;
+                    ApplyEffect(Effects.Run, position);
+                }
+                yield return _runWaitSeconds;
+            }
         }
-       
-          public IEnumerator ApplyJumpEffect()
-        {
-             _jumpEffect.transform.position = this.gameObject.transform.position;
-            _jumpEffect.SetActive(true);
-           yield return new WaitForSeconds (0.4f);
-           _jumpEffect.SetActive(false);
 
-        }
-        [PunRPC]
-        public void ApplyEffect(int target)
+        private void ApplyJumpEffect()
         {
-            _effects[target].SetActive(true);
+            if (_jumpEffect.activeSelf) _jumpEffect.SetActive(false);
+            var position = transform.position;
+            position.y += JumpPadding;
+            ApplyEffect(Effects.Jump, position);
         }
-        
-        [PunRPC]
-        public void DisableEffects()
+
+        private void ApplyEffect(Effects effect, Vector3? position = null)
         {
-            foreach (var t in _effects)
-                t.SetActive(false);
+            _effects[effect].SetActive(true);
+            photonView.RPC(nameof(RpcApplyEffect), RpcTarget.Others, (int)effect, position ?? Vector3.zero);
+
+            if (position != null) MoveEffect(effect, (Vector3)position);
+        }
+
+        [PunRPC]
+        public void RpcApplyEffect(int effectIndex, Vector3 position)
+        {
+            var effect = (Effects)effectIndex;
+            _effects[effect].SetActive(true);
+            if (position != Vector3.zero) MoveEffect(effect, position);
+        }
+
+        private void MoveEffect(Effects effect, Vector3 position)
+        {
+            _effects[effect].transform.position = position;
+        }
+
+        private void StopEffectCoroutine()
+        {
+            if (_runCoroutine != null)
+            {
+                StopCoroutine(_runCoroutine);
+                _runCoroutine = null;
+            }
+        }
+
+        private void DisableAllEffects()
+        {
+            foreach (var effect in _effects.Values)
+                effect.SetActive(false);
         }
     }
 }

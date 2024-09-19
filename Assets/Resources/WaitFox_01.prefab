@@ -208,7 +208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832832770527276493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -565,7 +565,6 @@ MonoBehaviour:
   _characterObjGenerator: {fileID: 5970117286552278260}
   _characterPhotonStatus: {fileID: 250263548078847141}
   _isWaitScene: 1
-  _characterEffectHandler: {fileID: 7446897279673900789}
 --- !u!114 &250263548078847141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,12 +710,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterStatus: {fileID: 6192094455029975914}
-  _characterPhotonStatus: {fileID: 250263548078847141}
   _selfEnhancementEffect: {fileID: 6565954238702053958}
   _stanEffect: {fileID: 6565954238702053958}
   _dieEffect: {fileID: 6565954238702053958}
-  _walkEffect: {fileID: 6565954238702053958}
+  _runEffect: {fileID: 6565954238702053958}
   _jumpEffect: {fileID: 1832832770527276493}
+  _characterMover: {fileID: 6192094455029975910}
 --- !u!1 &6192094455082704709
 GameObject:
   m_ObjectHideFlags: 0
@@ -3193,7 +3192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1133916527834182603
 Transform:
   m_ObjectHideFlags: 0
