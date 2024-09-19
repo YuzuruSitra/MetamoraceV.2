@@ -28,8 +28,8 @@ namespace Character
             new(0, 1.2f, -EffectPosZ),
             new(0, 1.2f, EffectPosZ)
         };
-        private readonly Vector3 _walkInitPos = 
-            new (0f, 0.1f, -0.2f)
+        private readonly Vector3 _walkOffSet = 
+            new (0f, 0.4f, 0f)
         ;
     
         bool PlayWalkEffect ,PlayJumpEffect= false;
@@ -39,7 +39,7 @@ namespace Character
             _dieEffect.SetActive(false);
             _characterStatus.ChangeConditionEvent += ReceiveEffect;
             _characterStatus.ChangeSpecialEffectsEvent += ReceiveEnhancement;
-             _effects = new[] { _stanEffect, _dieEffect};
+             _effects = new[] { _stanEffect, _dieEffect,_selfEnhancementEffect};
              _walkEffect.transform.parent = null;
              _jumpEffect.transform.parent = null;
             var num = _characterStatus.LocalPlayerTeam - 1;
@@ -88,7 +88,7 @@ namespace Character
         public IEnumerator RecieveWalkEffect()
         {
             if(PlayWalkEffect) yield break;
-             _walkEffect.transform.position = this.gameObject.transform.position;
+             _walkEffect.transform.position = this.gameObject.transform.position + _walkOffSet;
             _walkEffect.SetActive(true);
             PlayWalkEffect = true;
            yield return new WaitForSeconds (0.6f);

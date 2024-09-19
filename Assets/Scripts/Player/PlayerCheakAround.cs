@@ -46,7 +46,7 @@ public class PlayerCheakAround : MonoBehaviourPunCallbacks
         return _currentBlock;
     }
     
-    //縦方向�?�死亡判�?
+    //縦方向�?�死亡判�?
     private void JudgeVerticalDeath()
     {
         Vector3 rayOrigin = transform.position + Vector3.up * _verticalRayOffset;
@@ -63,7 +63,7 @@ public class PlayerCheakAround : MonoBehaviourPunCallbacks
             Debug.Log("DeathVertical");
             //StartCoroutine(ChangePhysics());
     }
-    //奥行きの死亡判�?
+    //奥行きの死亡判�?
     private void JudgeHorizontalDeath()
     {
         Vector3 rayDirection = (_teamId == 0) ? Vector3.forward : Vector3.back;
