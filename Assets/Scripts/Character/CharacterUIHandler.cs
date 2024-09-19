@@ -14,15 +14,14 @@ namespace Character
         [SerializeField] private CharacterPhotonStatus _characterPhotonStatus;
         private string _name;
         private Camera _mainCam;
-        private float _canvasScaleFactor;
+        private Vector2 _baseScale = new Vector2(1920, 1080);
 
         void Start()
         {
             if (!photonView.IsMine) return;
             _nickNamePos = _nickName.GetComponent<RectTransform>();
             _mainCam = Camera.main;
-            var canvas = _nickName.GetComponentInParent<Canvas>();
-            _canvasScaleFactor = canvas.scaleFactor;
+
             if (!photonView.IsMine) return;
             _name = _characterPhotonStatus.LocalPlayerName;
             UpdateName();
@@ -42,12 +41,12 @@ namespace Character
                 return;
             }
 
-            // ターゲットのワールド座標をスクリーン座標に変換
+            var factor = Vector2.zero;
+            factor.x = Screen.width / _baseScale.x;
+            factor.y = Screen.height / _baseScale.y;
+
             var screenPos = RectTransformUtility.WorldToScreenPoint(_mainCam, target.position);
-            // スクリーン座標とCanvasのスケーリングを考慮してanchoredPositionを計算
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(_nickNamePos.parent as RectTransform, screenPos, _mainCam, out var localPos);
-            // プレイヤー名のオフセットを適用しつつ、スケールファクターを反映
-            _nickNamePos.anchoredPosition = localPos / _canvasScaleFactor + _playerNameOffset;
+            _nickNamePos.anchoredPosition = screenPos + _playerNameOffset * factor;
         }
 
         [PunRPC]
