@@ -2,7 +2,6 @@ using System;
 using System.Battle;
 using System.Collections.Generic;
 using Photon.Pun;
-using System.Network;
 using UnityEngine;
 
 namespace Character
@@ -36,12 +35,9 @@ namespace Character
         [SerializeField] private CharacterMover _characterMover;
         [SerializeField] private CharacterObjBreaker _characterObjBreaker;
         [SerializeField] private CharacterObjGenerator _characterObjGenerator;
-        
+        [SerializeField] private CharacterPhotonStatus _characterPhotonStatus;
         private TimeHandler _timeHandler;
         [SerializeField] private bool _isWaitScene;
-        // Team 1 or 2.
-        private int _localPlayerTeam;
-        public int LocalPlayerTeam => _localPlayerTeam;
         [SerializeField] CharacterEffectHandler _characterEffectHandler;
         private readonly HashSet<Condition> _nonMovingConditions = new()
         {
@@ -57,16 +53,14 @@ namespace Character
             Condition.Jump
         };
         
-        private void Awake()
+        private void Start()
         {
             if (!photonView.IsMine) return;
             if (_isWaitScene) return;
             ChangeCondition(Condition.Pause);
             _timeHandler = GameObject.FindWithTag("TimeHandler").GetComponent<TimeHandler>();
             _timeHandler.CountDownedEvent += LaunchGame;
-            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.MemberIdKey, out var memberId))
-            _localPlayerTeam = (int)memberId < 2 ? 1 : 2;
-            var isReversal = (_localPlayerTeam != 1);
+            var isReversal = (_characterPhotonStatus.LocalPlayerTeamID != 1);
             _characterMover.SetReversalBool(isReversal);
         }
 

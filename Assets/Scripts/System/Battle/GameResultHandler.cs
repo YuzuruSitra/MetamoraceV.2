@@ -15,12 +15,14 @@ namespace System.Battle
         private WaitForSeconds _waitFor;
         public event Action<int> CalcGameResult;
         private CharacterStatus _characterStatus;
+        private CharacterPhotonStatus _characterPhotonStatus;
         
         private void Start()
         {
             var playerGenerator = GameObject.FindWithTag("PlayerGenerator").GetComponent<PlayerGenerator>();
             var player = playerGenerator.CurrentPlayer;
             _characterStatus = player.GetComponent<CharacterStatus>();
+            _characterPhotonStatus = player.GetComponent<CharacterPhotonStatus>();
             _characterStatus.ChangeConditionEvent += ReceiveCondition;
 
             if (!PhotonNetwork.IsMasterClient) return;
@@ -52,7 +54,7 @@ namespace System.Battle
         private void CalcDeathResult()
         {
             _timeHandler.ReceiveStopTime();
-            var winTeamNum = 3 - _characterStatus.LocalPlayerTeam;
+            var winTeamNum = 3 - _characterPhotonStatus.LocalPlayerTeamID;
             photonView.RPC(nameof(ShareCalc), RpcTarget.All, winTeamNum);
         }
 

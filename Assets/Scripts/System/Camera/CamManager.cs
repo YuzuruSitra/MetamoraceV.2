@@ -1,6 +1,5 @@
 using System.Network;
 using Cinemachine;
-using Photon.Pun;
 using UnityEngine;
 using Character;
 
@@ -11,13 +10,10 @@ namespace System.Camera
         private int _teamID;
         [SerializeField]
         private CinemachineVirtualCameraBase[] _bottomRightCams = new CinemachineVirtualCameraBase[2];
-        private CinemachineVirtualCameraBase _vCamRight;
         [SerializeField]
         private CinemachineVirtualCameraBase[] _bottomCenterCams = new CinemachineVirtualCameraBase[2];
-        private CinemachineVirtualCameraBase _vCamCenter;
         [SerializeField]
         private CinemachineVirtualCameraBase[] _bottomLeftCams = new CinemachineVirtualCameraBase[2];
-        private CinemachineVirtualCameraBase _vCamLeft;
         [SerializeField]
         private CinemachineVirtualCameraBase[] _topRightCams = new CinemachineVirtualCameraBase[2];
         [SerializeField]
@@ -31,7 +27,7 @@ namespace System.Camera
         {
             _playerGenerator = GameObject.FindWithTag("PlayerGenerator").GetComponent<PlayerGenerator>();
             _targetPlayer = _playerGenerator.CurrentPlayer;
-            _teamID = _targetPlayer.GetComponent<CharacterStatus>().LocalPlayerTeam - 1;
+            _teamID = _targetPlayer.GetComponent<CharacterPhotonStatus>().LocalPlayerTeamID - 1;
         }
 
         private void Update()

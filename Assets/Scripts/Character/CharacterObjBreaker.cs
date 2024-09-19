@@ -17,14 +17,14 @@ namespace Character
         public bool IsBreaking { get; private set; }
         [SerializeField] private CharacterObjStacker _characterObjStacker;
         private BlockGenerator _blockGenerator;
-        [SerializeField] private CharacterStatus _characterStatus;
+        [SerializeField] private CharacterPhotonStatus _characterPhotonStatus;
         private int _teamID;
 
         private void Start()
         {
             if (!photonView.IsMine) return;
             _blockGenerator = GameObject.FindWithTag("BlockGenerator").GetComponent<BlockGenerator>();
-            _teamID = _characterStatus.LocalPlayerTeam - 1;
+            _teamID = _characterPhotonStatus.LocalPlayerTeamID - 1;
         }
 
         private void Update()

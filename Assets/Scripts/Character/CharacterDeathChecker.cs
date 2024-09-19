@@ -1,4 +1,3 @@
-using System.Network;
 using Photon.Pun;
 using UnityEngine;
 
@@ -12,10 +11,12 @@ namespace Character
         private Vector3 _horizontalRayDirection;
         [SerializeField] private CharacterMover _characterMover;
         [SerializeField] private CharacterStatus _characterStatus;
+        [SerializeField] private CharacterPhotonStatus _characterPhotonStatus;
+
         private void Start()
         {
             if (!photonView.IsMine) return;
-            _horizontalRayDirection = (_characterStatus.LocalPlayerTeam == 1) ? Vector3.forward : Vector3.back;
+            _horizontalRayDirection = (_characterPhotonStatus.LocalPlayerTeamID == 1) ? Vector3.forward : Vector3.back;
         }
 
         private void Update()

@@ -1,4 +1,3 @@
-using System.Network;
 using Photon.Pun;
 using UnityEngine;
 using System.Collections; 
@@ -8,6 +7,7 @@ namespace Character
     public class CharacterEffectHandler : MonoBehaviourPunCallbacks
     {
         [SerializeField] private CharacterStatus _characterStatus;
+        [SerializeField] private CharacterPhotonStatus _characterPhotonStatus;
         [SerializeField] private GameObject _selfEnhancementEffect;
         [SerializeField] private GameObject _stanEffect;
         [SerializeField] private GameObject _dieEffect;
@@ -42,10 +42,7 @@ namespace Character
              _effects = new[] { _stanEffect, _dieEffect,_selfEnhancementEffect};
              _walkEffect.transform.parent = null;
              _jumpEffect.transform.parent = null;
-            var num = _characterStatus.LocalPlayerTeam - 1;
-            // _stanEffect.transform.position = _stanOffSets[num];
-            // _selfEnhancementEffect.transform.position = _selfEnhancementOffSets[num];
-            // _dieEffect.transform.position = _dieOffSets[num];
+            var num = _characterPhotonStatus.LocalPlayerTeamID - 1;
         }
 
         private void OnDestroy()
@@ -106,8 +103,6 @@ namespace Character
         [PunRPC]
         public void ApplyEffect(int target)
         {
-            // var other = 1 - target;
-            // _effects[other].SetActive(false);
             _effects[target].SetActive(true);
         }
         

@@ -10,8 +10,8 @@ namespace Character
     {
         private int _teamID;
         private bool _isGenerate = true;
-        [SerializeField] private CharacterStatus _characterStatus;
         [SerializeField] private CharacterObjStacker _characterObjStacker;
+        [SerializeField] private CharacterPhotonStatus _characterPhotonStatus;
         [SerializeField] private GameObject[] _herosPrefab;
         [SerializeField] private GameObject[] _bigHerosPrefab;
         [SerializeField] private GameObject[] _blockCPrefab;
@@ -42,7 +42,7 @@ namespace Character
             _predictCubes = Instantiate(_predictCubes);
             _blockGenerator = GameObject.FindWithTag("BlockGenerator").GetComponent<BlockGenerator>();
 
-            _teamID = _characterStatus.LocalPlayerTeam - 1;
+            _teamID = _characterPhotonStatus.LocalPlayerTeamID - 1;
             if (_teamID == 1) return;
             _insBlockOffset.z *= -1;
             _insBigBlockOffset.z *= -1;
