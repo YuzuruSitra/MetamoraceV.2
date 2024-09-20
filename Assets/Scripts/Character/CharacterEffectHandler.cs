@@ -29,7 +29,7 @@ namespace Character
         [SerializeField] private CharacterMover _characterMover;
         private const float JumpPadding = 0.02f;
 
-        private void Start()
+        private void Awake()
         {
             InitializeEffects();
             if (!photonView.IsMine) return;
