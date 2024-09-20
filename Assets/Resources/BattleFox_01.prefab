@@ -1108,6 +1108,7 @@ GameObject:
   - component: {fileID: 6192094455029975908}
   - component: {fileID: 6192094455029975913}
   - component: {fileID: 6192094455029975911}
+  - component: {fileID: 6192094455029975909}
   - component: {fileID: 6192094455029975910}
   - component: {fileID: 6192094455029975915}
   - component: {fileID: 6192094455029975914}
@@ -1117,12 +1118,11 @@ GameObject:
   - component: {fileID: 7456515268578178929}
   - component: {fileID: 7429199923039469224}
   - component: {fileID: 278414432227119862}
-  - component: {fileID: 6192094455029975909}
+  - component: {fileID: 3910066193652626827}
+  - component: {fileID: 5784793257100763976}
   - component: {fileID: -277913044095691217}
   - component: {fileID: 9204295685674231509}
   - component: {fileID: 776502803261327228}
-  - component: {fileID: 3910066193652626827}
-  - component: {fileID: 5784793257100763976}
   m_Layer: 0
   m_Name: BattleFox_01
   m_TagString: Player
@@ -1185,6 +1185,24 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.35, y: 1, z: 0.35}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!143 &6192094455029975909
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6192094455029975907}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1
+  m_Radius: 0.2
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &6192094455029975910
 MonoBehaviour:
@@ -1340,24 +1358,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18075538149db4f4a84e13e975d9c9a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!143 &6192094455029975909
-CharacterController:
+--- !u!114 &3910066193652626827
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6192094455029975907}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.2
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0a210c0f00e1a42826cd4e3fe6c4dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterStatus: {fileID: 6192094455029975914}
+  _selfEnhancementEffect: {fileID: 2301195601308475551}
+  _stanEffect: {fileID: 1650002595328653766}
+  _dieEffect: {fileID: 2822620724261292728}
+  _runEffect: {fileID: 1513668318086624940}
+  _jumpEffect: {fileID: 158390312705297298}
+  _characterMover: {fileID: 6192094455029975910}
+--- !u!114 &5784793257100763976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6192094455029975907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb93e59037f9624eb14179351f79486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nickName: {fileID: 9196534010750121588}
+  target: {fileID: 6192094455029975908}
+  _playerNameOffset: {x: -960, y: -260}
+  _characterPhotonStatus: {fileID: 3968165114116681612}
 --- !u!114 &-277913044095691217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1407,41 +1442,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 6192094455029975913}
---- !u!114 &3910066193652626827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6192094455029975907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0a210c0f00e1a42826cd4e3fe6c4dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _characterStatus: {fileID: 6192094455029975914}
-  _selfEnhancementEffect: {fileID: 2301195601308475551}
-  _stanEffect: {fileID: 1650002595328653766}
-  _dieEffect: {fileID: 2822620724261292728}
-  _runEffect: {fileID: 1513668318086624940}
-  _jumpEffect: {fileID: 158390312705297298}
-  _characterMover: {fileID: 6192094455029975910}
---- !u!114 &5784793257100763976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6192094455029975907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcb93e59037f9624eb14179351f79486, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _nickName: {fileID: 9196534010750121588}
-  target: {fileID: 6192094455029975908}
-  _playerNameOffset: {x: -960, y: -260}
-  _characterPhotonStatus: {fileID: 3968165114116681612}
 --- !u!1 &6192094455082704709
 GameObject:
   m_ObjectHideFlags: 0

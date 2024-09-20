@@ -13,8 +13,8 @@ namespace Character
         [SerializeField] private bool _isWaitScene;
         private void Awake()
         {
+            LocalPlayerName = photonView.Owner.NickName;
             if (!photonView.IsMine) return;
-            LocalPlayerName = PhotonNetwork.LocalPlayer.NickName;
             if (_isWaitScene) return;
             if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.MemberIdKey, out var memberId))
                 LocalPlayerMemberID = (int)memberId;

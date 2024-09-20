@@ -13,6 +13,7 @@ namespace System.Network
         public const string TeamIdKey = "TeamID";
         public const string ReadyKey = "Ready";
         public const int InitialValue = -1;
+        public const int ReadyValue = 1;
         
         private CustomInfoHandler()
         {

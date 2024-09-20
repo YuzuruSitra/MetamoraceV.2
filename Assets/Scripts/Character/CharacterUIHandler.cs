@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Network;
 
 namespace Character
 {
@@ -12,7 +13,6 @@ namespace Character
         [SerializeField] private Transform target;
         [SerializeField] private Vector2 _playerNameOffset;
         [SerializeField] private CharacterPhotonStatus _characterPhotonStatus;
-        private string _name;
         private Camera _mainCam;
         private Vector2 _baseScale = new Vector2(1920, 1080);
 
@@ -20,20 +20,12 @@ namespace Character
         {
             _nickNamePos = _nickName.GetComponent<RectTransform>();
             _mainCam = Camera.main;
-
-            if (!photonView.IsMine) return;
-            _name = _characterPhotonStatus.LocalPlayerName;
-            UpdateName();
-        }
-
-        public override void OnPlayerEnteredRoom(Player newPlayer)
-        {
-            photonView.RPC(nameof(UpdateName), RpcTarget.Others);
+            var playerName = _characterPhotonStatus.LocalPlayerName;
+            _nickName.text = playerName;
         }
 
         void Update()
         {
-            // メインカメラが存在するかチェック
             if (_mainCam == null)
             {
                 Debug.LogError("Main camera not found!");
@@ -46,13 +38,6 @@ namespace Character
 
             var screenPos = RectTransformUtility.WorldToScreenPoint(_mainCam, target.position);
             _nickNamePos.anchoredPosition = screenPos + _playerNameOffset * factor;
-        }
-
-        [PunRPC]
-        private void UpdateName()
-        {
-            if (_nickName.text == _name) return;
-            _nickName.text = _name;
         }
     }
 }

@@ -37,7 +37,7 @@ namespace System.Network
                     _customInfoHandler.ChangeValue(CustomInfoHandler.ReadyKey, CustomInfoHandler.InitialValue, PhotonNetwork.LocalPlayer);
                     break;
                 case "Master_Battle":
-                    _customInfoHandler.ChangeValue(CustomInfoHandler.ReadyKey, 1, PhotonNetwork.LocalPlayer);
+                    _customInfoHandler.ChangeValue(CustomInfoHandler.ReadyKey, CustomInfoHandler.ReadyValue, PhotonNetwork.LocalPlayer);
                     break;
             }
         }
