@@ -24,8 +24,12 @@ namespace System.Network
             PhotonNetwork.CurrentRoom.IsOpen = true;
             photonView.RPC("ChangeGoToBattle", RpcTarget.All, false);
             foreach (var player in PhotonNetwork.PlayerList)
+            {
                 _customInfoHandler.ChangeValue(CustomInfoHandler.TeamIdKey, CustomInfoHandler.InitialValue, player);
+                _customInfoHandler.ChangeValue(CustomInfoHandler.MemberIdKey, CustomInfoHandler.InitialValue, player);
+            }
         }
+
 
         public void GameStart()
         {
