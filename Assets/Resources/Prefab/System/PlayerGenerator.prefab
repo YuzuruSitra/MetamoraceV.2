@@ -46,14 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waitCharacter:
   - {fileID: 6192094455029975907, guid: e9ef3029bb242f24eac97d08fadddb66, type: 3}
-  - {fileID: 6192094455029975907, guid: e9ef3029bb242f24eac97d08fadddb66, type: 3}
-  - {fileID: 6192094455029975907, guid: e9ef3029bb242f24eac97d08fadddb66, type: 3}
-  - {fileID: 6192094455029975907, guid: e9ef3029bb242f24eac97d08fadddb66, type: 3}
+  - {fileID: 6192094455029975907, guid: bc4e5c3b38f454ce0befca763ebf9d5a, type: 3}
+  - {fileID: 6192094455029975907, guid: f7deed845ee844b1cba1775ec7c591eb, type: 3}
+  - {fileID: 6192094455029975907, guid: 1544061937cd444e092447bcab1fc242, type: 3}
   _battleCharacter:
   - {fileID: 6192094455029975907, guid: 39d449409c53f9b4983e32439d7a1d57, type: 3}
-  - {fileID: 6192094455029975907, guid: 39d449409c53f9b4983e32439d7a1d57, type: 3}
-  - {fileID: 6192094455029975907, guid: 39d449409c53f9b4983e32439d7a1d57, type: 3}
-  - {fileID: 6192094455029975907, guid: 39d449409c53f9b4983e32439d7a1d57, type: 3}
+  - {fileID: 6192094455029975907, guid: c7106458041614fac884c64afc76f4f7, type: 3}
+  - {fileID: 6192094455029975907, guid: b519a195746704373826d9d4b32c6aba, type: 3}
+  - {fileID: 6192094455029975907, guid: a95dde755a273454cbb249a97d6506bb, type: 3}
   _waitInsPos: {x: 24, y: -15, z: 84}
   _battleInsPos:
   - {x: -2, y: 2, z: -2.42}
