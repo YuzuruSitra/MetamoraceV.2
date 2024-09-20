@@ -78,6 +78,7 @@ namespace Block
                 _blockAnimator.SetBool(IsTouch, false);
             }
 
+            if (!PhotonNetwork.IsMasterClient) return;
             if (_mesh.enabled) return;
             _currentDestroyTime += Time.deltaTime;
             if (DestroyTime <= _currentDestroyTime) PhotonNetwork.Destroy(gameObject);
