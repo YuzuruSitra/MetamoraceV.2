@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 3167995723650787603}
   - component: {fileID: 3167995723650787600}
   m_Layer: 5
-  m_Name: Seem
+  m_Name: Seem1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18, y: 38}
+  m_AnchoredPosition: {x: 40, y: 38}
   m_SizeDelta: {x: 266.82, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3167995723650787603
@@ -214,7 +214,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Team1 \u5360\u6709\u7387"
+  m_Text: "\u3042\u304A\u30C1\u30FC\u30E0"
 --- !u!1 &3167995723945207478
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 8815622715081512014}
   - component: {fileID: 8815622715081512013}
   m_Layer: 5
-  m_Name: Seem
+  m_Name: Seem1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -331,7 +331,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -25, y: 38}
+  m_AnchoredPosition: {x: -40, y: 38}
   m_SizeDelta: {x: 266.82, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8815622715081512014
@@ -375,4 +375,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Team2 \u5360\u6709\u7387"
+  m_Text: "\u3042\u304B\u30C1\u30FC\u30E0"

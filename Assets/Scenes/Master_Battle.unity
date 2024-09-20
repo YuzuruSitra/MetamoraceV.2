@@ -3225,6 +3225,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2534335084642425859, guid: ee0ca0014846851499a53a0885281e34,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ee0ca0014846851499a53a0885281e34, type: 3}
@@ -4031,6 +4036,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TeamPercent
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167995723650787600, guid: a30d883aad379d74aa4bf7e09903ef1d,
+        type: 3}
+      propertyPath: m_Text
+      value: "\u3042\u304A\u30C1\u30FC\u30E0"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167995723650787601, guid: a30d883aad379d74aa4bf7e09903ef1d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167995723650787606, guid: a30d883aad379d74aa4bf7e09903ef1d,
+        type: 3}
+      propertyPath: m_Name
+      value: Seem1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815622715081512011, guid: a30d883aad379d74aa4bf7e09903ef1d,
+        type: 3}
+      propertyPath: m_Name
+      value: Seem1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815622715081512012, guid: a30d883aad379d74aa4bf7e09903ef1d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815622715081512013, guid: a30d883aad379d74aa4bf7e09903ef1d,
+        type: 3}
+      propertyPath: m_Text
+      value: "\u3042\u304B\u30C1\u30FC\u30E0"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

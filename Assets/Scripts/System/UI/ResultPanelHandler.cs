@@ -36,7 +36,6 @@ namespace System.UI
             _gameResultHandler.CalcGameResult -= OpenResultPanel;
         }
 
-        // ƒƒ“ƒo[ƒŠƒXƒg‚Ì‰Šú‰»ˆ—
         private void InitializeMemberList()
         {
             foreach (var player in PhotonNetwork.PlayerList)
@@ -46,7 +45,6 @@ namespace System.UI
             }
         }
 
-        // Œ‹‰Êƒpƒlƒ‹‚ÌŠJ•Âˆ—
         private void OpenResultPanel(int winTeamNum)
         {
             _resultPanel.SetActive(true);
@@ -57,7 +55,6 @@ namespace System.UI
                 OpenWinLoosePanel(winTeamNum);
         }
 
-        // ˆø‚«•ª‚¯ƒpƒlƒ‹‚Ì•\Ž¦
         private void OpenDrawPanel()
         {
             _drawPanel.SetActive(true);
@@ -65,7 +62,6 @@ namespace System.UI
             UpdatePlayerNames(_drawNames, isDraw: true);
         }
 
-        // Ÿ”sƒpƒlƒ‹‚Ì•\Ž¦
         private void OpenWinLoosePanel(int winTeamNum)
         {
             _winLoosePanel.SetActive(true);
@@ -74,14 +70,20 @@ namespace System.UI
             UpdatePlayerNames(_names, winTeamNum);
         }
 
-        // ƒ`[ƒ€•\Ž¦‚ÌXV
         private void UpdateTeamSeems(int winTeamNum)
         {
-            _teamSeems[0].text = "Team" + winTeamNum;
-            _teamSeems[1].text = "Team" + (3 - winTeamNum);
+            if (winTeamNum == 1)
+            {
+                _teamSeems[0].text = "ã‚ãŠãƒãƒ¼ãƒ ";
+                _teamSeems[1].text = "ã‚ã‹ãƒãƒ¼ãƒ ";
+            }
+            else
+            {
+                _teamSeems[0].text = "ã‚ã‹ãƒãƒ¼ãƒ ";
+                _teamSeems[1].text = "ã‚ãŠãƒãƒ¼ãƒ ";
+            }
         }
 
-        // ƒVƒFƒAƒp[ƒZƒ“ƒg‚ÌXV
         private void UpdateSharePercent(int winTeamNum)
         {
             if (winTeamNum == 1)
@@ -101,7 +103,6 @@ namespace System.UI
             SetSharePercent(_blockGenerator.BlocksShareTeam1, _blockGenerator.BlocksShareTeam2);
         }
 
-        // ƒvƒŒƒCƒ„[–¼‚Ì•\Ž¦XV
         private void UpdatePlayerNames(UnityEngine.UI.Text[] nameFields, int winTeamNum = 0, bool isDraw = false)
         {
             var count = isDraw ? 0 : (winTeamNum - 1) * 2;

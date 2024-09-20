@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 2534335084102863482}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1609748022054679620
 MonoBehaviour:
@@ -1789,7 +1789,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
     m_FontSize: 42
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 6
     m_MaxSize: 76
@@ -1799,7 +1799,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Team1
+  m_Text: "\u3042\u304A\u30C1\u30FC\u30E0"
 --- !u!1 &2731457191886250626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1948,7 +1948,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
     m_FontSize: 26
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 76
@@ -1958,7 +1958,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Team2
+  m_Text: "\u3042\u304B\u30C1\u30FC\u30E0"
 --- !u!1 &2731457192588174894
 GameObject:
   m_ObjectHideFlags: 0
@@ -2107,10 +2107,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
-    m_FontSize: 42
-    m_FontStyle: 0
+    m_FontSize: 36
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 6
+    m_MinSize: 3
     m_MaxSize: 76
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -2118,7 +2118,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Team1
+  m_Text: "\u3042\u304A\u30C1\u30FC\u30E0"
 --- !u!1 &6446378107356805447
 GameObject:
   m_ObjectHideFlags: 0
@@ -2187,10 +2187,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
-    m_FontSize: 42
-    m_FontStyle: 0
+    m_FontSize: 36
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 6
+    m_MinSize: 3
     m_MaxSize: 76
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -2198,7 +2198,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Team2
+  m_Text: "\u3042\u304B\u30C1\u30FC\u30E0"
 --- !u!1 &6853744202773952883
 GameObject:
   m_ObjectHideFlags: 0
