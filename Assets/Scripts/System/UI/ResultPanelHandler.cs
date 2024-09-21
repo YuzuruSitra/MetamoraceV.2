@@ -3,6 +3,7 @@ using System.Network;
 using Photon.Pun;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Sound;
 
 namespace System.UI
 {
@@ -20,13 +21,19 @@ namespace System.UI
         [SerializeField] private UnityEngine.UI.Text[] _looseNames;
         [SerializeField] private UnityEngine.UI.Text[] _drawNames;
         [SerializeField] private UnityEngine.UI.Button _exitBt;
+        private SoundHandler _soundHandler;
+        [SerializeField] private AudioClip _finWhistleClip;
+
+
 
         private Dictionary<int, string> _memberList = new Dictionary<int, string>();
 
         private void Start()
         {
+            
             _gameResultHandler.CalcGameResult += OpenResultPanel;
             _exitBt.onClick.AddListener(() => new BattleExitHandler().ReturnRoom());
+            _soundHandler = SoundHandler.InstanceSoundHandler;
 
             InitializeMemberList();
         }
@@ -48,7 +55,7 @@ namespace System.UI
         private void OpenResultPanel(int winTeamNum)
         {
             _resultPanel.SetActive(true);
-
+            _soundHandler.PlaySe(_finWhistleClip);
             if (winTeamNum == 0)
                 OpenDrawPanel();
             else

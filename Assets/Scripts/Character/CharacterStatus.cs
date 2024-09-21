@@ -128,7 +128,7 @@ namespace Character
         private void ChangeCondition(Condition newCondition)
         {
             if (_currentCondition == newCondition) return;
-            ChangeConditionEvent?.Invoke(newCondition);
+           ChangeConditionEvent?.Invoke(newCondition);
             _currentCondition = newCondition;
             ChangeMoveBool(newCondition);
         }

@@ -18,7 +18,7 @@ namespace Character
         [SerializeField] private CharacterObjStacker _characterObjStacker;
         private BlockGenerator _blockGenerator;
         [SerializeField] private CharacterPhotonStatus _characterPhotonStatus;
-        private int _teamID;
+        private int _teamID; 
 
         private void Start()
         {

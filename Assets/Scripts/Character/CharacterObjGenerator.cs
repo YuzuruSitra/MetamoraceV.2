@@ -1,6 +1,7 @@
 using System.Battle;
 using System.Collections;
 using System.Collections.Generic;
+using System.Sound;
 using Photon.Pun;
 using UnityEngine;
 
@@ -26,10 +27,13 @@ namespace Character
         private Coroutine _insCoroutine;
         private BlockGenerator _blockGenerator;
         private BigBlockInsClamper _bigBlockInsClamper;
+        [SerializeField] private AudioClip _createBlockClip;
+        private SoundHandler _soundHandler;
         
         private void Start()
         {
             if (!photonView.IsMine) return;
+            _soundHandler = SoundHandler.InstanceSoundHandler;
             InitializeVariables();
             InitializeBlockInfoDict();
         }
@@ -82,6 +86,7 @@ namespace Character
                 insPos += values.offset;
                 _blockGenerator.OtherGenerateObj(1 - _teamID, values.prefab.name, insPos);
                 _characterObjStacker.InsBlock();
+                _soundHandler.PlaySe(_createBlockClip);
             }
             yield return _forSeconds;
             IsGenerate = false;

@@ -293,6 +293,7 @@ MonoBehaviour:
   _isMoving: 0
   _insPlayerTeam: 0
   _moveSpeed: 3
+  _breakBlockClip: {fileID: 8300000, guid: a36f30c4df2344a4980a7e9965851ee8, type: 3}
 --- !u!114 &985142421573186090
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System.Network;
+using System.Sound;
 using Photon.Pun;
 using UnityEngine;
 
@@ -27,23 +28,32 @@ namespace Character
         private float _currentInputFactor;
         private float _speedFactor = 1.0f;
         private bool _isReversal;
+        [SerializeField]
+        private float _checkGroundReach = 0.3f;
 
         public float CurrentMoveSpeed { get; private set; }
-        public bool IsGrounded => _controller.isGrounded;
+         bool _isGrounded;
+        public bool IsGrounded => _isGrounded;
 
         public float WalkSpeed => _walkSpeed;
         public float RunSpeed => _runSpeed;
-
+        Ray _checkGroundRay; 
+        RaycastHit _hit;
+        bool _onBlock;
+        private SoundHandler _soundHandler;
+        [SerializeField] private AudioClip _jumpClip;
         private void Start()
         {
             if (!photonView.IsMine) return;
             _controller = GetComponent<CharacterController>();
+            _soundHandler = SoundHandler.InstanceSoundHandler;
         }
 
         private void Update()
         {
             if (!photonView.IsMine) return;
             HandleMovement();
+            //Debug.Log(CheckGround());
         }
 
         private void HandleMovement()
@@ -72,17 +82,28 @@ namespace Character
 
         private void ApplyGravityAndJump()
         {
-            if (_controller.isGrounded)
+            if (_isGrounded = CheckGround())
             {
-                _verticalSpeed = -_gravity * Time.deltaTime;
                 if (_isMoving && !_characterObjBreaker.IsBreaking && Input.GetButtonDown("Jump"))
+                {
                     _verticalSpeed = _jumpSpeed;
+                    _soundHandler.PlaySe(_jumpClip);
+                }
             }
-            else
-            {
-                _verticalSpeed -= _gravity * Time.deltaTime;
-            }
+            else  _verticalSpeed -= _gravity * Time.deltaTime;
+            Debug.Log(_isGrounded);
             _moveDirection.y = _verticalSpeed;
+            // if (_isGrounded)
+            // {
+            //     _verticalSpeed = -_gravity * Time.deltaTime;
+            //     if (_isMoving && !_characterObjBreaker.IsBreaking && Input.GetButtonDown("Jump"))
+            //         _verticalSpeed = _jumpSpeed;
+            // }
+            // else
+            // {
+            //     _verticalSpeed -= _gravity * Time.deltaTime;
+            // }
+            // _moveDirection.y = _verticalSpeed;
         }
 
         private void SpeedReduction()
@@ -110,6 +131,28 @@ namespace Character
         public void ChangeSpeedFactor(float value)
         {
             _speedFactor = value;
+        }
+
+        bool CheckGround()
+        {
+            // Define the ray
+             _checkGroundRay = new Ray(transform.position, Vector3.down);
+        
+            // Visualize the ray in the scene view
+            Debug.DrawRay(transform.position, Vector3.down * _checkGroundReach, Color.red);
+        
+            // Perform the raycast and check if it hits something
+            if (Physics.Raycast(_checkGroundRay, out _hit, _checkGroundReach))
+            {
+                CheckBlock();
+                return true;
+            }
+            else  return  false;
+        }
+        void CheckBlock()
+        {
+            if (_hit.collider.gameObject.tag == "Ambras") _onBlock = true;
+            else _onBlock = false;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Battle;
+using System.Sound;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,9 +37,13 @@ namespace Block
         private Vector3[] _rayOrigins = new Vector3[4];
         private Vector3 _extents;
         private const float RayPadding = 0.2f;
+        [SerializeField] private AudioClip _breakBlockClip;
+        private SoundHandler _soundHandler;
+
         
         private void Start()
         {
+            _soundHandler = SoundHandler.InstanceSoundHandler;
             Transform child = transform.GetChild(0);
             _mesh = child.GetComponent<MeshRenderer>();
             _col = GetComponent<BoxCollider>();
@@ -109,6 +114,7 @@ namespace Block
         [PunRPC]
         public void LaunchBreak()
         {
+            _soundHandler.PlaySe(_breakBlockClip);
             _cloudAnimator.SetBool(IsBreak, true);
             _mesh.enabled = false;
             _col.enabled = false;

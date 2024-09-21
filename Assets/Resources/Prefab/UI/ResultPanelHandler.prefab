@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 2534335084102863482}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1609748022054679620
 MonoBehaviour:
@@ -73,6 +73,7 @@ MonoBehaviour:
   - {fileID: 4090911029919488668}
   - {fileID: 5990285028269642315}
   _exitBt: {fileID: 2534335084459018057}
+  _finWhistleClip: {fileID: 8300000, guid: 58bbd745e36da034787a7db6c18df639, type: 3}
 --- !u!1 &2534335082767549902
 GameObject:
   m_ObjectHideFlags: 0

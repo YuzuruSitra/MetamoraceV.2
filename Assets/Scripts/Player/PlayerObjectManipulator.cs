@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Sound;
 using Block;
 using Photon.Pun;
 
@@ -37,12 +38,14 @@ public class PlayerObjectManipulator : MonoBehaviourPunCallbacks
     private float _breakAnimTime;
 
     private float _breakTime;
-
+    [SerializeField] private AudioClip _createBlockClip;
+    private SoundHandler _soundHandler;
     // Start is called before the first frame update
     private void Start()
     {
         //if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
         _uiHandler = GameObject.FindWithTag("UIHandler").GetComponent<UIHandler>();
+        _soundHandler = SoundHandler.InstanceSoundHandler;
         _anim = GetComponent<Animator>();
         _swingAnimTime = GetAnimationClipLength(_anim.runtimeAnimatorController.animationClips,
             "swing");
@@ -109,7 +112,7 @@ public class PlayerObjectManipulator : MonoBehaviourPunCallbacks
                 playerItemHandler.ResetNextInsBlock();
                 break;
         }
-
+        _soundHandler.PlaySe(_createBlockClip);
         nextInsBlock = "Heros";
     }
 
