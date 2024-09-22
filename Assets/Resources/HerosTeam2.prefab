@@ -280,6 +280,7 @@ MonoBehaviour:
   _isMoving: 1
   _insPlayerTeam: 2
   _moveSpeed: 3
+  _breakBlockClip: {fileID: 0}
 --- !u!114 &985142421573186090
 MonoBehaviour:
   m_ObjectHideFlags: 0

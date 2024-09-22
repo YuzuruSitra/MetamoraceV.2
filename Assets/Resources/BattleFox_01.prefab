@@ -1219,11 +1219,11 @@ MonoBehaviour:
   _walkSpeed: 4
   _runSpeed: 6
   _decelerationSpeed: 1.5
-  _jumpSpeed: 20
+  _jumpSpeed: 15
   _gravity: 35
   _characterObjBreaker: {fileID: 2681944477019818140}
   _isWaitScene: 0
-  _checkGroundReach: 0.1
+  _checkGroundReach: 0.2
   _jumpClip: {fileID: 8300000, guid: 8435c23312ad2934a972e15f0a48c4f8, type: 3}
 --- !u!114 &6192094455029975915
 MonoBehaviour:
@@ -1302,7 +1302,6 @@ MonoBehaviour:
   _playerReach: 0.8
   _characterObjStacker: {fileID: 278414432227119862}
   _characterPhotonStatus: {fileID: 3968165114116681612}
-  _breakBlockClip: {fileID: 8300000, guid: a36f30c4df2344a4980a7e9965851ee8, type: 3}
 --- !u!114 &7456515268578178929
 MonoBehaviour:
   m_ObjectHideFlags: 0

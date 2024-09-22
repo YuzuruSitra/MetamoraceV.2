@@ -29,7 +29,8 @@ namespace Character
         private float _speedFactor = 1.0f;
         private bool _isReversal;
         [SerializeField]
-        private float _checkGroundReach = 0.3f;
+        private float _checkGroundReach = 0.1f;
+        private float _checkBlockReach = 0.2f;
 
         public float CurrentMoveSpeed { get; private set; }
          bool _isGrounded;
@@ -37,16 +38,18 @@ namespace Character
 
         public float WalkSpeed => _walkSpeed;
         public float RunSpeed => _runSpeed;
-        Ray _checkGroundRay; 
-        RaycastHit _hit;
-        bool _onBlock;
         private SoundHandler _soundHandler;
         [SerializeField] private AudioClip _jumpClip;
+        private Collider _collider;
+        Bounds bounds;
+        private Vector3[] corners;
         private void Start()
         {
             if (!photonView.IsMine) return;
             _controller = GetComponent<CharacterController>();
             _soundHandler = SoundHandler.InstanceSoundHandler;
+            _collider = GetComponent<Collider>();
+            bounds = _collider.bounds;
         }
 
         private void Update()
@@ -82,6 +85,14 @@ namespace Character
 
         private void ApplyGravityAndJump()
         {
+            // if (_isGrounded = CheckUnderBlock())
+            // {
+            //     if (_isMoving && !_characterObjBreaker.IsBreaking && Input.GetButtonDown("Jump"))
+            //     {
+            //         _verticalSpeed = _jumpSpeed;
+            //         _soundHandler.PlaySe(_jumpClip);
+            //     }
+            // }
             if (_isGrounded = CheckGround())
             {
                 if (_isMoving && !_characterObjBreaker.IsBreaking && Input.GetButtonDown("Jump"))
@@ -135,24 +146,25 @@ namespace Character
 
         bool CheckGround()
         {
-            // Define the ray
-             _checkGroundRay = new Ray(transform.position, Vector3.down);
-        
-            // Visualize the ray in the scene view
-            Debug.DrawRay(transform.position, Vector3.down * _checkGroundReach, Color.red);
-        
-            // Perform the raycast and check if it hits something
-            if (Physics.Raycast(_checkGroundRay, out _hit, _checkGroundReach))
+            bounds = _collider.bounds;
+            // コライダーの四隅を計算
+            corners = new Vector3[4];
+            corners[0] = new Vector3(bounds.min.x, transform.position.y, bounds.min.z); // 左下
+            corners[1] = new Vector3(bounds.max.x, transform.position.y, bounds.min.z); // 右下
+            corners[2] = new Vector3(bounds.min.x, transform.position.y, bounds.max.z); // 左上
+            corners[3] = new Vector3(bounds.max.x, transform.position.y, bounds.max.z); // 右上
+
+            _isGrounded = false;  
+            foreach (var corner in corners)
             {
-                CheckBlock();
-                return true;
+                Debug.DrawRay(corner, Vector3.down * _checkGroundReach, Color.red);
+                if (Physics.Raycast(corner, Vector3.down,  _checkGroundReach))
+                {
+                    _isGrounded = true;
+                    break;  
+                }
             }
-            else  return  false;
-        }
-        void CheckBlock()
-        {
-            if (_hit.collider.gameObject.tag == "Ambras") _onBlock = true;
-            else _onBlock = false;
+            return _isGrounded;
         }
     }
 }
