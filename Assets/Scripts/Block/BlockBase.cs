@@ -39,6 +39,7 @@ namespace Block
         private const float RayPadding = 0.2f;
         [SerializeField] private AudioClip _breakBlockClip;
         private SoundHandler _soundHandler;
+        [SerializeField]private GameObject _magicEffect;
 
         
         private void Start()
@@ -75,10 +76,12 @@ namespace Block
                 _currentActiveTime += Time.deltaTime;
                 _healthGage.enabled = true;
                 ChangeHealthGage();
+                _magicEffect.SetActive(true);
                 _blockAnimator.SetBool(IsTouch, true);
             }
             else
             {
+                _magicEffect.SetActive(false);
                 _healthGage.enabled = false;
                 _blockAnimator.SetBool(IsTouch, false);
             }
