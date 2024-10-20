@@ -4,6 +4,7 @@ using Photon.Pun;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Sound;
+using UnityEngine.UI;
 
 namespace System.UI
 {
@@ -14,6 +15,9 @@ namespace System.UI
         [SerializeField] private GameObject _resultPanel;
         [SerializeField] private GameObject _winLoosePanel;
         [SerializeField] private GameObject _drawPanel;
+        [SerializeField] private Image _winTeamImage;
+        [SerializeField] private Image _loseTeamImage;
+        [SerializeField] private Sprite[] _teamSprites;
         [SerializeField] private UnityEngine.UI.Text[] _sharePercent;
         [SerializeField] private UnityEngine.UI.Text[] _drawSharePercent;
         [SerializeField] private UnityEngine.UI.Text[] _teamSeems;
@@ -72,6 +76,8 @@ namespace System.UI
         private void OpenWinLoosePanel(int winTeamNum)
         {
             _winLoosePanel.SetActive(true);
+            _winTeamImage.sprite = _teamSprites[winTeamNum - 1];
+            _loseTeamImage.sprite = _teamSprites[winTeamNum % 2];
             UpdateTeamSeems(winTeamNum);
             UpdateSharePercent(winTeamNum);
             UpdatePlayerNames(_names, winTeamNum);
