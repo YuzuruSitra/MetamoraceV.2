@@ -771,9 +771,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.0017214417
     y: 0
-    width: 1
+    width: 0.9965571
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -2860,6 +2860,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WaitPlayerNameUi
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816336786583633366, guid: 883e064f476f34b52a55bda150811afd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8816336786831723841, guid: 883e064f476f34b52a55bda150811afd,
         type: 3}
