@@ -64,6 +64,7 @@ namespace Character
                         break;
                     case CharacterObjStacker.BlockHeros:
                     case CharacterObjStacker.BlockBigHeros:
+                    case CharacterObjStacker.BlockItemC:
                         herosCount++;
                         break;
                     case CharacterObjStacker.NullKey:

@@ -90,6 +90,7 @@ namespace System.UI
                         break;
                     case "Heros":
                     case "BigHeros":
+                    case "ItemCBlock":
                         _stackImage[i].enabled = true;
                         _stackImage[i].sprite = _herosSprite;
                         break;
