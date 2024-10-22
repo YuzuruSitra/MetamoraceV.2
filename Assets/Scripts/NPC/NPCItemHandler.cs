@@ -8,7 +8,7 @@ namespace NPC
     {
         [SerializeField] private NPCEffectHandler _npcEffectHandler;
         private NPCBlockStack _npcBlockStack;
-        private UIHandler _uiHandler;
+        // private UIHandler _uiHandler;
         private bool hasItemA, hasItemB, hasItemC;
         private float _itemAEffectTime = 6.0f;
         public int ItemAEffectRate { get; private set; } = 1;

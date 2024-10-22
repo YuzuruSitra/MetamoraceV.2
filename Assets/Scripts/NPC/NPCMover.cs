@@ -29,7 +29,7 @@ namespace NPC
     
     [SerializeField]
     private float _frontRayRength = 0.51f;
-    private PlayerStatus _playerStatus;
+    // private PlayerStatus _playerStatus;
     private bool _isMoving = true;
     private float _verticalSpeed;
     private Vector3 _moveDirection = Vector3.zero;

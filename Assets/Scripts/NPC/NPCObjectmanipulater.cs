@@ -24,7 +24,7 @@ namespace NPC
         private Vector3 _insBigPos;
 
         // private Vector3 PlayerDirection;
-        private UIHandler _uiHandler;
+        // private UIHandler _uiHandler;
         [SerializeField] private NPCItemHandler _npcItemHandler;
         [SerializeField] GameObject[] _herosPrefab = new GameObject[2];
         [SerializeField] GameObject[] _BigPrefab = new GameObject[2];
