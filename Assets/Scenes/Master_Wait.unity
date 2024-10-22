@@ -771,9 +771,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.0012129843
+    x: 0
     y: 0
-    width: 0.99757403
+    width: 1
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -2144,35 +2144,40 @@ PrefabInstance:
       propertyPath: _matchLauncher
       value: 
       objectReference: {fileID: 94220593}
+    - target: {fileID: 1530939390753701812, guid: 577b37ed2766d804d968a3c2d934a4f3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530939390753701813, guid: 577b37ed2766d804d968a3c2d934a4f3,
+        type: 3}
+      propertyPath: m_Name
+      value: BlueTeamText (Legacy)
+      objectReference: {fileID: 0}
     - target: {fileID: 1530939390753701815, guid: 577b37ed2766d804d968a3c2d934a4f3,
         type: 3}
       propertyPath: m_Text
-      value: "\u3042\u304A\u30C1\u30FC\u30E0"
+      value: "\u30C1\u30FC\u30E0"
       objectReference: {fileID: 0}
     - target: {fileID: 1530939390753701815, guid: 577b37ed2766d804d968a3c2d934a4f3,
         type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1530939390753701815, guid: 577b37ed2766d804d968a3c2d934a4f3,
-        type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 28
+      propertyPath: m_FontData.m_Alignment
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1530939391388815489, guid: 577b37ed2766d804d968a3c2d934a4f3,
         type: 3}
       propertyPath: m_Text
-      value: "\u3042\u304B\u30C1\u30FC\u30E0"
+      value: "\u30C1\u30FC\u30E0"
       objectReference: {fileID: 0}
     - target: {fileID: 1530939391388815489, guid: 577b37ed2766d804d968a3c2d934a4f3,
         type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 2
+      propertyPath: m_FontData.m_Alignment
+      value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 1530939391388815489, guid: 577b37ed2766d804d968a3c2d934a4f3,
+    - target: {fileID: 1530939391388815494, guid: 577b37ed2766d804d968a3c2d934a4f3,
         type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 28
+      propertyPath: m_AnchoredPosition.x
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
