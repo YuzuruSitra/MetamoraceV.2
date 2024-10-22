@@ -1,5 +1,6 @@
 using System;
 using System.Battle;
+using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
@@ -38,6 +39,7 @@ namespace Character
         [SerializeField] private CharacterPhotonStatus _characterPhotonStatus;
         private TimeHandler _timeHandler;
         [SerializeField] private bool _isWaitScene;
+        [SerializeField] private float _stanTime = 2.0f;
         private readonly HashSet<Condition> _nonMovingConditions = new()
         {
             Condition.Pause,
@@ -124,13 +126,23 @@ namespace Character
             _currentSpecialEffects = effects;
             ChangeSpecialEffectsEvent?.Invoke(effects);
         }
-
         private void ChangeCondition(Condition newCondition)
         {
             if (_currentCondition == newCondition) return;
-           ChangeConditionEvent?.Invoke(newCondition);
+            ChangeConditionEvent?.Invoke(newCondition);
             _currentCondition = newCondition;
+            JudgeStan(newCondition);
             ChangeMoveBool(newCondition);
+        }
+        private void JudgeStan(Condition newCondition)
+        {
+            if (newCondition != Condition.Stan) return;
+            StartCoroutine(StanCoroutine());
+        }
+        IEnumerator StanCoroutine()
+        {
+            yield return new WaitForSeconds(_stanTime);
+            ChangeCondition(Condition.Idole);
         }
 
         private void ChangeMoveBool(Condition newCondition)

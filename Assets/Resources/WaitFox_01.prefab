@@ -585,6 +585,7 @@ MonoBehaviour:
   _characterObjGenerator: {fileID: 5970117286552278260}
   _characterPhotonStatus: {fileID: 250263548078847141}
   _isWaitScene: 1
+  _stanTime: 2
 --- !u!114 &250263548078847141
 MonoBehaviour:
   m_ObjectHideFlags: 0

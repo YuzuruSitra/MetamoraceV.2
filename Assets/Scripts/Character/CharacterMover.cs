@@ -102,7 +102,6 @@ namespace Character
                 }
             }
             else  _verticalSpeed -= _gravity * Time.deltaTime;
-            Debug.Log(_isGrounded);
             _moveDirection.y = _verticalSpeed;
             // if (_isGrounded)
             // {
