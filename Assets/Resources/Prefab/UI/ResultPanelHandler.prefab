@@ -50,6 +50,9 @@ MonoBehaviour:
   _resultPanel: {fileID: 2534335084102863483}
   _winLoosePanel: {fileID: 2534335082771794126}
   _drawPanel: {fileID: 2534335084642425859}
+  _winTeamImage: {fileID: 0}
+  _loseTeamImage: {fileID: 0}
+  _teamSprites: []
   _sharePercent:
   - {fileID: 2534335084079177663}
   - {fileID: 2534335084651724459}

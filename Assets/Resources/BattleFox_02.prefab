@@ -1223,6 +1223,8 @@ MonoBehaviour:
   _gravity: 35
   _characterObjBreaker: {fileID: 2681944477019818140}
   _isWaitScene: 0
+  _checkGroundReach: 0.1
+  _jumpClip: {fileID: 0}
 --- !u!114 &6192094455029975915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1253,6 +1255,7 @@ MonoBehaviour:
   _characterObjGenerator: {fileID: 7456515268578178929}
   _characterPhotonStatus: {fileID: 3968165114116681612}
   _isWaitScene: 0
+  _stanTime: 2
 --- !u!114 &3968165114116681612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1327,6 +1330,7 @@ MonoBehaviour:
     type: 3}
   _generateAnim: {fileID: 7400000, guid: 4e5454ced529e814aa1d238a5e87e0f3, type: 2}
   _motionDelay: 0.1
+  _createBlockClip: {fileID: 0}
 --- !u!114 &7429199923039469224
 MonoBehaviour:
   m_ObjectHideFlags: 0
