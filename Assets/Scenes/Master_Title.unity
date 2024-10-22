@@ -1413,6 +1413,11 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6581757328248425592, guid: 25067429fff0d15469497ef6bc96150b,
+        type: 3}
+      propertyPath: _battleInsRot.Array.data[0].y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6581757328248425593, guid: 25067429fff0d15469497ef6bc96150b,
         type: 3}
       propertyPath: m_RootOrder
@@ -1813,9 +1818,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.0002939403
+    x: 0
     y: 0
-    width: 0.9994121
+    width: 1
     height: 1
   near clip plane: 0.3
   far clip plane: 1000

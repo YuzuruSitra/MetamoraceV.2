@@ -56,9 +56,7 @@ namespace System.Network
                     }
                     if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.MemberIdKey, out var memberId)) return;
                     var memberNum = (int)memberId;
-                    if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(CustomInfoHandler.TeamIdKey, out var teamId)) return;
-                    var teamNum = (int)teamId - 1;
-                    CurrentPlayer = PhotonNetwork.Instantiate(_battleCharacter[id].name, _battleInsPos[memberNum], Quaternion.Euler(_battleInsRot[teamNum]));
+                    CurrentPlayer = PhotonNetwork.Instantiate(_battleCharacter[id].name, _battleInsPos[memberNum], Quaternion.Euler(_battleInsRot[memberNum / 2]));
                     break;
             }
         }
