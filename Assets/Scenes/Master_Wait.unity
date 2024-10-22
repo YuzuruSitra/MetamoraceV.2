@@ -771,9 +771,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00017750263
+    x: 0.0012129843
     y: 0
-    width: 0.999645
+    width: 0.99757403
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -2497,6 +2497,11 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1629525287}
     m_Modifications:
+    - target: {fileID: 2251613761150009908, guid: d48a63223c8555645b9186b329eae38e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2501231660717743945, guid: d48a63223c8555645b9186b329eae38e,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2606,6 +2611,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InfoPanelHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 6480577306865797652, guid: d48a63223c8555645b9186b329eae38e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
