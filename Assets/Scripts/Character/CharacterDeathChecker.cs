@@ -7,7 +7,8 @@ namespace Character
     {
         [SerializeField] private float _verticalRayOffset = 2.0f;
         [SerializeField] private float _horizontalRayOffset = 0.5f;
-        [SerializeField] private float _rayDistance = 0.15f;
+        [SerializeField] private float _verticalrayDistance = 0.15f;
+        [SerializeField] private float _horizontalrayDistance = 0.4f;
         private Vector3 _horizontalRayDirection;
         [SerializeField] private CharacterMover _characterMover;
         [SerializeField] private CharacterStatus _characterStatus;
@@ -29,7 +30,7 @@ namespace Character
         private void JudgeVerticalDeath()
         {
             var rayOrigin = transform.position + Vector3.up * _verticalRayOffset;
-            if (!Physics.Raycast(rayOrigin, Vector3.up, out var hit, _rayDistance)) return;
+            if (!Physics.Raycast(rayOrigin, Vector3.up, out var hit, _verticalrayDistance)) return;
             if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Block")) return; 
             if (!_characterMover.IsGrounded) return;
             _characterStatus.ReceiveChangeState(CharacterStatus.Condition.VDeath);
@@ -38,7 +39,8 @@ namespace Character
         private void JudgeHorizontalDeath()
         {
             var rayOrigin = transform.position + Vector3.up * _horizontalRayOffset;
-            if (!Physics.Raycast(rayOrigin, _horizontalRayDirection, out var hit, _rayDistance)) return;
+            Debug.DrawRay(rayOrigin, _horizontalRayDirection * _horizontalrayDistance, Color.red); // レイを常に表示
+            if (!Physics.Raycast(rayOrigin, _horizontalRayDirection, out var hit, _horizontalrayDistance)) return;
             if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Block")) return; 
             _characterStatus.ReceiveChangeState(CharacterStatus.Condition.HDeath);
         }
