@@ -20,6 +20,8 @@ namespace System.Battle
         
         private void Start()
         {
+            _waitFor = new WaitForSeconds(_delayTime);
+
             var playerGenerator = GameObject.FindWithTag("PlayerGenerator").GetComponent<PlayerGenerator>();
             var player = playerGenerator.CurrentPlayer;
             _characterStatus = player.GetComponent<CharacterStatus>();
@@ -28,7 +30,6 @@ namespace System.Battle
 
             if (!PhotonNetwork.IsMasterClient) return;
             _timeHandler.FinishEvent += CalcTimeResult;
-            _waitFor = new WaitForSeconds(_delayTime);
         }
 
         private void OnDestroy()
@@ -50,6 +51,7 @@ namespace System.Battle
         private IEnumerator ResultDelay()
         {
             yield return _waitFor;
+            Debug.Log(_waitFor);
             CalcDeathResult();
         }
 

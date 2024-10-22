@@ -74,6 +74,7 @@ namespace System.UI
 
         private void OpenResultPanel(int winTeamNum, string losereason) // 変更: 敗因情報を受け取る
         {
+            
             _resultPanel.SetActive(true);
             _soundHandler.PlaySe(_finWhistleClip);
             if (winTeamNum == 0)
