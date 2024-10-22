@@ -8,6 +8,7 @@ namespace System.Battle
 {
     public class GameResultHandler : MonoBehaviourPunCallbacks
     {
+        public bool IsGameFin { get; private set; }
         [SerializeField] private TimeHandler _timeHandler;
         [SerializeField] private BlockGenerator _blockGenerator;
 
@@ -75,6 +76,7 @@ namespace System.Battle
         [PunRPC]
         private void ShareCalc(int winTeamNum,string loseReason)
         {
+            IsGameFin = true;
             CalcGameResult?.Invoke(winTeamNum,loseReason);
         }
     }

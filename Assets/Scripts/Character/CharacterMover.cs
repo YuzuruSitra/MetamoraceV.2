@@ -1,3 +1,4 @@
+using System.Battle;
 using System.Sound;
 using Photon.Pun;
 using UnityEngine;
@@ -42,6 +43,7 @@ namespace Character
         private Bounds _bounds;
         private readonly Vector3[] _corners = new Vector3[4];
         private float _lockZPos;
+        private TimeHandler _timeHandler;
         
         private void Start()
         {
@@ -51,6 +53,7 @@ namespace Character
             _soundHandler = SoundHandler.InstanceSoundHandler;
             _collider = GetComponent<Collider>();
             _bounds = _collider.bounds;
+            _timeHandler = GameObject.FindWithTag("TimeHandler").GetComponent<TimeHandler>();
         }
 
         private void Update()
@@ -96,7 +99,7 @@ namespace Character
             _isGrounded = CheckGround();
             if (_isGrounded)
             {
-                if (_isMoving && !_characterObjBreaker.IsBreaking && Input.GetButtonDown("Jump"))
+                if (_timeHandler.IsCountDown && _isMoving && !_characterObjBreaker.IsBreaking && Input.GetButtonDown("Jump"))
                 {
                     _verticalSpeed = _jumpSpeed;
                     _soundHandler.PlaySe(_jumpClip);
@@ -109,6 +112,7 @@ namespace Character
         private void SpeedReduction()
         {
             var input = Input.GetAxis("Horizontal");
+            if (!_timeHandler.IsCountDown) input = 0;
             input = _isReversal ? -input : input;
             if (input == 0 || _characterObjBreaker.IsBreaking)
                 _currentInputFactor = Mathf.MoveTowards(_currentInputFactor, 0, _decelerationSpeed * Time.deltaTime);

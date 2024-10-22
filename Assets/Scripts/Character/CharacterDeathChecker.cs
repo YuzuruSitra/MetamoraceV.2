@@ -1,3 +1,4 @@
+using System.Battle;
 using Photon.Pun;
 using UnityEngine;
 
@@ -13,16 +14,18 @@ namespace Character
         [SerializeField] private CharacterMover _characterMover;
         [SerializeField] private CharacterStatus _characterStatus;
         [SerializeField] private CharacterPhotonStatus _characterPhotonStatus;
-
+        private TimeHandler _timeHandler;
         private void Start()
         {
             if (!photonView.IsMine) return;
+            _timeHandler = GameObject.FindWithTag("TimeHandler").GetComponent<TimeHandler>();
             _horizontalRayDirection = (_characterPhotonStatus.LocalPlayerTeamID == 1) ? Vector3.forward : Vector3.back;
         }
 
         private void Update()
         {
             if (!photonView.IsMine) return;
+            if (!_timeHandler.IsCountDown) return;
             JudgeVerticalDeath();
             JudgeHorizontalDeath();
         }

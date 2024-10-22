@@ -19,19 +19,27 @@ namespace System.Battle
 
         private bool _isCountDowned;
         private bool _isFinished;
+        [SerializeField] private bool _isWaitRoom;
         
         private void Start()
         {
+            if (_isWaitRoom)
+            {
+                IsCountDown = true;
+                return;
+            }
             _battleLauncher.BattleLaunch += Launch;
         }
 
         private void OnDestroy()
         {
+            if (_isWaitRoom) return;
             _battleLauncher.BattleLaunch -= Launch;
         }
 
         private void Update()
         {
+            if (_isWaitRoom) return;
             if (!IsCountDown) return;
             if (_countTime > 0)
             {

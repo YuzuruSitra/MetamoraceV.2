@@ -29,6 +29,7 @@ namespace Character
         private BigBlockInsClamper _bigBlockInsClamper;
         [SerializeField] private AudioClip _createBlockClip;
         private SoundHandler _soundHandler;
+        private TimeHandler _timeHandler;
         
         private void Start()
         {
@@ -36,6 +37,7 @@ namespace Character
             _soundHandler = SoundHandler.InstanceSoundHandler;
             InitializeVariables();
             InitializeBlockInfoDict();
+            _timeHandler = GameObject.FindWithTag("TimeHandler").GetComponent<TimeHandler>();
         }
 
         private void InitializeVariables()
@@ -64,7 +66,8 @@ namespace Character
 
         private void Update()
         {
-            if (!photonView.IsMine) return; 
+            if (!photonView.IsMine) return;
+            if (!_timeHandler.IsCountDown) return;
             if (Input.GetMouseButtonDown(0)) CreateBlock();
             MovePredict();
         }

@@ -19,17 +19,20 @@ namespace Character
         private BlockGenerator _blockGenerator;
         [SerializeField] private CharacterPhotonStatus _characterPhotonStatus;
         private int _teamID; 
-
+        private TimeHandler _timeHandler;
+        
         private void Start()
         {
             if (!photonView.IsMine) return;
             _blockGenerator = GameObject.FindWithTag("BlockGenerator").GetComponent<BlockGenerator>();
             _teamID = _characterPhotonStatus.LocalPlayerTeamID - 1;
+            _timeHandler = GameObject.FindWithTag("TimeHandler").GetComponent<TimeHandler>();
         }
 
         private void Update()
         {
             if (!photonView.IsMine) return; 
+            if (!_timeHandler.IsCountDown) return;
             if (Input.GetMouseButton(0)) BreakBlock();
             else IsBreaking = false;
         }

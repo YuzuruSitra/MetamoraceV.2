@@ -1,4 +1,5 @@
 using System;
+using System.Battle;
 using System.Collections;
 using System.UI;
 using Photon.Pun;
@@ -18,6 +19,7 @@ namespace Character
         private Coroutine _enhanceCoroutine;
         [SerializeField] private float _enhanceSpeedFactor;
         [SerializeField] private float _enhancePowerFactor;
+        private TimeHandler _timeHandler;
         
         public enum Item
         {
@@ -35,6 +37,7 @@ namespace Character
             _enhanceForSeconds = new WaitForSeconds(_enhanceTime);
             _characterObjStacker.ChangeStackEvent += GetItem;
             _stackUIHandler = GameObject.FindWithTag("StackUIHandler").GetComponent<StackUIHandler>();
+            _timeHandler = GameObject.FindWithTag("TimeHandler").GetComponent<TimeHandler>();
             ChangeItemEvent += _stackUIHandler.ChangeItemImage;
         }
 
@@ -48,6 +51,7 @@ namespace Character
         private void Update()
         {
             if (!photonView.IsMine) return;
+            if (!_timeHandler.IsCountDown) return;
             if (Input.GetMouseButtonDown(1)) UseItem();
         }
 
