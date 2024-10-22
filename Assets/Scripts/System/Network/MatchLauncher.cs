@@ -62,6 +62,7 @@ namespace System.Network
         [PunRPC]
         public void LoadGameScene()
         {
+            // もっといい方法を模索中
             PhotonNetwork.LoadLevel(_gameSceneName);
         }
         

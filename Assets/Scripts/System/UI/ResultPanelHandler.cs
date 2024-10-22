@@ -4,6 +4,7 @@ using Photon.Pun;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Sound;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace System.UI
@@ -29,10 +30,9 @@ namespace System.UI
         [SerializeField] private AudioClip _finWhistleClip;
         
         private readonly Dictionary<int, string> _memberList = new();
-        private const string SceneName = "Master_Wait";
         
         [SerializeField] private UnityEngine.UI.Text _reasonText; // 追加: 敗因を表示するテキストフィールド
-
+        private const string SceneName = "Master_Wait";
         private void Start()
         {
             _gameResultHandler.CalcGameResult += OpenResultPanel;
@@ -60,7 +60,10 @@ namespace System.UI
         [PunRPC]
         public void LoadGameScene()
         {
+            // もっといい方法を模索中
             PhotonNetwork.LoadLevel(SceneName);
+            // var battleExitHandler = new BattleExitHandler();
+            // battleExitHandler.ReturnRoom();
         }
 
         private void InitializeMemberList()
