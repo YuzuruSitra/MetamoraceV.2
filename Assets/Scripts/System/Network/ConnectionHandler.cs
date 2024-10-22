@@ -11,13 +11,11 @@ namespace System.Network
         public string PlayerName { get; set; }
         [SerializeField] private string _sceneName;
         public const int MaxPlayer = 4;
-        private readonly RoomOptions _option = new();
     
         private void Start()
         {
             ModeState = 1;
             RoomPas = "";
-            _option.MaxPlayers = MaxPlayer;
         }
         
         public void JoinRoom()
@@ -43,12 +41,21 @@ namespace System.Network
         
         // ランダムなルームへの参加が失敗した時に呼ばれるコールバック
         public override void OnJoinRandomFailed(short returnCode, string message) {
-            PhotonNetwork.CreateRoom(null, _option);
+            var option = new RoomOptions
+            {
+                MaxPlayers = MaxPlayer
+            };
+            PhotonNetwork.CreateRoom(null, option);
         }
 
         private void JoinSelectRoom()
         {
-            PhotonNetwork.JoinOrCreateRoom(RoomPas, _option, TypedLobby.Default);
+            var option = new RoomOptions
+            {
+                MaxPlayers = MaxPlayer,
+                IsVisible = false
+            };
+            PhotonNetwork.JoinOrCreateRoom(RoomPas, option, TypedLobby.Default);
         }
         
         
