@@ -22,7 +22,7 @@ namespace Block
         protected override void SendEffect(GameObject player)
         {
             var selectedEffect = GetRandomEffect();
-            selectedEffect = Effect.Bomb;
+            selectedEffect = Effect.Stan;
             switch (selectedEffect)
             {
                 case Effect.Stan:

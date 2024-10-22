@@ -80,7 +80,7 @@ namespace Character
 
         private void Update()
         {
-            if (!photonView.IsMine) return;
+            if (!photonView.IsMine) return; ;
             JudgmentCondition();
         }
         

@@ -28,6 +28,17 @@ namespace Character
         {
             switch (condition)
             {
+                case CharacterStatus.Condition.Stan:
+                    _anim.SetBool(IsVDeath, false);
+                    _anim.SetBool(IsHDeath, false);
+                    _anim.SetBool(IsStan, true);
+                    _anim.SetBool(IsSwing, false);
+                    _anim.SetBool(IsJump, false);
+                    _anim.SetBool(IsBreak, false);
+                    _anim.SetBool(IsIdole, false);
+                    _anim.SetBool(IsWalk, false);
+                    _anim.SetFloat(MoveSpeed, 0.0f);
+                    break;
                 case CharacterStatus.Condition.Idole:
                     _anim.SetBool(IsVDeath, false);
                     _anim.SetBool(IsHDeath, false);
@@ -111,6 +122,7 @@ namespace Character
                     _anim.SetBool(IsIdole, false);
                     _anim.SetBool(IsWalk, false);
                     break;
+              
             }
         }
        

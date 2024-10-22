@@ -1283,7 +1283,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _verticalRayOffset: 2
   _horizontalRayOffset: 0.5
-  _rayDistance: 0.15
+  _verticalrayDistance: 0.15
+  _horizontalrayDistance: 0.4
   _characterMover: {fileID: 6192094455029975910}
   _characterStatus: {fileID: 6192094455029975914}
   _characterPhotonStatus: {fileID: 3968165114116681612}
