@@ -981,10 +981,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00007790327
-    y: 0.00031018257
-    width: 0.9998442
-    height: 0.99937963
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 45
@@ -3928,6 +3928,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 655f9649c33df4b6d8bbba7da1718a7d,
         type: 3}
+    - target: {fileID: 9219043726481133035, guid: ee0ca0014846851499a53a0885281e34,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2534335084368601894, guid: ee0ca0014846851499a53a0885281e34,

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace System.UI
 {
-    public class ResultPanelHandler : MonoBehaviour
+    public class ResultPanelHandler : MonoBehaviourPunCallbacks
     {
         [SerializeField] private GameResultHandler _gameResultHandler;
         [SerializeField] private BlockGenerator _blockGenerator;
@@ -24,19 +24,24 @@ namespace System.UI
         [SerializeField] private UnityEngine.UI.Text[] _names;
         [SerializeField] private UnityEngine.UI.Text[] _looseNames;
         [SerializeField] private UnityEngine.UI.Text[] _drawNames;
-        [SerializeField] private UnityEngine.UI.Button _exitBt;
+        [SerializeField] private GameObject _exitBt;
         private SoundHandler _soundHandler;
         [SerializeField] private AudioClip _finWhistleClip;
+        
+        private readonly Dictionary<int, string> _memberList = new();
+        private const string SceneName = "Master_Wait";
+        
         [SerializeField] private UnityEngine.UI.Text _reasonText; // 追加: 敗因を表示するテキストフィールド
-
-
-        private Dictionary<int, string> _memberList = new Dictionary<int, string>();
 
         private void Start()
         {
-            
             _gameResultHandler.CalcGameResult += OpenResultPanel;
-            _exitBt.onClick.AddListener(() => new BattleExitHandler().ReturnRoom());
+            if (PhotonNetwork.IsMasterClient)
+            {
+                _exitBt.SetActive(true);
+                var bt = _exitBt.GetComponent<Button>();
+                bt.onClick.AddListener(CallReturnRoom);
+            }
             _soundHandler = SoundHandler.InstanceSoundHandler;
 
             InitializeMemberList();
@@ -45,6 +50,17 @@ namespace System.UI
         private void OnDestroy()
         {
             _gameResultHandler.CalcGameResult -= OpenResultPanel;
+        }
+
+        private void CallReturnRoom()
+        {
+            photonView.RPC("LoadGameScene", RpcTarget.All);
+        }
+        
+        [PunRPC]
+        public void LoadGameScene()
+        {
+            PhotonNetwork.LoadLevel(SceneName);
         }
 
         private void InitializeMemberList()
