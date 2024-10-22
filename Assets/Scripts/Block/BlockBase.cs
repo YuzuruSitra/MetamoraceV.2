@@ -96,6 +96,7 @@ namespace Block
         {
             photonView.RPC(nameof(ChangeHealth), RpcTarget.All, power);
             if (!(_currentHealth <= 0)) return ErrorTag;
+            Debug.Log("DestroyBlock");
             if (caller.CompareTag("Player")) SendEffect(caller);
             photonView.RPC(nameof(LaunchBreak), RpcTarget.All);
             return gameObject.tag;

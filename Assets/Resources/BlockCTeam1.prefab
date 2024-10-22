@@ -285,7 +285,7 @@ MonoBehaviour:
   _breakBlockClip: {fileID: 8300000, guid: a36f30c4df2344a4980a7e9965851ee8, type: 3}
   _magicEffect: {fileID: 985943857426752782}
   _rayDistance: 1
-  _destroyPower: 100
+  _destroyPower: 10000
   _transitionTime: 0.5
   _waitTime: 2.5
 --- !u!114 &5025419353367423876
