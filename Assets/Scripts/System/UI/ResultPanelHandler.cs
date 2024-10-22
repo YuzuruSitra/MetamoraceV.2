@@ -27,7 +27,7 @@ namespace System.UI
         [SerializeField] private UnityEngine.UI.Button _exitBt;
         private SoundHandler _soundHandler;
         [SerializeField] private AudioClip _finWhistleClip;
-
+        [SerializeField] private UnityEngine.UI.Text _reasonText; // 追加: 敗因を表示するテキストフィールド
 
 
         private Dictionary<int, string> _memberList = new Dictionary<int, string>();
@@ -56,14 +56,14 @@ namespace System.UI
             }
         }
 
-        private void OpenResultPanel(int winTeamNum)
+        private void OpenResultPanel(int winTeamNum, string losereason) // 変更: 敗因情報を受け取る
         {
             _resultPanel.SetActive(true);
             _soundHandler.PlaySe(_finWhistleClip);
             if (winTeamNum == 0)
                 OpenDrawPanel();
             else
-                OpenWinLoosePanel(winTeamNum);
+                OpenWinLoosePanel(winTeamNum , losereason);
         }
 
         private void OpenDrawPanel()
@@ -73,8 +73,10 @@ namespace System.UI
             UpdatePlayerNames(_drawNames, isDraw: true);
         }
 
-        private void OpenWinLoosePanel(int winTeamNum)
+        private void OpenWinLoosePanel(int winTeamNum,string losereason)
         {
+            //敗因の表示
+            _reasonText.text = losereason; // 追加: 敗因情報を表示
             _winLoosePanel.SetActive(true);
             _winTeamImage.sprite = _teamSprites[winTeamNum - 1];
             _loseTeamImage.sprite = _teamSprites[winTeamNum % 2];

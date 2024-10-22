@@ -13,9 +13,10 @@ namespace System.Battle
 
         [SerializeField] private float _delayTime;
         private WaitForSeconds _waitFor;
-        public event Action<int> CalcGameResult;
+        public event Action<int,string> CalcGameResult;
         private CharacterStatus _characterStatus;
         private CharacterPhotonStatus _characterPhotonStatus;
+        private string _loseReason;
         
         private void Start()
         {
@@ -41,6 +42,7 @@ namespace System.Battle
         {
             if (condition is CharacterStatus.Condition.HDeath or CharacterStatus.Condition.VDeath)
             {
+                _loseReason = condition == CharacterStatus.Condition.HDeath ? "HDeath" : "VDeath"; // 追加: 敗因情報を設定
                 StartCoroutine(ResultDelay());
             }
         }
@@ -55,7 +57,7 @@ namespace System.Battle
         {
             _timeHandler.ReceiveStopTime();
             var winTeamNum = 3 - _characterPhotonStatus.LocalPlayerTeamID;
-            photonView.RPC(nameof(ShareCalc), RpcTarget.All, winTeamNum);
+            photonView.RPC(nameof(ShareCalc), RpcTarget.All, winTeamNum,_loseReason);
         }
 
         private void CalcTimeResult()
@@ -64,13 +66,14 @@ namespace System.Battle
             var shareTeam1 = _blockGenerator.BlocksShareTeam1;
             var shareTeam2 = _blockGenerator.BlocksShareTeam2;
             var winTeamNum = (shareTeam1 == shareTeam2) ? 0 : (shareTeam1 < shareTeam2 ? 1 : 2);
-            photonView.RPC(nameof(ShareCalc), RpcTarget.All, winTeamNum);
+            _loseReason = "時間切れ"; 
+            photonView.RPC(nameof(ShareCalc), RpcTarget.All, winTeamNum, _loseReason);
         }
 
         [PunRPC]
-        private void ShareCalc(int winTeamNum)
+        private void ShareCalc(int winTeamNum,string loseReason)
         {
-            CalcGameResult?.Invoke(winTeamNum);
+            CalcGameResult?.Invoke(winTeamNum,loseReason);
         }
     }
 }
