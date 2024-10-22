@@ -1338,7 +1338,7 @@ MonoBehaviour:
   _walkSpeed: 4
   _runSpeed: 6
   _decelerationSpeed: 1.5
-  _jumpSpeed: 15
+  _jumpSpeed: 14
   _gravity: 35
   _characterObjBreaker: {fileID: 2681944477019818140}
   _isWaitScene: 0

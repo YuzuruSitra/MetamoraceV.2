@@ -553,8 +553,8 @@ MonoBehaviour:
   _gravity: 50
   _characterObjBreaker: {fileID: 1267629793179180197}
   _isWaitScene: 1
-  _checkGroundReach: 0.1
-  _jumpClip: {fileID: 0}
+  _checkGroundReach: 0.3
+  _jumpClip: {fileID: 8300000, guid: 8435c23312ad2934a972e15f0a48c4f8, type: 3}
 --- !u!114 &6192094455029975915
 MonoBehaviour:
   m_ObjectHideFlags: 0
