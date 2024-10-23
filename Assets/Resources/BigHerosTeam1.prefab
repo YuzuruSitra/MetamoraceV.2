@@ -364,7 +364,7 @@ MonoBehaviour:
   _maxHealth: 5
   _healthGage: {fileID: 7685533847900862010}
   _activeTime: 0.5
-  _cloudAnimator: {fileID: 8616826936954140491}
+  _cloudEffect: {fileID: 8616826936954140489}
   _fallSpeed: 2.5
   _isMoving: 1
   _insPlayerTeam: 1

@@ -18,7 +18,9 @@ namespace Block
         private float _currentActiveTime;
         private Animator _blockAnimator;
         private static readonly int IsTouch = Animator.StringToHash("IsTouch");
-        [SerializeField] private Animator _cloudAnimator;
+         private Animator _cloudAnimator;
+        [SerializeField] private GameObject _cloudEffect;
+
         private static readonly int IsBreak = Animator.StringToHash("IsBreak");
         private const float DestroyTime = 1.0f;
         private float _currentDestroyTime;
@@ -44,6 +46,7 @@ namespace Block
         
         private void Start()
         {
+            _cloudAnimator = _cloudEffect.GetComponent<Animator>();
             _soundHandler = SoundHandler.InstanceSoundHandler;
             Transform child = transform.GetChild(0);
             _mesh = child.GetComponent<MeshRenderer>();
@@ -96,8 +99,13 @@ namespace Block
         {
             photonView.RPC(nameof(ChangeHealth), RpcTarget.All, power);
             if (!(_currentHealth <= 0)) return ErrorTag;
-            if (caller.CompareTag("Player")) SendEffect(caller);
-            photonView.RPC(nameof(LaunchBreak), RpcTarget.All);
+            if (caller.CompareTag("Player")) 
+            {
+                SendEffect(caller);
+                photonView.RPC(nameof(LaunchBreak), RpcTarget.All);
+            }
+            else photonView.RPC(nameof(LaunchBreakForBomb), RpcTarget.All);
+            
             return gameObject.tag;
         }
 
@@ -119,6 +127,18 @@ namespace Block
         {
             _soundHandler.PlaySe(_breakBlockClip);
             _cloudAnimator.SetBool(IsBreak, true);
+            _mesh.enabled = false;
+            _col.enabled = false;
+        }
+
+          [PunRPC]
+        public void LaunchBreakForBomb()
+        {
+            _soundHandler.PlaySe(_breakBlockClip);
+            //アニメーターからのclouエフェクトを赤色に変更したい
+            _cloudAnimator.SetBool(IsBreak, true);
+            //Bombの色変化
+            _cloudEffect.GetComponent<SpriteRenderer>().color = Color.red;
             _mesh.enabled = false;
             _col.enabled = false;
         }

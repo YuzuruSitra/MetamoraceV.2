@@ -22,7 +22,7 @@ namespace Block
         protected override void SendEffect(GameObject player)
         {
             var selectedEffect = GetRandomEffect();
-            selectedEffect = Effect.Stan;
+            //selectedEffect = Effect.Bomb;
             switch (selectedEffect)
             {
                 case Effect.Stan:
@@ -65,7 +65,6 @@ namespace Block
                 if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Block")) continue;
                 Debug.DrawRay(transform.position, direction * _rayDistance, Color.green, 5.0f);
                 var block = hit.collider.GetComponent<BlockBase>();
-                Debug.Log("Called");
                  block.DestroyBlock(_destroyPower, gameObject);
             }
         }
