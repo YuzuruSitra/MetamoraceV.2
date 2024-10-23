@@ -28,9 +28,9 @@ namespace System.UI
         [SerializeField] private GameObject _exitBt;
         private SoundHandler _soundHandler;
         [SerializeField] private AudioClip _finWhistleClip;
-        
+
         private readonly Dictionary<int, string> _memberList = new();
-        
+
         [SerializeField] private UnityEngine.UI.Text _reasonText; // 追加: 敗因を表示するテキストフィールド
         private const string SceneName = "Master_Wait";
         private void Start()
@@ -56,7 +56,7 @@ namespace System.UI
         {
             photonView.RPC("LoadGameScene", RpcTarget.All);
         }
-        
+
         [PunRPC]
         public void LoadGameScene()
         {
@@ -75,15 +75,15 @@ namespace System.UI
             }
         }
 
-        private void OpenResultPanel(int winTeamNum, string losereason) // 変更: 敗因情報を受け取る
+        private void OpenResultPanel(int winTeamNum, GameResultHandler.LoseReason losereason) // 変更: 敗因情報を受け取る
         {
-            
+
             _resultPanel.SetActive(true);
             _soundHandler.PlaySe(_finWhistleClip);
             if (winTeamNum == 0)
                 OpenDrawPanel();
             else
-                OpenWinLoosePanel(winTeamNum , losereason);
+                OpenWinLoosePanel(winTeamNum, losereason);
         }
 
         private void OpenDrawPanel()
@@ -93,10 +93,24 @@ namespace System.UI
             UpdatePlayerNames(_drawNames, isDraw: true);
         }
 
-        private void OpenWinLoosePanel(int winTeamNum,string losereason)
+        private void OpenWinLoosePanel(int winTeamNum, GameResultHandler.LoseReason losereason)
         {
-            //敗因の表示
-            _reasonText.text = losereason; // 追加: 敗因情報を表示
+            // winTeamNum 1:あおチーム 2:あかチーム
+            // 敗因の表示
+            string _loseTeamName = winTeamNum == 1 ? "あか" : "あお";
+            string _winTeamName = winTeamNum == 1 ? "あお" : "あか";
+            switch (losereason)
+            {
+                case GameResultHandler.LoseReason.HDeath:
+                    _reasonText.text = $"{_loseTeamName}チームメンバーが押し出されたため、{_winTeamName}チームの勝利";
+                    break;
+                case GameResultHandler.LoseReason.VDeath:
+                    _reasonText.text = $"{_loseTeamName}チームメンバーが押し潰されたため。{_winTeamName}チームの勝利";
+                    break;
+                case GameResultHandler.LoseReason.CalcRate:
+                    _reasonText.text = $"陣地内ブロックの量により、{_winTeamName}チームの勝利";
+                    break;
+            }
             _winLoosePanel.SetActive(true);
             _winTeamImage.sprite = _teamSprites[winTeamNum - 1];
             _loseTeamImage.sprite = _teamSprites[winTeamNum % 2];
