@@ -1818,9 +1818,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.00083991885
     y: 0
-    width: 1
+    width: 0.99832016
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -2221,6 +2221,41 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1629525287}
     m_Modifications:
+    - target: {fileID: 2028100132967981834, guid: df6f3ce573dfbec4382be7a8db2aa576,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2028100132967981834, guid: df6f3ce573dfbec4382be7a8db2aa576,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2028100132967981834, guid: df6f3ce573dfbec4382be7a8db2aa576,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2028100133477829287, guid: df6f3ce573dfbec4382be7a8db2aa576,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2028100133477829287, guid: df6f3ce573dfbec4382be7a8db2aa576,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243749004117384728, guid: df6f3ce573dfbec4382be7a8db2aa576,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243749004117384728, guid: df6f3ce573dfbec4382be7a8db2aa576,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7243749004396356706, guid: df6f3ce573dfbec4382be7a8db2aa576,
         type: 3}
       propertyPath: m_Name
@@ -2329,6 +2364,21 @@ PrefabInstance:
     - target: {fileID: 7243749004396356709, guid: df6f3ce573dfbec4382be7a8db2aa576,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243749005027071309, guid: df6f3ce573dfbec4382be7a8db2aa576,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243749005027071309, guid: df6f3ce573dfbec4382be7a8db2aa576,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243749005027071309, guid: df6f3ce573dfbec4382be7a8db2aa576,
+        type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

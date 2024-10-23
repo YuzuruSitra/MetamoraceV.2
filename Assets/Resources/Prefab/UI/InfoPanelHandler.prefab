@@ -1656,7 +1656,7 @@ GameObject:
   - component: {fileID: 5398511915612430255}
   - component: {fileID: 3516819591981510196}
   m_Layer: 0
-  m_Name: Button_Item
+  m_Name: Button_Duel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1937,7 +1937,7 @@ GameObject:
   - component: {fileID: 3512693440151710243}
   - component: {fileID: 4210239401223928014}
   m_Layer: 0
-  m_Name: Button_Duel
+  m_Name: Button_Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
