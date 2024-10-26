@@ -32,26 +32,16 @@ public class WaitPlayerNameUi : MonoBehaviourPunCallbacks
         }
     }
 
-    private void UpdatePlayerText(Player player)
-    {
-        int num = player.ActorNumber - 1;
-        if (num < _playerTexts.Length) _playerTexts[num].text = player.NickName;
-    }
-
-    private void ClearPlayerText(Player player)
-    {
-        int num = player.ActorNumber - 1;
-        if (num < _playerTexts.Length)
-        {
-            _playerTexts[num].text = "";
-        }
-    }
-
     private void UpdateMemberList()
     {
+        foreach (var playerText in _playerTexts)
+        {
+            playerText.text = "";
+        }
         foreach (var player in PhotonNetwork.PlayerList)
         {
-            UpdatePlayerText(player);
+            var num = player.ActorNumber - 1;
+            if (num < _playerTexts.Length) _playerTexts[num].text = player.NickName;
         }
     }
 }

@@ -18,20 +18,17 @@ namespace System.UI
         {
             UpdateNameList();
         }
-
+        
         private void UpdateNameList()
         {
-            foreach(var name in _headerNames)
+            foreach (var playerText in _headerNames)
             {
-                if (name.text == "") continue;
-                name.text = "";
+                playerText.text = "";
             }
             foreach (var player in PhotonNetwork.PlayerList)
             {
-                if (!player.CustomProperties.TryGetValue(CustomInfoHandler.MemberIdKey, out var memberIdKey)) continue;
-                var id = (int)memberIdKey;
-                if (_headerNames.Length - 1 < id) continue;
-                _headerNames[id].text = player.NickName;
+                var num = player.ActorNumber - 1;
+                if (num < _headerNames.Length) _headerNames[num].text = player.NickName;
             }
         }
 
