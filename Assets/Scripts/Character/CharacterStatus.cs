@@ -144,15 +144,16 @@ namespace Character
             ChangeMoveBool(newCondition);
         }
         
-        public void JudgeStan(Condition newCondition)
+        private void JudgeStan(Condition newCondition)
         {
             if (newCondition != Condition.Stan) return;
-            photonView.RPC(nameof(FinishStan), RpcTarget.All);
+            photonView.RPC(nameof(FinishStan), RpcTarget.All, newCondition);
         }
         
         [PunRPC]
-        public void FinishStan()
+        public void FinishStan(Condition newCondition)
         {
+            _currentCondition = newCondition;
             StartCoroutine(StanCoroutine());
         }
         
