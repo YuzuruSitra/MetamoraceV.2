@@ -369,7 +369,7 @@ MonoBehaviour:
   _isMoving: 1
   _insPlayerTeam: 1
   _moveSpeed: 3
-  _breakBlockClip: {fileID: 0}
+  _breakBlockClip: {fileID: 8300000, guid: a36f30c4df2344a4980a7e9965851ee8, type: 3}
   _magicEffect: {fileID: 6199386416760463408}
 --- !u!114 &3832327878639400025
 MonoBehaviour:
