@@ -134,11 +134,19 @@ namespace Character
             JudgeStan(newCondition);
             ChangeMoveBool(newCondition);
         }
-        private void JudgeStan(Condition newCondition)
+        
+        public void JudgeStan(Condition newCondition)
         {
             if (newCondition != Condition.Stan) return;
+            photonView.RPC(nameof(FinishStan), RpcTarget.All);
+        }
+        
+        [PunRPC]
+        public void FinishStan()
+        {
             StartCoroutine(StanCoroutine());
         }
+        
         IEnumerator StanCoroutine()
         {
             yield return new WaitForSeconds(_stanTime);
