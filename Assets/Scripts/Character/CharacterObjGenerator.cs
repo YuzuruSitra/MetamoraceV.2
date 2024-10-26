@@ -22,7 +22,7 @@ namespace Character
         [SerializeField] private float _motionDelay;
         public bool IsGenerate { get; private set; }
         private Vector3 _insBlockOffset = new(0f, 0.5f, -1f);
-        private Vector3 _insBigBlockOffset = new(0f, 1.5f, -1.5f);
+        private Vector3 _insBigBlockOffset = new(0f, 1.5f, -2.0f);
         private WaitForSeconds _forSeconds;
         private Coroutine _insCoroutine;
         private BlockGenerator _blockGenerator;

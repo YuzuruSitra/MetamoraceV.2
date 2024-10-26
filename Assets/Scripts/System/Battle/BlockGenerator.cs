@@ -156,6 +156,7 @@ namespace System.Battle
             var size = objKind == "BigHeros" ? BigSize : DefaultSize;
             if (isIncrease) _blocksCount[targetTeam] += size;
             else _blocksCount[targetTeam] -= size;
+            Debug.Log(_blocksCount[targetTeam]);
             int ratio = CalcShareRatio(_blocksCount[targetTeam]);
             photonView.RPC(nameof(ChangeBlockRatio), RpcTarget.All, targetTeam, ratio);
         }
