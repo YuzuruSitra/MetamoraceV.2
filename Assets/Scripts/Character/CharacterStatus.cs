@@ -124,8 +124,17 @@ namespace Character
         {
             if (_currentSpecialEffects == effects) return;
             _currentSpecialEffects = effects;
+            photonView.RPC(nameof(ChanSpecialEffects), RpcTarget.All, effects);
+        }
+        
+        [PunRPC]
+        public void ChanSpecialEffects(SpecialEffects effects)
+        {
+            _currentSpecialEffects = effects;
             ChangeSpecialEffectsEvent?.Invoke(effects);
         }
+        
+        
         private void ChangeCondition(Condition newCondition)
         {
             if (_currentCondition == newCondition) return;

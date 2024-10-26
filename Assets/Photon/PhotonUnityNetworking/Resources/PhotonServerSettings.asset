@@ -62,6 +62,8 @@ MonoBehaviour:
   - ReturnRoom
   - LaunchBreakForBomb
   - JudgeStan
+  - FinishStan
+  - ChanSpecialEffects
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

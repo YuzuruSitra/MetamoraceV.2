@@ -32,16 +32,12 @@ namespace Character
         private void Awake()
         {
             InitializeEffects();
-            if (!photonView.IsMine) return;
-
             _characterStatus.ChangeConditionEvent += OnConditionChanged;
             _characterStatus.ChangeSpecialEffectsEvent += OnSpecialEffectChanged;
         }
 
         private void OnDestroy()
         {
-            if (!photonView.IsMine) return;
-
             _characterStatus.ChangeConditionEvent -= OnConditionChanged;
             _characterStatus.ChangeSpecialEffectsEvent -= OnSpecialEffectChanged;
         }
