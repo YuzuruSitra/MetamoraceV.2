@@ -36,6 +36,16 @@ namespace System.UI
         {
             _startBt.interactable = isActive;
         }
+        
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        {
+            if (PhotonNetwork.IsMasterClient) _startBtObj.SetActive(true);
+        }
+
+        public override void OnPlayerLeftRoom(Player otherPlayer)
+        {
+            if (PhotonNetwork.IsMasterClient) _startBtObj.SetActive(true);
+        }
 
         public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
         {
@@ -58,19 +68,19 @@ namespace System.UI
                         break;
                     case 1:
                         for (var i = 0; i < _nameText.Length / 2; i++)
-                        if (_nameText[i].text == "")
-                        {
-                            _nameText[i].text = player.NickName;
-                            break;
-                        }
+                            if (_nameText[i].text == "")
+                            {
+                                _nameText[i].text = player.NickName;
+                                break;
+                            }
                         break;
                     case 2:
                         for (var i = _nameText.Length / 2; i < _nameText.Length; i++)
-                        if (_nameText[i].text == "")
-                        {
-                            _nameText[i].text = player.NickName;
-                            break;
-                        }
+                            if (_nameText[i].text == "")
+                            {
+                                _nameText[i].text = player.NickName;
+                                break;
+                            }
                         break;
                 }
             }

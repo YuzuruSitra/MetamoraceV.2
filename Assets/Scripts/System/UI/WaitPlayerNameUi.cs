@@ -14,12 +14,12 @@ public class WaitPlayerNameUi : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        UpdatePlayerText(newPlayer);
+        UpdateMemberList();
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        ClearPlayerText(otherPlayer);
+        UpdateMemberList();
     }
 
     private void UpdateAllMemberText()

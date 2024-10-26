@@ -4,8 +4,10 @@ using Photon.Pun;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Sound;
+using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using ConnectionHandler = System.Network.ConnectionHandler;
 
 namespace System.UI
 {
@@ -50,6 +52,16 @@ namespace System.UI
         private void OnDestroy()
         {
             _gameResultHandler.CalcGameResult -= OpenResultPanel;
+        }
+        
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        {
+            if (PhotonNetwork.IsMasterClient) _exitBt.SetActive(true);
+        }
+
+        public override void OnPlayerLeftRoom(Player otherPlayer)
+        {
+            if (PhotonNetwork.IsMasterClient) _exitBt.SetActive(true);
         }
 
         private void CallReturnRoom()
