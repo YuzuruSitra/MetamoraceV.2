@@ -829,9 +829,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00031384826
+    x: 0
     y: 0
-    width: 0.9993723
+    width: 1
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -1280,10 +1280,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
-    m_FontSize: 60
+    m_FontSize: 48
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 0
+    m_MinSize: 10
     m_MaxSize: 71
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1291,7 +1291,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
-  m_Text: "\u9663\u5730\u5185\u30D6\u30ED\u30C3\u30AF\u306E\u91CF\u306B\u3088\u308A\\\u30C1\u30FC\u30E0\u306E\u52DD\u5229\uFF01"
+  m_Text: "\u9663\u5730\u5185\u30D6\u30ED\u30C3\u30AF\u306E\u91CF\u306B\u3088\u308A\u3042\u304A\u30C1\u30FC\u30E0\u306E\u52DD\u5229\uFF01\uFF01"
 --- !u!222 &927608846
 CanvasRenderer:
   m_ObjectHideFlags: 0

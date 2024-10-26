@@ -85,6 +85,7 @@ namespace System.Battle
 
         private void CalcTimeResult()
         {
+            photonView.RPC(nameof(ShareSound), RpcTarget.All);
             _timeHandler.ReceiveStopTime();
             var shareTeam1 = _blockGenerator.BlocksShareTeam1;
             var shareTeam2 = _blockGenerator.BlocksShareTeam2;
@@ -92,9 +93,15 @@ namespace System.Battle
             _loseReason = LoseReason.CalcRate; 
             photonView.RPC(nameof(ShareCalc), RpcTarget.All, winTeamNum, _loseReason);
         }
+        
+        [PunRPC]
+        public void ShareSound()
+        {
+            _soundHandler.PlaySe(_finWhistleClip);
+        }
 
         [PunRPC]
-        private void ShareCalc(int winTeamNum,LoseReason loseReason)
+        public void ShareCalc(int winTeamNum,LoseReason loseReason)
         {
             CalcGameResult?.Invoke(winTeamNum,loseReason);
         }

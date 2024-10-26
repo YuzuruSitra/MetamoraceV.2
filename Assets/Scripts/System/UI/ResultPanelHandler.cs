@@ -111,13 +111,13 @@ namespace System.UI
             {
                 case GameResultHandler.LoseReason.HDeath:
                     //改行したい
-                    _reasonText.text = $"{_loseTeamName}チームは押し出されてしまった！";
+                    _reasonText.text = $"{_loseTeamName}チームは押し出されてしまった！！";
                     break;
                 case GameResultHandler.LoseReason.VDeath:
-                    _reasonText.text = $"{_loseTeamName}チームは押しつぶされてしまった！";
+                    _reasonText.text = $"{_loseTeamName}チームは押しつぶされてしまった！！";
                     break;
                 case GameResultHandler.LoseReason.CalcRate:
-                    _reasonText.text = $"陣地内ブロックの量により\n{_winTeamName}チームの勝利！";
+                    _reasonText.text = $"陣地内ブロックの量により\n{_winTeamName}チームの勝利！！";
                     break;
             }
             _winLoosePanel.SetActive(true);
