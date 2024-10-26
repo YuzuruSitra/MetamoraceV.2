@@ -48,6 +48,7 @@ MonoBehaviour:
   _timeHandler: {fileID: 0}
   _blockGenerator: {fileID: 0}
   _delayTime: 2
+  _finWhistleClip: {fileID: 8300000, guid: 58bbd745e36da034787a7db6c18df639, type: 3}
 --- !u!114 &5866726218807263601
 MonoBehaviour:
   m_ObjectHideFlags: 0

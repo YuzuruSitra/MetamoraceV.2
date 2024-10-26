@@ -1,3 +1,4 @@
+using System.Sound;
 using Photon.Pun;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ namespace System.Battle
         private bool _isCountDowned;
         private bool _isFinished;
         [SerializeField] private bool _isWaitRoom;
+        private SoundHandler _soundHandler;
+        [SerializeField] private AudioClip _launchWhistleClip;
         
         private void Start()
         {
@@ -29,6 +32,7 @@ namespace System.Battle
                 return;
             }
             _battleLauncher.BattleLaunch += Launch;
+            _soundHandler = SoundHandler.InstanceSoundHandler;
         }
 
         private void OnDestroy()
@@ -50,6 +54,7 @@ namespace System.Battle
             if (!_isCountDowned)
             {
                 CountDownedEvent?.Invoke();
+                _soundHandler.PlaySe(_launchWhistleClip);
                 _isCountDowned = true;
             }
             _battleTime -= Time.deltaTime;

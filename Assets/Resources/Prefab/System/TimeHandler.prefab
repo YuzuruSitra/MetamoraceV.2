@@ -47,3 +47,5 @@ MonoBehaviour:
   _battleTime: 90
   _countTime: 3
   _battleLauncher: {fileID: 0}
+  _isWaitRoom: 0
+  _launchWhistleClip: {fileID: 8300000, guid: 3bee2cd39c9b65f46aa938b761d59a31, type: 3}

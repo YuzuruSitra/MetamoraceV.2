@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Network;
+using System.Sound;
 using Character;
 using Photon.Pun;
 using UnityEngine;
@@ -17,6 +18,8 @@ namespace System.Battle
         public event Action<int,LoseReason> CalcGameResult;
         private CharacterStatus _characterStatus;
         private CharacterPhotonStatus _characterPhotonStatus;
+        private SoundHandler _soundHandler;
+        [SerializeField] private AudioClip _finWhistleClip;
         //private string _loseReason;
 
         public enum LoseReason
@@ -30,7 +33,8 @@ namespace System.Battle
         private void Start()
         {
             _waitFor = new WaitForSeconds(_delayTime);
-
+            
+            _soundHandler = SoundHandler.InstanceSoundHandler;
             var playerGenerator = GameObject.FindWithTag("PlayerGenerator").GetComponent<PlayerGenerator>();
             var player = playerGenerator.CurrentPlayer;
             _characterStatus = player.GetComponent<CharacterStatus>();
@@ -59,9 +63,17 @@ namespace System.Battle
 
         private IEnumerator ResultDelay()
         {
+            photonView.RPC(nameof(ShareFinGame), RpcTarget.All);
             yield return _waitFor;
             Debug.Log(_waitFor);
             CalcDeathResult();
+        }
+        
+        [PunRPC]
+        public void ShareFinGame()
+        {
+            IsGameFin = true;
+            _soundHandler.PlaySe(_finWhistleClip);
         }
 
         private void CalcDeathResult()
@@ -84,7 +96,6 @@ namespace System.Battle
         [PunRPC]
         private void ShareCalc(int winTeamNum,LoseReason loseReason)
         {
-            IsGameFin = true;
             CalcGameResult?.Invoke(winTeamNum,loseReason);
         }
     }

@@ -28,8 +28,6 @@ namespace System.UI
         [SerializeField] private UnityEngine.UI.Text[] _looseNames;
         [SerializeField] private UnityEngine.UI.Text[] _drawNames;
         [SerializeField] private GameObject _exitBt;
-        private SoundHandler _soundHandler;
-        [SerializeField] private AudioClip _finWhistleClip;
 
         private readonly Dictionary<int, string> _memberList = new();
 
@@ -44,7 +42,6 @@ namespace System.UI
                 var bt = _exitBt.GetComponent<Button>();
                 bt.onClick.AddListener(CallReturnRoom);
             }
-            _soundHandler = SoundHandler.InstanceSoundHandler;
 
             InitializeMemberList();
         }
@@ -91,7 +88,6 @@ namespace System.UI
         {
 
             _resultPanel.SetActive(true);
-            _soundHandler.PlaySe(_finWhistleClip);
             if (winTeamNum == 0)
                 OpenDrawPanel();
             else
