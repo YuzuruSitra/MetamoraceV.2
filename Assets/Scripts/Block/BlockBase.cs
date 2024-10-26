@@ -36,7 +36,7 @@ namespace Block
         private const float Threshold = 0.01f;
 
         private bool _isExit;
-        private Vector3[] _rayOrigins = new Vector3[4];
+        private Vector3[] _rayOrigins = new Vector3[9];
         private Vector3 _extents;
         private const float RayPadding = 0.2f;
         [SerializeField] private AudioClip _breakBlockClip;
@@ -164,44 +164,51 @@ namespace Block
         }
 
         private void DoExit()
+{
+    if (!_isExit)
+    {
+        if (!IsGrounded()) return;
+
+        bool exitDetected = false;
+        var rayLength = _extents.x + ExitRayLength;
+        var rayColor = Color.red;
+
+        // 端と中央の間にある位置も含め、9本のレイを設定
+        _rayOrigins[0] = transform.position + transform.right * (_extents.x - RayPadding) + transform.up * (_extents.y - RayPadding);       // 右上
+        _rayOrigins[1] = transform.position - transform.right * (_extents.x - RayPadding) + transform.up * (_extents.y - RayPadding);       // 左上
+        _rayOrigins[2] = transform.position + transform.right * (_extents.x - RayPadding) - transform.up * (_extents.y - RayPadding);       // 右下
+        _rayOrigins[3] = transform.position - transform.right * (_extents.x - RayPadding) - transform.up * (_extents.y - RayPadding);       // 左下
+        _rayOrigins[4] = transform.position;                                                                                               // 中央
+        _rayOrigins[5] = transform.position + transform.right * (_extents.x - RayPadding);                                                 // 右端中央
+        _rayOrigins[6] = transform.position - transform.right * (_extents.x - RayPadding);                                                 // 左端中央
+        _rayOrigins[7] = transform.position + transform.up * (_extents.y - RayPadding);                                                    // 上端中央
+        _rayOrigins[8] = transform.position - transform.up * (_extents.y - RayPadding);                                                    // 下端中央
+
+        foreach (var origin in _rayOrigins)
         {
-            if (!_isExit)
+            Debug.DrawRay(origin, -transform.forward * rayLength, rayColor);
+
+            if (Physics.Raycast(origin, -transform.forward, out var hitInfo, rayLength))
             {
-                if (!IsGrounded()) return;
-
-                bool exitDetected = false;
-                var rayLength = _extents.x + ExitRayLength;
-                var rayColor = Color.red;
-
-                _rayOrigins[0] = transform.position + transform.right * (_extents.x - RayPadding) + transform.up * (_extents.y - RayPadding);
-                _rayOrigins[1] = transform.position - transform.right * (_extents.x - RayPadding) + transform.up * (_extents.y - RayPadding);
-                _rayOrigins[2] = transform.position + transform.right * (_extents.x - RayPadding) - transform.up * (_extents.y - RayPadding);
-                _rayOrigins[3] = transform.position - transform.right * (_extents.x - RayPadding) - transform.up * (_extents.y - RayPadding);
-
-                foreach (var origin in _rayOrigins)
+                var obj = hitInfo.collider.gameObject;
+                if (obj.layer == LayerMask.NameToLayer("Block"))
                 {
-                    Debug.DrawRay(origin, -transform.forward * rayLength, rayColor);
-                    
-                    if (Physics.Raycast(origin, -transform.forward, out var hitInfo, rayLength))
-                    {
-                        var obj = hitInfo.collider.gameObject;
-                        if (obj.layer == LayerMask.NameToLayer("Block"))
-                        {
-                            exitDetected = true;
-                            break;
-                        }
-                    }
+                    Debug.Log("Hir");
+                    exitDetected = true;
+                    break;
                 }
-
-                if (!exitDetected) return;
-
-                _isExit = true;
-            }
-            else
-            {
-                transform.position += transform.forward.normalized * (_moveSpeed * Time.deltaTime);
             }
         }
+
+        if (!exitDetected) return;
+
+        _isExit = true;
+    }
+    else
+    {
+        transform.position += transform.forward.normalized * (_moveSpeed * Time.deltaTime);
+    }
+}
 
         
         private bool IsGrounded()
