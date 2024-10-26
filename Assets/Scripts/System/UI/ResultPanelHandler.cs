@@ -102,19 +102,20 @@ namespace System.UI
             switch (losereason)
             {
                 case GameResultHandler.LoseReason.HDeath:
-                    _reasonText.text = $"{_loseTeamName}チームメンバーが押し出されたため、{_winTeamName}チームの勝利";
+                    //改行したい
+                    _reasonText.text = $"{_loseTeamName}チームメンバーが押し出されたため\n{_winTeamName}チームの勝利";
                     break;
                 case GameResultHandler.LoseReason.VDeath:
-                    _reasonText.text = $"{_loseTeamName}チームメンバーが押し潰されたため。{_winTeamName}チームの勝利";
+                    _reasonText.text = $"{_loseTeamName}チームメンバーが押し潰されたため\n{_winTeamName}チームの勝利";
                     break;
                 case GameResultHandler.LoseReason.CalcRate:
-                    _reasonText.text = $"陣地内ブロックの量により、{_winTeamName}チームの勝利";
+                    _reasonText.text = $"陣地内ブロックの量により\n{_winTeamName}チームの勝利";
                     break;
             }
             _winLoosePanel.SetActive(true);
             _winTeamImage.sprite = _teamSprites[winTeamNum - 1];
             _loseTeamImage.sprite = _teamSprites[winTeamNum % 2];
-            UpdateTeamSeems(winTeamNum);
+            //UpdateTeamSeems(winTeamNum);
             UpdateSharePercent(winTeamNum);
             UpdatePlayerNames(_names, winTeamNum);
         }
@@ -159,6 +160,8 @@ namespace System.UI
             {
                 if (_memberList.TryGetValue(count, out var playerName))
                     nameFields[i].text = playerName;
+                else
+                    nameFields[i].text = "";
 
                 count++;
                 if (count >= ConnectionHandler.MaxPlayer) count = 0;
