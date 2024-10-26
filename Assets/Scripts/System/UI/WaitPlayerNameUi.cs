@@ -1,3 +1,4 @@
+using System.Linq;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -38,10 +39,13 @@ public class WaitPlayerNameUi : MonoBehaviourPunCallbacks
         {
             playerText.text = "";
         }
-        foreach (var player in PhotonNetwork.PlayerList)
+        var sortedPlayerList = PhotonNetwork.PlayerList
+            .OrderBy(player => player.ActorNumber)
+            .ToArray();
+        for (var i = 0; i < sortedPlayerList.Length; i++)
         {
-            var num = player.ActorNumber - 1;
-            if (num < _playerTexts.Length) _playerTexts[num].text = player.NickName;
+            if (i < _playerTexts.Length) _playerTexts[i].text = sortedPlayerList[i].NickName;
+            Debug.Log(sortedPlayerList[i].NickName);
         }
     }
 }

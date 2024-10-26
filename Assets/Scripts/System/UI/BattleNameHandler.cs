@@ -27,8 +27,10 @@ namespace System.UI
             }
             foreach (var player in PhotonNetwork.PlayerList)
             {
-                var num = player.ActorNumber - 1;
-                if (num < _headerNames.Length) _headerNames[num].text = player.NickName;
+                if (!player.CustomProperties.TryGetValue(CustomInfoHandler.MemberIdKey, out var memberIdKey)) continue;
+                var id = (int)memberIdKey;
+                if (_headerNames.Length - 1 < id) continue;
+                _headerNames[id].text = player.NickName;
             }
         }
 
